@@ -10,7 +10,6 @@ import UIKit
 class PhoneAuthViewController: UIViewController {
 
     override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .systemPink
+        super.viewDidLoad()        
     }
 }

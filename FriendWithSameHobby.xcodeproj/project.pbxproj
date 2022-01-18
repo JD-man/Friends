@@ -16,6 +16,15 @@
 		890CCA112796959D00D6185E /* FriendWithSameHobbyUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890CCA102796959D00D6185E /* FriendWithSameHobbyUITestsLaunchTests.swift */; };
 		890CCA222796986600D6185E /* PhoneAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890CCA212796986600D6185E /* PhoneAuthViewController.swift */; };
 		890CCA5127970DDC00D6185E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 890CCA5027970DDC00D6185E /* GoogleService-Info.plist */; };
+		890CCA55279712DA00D6185E /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 890CCA54279712DA00D6185E /* Alamofire */; };
+		890CCA58279712E800D6185E /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 890CCA57279712E800D6185E /* SnapKit */; };
+		890CCA5B279712FC00D6185E /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 890CCA5A279712FC00D6185E /* RxCocoa */; };
+		890CCA5D279712FC00D6185E /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 890CCA5C279712FC00D6185E /* RxRelay */; };
+		890CCA5F279712FC00D6185E /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 890CCA5E279712FC00D6185E /* RxSwift */; };
+		890CCA622797134F00D6185E /* RxKeyboard in Frameworks */ = {isa = PBXBuildFile; productRef = 890CCA612797134F00D6185E /* RxKeyboard */; };
+		890CCA652797136000D6185E /* RxGesture in Frameworks */ = {isa = PBXBuildFile; productRef = 890CCA642797136000D6185E /* RxGesture */; };
+		890CCA682797179B00D6185E /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 890CCA672797179B00D6185E /* FirebaseAuth */; };
+		890CCA6B2797188100D6185E /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 890CCA6A2797188100D6185E /* .swiftlint.yml */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +58,8 @@
 		890CCA102796959D00D6185E /* FriendWithSameHobbyUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendWithSameHobbyUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		890CCA212796986600D6185E /* PhoneAuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneAuthViewController.swift; sourceTree = "<group>"; };
 		890CCA5027970DDC00D6185E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		890CCA69279717C600D6185E /* FriendWithSameHobby.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FriendWithSameHobby.entitlements; sourceTree = "<group>"; };
+		890CCA6A2797188100D6185E /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +67,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				890CCA5B279712FC00D6185E /* RxCocoa in Frameworks */,
+				890CCA622797134F00D6185E /* RxKeyboard in Frameworks */,
+				890CCA55279712DA00D6185E /* Alamofire in Frameworks */,
+				890CCA5F279712FC00D6185E /* RxSwift in Frameworks */,
+				890CCA5D279712FC00D6185E /* RxRelay in Frameworks */,
+				890CCA58279712E800D6185E /* SnapKit in Frameworks */,
+				890CCA652797136000D6185E /* RxGesture in Frameworks */,
+				890CCA682797179B00D6185E /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -79,6 +98,7 @@
 		890CC9E12796959C00D6185E = {
 			isa = PBXGroup;
 			children = (
+				890CCA6A2797188100D6185E /* .swiftlint.yml */,
 				890CC9EC2796959C00D6185E /* FriendWithSameHobby */,
 				890CCA032796959D00D6185E /* FriendWithSameHobbyTests */,
 				890CCA0D2796959D00D6185E /* FriendWithSameHobbyUITests */,
@@ -99,6 +119,7 @@
 		890CC9EC2796959C00D6185E /* FriendWithSameHobby */ = {
 			isa = PBXGroup;
 			children = (
+				890CCA69279717C600D6185E /* FriendWithSameHobby.entitlements */,
 				890CCA202796984C00D6185E /* ViewModels */,
 				890CCA1F2796984300D6185E /* Models */,
 				890CCA1E2796983D00D6185E /* Views */,
@@ -166,6 +187,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 890CCA142796959D00D6185E /* Build configuration list for PBXNativeTarget "FriendWithSameHobby" */;
 			buildPhases = (
+				890CCA52279710EA00D6185E /* SwiftLint Script */,
 				890CC9E62796959C00D6185E /* Sources */,
 				890CC9E72796959C00D6185E /* Frameworks */,
 				890CC9E82796959C00D6185E /* Resources */,
@@ -175,6 +197,16 @@
 			dependencies = (
 			);
 			name = FriendWithSameHobby;
+			packageProductDependencies = (
+				890CCA54279712DA00D6185E /* Alamofire */,
+				890CCA57279712E800D6185E /* SnapKit */,
+				890CCA5A279712FC00D6185E /* RxCocoa */,
+				890CCA5C279712FC00D6185E /* RxRelay */,
+				890CCA5E279712FC00D6185E /* RxSwift */,
+				890CCA612797134F00D6185E /* RxKeyboard */,
+				890CCA642797136000D6185E /* RxGesture */,
+				890CCA672797179B00D6185E /* FirebaseAuth */,
+			);
 			productName = FriendWithSameHobby;
 			productReference = 890CC9EA2796959C00D6185E /* FriendWithSameHobby.app */;
 			productType = "com.apple.product-type.application";
@@ -247,6 +279,14 @@
 				Base,
 			);
 			mainGroup = 890CC9E12796959C00D6185E;
+			packageReferences = (
+				890CCA53279712DA00D6185E /* XCRemoteSwiftPackageReference "Alamofire" */,
+				890CCA56279712E800D6185E /* XCRemoteSwiftPackageReference "SnapKit" */,
+				890CCA59279712FC00D6185E /* XCRemoteSwiftPackageReference "RxSwift" */,
+				890CCA602797134F00D6185E /* XCRemoteSwiftPackageReference "RxKeyboard" */,
+				890CCA632797136000D6185E /* XCRemoteSwiftPackageReference "RxGesture" */,
+				890CCA662797179B00D6185E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = 890CC9EB2796959C00D6185E /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -263,6 +303,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				890CCA6B2797188100D6185E /* .swiftlint.yml in Resources */,
 				890CC9FA2796959D00D6185E /* LaunchScreen.storyboard in Resources */,
 				890CC9F72796959D00D6185E /* Assets.xcassets in Resources */,
 				890CCA5127970DDC00D6185E /* GoogleService-Info.plist in Resources */,
@@ -284,6 +325,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		890CCA52279710EA00D6185E /* SwiftLint Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "SwiftLint Script";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which swiftlint; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		890CC9E62796959C00D6185E /* Sources */ = {
@@ -461,6 +523,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = FriendWithSameHobby/FriendWithSameHobby.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -491,6 +554,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = FriendWithSameHobby/FriendWithSameHobby.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -632,6 +696,100 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		890CCA53279712DA00D6185E /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+		890CCA56279712E800D6185E /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+		890CCA59279712FC00D6185E /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.0.0;
+			};
+		};
+		890CCA602797134F00D6185E /* XCRemoteSwiftPackageReference "RxKeyboard" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RxSwiftCommunity/RxKeyboard";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+		890CCA632797136000D6185E /* XCRemoteSwiftPackageReference "RxGesture" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RxSwiftCommunity/RxGesture";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
+		890CCA662797179B00D6185E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		890CCA54279712DA00D6185E /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 890CCA53279712DA00D6185E /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		890CCA57279712E800D6185E /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 890CCA56279712E800D6185E /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		890CCA5A279712FC00D6185E /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 890CCA59279712FC00D6185E /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
+		};
+		890CCA5C279712FC00D6185E /* RxRelay */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 890CCA59279712FC00D6185E /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxRelay;
+		};
+		890CCA5E279712FC00D6185E /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 890CCA59279712FC00D6185E /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
+		};
+		890CCA612797134F00D6185E /* RxKeyboard */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 890CCA602797134F00D6185E /* XCRemoteSwiftPackageReference "RxKeyboard" */;
+			productName = RxKeyboard;
+		};
+		890CCA642797136000D6185E /* RxGesture */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 890CCA632797136000D6185E /* XCRemoteSwiftPackageReference "RxGesture" */;
+			productName = RxGesture;
+		};
+		890CCA672797179B00D6185E /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 890CCA662797179B00D6185E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 890CC9E22796959C00D6185E /* Project object */;
 }
