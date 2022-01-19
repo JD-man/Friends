@@ -6,10 +6,16 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 class PhoneAuthViewController: UIViewController {
 
+    var test: Int = 1
+    var dict: [String: Int] = [:]    
+    
     override func viewDidLoad() {
-        super.viewDidLoad()        
+        super.viewDidLoad()
+        view.backgroundColor = Asset.success.color
     }
 }

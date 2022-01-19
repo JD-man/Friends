@@ -1,0 +1,12 @@
+# Colors
+
+input_dir: FriendWithSameHobby/Resources/Assets/
+output_dir: FriendWithSameHobby/Resources/Assets/Generated
+
+xcassets:
+  inputs:
+    - Colors.xcassets
+  outputs:
+    - templateName: swift5
+      output: Assets+Colors.swift
+

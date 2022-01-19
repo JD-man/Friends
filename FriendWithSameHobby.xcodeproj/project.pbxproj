@@ -25,6 +25,13 @@
 		890CCA652797136000D6185E /* RxGesture in Frameworks */ = {isa = PBXBuildFile; productRef = 890CCA642797136000D6185E /* RxGesture */; };
 		890CCA682797179B00D6185E /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 890CCA672797179B00D6185E /* FirebaseAuth */; };
 		890CCA6B2797188100D6185E /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 890CCA6A2797188100D6185E /* .swiftlint.yml */; };
+		890CCA6E2797210100D6185E /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 890CCA6D2797210100D6185E /* Moya */; };
+		890CCA702797210100D6185E /* RxMoya in Frameworks */ = {isa = PBXBuildFile; productRef = 890CCA6F2797210100D6185E /* RxMoya */; };
+		890CCA732797211F00D6185E /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 890CCA722797211F00D6185E /* Then */; };
+		890CCA762797214000D6185E /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = 890CCA752797214000D6185E /* Toast */; };
+		89AB664A27983F8D00DFEE95 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 89AB664927983F8D00DFEE95 /* Colors.xcassets */; };
+		89AB664E279844B000DFEE95 /* swiftgen.yml in Resources */ = {isa = PBXBuildFile; fileRef = 89AB664D279844B000DFEE95 /* swiftgen.yml */; };
+		89AB6650279846A900DFEE95 /* Assets+Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89AB664F279846A900DFEE95 /* Assets+Colors.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +67,9 @@
 		890CCA5027970DDC00D6185E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		890CCA69279717C600D6185E /* FriendWithSameHobby.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FriendWithSameHobby.entitlements; sourceTree = "<group>"; };
 		890CCA6A2797188100D6185E /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		89AB664927983F8D00DFEE95 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		89AB664D279844B000DFEE95 /* swiftgen.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = swiftgen.yml; sourceTree = "<group>"; };
+		89AB664F279846A900DFEE95 /* Assets+Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Assets+Colors.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,8 +77,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				890CCA762797214000D6185E /* Toast in Frameworks */,
+				890CCA702797210100D6185E /* RxMoya in Frameworks */,
 				890CCA5B279712FC00D6185E /* RxCocoa in Frameworks */,
+				890CCA732797211F00D6185E /* Then in Frameworks */,
 				890CCA622797134F00D6185E /* RxKeyboard in Frameworks */,
+				890CCA6E2797210100D6185E /* Moya in Frameworks */,
 				890CCA55279712DA00D6185E /* Alamofire in Frameworks */,
 				890CCA5F279712FC00D6185E /* RxSwift in Frameworks */,
 				890CCA5D279712FC00D6185E /* RxRelay in Frameworks */,
@@ -98,6 +112,7 @@
 		890CC9E12796959C00D6185E = {
 			isa = PBXGroup;
 			children = (
+				89AB664D279844B000DFEE95 /* swiftgen.yml */,
 				890CCA6A2797188100D6185E /* .swiftlint.yml */,
 				890CC9EC2796959C00D6185E /* FriendWithSameHobby */,
 				890CCA032796959D00D6185E /* FriendWithSameHobbyTests */,
@@ -150,9 +165,9 @@
 		890CCA1D279697B300D6185E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				89AB664827983F6C00DFEE95 /* Assets */,
 				890CC9ED2796959C00D6185E /* AppDelegate.swift */,
 				890CC9EF2796959C00D6185E /* SceneDelegate.swift */,
-				890CC9F62796959D00D6185E /* Assets.xcassets */,
 				890CC9F82796959D00D6185E /* LaunchScreen.storyboard */,
 			);
 			path = Resources;
@@ -180,6 +195,24 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
+		89AB664827983F6C00DFEE95 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				89AB664B2798425D00DFEE95 /* Generated */,
+				890CC9F62796959D00D6185E /* Assets.xcassets */,
+				89AB664927983F8D00DFEE95 /* Colors.xcassets */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		89AB664B2798425D00DFEE95 /* Generated */ = {
+			isa = PBXGroup;
+			children = (
+				89AB664F279846A900DFEE95 /* Assets+Colors.swift */,
+			);
+			path = Generated;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -191,6 +224,7 @@
 				890CC9E62796959C00D6185E /* Sources */,
 				890CC9E72796959C00D6185E /* Frameworks */,
 				890CC9E82796959C00D6185E /* Resources */,
+				89AB664C2798436A00DFEE95 /* SwiftGen Script */,
 			);
 			buildRules = (
 			);
@@ -206,6 +240,10 @@
 				890CCA612797134F00D6185E /* RxKeyboard */,
 				890CCA642797136000D6185E /* RxGesture */,
 				890CCA672797179B00D6185E /* FirebaseAuth */,
+				890CCA6D2797210100D6185E /* Moya */,
+				890CCA6F2797210100D6185E /* RxMoya */,
+				890CCA722797211F00D6185E /* Then */,
+				890CCA752797214000D6185E /* Toast */,
 			);
 			productName = FriendWithSameHobby;
 			productReference = 890CC9EA2796959C00D6185E /* FriendWithSameHobby.app */;
@@ -286,6 +324,9 @@
 				890CCA602797134F00D6185E /* XCRemoteSwiftPackageReference "RxKeyboard" */,
 				890CCA632797136000D6185E /* XCRemoteSwiftPackageReference "RxGesture" */,
 				890CCA662797179B00D6185E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				890CCA6C2797210100D6185E /* XCRemoteSwiftPackageReference "Moya" */,
+				890CCA712797211F00D6185E /* XCRemoteSwiftPackageReference "Then" */,
+				890CCA742797214000D6185E /* XCRemoteSwiftPackageReference "Toast-Swift" */,
 			);
 			productRefGroup = 890CC9EB2796959C00D6185E /* Products */;
 			projectDirPath = "";
@@ -303,10 +344,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				89AB664A27983F8D00DFEE95 /* Colors.xcassets in Resources */,
 				890CCA6B2797188100D6185E /* .swiftlint.yml in Resources */,
 				890CC9FA2796959D00D6185E /* LaunchScreen.storyboard in Resources */,
 				890CC9F72796959D00D6185E /* Assets.xcassets in Resources */,
 				890CCA5127970DDC00D6185E /* GoogleService-Info.plist in Resources */,
+				89AB664E279844B000DFEE95 /* swiftgen.yml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -345,6 +388,24 @@
 			shellPath = /bin/sh;
 			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which swiftlint; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
+		89AB664C2798436A00DFEE95 /* SwiftGen Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "SwiftGen Script";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\n\nswiftgen xcassets --templateName swift5 --output FriendWithSameHobby/Resources/Assets/Generated/Assets+Colors.swift FriendWithSameHobby/Resources/Assets/Colors.xcassets\n";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -354,6 +415,7 @@
 			files = (
 				890CC9EE2796959C00D6185E /* AppDelegate.swift in Sources */,
 				890CC9F02796959C00D6185E /* SceneDelegate.swift in Sources */,
+				89AB6650279846A900DFEE95 /* Assets+Colors.swift in Sources */,
 				890CCA222796986600D6185E /* PhoneAuthViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -746,6 +808,30 @@
 				minimumVersion = 8.0.0;
 			};
 		};
+		890CCA6C2797210100D6185E /* XCRemoteSwiftPackageReference "Moya" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Moya/Moya";
+			requirement = {
+				kind = exactVersion;
+				version = 15.0.0;
+			};
+		};
+		890CCA712797211F00D6185E /* XCRemoteSwiftPackageReference "Then" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/devxoul/Then";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+		890CCA742797214000D6185E /* XCRemoteSwiftPackageReference "Toast-Swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/scalessec/Toast-Swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -788,6 +874,26 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 890CCA662797179B00D6185E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAuth;
+		};
+		890CCA6D2797210100D6185E /* Moya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 890CCA6C2797210100D6185E /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = Moya;
+		};
+		890CCA6F2797210100D6185E /* RxMoya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 890CCA6C2797210100D6185E /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = RxMoya;
+		};
+		890CCA722797211F00D6185E /* Then */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 890CCA712797211F00D6185E /* XCRemoteSwiftPackageReference "Then" */;
+			productName = Then;
+		};
+		890CCA752797214000D6185E /* Toast */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 890CCA742797214000D6185E /* XCRemoteSwiftPackageReference "Toast-Swift" */;
+			productName = Toast;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
