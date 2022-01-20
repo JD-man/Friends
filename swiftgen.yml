@@ -3,10 +3,34 @@
 input_dir: FriendWithSameHobby/Resources/Assets/
 output_dir: FriendWithSameHobby/Resources/Assets/Generated
 
+#xcassets:
+#  inputs:
+#    - Colors.xcassets
+#  outputs:
+#    - templateName: swift5
+#      params:
+#        forceProviedsNamespaces: true
+#        enumName: AssetsColors
+#      output: Assets+Colors.swift
+      
+
+#fonts:
+#  inputs:
+#    - Fonts
+#  outputs:
+#    - templateName: swift5
+#      params:
+#        forceProviedsNamespaces: true
+#        enumName: AssetsColors
+#      output: Assets+Fonts.swift
+
+
 xcassets:
   inputs:
-    - Colors.xcassets
+    - Images.xcassets
   outputs:
     - templateName: swift5
-      output: Assets+Colors.swift
-
+      params:
+        forceProviedsNamespaces: true
+        enumName: AssetsImages
+      output: Assets+Images.swift
