@@ -7,22 +7,25 @@
 
 import UIKit
 import SnapKit
+import Then
+import RxSwift
+import RxGesture
 
 class OnboardingViewController: UIViewController {
     
-    let pageImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = AssetsImages.onboardingImg1.image
-        imageView.contentMode = .scaleAspectFit
-        return imageView
-    }()
+    var viewModel: OnboardingViewModel?
+    private var disposeBag = DisposeBag()
     
-    let pageControl: UIPageControl = {
-        let pageControl = UIPageControl()
-        pageControl.backgroundColor = .systemGreen
-        pageControl.numberOfPages = 3
-        return pageControl
-    }()
+    private let pageImageView = UIImageView().then {
+        $0.image = AssetsImages.onboardingImg1.image
+        $0.contentMode = .scaleAspectFit
+    }
+    
+    private let pageControl = UIPageControl().then {
+        $0.numberOfPages = 3
+        $0.pageIndicatorTintColor = AssetsColors.gray5.color
+        $0.currentPageIndicatorTintColor = AssetsColors.black.color
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,7 +40,7 @@ class OnboardingViewController: UIViewController {
         pageImageView.snp.makeConstraints { make in
             make.width.equalTo(view.safeAreaLayoutGuide)
             make.height.equalTo(pageImageView.snp.width)
-            make.centerY.equalTo(view.safeAreaLayoutGuide)
+            make.centerY.equalTo(view)
         }
         
         pageControl.snp.makeConstraints { make in
@@ -48,6 +51,8 @@ class OnboardingViewController: UIViewController {
     }
     
     private func binding() {
-        
+        let input = OnboardingViewModel
+            .Input(didSwipeGesture: view.rx.swipeGesture([.left, .right]))
+        let output = viewModel?.transform(input, disposeBag: disposeBag)            
     }
 }

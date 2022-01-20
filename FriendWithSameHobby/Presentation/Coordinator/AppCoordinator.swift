@@ -7,7 +7,7 @@
 import UIKit
 
 final class AppCoordinator: CoordinateType {
-    var childNavigation: [CoordinateType]?
+    var childCoordinators: [CoordinateType] = []
     var navigationController: UINavigationController
     
     init(nav: UINavigationController) {
@@ -17,5 +17,17 @@ final class AppCoordinator: CoordinateType {
     func start() {
         print("App start")
         // switch user auth status
+        addAuthCoordinator()
+    }
+    
+    func addAuthCoordinator() {
+        let authCoordinator = AuthCoordinator(nav: navigationController)
+        authCoordinator.parentCoordinator = self
+        childCoordinators.append(authCoordinator)
+        authCoordinator.start()
+    }
+    
+    func completedChild(_ child: CoordinateType) {
+        print(child)
     }
 }

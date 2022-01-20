@@ -6,10 +6,11 @@
 //
 import UIKit
 
-protocol CoordinateType {
-    var childNavigation: [CoordinateType]? { get set }
+protocol CoordinateType: AnyObject {
+    var childCoordinators: [CoordinateType] { get set }
     var navigationController: UINavigationController { get set }
     
     init(nav: UINavigationController)
-    func start()
+    
+    func start()    
 }

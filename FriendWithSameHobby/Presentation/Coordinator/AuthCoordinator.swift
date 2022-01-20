@@ -7,13 +7,19 @@
 import UIKit
 
 final class AuthCoordinator: CoordinateType {
-    var childNavigation: [CoordinateType]?
+    weak var parentCoordinator: AppCoordinator?
+    
+    var childCoordinators: [CoordinateType] = []
     var navigationController: UINavigationController
     
     init(nav: UINavigationController) {
         self.navigationController = nav
     }
+    
     func start() {
-        print("Auth Coordinator Start")
+        let onboardingVC = OnboardingViewController()
+        let viewModel = OnboardingViewModel()
+        viewModel.coordinator = self
+        navigationController.pushViewController(onboardingVC, animated: true)
     }
 }

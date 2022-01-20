@@ -213,6 +213,7 @@
 		890CCA1F2796984300D6185E /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				898B795B27997F0E00844284 /* RepositoryInterfaces */,
 				898B79352799423A00844284 /* UseCases */,
 				898B79342799423400844284 /* Entities */,
 			);
@@ -358,6 +359,13 @@
 				898B79592799604700844284 /* AuthCoordinator.swift */,
 			);
 			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		898B795B27997F0E00844284 /* RepositoryInterfaces */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = RepositoryInterfaces;
 			sourceTree = "<group>";
 		};
 		89AB664827983F6C00DFEE95 /* Assets */ = {

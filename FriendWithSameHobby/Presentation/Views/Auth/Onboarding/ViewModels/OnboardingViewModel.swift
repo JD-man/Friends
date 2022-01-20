@@ -7,16 +7,22 @@
 
 import Foundation
 import RxSwift
+import RxRelay
+import RxCocoa
+import RxGesture
 
 final class OnboardingViewModel: ViewModelType {
     struct Input {
-        // Page Control (-> Swipe Gesture)
-        // Button
+        // ViewDidLoad
         
+        // Swipe Gesture
+        let didSwipeGesture: SwipeControlEvent
+        // Button
     }
     
     struct Output {
-        // Page Number BehaviorRelay Int
+        // UIImage BehaviorRelay Int
+        // let imageRelay: BehaviorRelay<UIImage>()
         // UserDefaults isOnboardingPassed PublishRelay Bool
     }
     
