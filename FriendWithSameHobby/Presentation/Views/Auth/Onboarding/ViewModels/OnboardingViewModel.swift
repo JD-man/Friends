@@ -5,7 +5,7 @@
 //  Created by JD_MacMini on 2022/01/20.
 //
 
-import Foundation
+import UIKit
 import RxSwift
 import RxRelay
 import RxCocoa
@@ -21,8 +21,11 @@ final class OnboardingViewModel: ViewModelType {
     }
     
     struct Output {
-        // UIImage BehaviorRelay Int
-        // let imageRelay: BehaviorRelay<UIImage>()
+        // UIImage Relay
+        let imageRelay = PublishRelay<UIImage>()
+        // PageControl Current Page Index Relay
+        let pageControlRelay = PublishRelay<Int>()
+        
         // UserDefaults isOnboardingPassed PublishRelay Bool
     }
     
@@ -30,10 +33,22 @@ final class OnboardingViewModel: ViewModelType {
     weak var coordinator: AuthCoordinator?
     
     func transform(_ input: Input, disposeBag: DisposeBag) -> Output {
-        var output = Output()
+        let output = Output()
         // Input To UseCase
+        input.didSwipeGesture
+            .when(.ended)            
+            .subscribe(onNext: { [weak self] in                
+                self?.useCase.execute(of: $0.direction)
+            }).disposed(by: disposeBag)
         
         // UseCase To Output
+        useCase.assetImageRelay
+            .bind(to: output.imageRelay)            
+            .disposed(by: disposeBag)
+        
+        useCase.idxRelay
+            .bind(to: output.pageControlRelay)
+            .disposed(by: disposeBag)
         return output
     }
 }

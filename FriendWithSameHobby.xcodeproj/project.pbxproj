@@ -39,6 +39,8 @@
 		898B79542799502900844284 /* CoordinatorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898B79532799502900844284 /* CoordinatorType.swift */; };
 		898B79572799505000844284 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898B79562799505000844284 /* AppCoordinator.swift */; };
 		898B795A2799604700844284 /* AuthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898B79592799604700844284 /* AuthCoordinator.swift */; };
+		89A81983279A81D400F257CA /* OnboardingRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A81982279A81D400F257CA /* OnboardingRepository.swift */; };
+		89A81985279A831A00F257CA /* OnboardingRepositoryInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A81984279A831A00F257CA /* OnboardingRepositoryInterface.swift */; };
 		89AB664A27983F8D00DFEE95 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 89AB664927983F8D00DFEE95 /* Colors.xcassets */; };
 		89AB664E279844B000DFEE95 /* swiftgen.yml in Resources */ = {isa = PBXBuildFile; fileRef = 89AB664D279844B000DFEE95 /* swiftgen.yml */; };
 		89AB6650279846A900DFEE95 /* Assets+Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89AB664F279846A900DFEE95 /* Assets+Colors.swift */; };
@@ -91,6 +93,8 @@
 		898B79532799502900844284 /* CoordinatorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorType.swift; sourceTree = "<group>"; };
 		898B79562799505000844284 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		898B79592799604700844284 /* AuthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinator.swift; sourceTree = "<group>"; };
+		89A81982279A81D400F257CA /* OnboardingRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingRepository.swift; sourceTree = "<group>"; };
+		89A81984279A831A00F257CA /* OnboardingRepositoryInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingRepositoryInterface.swift; sourceTree = "<group>"; };
 		89AB664927983F8D00DFEE95 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		89AB664D279844B000DFEE95 /* swiftgen.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = swiftgen.yml; sourceTree = "<group>"; };
 		89AB664F279846A900DFEE95 /* Assets+Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Assets+Colors.swift"; sourceTree = "<group>"; };
@@ -206,6 +210,7 @@
 		890CCA1E2796983D00D6185E /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				89A81982279A81D400F257CA /* OnboardingRepository.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -364,6 +369,7 @@
 		898B795B27997F0E00844284 /* RepositoryInterfaces */ = {
 			isa = PBXGroup;
 			children = (
+				89A81984279A831A00F257CA /* OnboardingRepositoryInterface.swift */,
 			);
 			path = RepositoryInterfaces;
 			sourceTree = "<group>";
@@ -614,10 +620,12 @@
 				89AB665927985B9600DFEE95 /* Assets+Fonts.swift in Sources */,
 				898B79482799456F00844284 /* Assets+Images.swift in Sources */,
 				890CC9EE2796959C00D6185E /* AppDelegate.swift in Sources */,
+				89A81985279A831A00F257CA /* OnboardingRepositoryInterface.swift in Sources */,
 				898B794A279945BC00844284 /* OnboardingViewModel.swift in Sources */,
 				890CC9F02796959C00D6185E /* SceneDelegate.swift in Sources */,
 				898B79572799505000844284 /* AppCoordinator.swift in Sources */,
 				898B79542799502900844284 /* CoordinatorType.swift in Sources */,
+				89A81983279A81D400F257CA /* OnboardingRepository.swift in Sources */,
 				898B795127994A4E00844284 /* OnboardingUseCase.swift in Sources */,
 				898B794F279949D600844284 /* UseCaseType.swift in Sources */,
 				898B795A2799604700844284 /* AuthCoordinator.swift in Sources */,

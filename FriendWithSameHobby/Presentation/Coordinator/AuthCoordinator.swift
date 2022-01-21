@@ -20,6 +20,7 @@ final class AuthCoordinator: CoordinateType {
         let onboardingVC = OnboardingViewController()
         let viewModel = OnboardingViewModel()
         viewModel.coordinator = self
+        onboardingVC.viewModel = viewModel
         navigationController.pushViewController(onboardingVC, animated: true)
     }
 }

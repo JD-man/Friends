@@ -29,7 +29,9 @@ class OnboardingViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(viewModel)
         viewConfig()
+        binding()
     }
     
     private func viewConfig() {
@@ -53,6 +55,16 @@ class OnboardingViewController: UIViewController {
     private func binding() {
         let input = OnboardingViewModel
             .Input(didSwipeGesture: view.rx.swipeGesture([.left, .right]))
-        let output = viewModel?.transform(input, disposeBag: disposeBag)            
+        let output = viewModel?.transform(input, disposeBag: disposeBag)
+        
+        output?.imageRelay
+            .asDriver(onErrorJustReturn: UIImage(systemName: "xmark")!)
+            .drive(pageImageView.rx.image)
+            .disposed(by: disposeBag)
+        
+        output?.pageControlRelay
+            .asDriver(onErrorJustReturn: 0)
+            .drive(pageControl.rx.currentPage)
+            .disposed(by: disposeBag)
     }
 }
