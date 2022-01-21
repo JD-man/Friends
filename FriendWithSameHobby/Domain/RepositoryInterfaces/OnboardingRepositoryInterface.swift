@@ -6,8 +6,8 @@
 //
 
 import RxSwift
-import UIKit
+import Foundation
 
 protocol OnboardingRepositoryInterface {
-    func getOnboardingImages(idx: Int) -> UIImage
+    func getOnboardingImages(idx: Int) -> ImageAsset
 }

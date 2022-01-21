@@ -13,20 +13,20 @@ import RxGesture
 
 final class OnboardingViewModel: ViewModelType {
     struct Input {
-        // ViewDidLoad
-        
         // Swipe Gesture
         let didSwipeGesture: SwipeControlEvent
+        
         // Button
+        let didTapStartButton: ControlEvent<Void>
     }
     
     struct Output {
         // UIImage Relay
-        let imageRelay = PublishRelay<UIImage>()
+        let imageRelay = PublishRelay<UIImage?>()
         // PageControl Current Page Index Relay
         let pageControlRelay = PublishRelay<Int>()
         
-        // UserDefaults isOnboardingPassed PublishRelay Bool
+        // UserDefaults isOnboardingPassed PublishRelay Bool        
     }
     
     var useCase = OnboardingUseCase()
@@ -37,12 +37,22 @@ final class OnboardingViewModel: ViewModelType {
         // Input To UseCase
         input.didSwipeGesture
             .when(.ended)            
-            .subscribe(onNext: { [weak self] in                
-                self?.useCase.execute(of: $0.direction)
+            .subscribe(onNext: { [weak self] in
+                var offset = 0
+                switch $0.direction {
+                case .left:
+                    offset = 1
+                case .right:
+                    offset = -1
+                default:
+                    break
+                }
+                self?.useCase.execute(offset: offset)
             }).disposed(by: disposeBag)
         
         // UseCase To Output
         useCase.assetImageRelay
+            .map { $0.image }
             .bind(to: output.imageRelay)            
             .disposed(by: disposeBag)
         

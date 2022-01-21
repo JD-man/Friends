@@ -5,7 +5,7 @@
 //  Created by JD_MacMini on 2022/01/20.
 //
 
-import UIKit
+import Foundation
 import RxSwift
 import RxRelay
 
@@ -14,19 +14,20 @@ final class OnboardingUseCase: UseCaseType {
     let repository = OnboardingRepository()
     
     var idxRelay = BehaviorRelay<Int>(value: 0)
-    var assetImageRelay = PublishRelay<UIImage>()
+    var assetImageRelay = PublishRelay<ImageAsset>()
     
-    func execute(of direction: UISwipeGestureRecognizer.Direction) {
-        var idx = idxRelay.value
-        switch direction {
-        case .left:
-            idx = idx >= 2 ? 2 : idx + 1
-        case .right:
-            idx = idx <= 0 ? 0 : idx - 1
+    func execute(offset: Int) {
+        var newIdx = idxRelay.value + offset
+        
+        switch offset {
+        case 1:
+            newIdx = min(2, newIdx)
+        case -1:
+            newIdx = max(0, newIdx)
         default:
             break
         }        
-        idxRelay.accept(idx)
-        assetImageRelay.accept(repository.getOnboardingImages(idx: idx))
+        idxRelay.accept(newIdx)
+        assetImageRelay.accept(repository.getOnboardingImages(idx: newIdx))
     }
 }

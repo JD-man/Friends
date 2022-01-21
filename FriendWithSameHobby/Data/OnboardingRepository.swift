@@ -5,18 +5,18 @@
 //  Created by JD_MacMini on 2022/01/21.
 //
 
-import UIKit
+import Foundation
 import RxSwift
 
 final class OnboardingRepository: OnboardingRepositoryInterface {
     
-    let assetsImage: [UIImage] = [
-        AssetsImages.onboardingImg1.image,
-        AssetsImages.onboardingImg2.image,
-        AssetsImages.socialLifeCuate.image
+    let assetsImage: [ImageAsset] = [
+        AssetsImages.onboardingImg1,
+        AssetsImages.onboardingImg2,
+        AssetsImages.socialLifeCuate
     ]
     
-    func getOnboardingImages(idx: Int) -> UIImage {
+    func getOnboardingImages(idx: Int) -> ImageAsset {
         return assetsImage[idx]
     }
 }

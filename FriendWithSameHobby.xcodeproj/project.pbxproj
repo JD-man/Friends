@@ -41,6 +41,8 @@
 		898B795A2799604700844284 /* AuthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898B79592799604700844284 /* AuthCoordinator.swift */; };
 		89A81983279A81D400F257CA /* OnboardingRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A81982279A81D400F257CA /* OnboardingRepository.swift */; };
 		89A81985279A831A00F257CA /* OnboardingRepositoryInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A81984279A831A00F257CA /* OnboardingRepositoryInterface.swift */; };
+		89A81988279ADF7800F257CA /* BaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A81987279ADF7800F257CA /* BaseButton.swift */; };
+		89A8198A279AE7D100F257CA /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A81989279AE7D100F257CA /* UIView+Ext.swift */; };
 		89AB664A27983F8D00DFEE95 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 89AB664927983F8D00DFEE95 /* Colors.xcassets */; };
 		89AB664E279844B000DFEE95 /* swiftgen.yml in Resources */ = {isa = PBXBuildFile; fileRef = 89AB664D279844B000DFEE95 /* swiftgen.yml */; };
 		89AB6650279846A900DFEE95 /* Assets+Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89AB664F279846A900DFEE95 /* Assets+Colors.swift */; };
@@ -95,6 +97,8 @@
 		898B79592799604700844284 /* AuthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinator.swift; sourceTree = "<group>"; };
 		89A81982279A81D400F257CA /* OnboardingRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingRepository.swift; sourceTree = "<group>"; };
 		89A81984279A831A00F257CA /* OnboardingRepositoryInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingRepositoryInterface.swift; sourceTree = "<group>"; };
+		89A81987279ADF7800F257CA /* BaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseButton.swift; sourceTree = "<group>"; };
+		89A81989279AE7D100F257CA /* UIView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
 		89AB664927983F8D00DFEE95 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		89AB664D279844B000DFEE95 /* swiftgen.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = swiftgen.yml; sourceTree = "<group>"; };
 		89AB664F279846A900DFEE95 /* Assets+Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Assets+Colors.swift"; sourceTree = "<group>"; };
@@ -166,6 +170,7 @@
 		890CC9EC2796959C00D6185E /* FriendWithSameHobby */ = {
 			isa = PBXGroup;
 			children = (
+				89A8198B279AF32500F257CA /* Managers */,
 				890CCA69279717C600D6185E /* FriendWithSameHobby.entitlements */,
 				898B794B279945D200844284 /* Protocols */,
 				89AB665C27985F3400DFEE95 /* Extensions */,
@@ -237,6 +242,7 @@
 		898B79332799422D00844284 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				89A81986279ADF3A00F257CA /* BaseComponent */,
 				898B79362799425D00844284 /* Auth */,
 			);
 			path = Views;
@@ -374,6 +380,21 @@
 			path = RepositoryInterfaces;
 			sourceTree = "<group>";
 		};
+		89A81986279ADF3A00F257CA /* BaseComponent */ = {
+			isa = PBXGroup;
+			children = (
+				89A81987279ADF7800F257CA /* BaseButton.swift */,
+			);
+			path = BaseComponent;
+			sourceTree = "<group>";
+		};
+		89A8198B279AF32500F257CA /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
 		89AB664827983F6C00DFEE95 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
@@ -409,6 +430,7 @@
 			isa = PBXGroup;
 			children = (
 				89AB665D27985F4200DFEE95 /* UIFont+Ext.swift */,
+				89A81989279AE7D100F257CA /* UIView+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -620,9 +642,11 @@
 				89AB665927985B9600DFEE95 /* Assets+Fonts.swift in Sources */,
 				898B79482799456F00844284 /* Assets+Images.swift in Sources */,
 				890CC9EE2796959C00D6185E /* AppDelegate.swift in Sources */,
+				89A81988279ADF7800F257CA /* BaseButton.swift in Sources */,
 				89A81985279A831A00F257CA /* OnboardingRepositoryInterface.swift in Sources */,
 				898B794A279945BC00844284 /* OnboardingViewModel.swift in Sources */,
 				890CC9F02796959C00D6185E /* SceneDelegate.swift in Sources */,
+				89A8198A279AE7D100F257CA /* UIView+Ext.swift in Sources */,
 				898B79572799505000844284 /* AppCoordinator.swift in Sources */,
 				898B79542799502900844284 /* CoordinatorType.swift in Sources */,
 				89A81983279A81D400F257CA /* OnboardingRepository.swift in Sources */,

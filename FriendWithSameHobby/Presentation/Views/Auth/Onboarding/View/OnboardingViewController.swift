@@ -13,9 +13,6 @@ import RxGesture
 
 class OnboardingViewController: UIViewController {
     
-    var viewModel: OnboardingViewModel?
-    private var disposeBag = DisposeBag()
-    
     private let pageImageView = UIImageView().then {
         $0.image = AssetsImages.onboardingImg1.image
         $0.contentMode = .scaleAspectFit
@@ -26,17 +23,21 @@ class OnboardingViewController: UIViewController {
         $0.pageIndicatorTintColor = AssetsColors.gray5.color
         $0.currentPageIndicatorTintColor = AssetsColors.black.color
     }
+    
+    private let startButton = BaseButton(title: "시작하기", status: .fill, type: .h48)
+    
+    var viewModel: OnboardingViewModel?
+    private var disposeBag = DisposeBag()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(viewModel)
         viewConfig()
         binding()
     }
     
     private func viewConfig() {
         view.backgroundColor = .systemBackground
-        [pageImageView, pageControl]
+        [pageImageView, pageControl, startButton]
             .forEach { view.addSubview($0) }
         
         pageImageView.snp.makeConstraints { make in
@@ -50,15 +51,20 @@ class OnboardingViewController: UIViewController {
             make.leading.trailing.equalTo(view.safeAreaLayoutGuide)
             make.height.equalTo(50)
         }
+        
+        startButton.snp.makeConstraints { make in
+            make.height.equalTo(startButton.frame.height)
+            make.bottom.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(16)            
+        }
     }
     
     private func binding() {
-        let input = OnboardingViewModel
-            .Input(didSwipeGesture: view.rx.swipeGesture([.left, .right]))
+        let input = OnboardingViewModel.Input(didSwipeGesture: view.rx.swipeGesture([.left, .right]),
+                                              didTapStartButton: startButton.rx.tap)
         let output = viewModel?.transform(input, disposeBag: disposeBag)
         
         output?.imageRelay
-            .asDriver(onErrorJustReturn: UIImage(systemName: "xmark")!)
+            .asDriver(onErrorJustReturn: UIImage(systemName: "xmark"))
             .drive(pageImageView.rx.image)
             .disposed(by: disposeBag)
         
