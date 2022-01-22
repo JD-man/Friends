@@ -10,4 +10,5 @@ import Foundation
 
 protocol OnboardingRepositoryInterface {
     func getOnboardingImages(idx: Int) -> ImageAsset
+    
 }

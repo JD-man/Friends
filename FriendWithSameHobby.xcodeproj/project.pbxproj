@@ -43,6 +43,9 @@
 		89A81985279A831A00F257CA /* OnboardingRepositoryInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A81984279A831A00F257CA /* OnboardingRepositoryInterface.swift */; };
 		89A81988279ADF7800F257CA /* BaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A81987279ADF7800F257CA /* BaseButton.swift */; };
 		89A8198A279AE7D100F257CA /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A81989279AE7D100F257CA /* UIView+Ext.swift */; };
+		89A8198D279AF95C00F257CA /* PhoneAuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A8198C279AF95C00F257CA /* PhoneAuthViewModel.swift */; };
+		89A81990279AF9E500F257CA /* PhoneAuthUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A8198F279AF9E500F257CA /* PhoneAuthUseCase.swift */; };
+		89A81992279B023900F257CA /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A81991279B023900F257CA /* String+Ext.swift */; };
 		89AB664A27983F8D00DFEE95 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 89AB664927983F8D00DFEE95 /* Colors.xcassets */; };
 		89AB664E279844B000DFEE95 /* swiftgen.yml in Resources */ = {isa = PBXBuildFile; fileRef = 89AB664D279844B000DFEE95 /* swiftgen.yml */; };
 		89AB6650279846A900DFEE95 /* Assets+Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89AB664F279846A900DFEE95 /* Assets+Colors.swift */; };
@@ -50,6 +53,8 @@
 		89AB66572798587200DFEE95 /* NotoSansKR-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 89AB66552798584D00DFEE95 /* NotoSansKR-Regular.otf */; };
 		89AB665927985B9600DFEE95 /* Assets+Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89AB665827985B9600DFEE95 /* Assets+Fonts.swift */; };
 		89AB665E27985F4200DFEE95 /* UIFont+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89AB665D27985F4200DFEE95 /* UIFont+Ext.swift */; };
+		89D721C2279B8F8300B02A1E /* BaseTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D721C1279B8F8300B02A1E /* BaseTextField.swift */; };
+		89D721C4279B906F00B02A1E /* UITextField+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D721C3279B906F00B02A1E /* UITextField+Ext.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -99,6 +104,9 @@
 		89A81984279A831A00F257CA /* OnboardingRepositoryInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingRepositoryInterface.swift; sourceTree = "<group>"; };
 		89A81987279ADF7800F257CA /* BaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseButton.swift; sourceTree = "<group>"; };
 		89A81989279AE7D100F257CA /* UIView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
+		89A8198C279AF95C00F257CA /* PhoneAuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneAuthViewModel.swift; sourceTree = "<group>"; };
+		89A8198F279AF9E500F257CA /* PhoneAuthUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneAuthUseCase.swift; sourceTree = "<group>"; };
+		89A81991279B023900F257CA /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
 		89AB664927983F8D00DFEE95 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		89AB664D279844B000DFEE95 /* swiftgen.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = swiftgen.yml; sourceTree = "<group>"; };
 		89AB664F279846A900DFEE95 /* Assets+Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Assets+Colors.swift"; sourceTree = "<group>"; };
@@ -106,6 +114,8 @@
 		89AB66552798584D00DFEE95 /* NotoSansKR-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Regular.otf"; sourceTree = "<group>"; };
 		89AB665827985B9600DFEE95 /* Assets+Fonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Assets+Fonts.swift"; sourceTree = "<group>"; };
 		89AB665D27985F4200DFEE95 /* UIFont+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Ext.swift"; sourceTree = "<group>"; };
+		89D721C1279B8F8300B02A1E /* BaseTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTextField.swift; sourceTree = "<group>"; };
+		89D721C3279B906F00B02A1E /* UITextField+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Ext.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -258,7 +268,7 @@
 		898B79352799423A00844284 /* UseCases */ = {
 			isa = PBXGroup;
 			children = (
-				898B795027994A4E00844284 /* OnboardingUseCase.swift */,
+				89A8198E279AF9C600F257CA /* Auth */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -349,6 +359,7 @@
 		898B7942279942F700844284 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				89A8198C279AF95C00F257CA /* PhoneAuthViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -384,6 +395,7 @@
 			isa = PBXGroup;
 			children = (
 				89A81987279ADF7800F257CA /* BaseButton.swift */,
+				89D721C1279B8F8300B02A1E /* BaseTextField.swift */,
 			);
 			path = BaseComponent;
 			sourceTree = "<group>";
@@ -393,6 +405,15 @@
 			children = (
 			);
 			path = Managers;
+			sourceTree = "<group>";
+		};
+		89A8198E279AF9C600F257CA /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				898B795027994A4E00844284 /* OnboardingUseCase.swift */,
+				89A8198F279AF9E500F257CA /* PhoneAuthUseCase.swift */,
+			);
+			path = Auth;
 			sourceTree = "<group>";
 		};
 		89AB664827983F6C00DFEE95 /* Assets */ = {
@@ -431,6 +452,8 @@
 			children = (
 				89AB665D27985F4200DFEE95 /* UIFont+Ext.swift */,
 				89A81989279AE7D100F257CA /* UIView+Ext.swift */,
+				89A81991279B023900F257CA /* String+Ext.swift */,
+				89D721C3279B906F00B02A1E /* UITextField+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -648,15 +671,20 @@
 				890CC9F02796959C00D6185E /* SceneDelegate.swift in Sources */,
 				89A8198A279AE7D100F257CA /* UIView+Ext.swift in Sources */,
 				898B79572799505000844284 /* AppCoordinator.swift in Sources */,
+				89A81992279B023900F257CA /* String+Ext.swift in Sources */,
 				898B79542799502900844284 /* CoordinatorType.swift in Sources */,
+				89D721C2279B8F8300B02A1E /* BaseTextField.swift in Sources */,
 				89A81983279A81D400F257CA /* OnboardingRepository.swift in Sources */,
 				898B795127994A4E00844284 /* OnboardingUseCase.swift in Sources */,
 				898B794F279949D600844284 /* UseCaseType.swift in Sources */,
+				89A81990279AF9E500F257CA /* PhoneAuthUseCase.swift in Sources */,
 				898B795A2799604700844284 /* AuthCoordinator.swift in Sources */,
 				898B79442799431000844284 /* OnboardingViewController.swift in Sources */,
+				89D721C4279B906F00B02A1E /* UITextField+Ext.swift in Sources */,
 				89AB6650279846A900DFEE95 /* Assets+Colors.swift in Sources */,
 				898B794D279945F100844284 /* ViewModelType.swift in Sources */,
 				890CCA222796986600D6185E /* PhoneAuthViewController.swift in Sources */,
+				89A8198D279AF95C00F257CA /* PhoneAuthViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

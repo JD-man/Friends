@@ -18,21 +18,26 @@ final class BaseButton: UIButton {
     
     convenience init(title: String, status: BaseButtonStatus, type: BaseButtonType) {
         self.init(type: .system)
+        statusUpdate(status: status)
         setTitle(title, for: .normal)
         frame.size.height = type.height
+        titleLabel?.font = AssetsFonts.NotoSansKR.regular.font(size: 14)
+        
+    }
+    
+    func statusUpdate(status: BaseButtonStatus) {
         backgroundColor = status.backgroundColor
         setTitleColor(status.titleColor, for: .normal)
         addCorner(rad: 8,borderColor: status.cornerColor)
-        titleLabel?.font = AssetsFonts.NotoSansKR.regular.font(size: 14)
     }
 }
 
-enum BaseButtonStatus {
-    case inactive
+enum BaseButtonStatus {    
     case fill
-    case outline
     case cancel
+    case outline
     case disable
+    case inactive
     
     var backgroundColor: UIColor {
         switch self {

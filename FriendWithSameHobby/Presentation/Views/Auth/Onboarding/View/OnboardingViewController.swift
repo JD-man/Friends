@@ -13,8 +13,14 @@ import RxGesture
 
 class OnboardingViewController: UIViewController {
     
-    private let pageImageView = UIImageView().then {
-        $0.image = AssetsImages.onboardingImg1.image
+    private let onBoardingLabel = UILabel().then {
+        $0.numberOfLines = 0
+        $0.textAlignment = .center
+        $0.textColor = AssetsColors.black.color
+        $0.font = AssetsFonts.NotoSansKR.medium.font(size: 24)        
+    }
+    
+    private let pageImageView = UIImageView().then {        
         $0.contentMode = .scaleAspectFit
     }
     
@@ -37,8 +43,14 @@ class OnboardingViewController: UIViewController {
     
     private func viewConfig() {
         view.backgroundColor = .systemBackground
-        [pageImageView, pageControl, startButton]
+        [onBoardingLabel, pageImageView, pageControl, startButton]
             .forEach { view.addSubview($0) }
+        
+        onBoardingLabel.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(72)
+            make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(85)
+            make.height.equalTo(76)
+        }
         
         pageImageView.snp.makeConstraints { make in
             make.width.equalTo(view.safeAreaLayoutGuide)
@@ -58,6 +70,9 @@ class OnboardingViewController: UIViewController {
         }
     }
     
+    // signal vs driver
+    // signal : 화면전환, 알림창
+    // driver : UI에 바로 연결
     private func binding() {
         let input = OnboardingViewModel.Input(didSwipeGesture: view.rx.swipeGesture([.left, .right]),
                                               didTapStartButton: startButton.rx.tap)
@@ -71,6 +86,13 @@ class OnboardingViewController: UIViewController {
         output?.pageControlRelay
             .asDriver(onErrorJustReturn: 0)
             .drive(pageControl.rx.currentPage)
+            .disposed(by: disposeBag)
+        
+        output?.onboardingTextRelay
+            .asDriver(onErrorJustReturn: NSMutableAttributedString())
+            .drive { [weak self] in
+                self?.onBoardingLabel.attributedText = $0
+            }
             .disposed(by: disposeBag)
     }
 }

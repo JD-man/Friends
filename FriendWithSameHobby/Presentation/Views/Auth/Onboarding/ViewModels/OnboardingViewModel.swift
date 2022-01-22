@@ -12,7 +12,7 @@ import RxCocoa
 import RxGesture
 
 final class OnboardingViewModel: ViewModelType {
-    struct Input {
+    struct Input {        
         // Swipe Gesture
         let didSwipeGesture: SwipeControlEvent
         
@@ -22,11 +22,13 @@ final class OnboardingViewModel: ViewModelType {
     
     struct Output {
         // UIImage Relay
-        let imageRelay = PublishRelay<UIImage?>()
+        let imageRelay = BehaviorRelay<UIImage?>(value: UIImage())
         // PageControl Current Page Index Relay
-        let pageControlRelay = PublishRelay<Int>()
+        let pageControlRelay = BehaviorRelay<Int>(value: 0)
+        // Onboarding Text
+        let onboardingTextRelay = BehaviorRelay<NSMutableAttributedString>(value: NSMutableAttributedString())
         
-        // UserDefaults isOnboardingPassed PublishRelay Bool        
+        // UserDefaults isOnboardingPassed PublishRelay Bool
     }
     
     var useCase = OnboardingUseCase()
@@ -46,9 +48,15 @@ final class OnboardingViewModel: ViewModelType {
                     offset = -1
                 default:
                     break
-                }
+                }                
                 self?.useCase.execute(offset: offset)
             }).disposed(by: disposeBag)
+        
+        input.didTapStartButton
+            .bind { [weak self] in
+                self?.coordinator?.pushPhoneAuthVC()
+                print("Start Button Clicked")
+            }.disposed(by: disposeBag)
         
         // UseCase To Output
         useCase.assetImageRelay
@@ -58,6 +66,10 @@ final class OnboardingViewModel: ViewModelType {
         
         useCase.idxRelay
             .bind(to: output.pageControlRelay)
+            .disposed(by: disposeBag)
+        
+        useCase.highlightedTextRelay
+            .bind(to: output.onboardingTextRelay)
             .disposed(by: disposeBag)
         return output
     }
