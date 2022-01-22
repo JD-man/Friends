@@ -84,11 +84,22 @@ class VerifyViewController: UIViewController {
         verifyButton.snp.makeConstraints { make in
             make.height.equalTo(verifyButton.frame.height)
             make.top.equalTo(retryButton.snp.bottom).offset(74)
-            make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(16)            
+            make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(16)
         }
     }
     
     private func binding() {
+        let input = VerifyViewModel.Input(veriftButtonTap: verifyButton.rx.tap,
+                                          retryButtonTap: retryButton.rx.tap,
+                                          verifyTextFieldText: verifyTextField.inputTextField.rx.text.orEmpty,
+                                          verifyTextFieldEditBegin: verifyTextField.inputTextField.rx.controlEvent(.editingDidBegin))
         
+        let output = viewModel?.transform(input, disposeBag: disposeBag)
+        
+        output?.verifyButtonStatus
+            .asDriver(onErrorJustReturn: .disable)
+            .drive { [weak self] in
+                self?.verifyButton.statusUpdate(status: $0)
+            }.disposed(by: disposeBag)
     }
 }
