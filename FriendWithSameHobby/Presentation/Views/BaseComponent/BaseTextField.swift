@@ -32,7 +32,8 @@ final class BaseTextField: UIView {
     convenience init(text: String, status: BaseTextFieldStatus) {
         self.init()
         viewConfig()
-        statusUpdate(text: text, status: status)
+        inputTextField.text = text
+        statusUpdate(status: status)
     }
     
     private func viewConfig() {
@@ -58,10 +59,10 @@ final class BaseTextField: UIView {
         }
     }
     
-    func statusUpdate(text: String, status: BaseTextFieldStatus) {
-        inputTextField.text = text
+    func statusUpdate(status: BaseTextFieldStatus) {
         inputTextField.textColor = status.textColor
         lineView.backgroundColor = status.lineColor
+        validationLabel.text = status.validationtext
         validationLabel.textColor = status.validationTextColor
         inputTextField.backgroundColor = status.backGroundColor
     }
@@ -72,8 +73,8 @@ enum BaseTextFieldStatus {
     case focus
     case active
     case disable
-    case error
-    case success
+    case error(message: String)
+    case success(message: String)
     
     var backGroundColor: UIColor {
         switch self {
@@ -108,6 +109,17 @@ enum BaseTextFieldStatus {
         }
     }
     
+    var validationtext: String {
+        switch self {
+        case .error(let message):
+            return message
+        case .success(let message):
+            return message
+        default:
+            return ""
+        }
+    }
+    
     var validationTextColor: UIColor {
         switch self {
         case .error:
@@ -118,5 +130,4 @@ enum BaseTextFieldStatus {
             return .clear
         }
     }
-
 }

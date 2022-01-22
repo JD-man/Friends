@@ -12,8 +12,7 @@ final class PhoneAuthUseCase: UseCaseType {
     
     let formattedTextRelay = PublishRelay<String>()
     let buttonStatusRelay = PublishRelay<BaseButtonStatus>()
-    // lineView Status
-    // label Status
+    let textFieldStatusRelay = PublishRelay<BaseTextFieldStatus>()
     
     func execute(text: String) {
         numberFormatting(text: text)
@@ -35,9 +34,11 @@ final class PhoneAuthUseCase: UseCaseType {
         guard phoneNumberPred.evaluate(with: text) else {
             // accept validation result
             buttonStatusRelay.accept(.disable)
+            textFieldStatusRelay.accept(.error(message: "전화번호 형식으로 입력해주세요."))
             return
         }
         
+        textFieldStatusRelay.accept(.success(message: "알맞은 전화번호 형식입니다."))
         buttonStatusRelay.accept(.fill)
     }
 }

@@ -78,8 +78,14 @@ class PhoneAuthViewController: UIViewController {
         
         output?.buttonStatusRelay
             .asDriver(onErrorJustReturn: .disable)
-            .drive { [weak self] in                
+            .drive { [weak self] in
                 self?.requestPhoneNumberButton.statusUpdate(status: $0)
+            }.disposed(by: disposeBag)
+        
+        output?.textFieldStatusRelay
+            .asDriver(onErrorJustReturn: .disable)
+            .drive { [weak self] in
+                self?.phoneNumberTextField.statusUpdate(status: $0)
             }.disposed(by: disposeBag)
     }
 }

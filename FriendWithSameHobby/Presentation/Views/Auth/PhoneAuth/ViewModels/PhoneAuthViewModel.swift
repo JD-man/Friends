@@ -28,7 +28,7 @@ final class PhoneAuthViewModel: ViewModelType {
         let formattedNumberRelay = PublishRelay<String>()
         
         // textfield status
-        
+        let textFieldStatusRelay = PublishRelay<BaseTextFieldStatus>()
         // button status
         let buttonStatusRelay = PublishRelay<BaseButtonStatus>()
     }
@@ -56,10 +56,14 @@ final class PhoneAuthViewModel: ViewModelType {
             .bind(to: output.buttonStatusRelay)
             .disposed(by: disposeBag)
         
+        useCase.textFieldStatusRelay
+            .bind(to: output.textFieldStatusRelay)
+            .disposed(by: disposeBag)
+        
         // edit begin output
         input.editBegin
-            .drive { _ in
-                output.emptyStringRelay.accept("")
+            .drive { _ in                
+                output.emptyStringRelay.accept("")                
             }.disposed(by: disposeBag)
         
         return output
