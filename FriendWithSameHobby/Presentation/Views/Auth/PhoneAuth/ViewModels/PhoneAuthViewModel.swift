@@ -17,16 +17,16 @@ final class PhoneAuthViewModel: ViewModelType {
         
         // TextField text
         let phoneNumberText: Driver<String>
+        
         // button tap
+        let buttonTap: Driver<Void>
     }
     
     struct Output {
         // edit begin
         let emptyStringRelay = PublishRelay<String>()
-        
         // formatted number text
         let formattedNumberRelay = PublishRelay<String>()
-        
         // textfield status
         let textFieldStatusRelay = PublishRelay<BaseTextFieldStatus>()
         // button status
@@ -44,7 +44,12 @@ final class PhoneAuthViewModel: ViewModelType {
         input.phoneNumberText
             .distinctUntilChanged()
             .drive { [unowned self] in
-                self.useCase.execute(text: $0)
+                self.useCase.validation(text: $0)
+            }.disposed(by: disposeBag)
+        
+        input.buttonTap
+            .drive { [unowned self] _ in
+                self.useCase.execute()
             }.disposed(by: disposeBag)
         
         // UseCase to Output
@@ -58,6 +63,22 @@ final class PhoneAuthViewModel: ViewModelType {
         
         useCase.textFieldStatusRelay
             .bind(to: output.textFieldStatusRelay)
+            .disposed(by: disposeBag)
+        
+        // UseCase to Coordinator
+        useCase.authSuccessRelay
+            .asDriver(onErrorJustReturn: "")
+            .drive { [weak self] in
+                if $0 != "" {
+                    print("auth success")
+                }
+            }.disposed(by: disposeBag)
+        
+        useCase.authErrorRelay
+            .asDriver(onErrorJustReturn: .authFail)
+            .drive { _ in
+                print("auth error")
+            }
             .disposed(by: disposeBag)
         
         // edit begin output

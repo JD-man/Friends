@@ -6,16 +6,42 @@
 //
 
 import Foundation
+import RxSwift
 import RxRelay
 
 final class PhoneAuthUseCase: UseCaseType {
     
-    let formattedTextRelay = PublishRelay<String>()
-    let buttonStatusRelay = PublishRelay<BaseButtonStatus>()
-    let textFieldStatusRelay = PublishRelay<BaseTextFieldStatus>()
+    var repository = PhoneAuthRepository()
     
-    func execute(text: String) {
+    let formattedTextRelay = BehaviorRelay<String>(value: "")
+    let buttonStatusRelay = BehaviorRelay<BaseButtonStatus>(value: .disable)
+    let textFieldStatusRelay = BehaviorRelay<BaseTextFieldStatus>(value: .disable)
+    
+    let authSuccessRelay = PublishRelay<String>()
+    let authErrorRelay = PublishRelay<PhoneAuthError>()
+    
+    private var disposeBag = DisposeBag()
+    
+    func validation(text: String) {
         numberFormatting(text: text)
+    }
+    
+    func execute() {
+        print("Phone Auth Use Case execute")
+        if buttonStatusRelay.value == .fill {
+            repository.verifyPhoneNumber(formattedTextRelay.value)
+                .subscribe { [unowned self] in
+                    switch $0 {
+                    case .success(let id):
+                        self.authSuccessRelay.accept(id)
+                    case .failure(_):
+                        self.authErrorRelay.accept(.authFail)
+                    }
+                }.disposed(by: disposeBag)
+        }
+        else {
+            authErrorRelay.accept(.notFillButton)
+        }
     }
     
     private func numberFormatting(text: String) {

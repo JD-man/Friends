@@ -55,6 +55,7 @@
 		89AB665E27985F4200DFEE95 /* UIFont+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89AB665D27985F4200DFEE95 /* UIFont+Ext.swift */; };
 		89D721C2279B8F8300B02A1E /* BaseTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D721C1279B8F8300B02A1E /* BaseTextField.swift */; };
 		89D721C4279B906F00B02A1E /* UITextField+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D721C3279B906F00B02A1E /* UITextField+Ext.swift */; };
+		89D721C6279C14CC00B02A1E /* PhoneAuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D721C5279C14CC00B02A1E /* PhoneAuthRepository.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -116,6 +117,7 @@
 		89AB665D27985F4200DFEE95 /* UIFont+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Ext.swift"; sourceTree = "<group>"; };
 		89D721C1279B8F8300B02A1E /* BaseTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTextField.swift; sourceTree = "<group>"; };
 		89D721C3279B906F00B02A1E /* UITextField+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Ext.swift"; sourceTree = "<group>"; };
+		89D721C5279C14CC00B02A1E /* PhoneAuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneAuthRepository.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -226,6 +228,7 @@
 			isa = PBXGroup;
 			children = (
 				89A81982279A81D400F257CA /* OnboardingRepository.swift */,
+				89D721C5279C14CC00B02A1E /* PhoneAuthRepository.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -671,6 +674,7 @@
 				890CC9F02796959C00D6185E /* SceneDelegate.swift in Sources */,
 				89A8198A279AE7D100F257CA /* UIView+Ext.swift in Sources */,
 				898B79572799505000844284 /* AppCoordinator.swift in Sources */,
+				89D721C6279C14CC00B02A1E /* PhoneAuthRepository.swift in Sources */,
 				89A81992279B023900F257CA /* String+Ext.swift in Sources */,
 				898B79542799502900844284 /* CoordinatorType.swift in Sources */,
 				89D721C2279B8F8300B02A1E /* BaseTextField.swift in Sources */,

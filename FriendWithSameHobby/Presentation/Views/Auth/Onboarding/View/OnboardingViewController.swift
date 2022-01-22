@@ -38,7 +38,8 @@ class OnboardingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         viewConfig()
-        binding()
+        binding()        
+        navigationController?.navigationBar.isHidden = true
     }
     
     private func viewConfig() {

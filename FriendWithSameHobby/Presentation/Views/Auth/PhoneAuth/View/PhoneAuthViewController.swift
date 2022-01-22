@@ -41,7 +41,7 @@ class PhoneAuthViewController: UIViewController {
         
         titleLabel.snp.makeConstraints { make in
             make.height.equalTo(64)
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(125)
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(80)
             make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(74)
         }
         
@@ -52,8 +52,8 @@ class PhoneAuthViewController: UIViewController {
         }
         
         requestPhoneNumberButton.snp.makeConstraints { make in
-            make.centerY.equalTo(view.safeAreaLayoutGuide)
             make.height.equalTo(requestPhoneNumberButton.frame.height)
+            make.top.equalTo(phoneNumberTextField.snp.bottom).offset(72)
             make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(16)
         }
     }
@@ -62,7 +62,9 @@ class PhoneAuthViewController: UIViewController {
         let textFieldRx = phoneNumberTextField.inputTextField.rx
         
         let input = PhoneAuthViewModel.Input(editBegin: textFieldRx.controlEvent(.editingDidBegin).asDriver(onErrorJustReturn: ()),
-                                             phoneNumberText: textFieldRx.text.orEmpty.asDriver(onErrorJustReturn: ""))
+                                             phoneNumberText: textFieldRx.text.orEmpty.asDriver(onErrorJustReturn: ""),
+                                             buttonTap: requestPhoneNumberButton.rx.tap.asDriver()
+        )
         
         let output = viewModel?.transform(input, disposeBag: disposeBag)
         
