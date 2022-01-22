@@ -9,14 +9,14 @@ import Then
 import SnapKit
 
 final class BaseTextField: UIView {
-    private let inputTextField = UITextField().then {
+    let inputTextField = UITextField().then {
         $0.basicConfig()
         $0.font = AssetsFonts.NotoSansKR.regular.font(size: 14)
     }
     
-    private let lineView = UIView()
+    let lineView = UIView()
     
-    private let validationLabel = UILabel().then {
+    let validationLabel = UILabel().then {
         $0.text = "상태"
         $0.font = AssetsFonts.NotoSansKR.regular.font(size: 12)
     }

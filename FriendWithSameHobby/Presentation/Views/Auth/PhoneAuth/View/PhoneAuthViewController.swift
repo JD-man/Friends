@@ -13,6 +13,7 @@ import Then
 class PhoneAuthViewController: UIViewController {
     
     var viewModel: PhoneAuthViewModel?
+    private var disposeBag = DisposeBag()
     
     private let titleLabel = UILabel().then {
         $0.numberOfLines = 0
@@ -21,15 +22,16 @@ class PhoneAuthViewController: UIViewController {
         $0.font = AssetsFonts.NotoSansKR.regular.font(size: 20)        
     }
     
-    private let phoneNumberTextField = BaseTextField(text: "휴대폰 번호(-없이 숫자만 입력)", status: .inactive)
-    private let requestPhoneNumberButton = BaseButton(title: "인증 문자 받기",
-                                                status: .disable,
-                                                type: .h48)
+    private let phoneNumberTextField = BaseTextField(text: "휴대폰 번호(-없이 숫자만 입력)", status: .inactive).then {
+        $0.inputTextField.keyboardType = .numberPad
+    }
+    private let requestPhoneNumberButton = BaseButton(title: "인증 문자 받기", status: .disable, type: .h48)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         viewConfig()
+        binding()
     }
     
     private func viewConfig() {
@@ -54,5 +56,30 @@ class PhoneAuthViewController: UIViewController {
             make.height.equalTo(requestPhoneNumberButton.frame.height)
             make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(16)
         }
+    }
+    
+    private func binding() {
+        let textFieldRx = phoneNumberTextField.inputTextField.rx
+        
+        let input = PhoneAuthViewModel.Input(editBegin: textFieldRx.controlEvent(.editingDidBegin).asDriver(onErrorJustReturn: ()),
+                                             phoneNumberText: textFieldRx.text.orEmpty.asDriver(onErrorJustReturn: ""))
+        
+        let output = viewModel?.transform(input, disposeBag: disposeBag)
+        
+        output?.emptyStringRelay
+            .asDriver(onErrorJustReturn: "")
+            .drive(phoneNumberTextField.inputTextField.rx.text)
+            .disposed(by: disposeBag)
+        
+        output?.formattedNumberRelay
+            .asDriver(onErrorJustReturn: "")
+            .drive(phoneNumberTextField.inputTextField.rx.text)
+            .disposed(by: disposeBag)
+        
+        output?.buttonStatusRelay
+            .asDriver(onErrorJustReturn: .disable)
+            .drive { [weak self] in                
+                self?.requestPhoneNumberButton.statusUpdate(status: $0)
+            }.disposed(by: disposeBag)
     }
 }
