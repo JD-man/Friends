@@ -49,7 +49,8 @@ final class PhoneAuthViewModel: ViewModelType {
         
         input.buttonTap
             .drive { [unowned self] _ in
-                self.useCase.execute()
+                //self.useCase.execute()
+                self.coordinator?.pushVerifyVC()
             }.disposed(by: disposeBag)
         
         // UseCase to Output

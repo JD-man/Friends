@@ -26,8 +26,7 @@ final class PhoneAuthUseCase: UseCaseType {
         numberFormatting(text: text)
     }
     
-    func execute() {
-        print("Phone Auth Use Case execute")
+    func execute() {        
         if buttonStatusRelay.value == .fill {
             repository.verifyPhoneNumber(formattedTextRelay.value)
                 .subscribe { [unowned self] in

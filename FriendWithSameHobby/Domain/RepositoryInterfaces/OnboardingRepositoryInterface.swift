@@ -9,6 +9,5 @@ import RxSwift
 import Foundation
 
 protocol OnboardingRepositoryInterface {
-    func getOnboardingImages(idx: Int) -> ImageAsset
-    
+    func getOnboardingImages(idx: Int) -> ImageAsset    
 }

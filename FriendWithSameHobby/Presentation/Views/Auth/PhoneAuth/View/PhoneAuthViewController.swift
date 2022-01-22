@@ -42,7 +42,7 @@ class PhoneAuthViewController: UIViewController {
         titleLabel.snp.makeConstraints { make in
             make.height.equalTo(64)
             make.top.equalTo(view.safeAreaLayoutGuide).offset(80)
-            make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(74)
+            make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(16)
         }
         
         phoneNumberTextField.snp.makeConstraints { make in

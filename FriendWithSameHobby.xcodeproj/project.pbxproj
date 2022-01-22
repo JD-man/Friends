@@ -56,6 +56,9 @@
 		89D721C2279B8F8300B02A1E /* BaseTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D721C1279B8F8300B02A1E /* BaseTextField.swift */; };
 		89D721C4279B906F00B02A1E /* UITextField+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D721C3279B906F00B02A1E /* UITextField+Ext.swift */; };
 		89D721C6279C14CC00B02A1E /* PhoneAuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D721C5279C14CC00B02A1E /* PhoneAuthRepository.swift */; };
+		89D721CA279C5A0E00B02A1E /* VerifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D721C9279C5A0E00B02A1E /* VerifyViewController.swift */; };
+		89D721CC279C5B4A00B02A1E /* VerifyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D721CB279C5B4A00B02A1E /* VerifyViewModel.swift */; };
+		89D721CE279C5BFE00B02A1E /* VerifyUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D721CD279C5BFE00B02A1E /* VerifyUseCase.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -118,6 +121,9 @@
 		89D721C1279B8F8300B02A1E /* BaseTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTextField.swift; sourceTree = "<group>"; };
 		89D721C3279B906F00B02A1E /* UITextField+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Ext.swift"; sourceTree = "<group>"; };
 		89D721C5279C14CC00B02A1E /* PhoneAuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneAuthRepository.swift; sourceTree = "<group>"; };
+		89D721C9279C5A0E00B02A1E /* VerifyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyViewController.swift; sourceTree = "<group>"; };
+		89D721CB279C5B4A00B02A1E /* VerifyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyViewModel.swift; sourceTree = "<group>"; };
+		89D721CD279C5BFE00B02A1E /* VerifyUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyUseCase.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -310,6 +316,8 @@
 		898B79392799429200844284 /* Verify */ = {
 			isa = PBXGroup;
 			children = (
+				89D721C8279C595D00B02A1E /* ViewModels */,
+				89D721C7279C595100B02A1E /* View */,
 			);
 			path = Verify;
 			sourceTree = "<group>";
@@ -415,6 +423,7 @@
 			children = (
 				898B795027994A4E00844284 /* OnboardingUseCase.swift */,
 				89A8198F279AF9E500F257CA /* PhoneAuthUseCase.swift */,
+				89D721CD279C5BFE00B02A1E /* VerifyUseCase.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -459,6 +468,22 @@
 				89D721C3279B906F00B02A1E /* UITextField+Ext.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		89D721C7279C595100B02A1E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				89D721C9279C5A0E00B02A1E /* VerifyViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		89D721C8279C595D00B02A1E /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				89D721CB279C5B4A00B02A1E /* VerifyViewModel.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -667,6 +692,8 @@
 				89AB665E27985F4200DFEE95 /* UIFont+Ext.swift in Sources */,
 				89AB665927985B9600DFEE95 /* Assets+Fonts.swift in Sources */,
 				898B79482799456F00844284 /* Assets+Images.swift in Sources */,
+				89D721CA279C5A0E00B02A1E /* VerifyViewController.swift in Sources */,
+				89D721CE279C5BFE00B02A1E /* VerifyUseCase.swift in Sources */,
 				890CC9EE2796959C00D6185E /* AppDelegate.swift in Sources */,
 				89A81988279ADF7800F257CA /* BaseButton.swift in Sources */,
 				89A81985279A831A00F257CA /* OnboardingRepositoryInterface.swift in Sources */,
@@ -688,6 +715,7 @@
 				89AB6650279846A900DFEE95 /* Assets+Colors.swift in Sources */,
 				898B794D279945F100844284 /* ViewModelType.swift in Sources */,
 				890CCA222796986600D6185E /* PhoneAuthViewController.swift in Sources */,
+				89D721CC279C5B4A00B02A1E /* VerifyViewModel.swift in Sources */,
 				89A8198D279AF95C00F257CA /* PhoneAuthViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
