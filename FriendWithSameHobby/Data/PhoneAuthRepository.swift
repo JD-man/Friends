@@ -28,6 +28,7 @@ final class PhoneAuthRepository {
                         print("phone auth id is nil")
                         return
                     }
+                    UserDefaultsManager.phoneNumber = numText.removeHyphen()
                     single(.success(id))
                 }            
             return Disposables.create()

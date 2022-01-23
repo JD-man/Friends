@@ -39,21 +39,22 @@ extension UserTargets: TargetType {
         case .getUserInfo:
             return .requestParameters(parameters: [:], encoding: URLEncoding.default)
         case .postUser:
-            return .requestParameters(parameters: ["phoneNumber": "test"],
+            return .requestParameters(parameters:
+                                        ["phoneNumber": UserDefaultsManager.phoneNumber ?? "",
+                                         "FCMtoken": UserDefaultsManager.FCMtoken ?? "",
+                                         "nick": UserDefaultsManager.nick ?? "",
+                                         "birth": UserDefaultsManager.birth ?? "",
+                                         "email": UserDefaultsManager.email ?? "",
+                                         "gender": UserDefaultsManager.gender ?? ""],
                                       encoding: URLEncoding.default)
         }
     }
     
     var headers: [String: String]? {
         switch self {
-        case .getUserInfo(let idToken):
+        default:
             return ["Content-Type": "application/json",
-                    "idToken": idToken
-            ]
-        case .postUser(idToken: let idToken):
-            return ["Content-Type": "application/json",
-                    "idToken": idToken
-            ]
+                    "idToken": UserDefaultsManager.idToken ?? ""]
         }
     }
 }

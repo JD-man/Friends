@@ -20,4 +20,8 @@ extension String {
                                 range: range)
         return mutableAtt
     }
+    
+    func removeHyphen() -> String {
+        return self.replacingOccurrences(of: "-", with: "")
+    }
 }
