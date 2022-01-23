@@ -26,7 +26,7 @@ final class VerifyViewModel: ViewModelType {
     
     struct Output {
         // textField status
-        
+        let textFieldStatus = PublishRelay<BaseTextFieldStatus>()
         // verifyButton status
         let verifyButtonStatus = PublishRelay<BaseButtonStatus>()
         
@@ -58,8 +58,7 @@ final class VerifyViewModel: ViewModelType {
                 self.useCase.excuteAuthNumber(phoneID: self.phoneID)
             }.disposed(by: disposeBag)
         
-        // UseCase to Coordinator
-        
+        // UseCase to Coordinator        
         
         // UseCase to Output
         useCase.verifyButtonStatusRelay
@@ -71,6 +70,7 @@ final class VerifyViewModel: ViewModelType {
             .asDriver(onErrorJustReturn: ())
             .drive { _ in
                 output.emptyStringRelay.accept("")
+                output.textFieldStatus.accept(.focus)
             }.disposed(by: disposeBag)
             
         return output

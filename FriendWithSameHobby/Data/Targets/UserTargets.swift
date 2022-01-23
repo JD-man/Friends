@@ -8,12 +8,14 @@
 import Foundation
 import Moya
 
+protocol APITarget {}
+
 enum UserTargets {
-    case getUserInfo(idToken: String)
-    case postUser(idToken: String)
+    case getUserInfo
+    case postUser
 }
 
-extension UserTargets: TargetType {
+extension UserTargets: TargetType, APITarget {
     var baseURL: URL {
         return URL(string: "http://test.monocoding.com:35484")!
     }

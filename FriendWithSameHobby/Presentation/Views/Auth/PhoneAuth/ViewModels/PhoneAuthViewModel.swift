@@ -49,8 +49,8 @@ final class PhoneAuthViewModel: ViewModelType {
         
         input.buttonTap
             .drive { [unowned self] _ in
-                self.useCase.execute()
-                //self.coordinator?.pushVerifyVC(phoneId: "test")
+                //self.useCase.execute()
+                self.coordinator?.pushVerifyVC(phoneId: "test")
             }.disposed(by: disposeBag)
         
         // UseCase to Output
@@ -79,8 +79,8 @@ final class PhoneAuthViewModel: ViewModelType {
         
         useCase.authErrorRelay
             .asDriver(onErrorJustReturn: .authFail)
-            .drive { _ in
-                print("auth error")
+            .drive {
+                print($0)
             }
             .disposed(by: disposeBag)
         

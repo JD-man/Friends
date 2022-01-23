@@ -11,7 +11,8 @@ import RxRelay
 
 final class VerifyUseCase: UseCaseType {
     let userRepo = UserRepository()
-    let phoneAuthRepo = PhoneAuthRepository()    
+    let phoneAuthRepo = PhoneAuthRepository()
+    
     let verifyButtonStatusRelay = PublishRelay<BaseButtonStatus>()
     
     let codeRelay = BehaviorRelay<String>(value: "")
@@ -35,11 +36,14 @@ final class VerifyUseCase: UseCaseType {
     
     func validation(text: String) {
         codeRelay.accept(text)
-        if text.count == 6 {
-            verifyButtonStatusRelay.accept(.fill)
-        }
-        else {
+        
+        let registerNumberRegex = "^([0-9]{6})$"
+        let registerNumberPred = NSPredicate(format: "SELF MATCHES %@", registerNumberRegex)
+        
+        guard registerNumberPred.evaluate(with: text) else {
             verifyButtonStatusRelay.accept(.disable)
+            return
         }
+        verifyButtonStatusRelay.accept(.fill)
     }
 }

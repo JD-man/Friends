@@ -38,7 +38,6 @@ final class AuthCoordinator: CoordinateType {
         let verifyVC = VerifyViewController()
         let viewModel = VerifyViewModel(phoneId: phoneId)
         viewModel.coordinator = self
-        verifyVC.viewModel = viewModel
         navigationController.pushViewController(verifyVC, animated: true)
     }
 }

@@ -36,8 +36,10 @@ class VerifyViewController: UIViewController {
     }
     
     let retryButton = BaseButton(title: "재전송", status: .fill, type: .h48)
-    let verifyTextField = BaseTextField(text: "인증번호 입력", status: .inactive)
     let verifyButton = BaseButton(title: "인증하고 시작하기", status: .disable, type: .h48)
+    let verifyTextField = BaseTextField(text: "인증번호 입력", status: .inactive).then {
+        $0.inputTextField.keyboardType = .numberPad
+    }   
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -106,5 +108,11 @@ class VerifyViewController: UIViewController {
             .asDriver(onErrorJustReturn: "")
             .drive(verifyTextField.inputTextField.rx.text)
             .disposed(by: disposeBag)
+        
+        output?.textFieldStatus
+            .asDriver(onErrorJustReturn: .disable)
+            .drive { [weak self] in
+                self?.verifyTextField.statusUpdate(status: $0)
+            }.disposed(by: disposeBag)
     }
 }

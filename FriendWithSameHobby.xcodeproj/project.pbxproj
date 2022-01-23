@@ -63,6 +63,9 @@
 		89E055A5279D296400E86445 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E055A4279D296400E86445 /* UserDefaultsManager.swift */; };
 		89E055A8279D7BCC00E86445 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 89E055A7279D7BCC00E86445 /* FirebaseAuth */; };
 		89E055AA279D7BCC00E86445 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 89E055A9279D7BCC00E86445 /* FirebaseMessaging */; };
+		89E055AD279D946000E86445 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E055AC279D946000E86445 /* APIService.swift */; };
+		89E055AF279D9B4400E86445 /* PostUserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E055AE279D9B4400E86445 /* PostUserResponse.swift */; };
+		89E055B1279D9D7800E86445 /* APIErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E055B0279D9D7800E86445 /* APIErrors.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -132,6 +135,9 @@
 		89E0559D279D1AF100E86445 /* UserTargets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTargets.swift; sourceTree = "<group>"; };
 		89E055A1279D1B9F00E86445 /* URLComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLComponents.swift; sourceTree = "<group>"; };
 		89E055A4279D296400E86445 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
+		89E055AC279D946000E86445 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
+		89E055AE279D9B4400E86445 /* PostUserResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostUserResponse.swift; sourceTree = "<group>"; };
+		89E055B0279D9D7800E86445 /* APIErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIErrors.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -196,6 +202,7 @@
 		890CC9EC2796959C00D6185E /* FriendWithSameHobby */ = {
 			isa = PBXGroup;
 			children = (
+				89E055AB279D942B00E86445 /* Network */,
 				89E055A0279D1B8500E86445 /* APIKey */,
 				89A8198B279AF32500F257CA /* Managers */,
 				890CCA69279717C600D6185E /* FriendWithSameHobby.entitlements */,
@@ -503,6 +510,7 @@
 		89E05599279D108100E86445 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				89E055AE279D9B4400E86445 /* PostUserResponse.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -528,6 +536,15 @@
 				89E055A1279D1B9F00E86445 /* URLComponents.swift */,
 			);
 			path = APIKey;
+			sourceTree = "<group>";
+		};
+		89E055AB279D942B00E86445 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				89E055AC279D946000E86445 /* APIService.swift */,
+				89E055B0279D9D7800E86445 /* APIErrors.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -736,6 +753,7 @@
 				89AB665927985B9600DFEE95 /* Assets+Fonts.swift in Sources */,
 				898B79482799456F00844284 /* Assets+Images.swift in Sources */,
 				89D721CA279C5A0E00B02A1E /* VerifyViewController.swift in Sources */,
+				89E055AD279D946000E86445 /* APIService.swift in Sources */,
 				89D721CE279C5BFE00B02A1E /* VerifyUseCase.swift in Sources */,
 				890CC9EE2796959C00D6185E /* AppDelegate.swift in Sources */,
 				89E055A5279D296400E86445 /* UserDefaultsManager.swift in Sources */,
@@ -746,6 +764,7 @@
 				89A8198A279AE7D100F257CA /* UIView+Ext.swift in Sources */,
 				898B79572799505000844284 /* AppCoordinator.swift in Sources */,
 				89D721C6279C14CC00B02A1E /* PhoneAuthRepository.swift in Sources */,
+				89E055B1279D9D7800E86445 /* APIErrors.swift in Sources */,
 				89A81992279B023900F257CA /* String+Ext.swift in Sources */,
 				898B79542799502900844284 /* CoordinatorType.swift in Sources */,
 				89D721C2279B8F8300B02A1E /* BaseTextField.swift in Sources */,
@@ -762,6 +781,7 @@
 				89AB6650279846A900DFEE95 /* Assets+Colors.swift in Sources */,
 				898B794D279945F100844284 /* ViewModelType.swift in Sources */,
 				890CCA222796986600D6185E /* PhoneAuthViewController.swift in Sources */,
+				89E055AF279D9B4400E86445 /* PostUserResponse.swift in Sources */,
 				89D721CC279C5B4A00B02A1E /* VerifyViewModel.swift in Sources */,
 				89A8198D279AF95C00F257CA /* PhoneAuthViewModel.swift in Sources */,
 			);
