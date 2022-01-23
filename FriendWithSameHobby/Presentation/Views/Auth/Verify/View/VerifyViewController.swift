@@ -101,5 +101,10 @@ class VerifyViewController: UIViewController {
             .drive { [weak self] in
                 self?.verifyButton.statusUpdate(status: $0)
             }.disposed(by: disposeBag)
+        
+        output?.emptyStringRelay
+            .asDriver(onErrorJustReturn: "")
+            .drive(verifyTextField.inputTextField.rx.text)
+            .disposed(by: disposeBag)
     }
 }

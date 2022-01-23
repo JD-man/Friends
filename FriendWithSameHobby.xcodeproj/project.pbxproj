@@ -16,7 +16,6 @@
 		890CCA112796959D00D6185E /* FriendWithSameHobbyUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890CCA102796959D00D6185E /* FriendWithSameHobbyUITestsLaunchTests.swift */; };
 		890CCA222796986600D6185E /* PhoneAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890CCA212796986600D6185E /* PhoneAuthViewController.swift */; };
 		890CCA5127970DDC00D6185E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 890CCA5027970DDC00D6185E /* GoogleService-Info.plist */; };
-		890CCA55279712DA00D6185E /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 890CCA54279712DA00D6185E /* Alamofire */; };
 		890CCA58279712E800D6185E /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 890CCA57279712E800D6185E /* SnapKit */; };
 		890CCA5B279712FC00D6185E /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 890CCA5A279712FC00D6185E /* RxCocoa */; };
 		890CCA5D279712FC00D6185E /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 890CCA5C279712FC00D6185E /* RxRelay */; };
@@ -59,6 +58,10 @@
 		89D721CA279C5A0E00B02A1E /* VerifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D721C9279C5A0E00B02A1E /* VerifyViewController.swift */; };
 		89D721CC279C5B4A00B02A1E /* VerifyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D721CB279C5B4A00B02A1E /* VerifyViewModel.swift */; };
 		89D721CE279C5BFE00B02A1E /* VerifyUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D721CD279C5BFE00B02A1E /* VerifyUseCase.swift */; };
+		89E0559C279D18D200E86445 /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E0559B279D18D200E86445 /* UserRepository.swift */; };
+		89E0559E279D1AF100E86445 /* UserTargets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E0559D279D1AF100E86445 /* UserTargets.swift */; };
+		89E055A2279D1B9F00E86445 /* URLComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E055A1279D1B9F00E86445 /* URLComponents.swift */; };
+		89E055A5279D296400E86445 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E055A4279D296400E86445 /* UserDefaultsManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -124,6 +127,10 @@
 		89D721C9279C5A0E00B02A1E /* VerifyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyViewController.swift; sourceTree = "<group>"; };
 		89D721CB279C5B4A00B02A1E /* VerifyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyViewModel.swift; sourceTree = "<group>"; };
 		89D721CD279C5BFE00B02A1E /* VerifyUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyUseCase.swift; sourceTree = "<group>"; };
+		89E0559B279D18D200E86445 /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
+		89E0559D279D1AF100E86445 /* UserTargets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTargets.swift; sourceTree = "<group>"; };
+		89E055A1279D1B9F00E86445 /* URLComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLComponents.swift; sourceTree = "<group>"; };
+		89E055A4279D296400E86445 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,7 +144,6 @@
 				890CCA732797211F00D6185E /* Then in Frameworks */,
 				890CCA622797134F00D6185E /* RxKeyboard in Frameworks */,
 				890CCA6E2797210100D6185E /* Moya in Frameworks */,
-				890CCA55279712DA00D6185E /* Alamofire in Frameworks */,
 				890CCA5F279712FC00D6185E /* RxSwift in Frameworks */,
 				890CCA5D279712FC00D6185E /* RxRelay in Frameworks */,
 				890CCA58279712E800D6185E /* SnapKit in Frameworks */,
@@ -188,6 +194,7 @@
 		890CC9EC2796959C00D6185E /* FriendWithSameHobby */ = {
 			isa = PBXGroup;
 			children = (
+				89E055A0279D1B8500E86445 /* APIKey */,
 				89A8198B279AF32500F257CA /* Managers */,
 				890CCA69279717C600D6185E /* FriendWithSameHobby.entitlements */,
 				898B794B279945D200844284 /* Protocols */,
@@ -233,8 +240,11 @@
 		890CCA1E2796983D00D6185E /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				89E0559F279D1B5D00E86445 /* Targets */,
+				89E05599279D108100E86445 /* Model */,
 				89A81982279A81D400F257CA /* OnboardingRepository.swift */,
 				89D721C5279C14CC00B02A1E /* PhoneAuthRepository.swift */,
+				89E0559B279D18D200E86445 /* UserRepository.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -286,6 +296,7 @@
 			isa = PBXGroup;
 			children = (
 				898B793C279942AD00844284 /* Gender */,
+				89E0559A279D146100E86445 /* Email */,
 				898B793B279942A700844284 /* Birth */,
 				898B793A279942A000844284 /* Nickname */,
 				898B79392799429200844284 /* Verify */,
@@ -414,6 +425,7 @@
 		89A8198B279AF32500F257CA /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				89E055A4279D296400E86445 /* UserDefaultsManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -486,6 +498,36 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
+		89E05599279D108100E86445 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		89E0559A279D146100E86445 /* Email */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Email;
+			sourceTree = "<group>";
+		};
+		89E0559F279D1B5D00E86445 /* Targets */ = {
+			isa = PBXGroup;
+			children = (
+				89E0559D279D1AF100E86445 /* UserTargets.swift */,
+			);
+			path = Targets;
+			sourceTree = "<group>";
+		};
+		89E055A0279D1B8500E86445 /* APIKey */ = {
+			isa = PBXGroup;
+			children = (
+				89E055A1279D1B9F00E86445 /* URLComponents.swift */,
+			);
+			path = APIKey;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -505,7 +547,6 @@
 			);
 			name = FriendWithSameHobby;
 			packageProductDependencies = (
-				890CCA54279712DA00D6185E /* Alamofire */,
 				890CCA57279712E800D6185E /* SnapKit */,
 				890CCA5A279712FC00D6185E /* RxCocoa */,
 				890CCA5C279712FC00D6185E /* RxRelay */,
@@ -591,7 +632,6 @@
 			);
 			mainGroup = 890CC9E12796959C00D6185E;
 			packageReferences = (
-				890CCA53279712DA00D6185E /* XCRemoteSwiftPackageReference "Alamofire" */,
 				890CCA56279712E800D6185E /* XCRemoteSwiftPackageReference "SnapKit" */,
 				890CCA59279712FC00D6185E /* XCRemoteSwiftPackageReference "RxSwift" */,
 				890CCA602797134F00D6185E /* XCRemoteSwiftPackageReference "RxKeyboard" */,
@@ -695,6 +735,7 @@
 				89D721CA279C5A0E00B02A1E /* VerifyViewController.swift in Sources */,
 				89D721CE279C5BFE00B02A1E /* VerifyUseCase.swift in Sources */,
 				890CC9EE2796959C00D6185E /* AppDelegate.swift in Sources */,
+				89E055A5279D296400E86445 /* UserDefaultsManager.swift in Sources */,
 				89A81988279ADF7800F257CA /* BaseButton.swift in Sources */,
 				89A81985279A831A00F257CA /* OnboardingRepositoryInterface.swift in Sources */,
 				898B794A279945BC00844284 /* OnboardingViewModel.swift in Sources */,
@@ -705,10 +746,13 @@
 				89A81992279B023900F257CA /* String+Ext.swift in Sources */,
 				898B79542799502900844284 /* CoordinatorType.swift in Sources */,
 				89D721C2279B8F8300B02A1E /* BaseTextField.swift in Sources */,
+				89E0559E279D1AF100E86445 /* UserTargets.swift in Sources */,
 				89A81983279A81D400F257CA /* OnboardingRepository.swift in Sources */,
 				898B795127994A4E00844284 /* OnboardingUseCase.swift in Sources */,
 				898B794F279949D600844284 /* UseCaseType.swift in Sources */,
+				89E0559C279D18D200E86445 /* UserRepository.swift in Sources */,
 				89A81990279AF9E500F257CA /* PhoneAuthUseCase.swift in Sources */,
+				89E055A2279D1B9F00E86445 /* URLComponents.swift in Sources */,
 				898B795A2799604700844284 /* AuthCoordinator.swift in Sources */,
 				898B79442799431000844284 /* OnboardingViewController.swift in Sources */,
 				89D721C4279B906F00B02A1E /* UITextField+Ext.swift in Sources */,
@@ -1060,14 +1104,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		890CCA53279712DA00D6185E /* XCRemoteSwiftPackageReference "Alamofire" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
 		890CCA56279712E800D6185E /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit";
@@ -1135,11 +1171,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		890CCA54279712DA00D6185E /* Alamofire */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 890CCA53279712DA00D6185E /* XCRemoteSwiftPackageReference "Alamofire" */;
-			productName = Alamofire;
-		};
 		890CCA57279712E800D6185E /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 890CCA56279712E800D6185E /* XCRemoteSwiftPackageReference "SnapKit" */;

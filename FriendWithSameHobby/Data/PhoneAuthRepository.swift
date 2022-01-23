@@ -45,9 +45,20 @@ final class PhoneAuthRepository {
                     return
                 }
                 
-                //single(.success(<#T##String#>))
+                let currentUser = Auth.auth().currentUser
+                currentUser?.getIDTokenForcingRefresh(true, completion: { idToken, error in
+                    if let error = error {
+                        single(.failure(error))
+                        return
+                    }
+                    guard let idToken = idToken else {
+                        print("idToken Fail")
+                        return
+                    }
+                    UserDefaultsManager.idToken = idToken
+                    single(.success(idToken))
+                })
             }
-            
             return Disposables.create()
         }
     }

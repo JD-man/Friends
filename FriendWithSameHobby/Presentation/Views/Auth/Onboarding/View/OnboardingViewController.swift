@@ -36,10 +36,9 @@ class OnboardingViewController: UIViewController {
     private var disposeBag = DisposeBag()
 
     override func viewDidLoad() {
-        super.viewDidLoad()
+        super.viewDidLoad()        
         viewConfig()
-        binding()        
-        navigationController?.navigationBar.isHidden = true
+        binding()
     }
     
     private func viewConfig() {

@@ -28,7 +28,7 @@ class PhoneAuthViewController: UIViewController {
     private let requestPhoneNumberButton = BaseButton(title: "인증 문자 받기", status: .disable, type: .h48)
     
     override func viewDidLoad() {
-        super.viewDidLoad()
+        super.viewDidLoad()        
         view.backgroundColor = .systemBackground
         viewConfig()
         binding()
