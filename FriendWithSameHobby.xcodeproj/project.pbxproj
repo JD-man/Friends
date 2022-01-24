@@ -66,6 +66,8 @@
 		89E055AD279D946000E86445 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E055AC279D946000E86445 /* APIService.swift */; };
 		89E055AF279D9B4400E86445 /* PostUserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E055AE279D9B4400E86445 /* PostUserResponse.swift */; };
 		89E055B1279D9D7800E86445 /* APIErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E055B0279D9D7800E86445 /* APIErrors.swift */; };
+		89E055B5279DA6C200E86445 /* NicknameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E055B4279DA6C200E86445 /* NicknameViewController.swift */; };
+		89ECC564279E759600C4C477 /* NickNameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89ECC563279E759600C4C477 /* NickNameViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -138,6 +140,8 @@
 		89E055AC279D946000E86445 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		89E055AE279D9B4400E86445 /* PostUserResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostUserResponse.swift; sourceTree = "<group>"; };
 		89E055B0279D9D7800E86445 /* APIErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIErrors.swift; sourceTree = "<group>"; };
+		89E055B4279DA6C200E86445 /* NicknameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameViewController.swift; sourceTree = "<group>"; };
+		89ECC563279E759600C4C477 /* NickNameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -345,6 +349,8 @@
 		898B793A279942A000844284 /* Nickname */ = {
 			isa = PBXGroup;
 			children = (
+				89E055B3279DA6B200E86445 /* ViewModels */,
+				89E055B2279DA6AA00E86445 /* View */,
 			);
 			path = Nickname;
 			sourceTree = "<group>";
@@ -545,6 +551,22 @@
 				89E055B0279D9D7800E86445 /* APIErrors.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		89E055B2279DA6AA00E86445 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				89E055B4279DA6C200E86445 /* NicknameViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		89E055B3279DA6B200E86445 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				89ECC563279E759600C4C477 /* NickNameViewModel.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -765,6 +787,7 @@
 				898B79572799505000844284 /* AppCoordinator.swift in Sources */,
 				89D721C6279C14CC00B02A1E /* PhoneAuthRepository.swift in Sources */,
 				89E055B1279D9D7800E86445 /* APIErrors.swift in Sources */,
+				89E055B5279DA6C200E86445 /* NicknameViewController.swift in Sources */,
 				89A81992279B023900F257CA /* String+Ext.swift in Sources */,
 				898B79542799502900844284 /* CoordinatorType.swift in Sources */,
 				89D721C2279B8F8300B02A1E /* BaseTextField.swift in Sources */,
@@ -777,6 +800,7 @@
 				89E055A2279D1B9F00E86445 /* URLComponents.swift in Sources */,
 				898B795A2799604700844284 /* AuthCoordinator.swift in Sources */,
 				898B79442799431000844284 /* OnboardingViewController.swift in Sources */,
+				89ECC564279E759600C4C477 /* NickNameViewModel.swift in Sources */,
 				89D721C4279B906F00B02A1E /* UITextField+Ext.swift in Sources */,
 				89AB6650279846A900DFEE95 /* Assets+Colors.swift in Sources */,
 				898B794D279945F100844284 /* ViewModelType.swift in Sources */,

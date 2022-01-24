@@ -37,7 +37,18 @@ final class AuthCoordinator: CoordinateType {
     func pushVerifyVC(phoneId: String) {
         let verifyVC = VerifyViewController()
         let viewModel = VerifyViewModel(phoneId: phoneId)
+        verifyVC.viewModel = viewModel
         viewModel.coordinator = self
         navigationController.pushViewController(verifyVC, animated: true)
+    }
+    
+    func pushNicknameVC() {
+        // coordinator injection
+        let viewModel = NickNameViewModel(coordinator: self)        
+        // viewModel injection
+        let nicknameVC = NicknameViewController(viewModel: viewModel)
+        
+        
+        navigationController.viewControllers = [nicknameVC]
     }
 }

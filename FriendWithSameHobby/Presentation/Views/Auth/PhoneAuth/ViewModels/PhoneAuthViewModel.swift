@@ -12,9 +12,6 @@ import RxRelay
 
 final class PhoneAuthViewModel: ViewModelType {
     struct Input {
-        // TextField edit begin
-        let editBegin: Driver<()>
-        
         // TextField text
         let phoneNumberText: Driver<String>
         
@@ -23,8 +20,6 @@ final class PhoneAuthViewModel: ViewModelType {
     }
     
     struct Output {
-        // edit begin
-        let emptyStringRelay = PublishRelay<String>()
         // formatted number text
         let formattedNumberRelay = PublishRelay<String>()
         // textfield status
@@ -33,7 +28,7 @@ final class PhoneAuthViewModel: ViewModelType {
         let buttonStatusRelay = PublishRelay<BaseButtonStatus>()
     }
     
-    var useCase = PhoneAuthUseCase()
+    var useCase: PhoneAuthUseCase? = PhoneAuthUseCase()
     private var disposeBag = DisposeBag()
     weak var coordinator: AuthCoordinator?
     
@@ -44,7 +39,7 @@ final class PhoneAuthViewModel: ViewModelType {
         input.phoneNumberText
             .distinctUntilChanged()
             .drive { [unowned self] in
-                self.useCase.validation(text: $0)
+                self.useCase?.validation(text: $0)
             }.disposed(by: disposeBag)
         
         input.buttonTap
@@ -54,20 +49,20 @@ final class PhoneAuthViewModel: ViewModelType {
             }.disposed(by: disposeBag)
         
         // UseCase to Output
-        useCase.formattedTextRelay
+        useCase?.formattedTextRelay
             .bind(to: output.formattedNumberRelay)
             .disposed(by: disposeBag)
         
-        useCase.buttonStatusRelay
+        useCase?.buttonStatusRelay
             .bind(to: output.buttonStatusRelay)
             .disposed(by: disposeBag)
         
-        useCase.textFieldStatusRelay
+        useCase?.textFieldStatusRelay
             .bind(to: output.textFieldStatusRelay)
             .disposed(by: disposeBag)
         
         // UseCase to Coordinator
-        useCase.authSuccessRelay
+        useCase?.authSuccessRelay
             .asDriver(onErrorJustReturn: "")
             .drive { [weak self] in
                 if $0 != "" {
@@ -77,18 +72,12 @@ final class PhoneAuthViewModel: ViewModelType {
                 }
             }.disposed(by: disposeBag)
         
-        useCase.authErrorRelay
+        useCase?.authErrorRelay
             .asDriver(onErrorJustReturn: .authFail)
             .drive {
                 print($0)
             }
             .disposed(by: disposeBag)
-        
-        // edit begin output
-        input.editBegin
-            .drive { _ in                
-                output.emptyStringRelay.accept("")                
-            }.disposed(by: disposeBag)
         
         return output
     }

@@ -29,7 +29,7 @@ final class PhoneAuthRepository {
                         return
                     }
                     UserDefaultsManager.phoneNumber = numText.removeHyphen()
-                    single(.success(id))
+                    single(.failure(PhoneAuthError.authFail))
                 }            
             return Disposables.create()
         }

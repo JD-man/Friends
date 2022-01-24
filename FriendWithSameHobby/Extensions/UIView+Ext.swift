@@ -8,9 +8,9 @@
 import UIKit
 
 extension UIView {
-    func addCorner(rad: CGFloat, borderColor: UIColor) {
+    func addCorner(rad: CGFloat, borderColor: UIColor?) {
         layer.borderWidth = 1
         layer.cornerRadius = rad
-        layer.borderColor = borderColor.cgColor
+        layer.borderColor = (borderColor ?? .clear).cgColor
     }
 }

@@ -14,7 +14,7 @@ protocol ViewModelType {
     associatedtype UseCase: UseCaseType
     associatedtype Coordinator: CoordinateType
     
-    var useCase: UseCase { get set }
+    var useCase: UseCase? { get set }
     var coordinator: Coordinator? { get set }
     func transform(_ input: Input, disposeBag: DisposeBag) -> Output    
 }

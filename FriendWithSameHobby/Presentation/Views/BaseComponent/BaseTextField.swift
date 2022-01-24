@@ -31,12 +31,14 @@ final class BaseTextField: UIView {
     
     convenience init(text: String, status: BaseTextFieldStatus) {
         self.init()
-        viewConfig()
-        inputTextField.text = text
+        viewConfig()        
         statusUpdate(status: status)
+        inputTextField.placeHolderConfig(text: text)
     }
     
     private func viewConfig() {
+        frame.size.height = 48
+        addCorner(rad: 5, borderColor: nil)
         [inputTextField, lineView, validationLabel]
             .forEach { addSubview($0) }
         
@@ -60,11 +62,11 @@ final class BaseTextField: UIView {
     }
     
     func statusUpdate(status: BaseTextFieldStatus) {
+        backgroundColor = status.backGroundColor
         inputTextField.textColor = status.textColor
         lineView.backgroundColor = status.lineColor
         validationLabel.text = status.validationtext
         validationLabel.textColor = status.validationTextColor
-        inputTextField.backgroundColor = status.backGroundColor
     }
 }
 

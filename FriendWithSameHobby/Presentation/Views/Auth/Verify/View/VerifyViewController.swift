@@ -30,7 +30,7 @@ class VerifyViewController: UIViewController {
     }
     
     let timerLabel = UILabel().then {
-        $0.text = "05:00"
+        $0.text = "01:00"
         $0.textColor = AssetsColors.green.color
         $0.font = AssetsFonts.NotoSansKR.medium.font(size: 14)
     }
@@ -91,10 +91,11 @@ class VerifyViewController: UIViewController {
     }
     
     private func binding() {
-        let input = VerifyViewModel.Input(veriftButtonTap: verifyButton.rx.tap,
-                                          retryButtonTap: retryButton.rx.tap,
-                                          verifyTextFieldText: verifyTextField.inputTextField.rx.text.orEmpty,
-                                          verifyTextFieldEditBegin: verifyTextField.inputTextField.rx.controlEvent(.editingDidBegin))
+        let input = VerifyViewModel.Input(
+            verifyButtonTap: verifyButton.rx.tap,
+            retryButtonTap: retryButton.rx.tap,
+            verifyTextFieldText: verifyTextField.inputTextField.rx.text.orEmpty
+            )
         
         let output = viewModel?.transform(input, disposeBag: disposeBag)
         
@@ -113,6 +114,13 @@ class VerifyViewController: UIViewController {
             .asDriver(onErrorJustReturn: .disable)
             .drive { [weak self] in
                 self?.verifyTextField.statusUpdate(status: $0)
+            }.disposed(by: disposeBag)
+        
+        // Edit begin
+        verifyTextField.inputTextField.rx.controlEvent(.editingDidBegin)
+            .asDriver()
+            .drive { [weak self] _ in
+                self?.verifyTextField.statusUpdate(status: .focus)
             }.disposed(by: disposeBag)
     }
 }

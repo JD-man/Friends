@@ -11,4 +11,7 @@ import Moya
 
 final class UserRepository {
     
+    func postUser() {
+        
+    }
 }

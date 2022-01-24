@@ -11,4 +11,11 @@ extension UITextField {
         autocorrectionType = .no
         autocapitalizationType = .none
     }
+    
+    func placeHolderConfig(text: String) {
+        attributedPlaceholder = NSAttributedString(
+            string: text,
+            attributes: [.font : AssetsFonts.NotoSansKR.regular.font(size: 14),
+                         .foregroundColor : AssetsColors.gray7.color])
+    }
 }

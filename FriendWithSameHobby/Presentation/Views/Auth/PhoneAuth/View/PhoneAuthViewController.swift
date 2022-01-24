@@ -61,17 +61,12 @@ class PhoneAuthViewController: UIViewController {
     private func binding() {
         let textFieldRx = phoneNumberTextField.inputTextField.rx
         
-        let input = PhoneAuthViewModel.Input(editBegin: textFieldRx.controlEvent(.editingDidBegin).asDriver(onErrorJustReturn: ()),
-                                             phoneNumberText: textFieldRx.text.orEmpty.asDriver(onErrorJustReturn: ""),
-                                             buttonTap: requestPhoneNumberButton.rx.tap.asDriver()
+        let input = PhoneAuthViewModel.Input(
+            phoneNumberText: textFieldRx.text.orEmpty.asDriver(onErrorJustReturn: ""),
+            buttonTap: requestPhoneNumberButton.rx.tap.asDriver()
         )
         
         let output = viewModel?.transform(input, disposeBag: disposeBag)
-        
-        output?.emptyStringRelay
-            .asDriver(onErrorJustReturn: "")
-            .drive(phoneNumberTextField.inputTextField.rx.text)
-            .disposed(by: disposeBag)
         
         output?.formattedNumberRelay
             .asDriver(onErrorJustReturn: "")
@@ -88,6 +83,13 @@ class PhoneAuthViewController: UIViewController {
             .asDriver(onErrorJustReturn: .disable)
             .drive { [weak self] in
                 self?.phoneNumberTextField.statusUpdate(status: $0)
+            }.disposed(by: disposeBag)
+        
+        // Edit Begin
+        phoneNumberTextField.inputTextField.rx.controlEvent(.editingDidBegin)
+            .asDriver()
+            .drive { [weak self] _ in
+                self?.phoneNumberTextField.statusUpdate(status: .focus)
             }.disposed(by: disposeBag)
     }
 }

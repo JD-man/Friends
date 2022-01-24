@@ -8,14 +8,12 @@
 import Foundation
 import Moya
 
-protocol APITarget {}
-
 enum UserTargets {
     case getUserInfo
     case postUser
 }
 
-extension UserTargets: TargetType, APITarget {
+extension UserTargets: TargetType {
     var baseURL: URL {
         return URL(string: "http://test.monocoding.com:35484")!
     }
@@ -52,11 +50,12 @@ extension UserTargets: TargetType, APITarget {
         }
     }
     
+    var validationType: ValidationType {
+        return .customCodes([200])
+    }
+    
     var headers: [String: String]? {
-        switch self {
-        default:
-            return ["Content-Type": "application/json",
+        return ["Content-Type": "application/json",
                     "idToken": UserDefaultsManager.idToken ?? ""]
-        }
     }
 }

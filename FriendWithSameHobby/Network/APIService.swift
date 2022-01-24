@@ -16,21 +16,17 @@ final class APIService {
             provider.request(target) { result in
                 switch result {
                 case .success(let response):
-                    let statusCode = response.statusCode
-                    if statusCode == 200 {
-                        let data = response.data
-                        if let decoded = try? JSONDecoder().decode(T.self, from: data) {
-                            single(.success(decoded))
-                        }
-                        else {
-                            print("decode error")
-                        }
+                    let data = response.data
+                    if let decoded = try? JSONDecoder().decode(T.self, from: data) {
+                        single(.success(decoded))
                     }
                     else {
-                        single(.failure(UserAPIError(rawValue: statusCode) ?? .unknownError))
+                        print("decode error")
                     }
                 case .failure(let error):
-                    single(.failure(error))
+                    let statusCode = error.response?.statusCode ?? 500
+                    // Error...
+                    single(.failure(UserAPIError(rawValue: statusCode) ?? .unknownError))
                 }
             }            
             return Disposables.create()

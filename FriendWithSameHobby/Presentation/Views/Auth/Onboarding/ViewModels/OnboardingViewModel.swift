@@ -31,7 +31,7 @@ final class OnboardingViewModel: ViewModelType {
         // UserDefaults isOnboardingPassed PublishRelay Bool
     }
     
-    var useCase = OnboardingUseCase()
+    var useCase: OnboardingUseCase? = OnboardingUseCase()
     weak var coordinator: AuthCoordinator?
     
     func transform(_ input: Input, disposeBag: DisposeBag) -> Output {
@@ -49,7 +49,7 @@ final class OnboardingViewModel: ViewModelType {
                 default:
                     break
                 }                
-                self?.useCase.execute(offset: offset)
+                self?.useCase?.execute(offset: offset)
             }).disposed(by: disposeBag)
         
         input.didTapStartButton
@@ -59,16 +59,16 @@ final class OnboardingViewModel: ViewModelType {
             }.disposed(by: disposeBag)
         
         // UseCase To Output
-        useCase.assetImageRelay
+        useCase?.assetImageRelay
             .map { $0.image }
             .bind(to: output.imageRelay)            
             .disposed(by: disposeBag)
         
-        useCase.idxRelay
+        useCase?.idxRelay
             .bind(to: output.pageControlRelay)
             .disposed(by: disposeBag)
         
-        useCase.highlightedTextRelay
+        useCase?.highlightedTextRelay
             .bind(to: output.onboardingTextRelay)
             .disposed(by: disposeBag)
         return output
