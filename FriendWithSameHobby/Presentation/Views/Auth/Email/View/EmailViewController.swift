@@ -26,10 +26,13 @@ class EmailViewController: UIViewController {
         $0.font = AssetsFonts.NotoSansKR.regular.font(size: 16)
     }
     
-    private let emailTextField = BaseTextField(text: "SeSAC@email.com", status: .inactive)
+    private let emailTextField = BaseTextField(text: "SeSAC@email.com", status: .inactive).then {
+        $0.inputTextField.text = UserDefaultsManager.email
+    }
     private let nextButton = BaseButton(title: "다음", status: .disable, type: .h48)
     
     var viewModel: EmailViewModel?
+    private var disposeBag = DisposeBag()
     
     init(viewModel: EmailViewModel) {
         super.init(nibName: nil, bundle: nil)
@@ -77,6 +80,33 @@ class EmailViewController: UIViewController {
     }
     
     private func binding() {
+        let input = EmailViewModel.Input(
+            textFieldText: emailTextField.inputTextField.rx.text.orEmpty.asDriver(),
+            nextButtonTap: nextButton.rx.tap.map { [unowned self] in
+                self.emailTextField.inputTextField.text ?? ""
+            }.asDriver(onErrorJustReturn: ""))
         
+        let output = viewModel?.transform(input, disposeBag: disposeBag)
+        
+        output?.textFieldStatus
+            .asDriver(onErrorJustReturn: .inactive)
+            .drive {
+                guard let status = $0 else { return }
+                self.emailTextField.statusUpdate(status: status)
+            }.disposed(by: self.disposeBag)
+        
+        output?.nextButtonStatus
+            .asDriver()
+            .drive {
+                self.nextButton.statusUpdate(status: $0)
+            }.disposed(by: self.disposeBag)
+        
+        // Edit Begin
+        
+        emailTextField.inputTextField.rx.controlEvent(.editingDidBegin)
+            .asDriver()
+            .drive { [unowned self] _ in
+                self.emailTextField.statusUpdate(status: .focus)
+            }.disposed(by: disposeBag)
     }
 }

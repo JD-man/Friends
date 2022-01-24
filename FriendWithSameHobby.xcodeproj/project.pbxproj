@@ -73,6 +73,9 @@
 		89ECC56C279EF43100C4C477 /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89ECC56B279EF43100C4C477 /* Date+Ext.swift */; };
 		89ECC56E279F011B00C4C477 /* EmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89ECC56D279F011B00C4C477 /* EmailViewController.swift */; };
 		89ECC572279F013800C4C477 /* EmailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89ECC571279F013700C4C477 /* EmailViewModel.swift */; };
+		89ECC578279F2AEB00C4C477 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89ECC577279F2AEB00C4C477 /* RegisterViewModel.swift */; };
+		89ECC57A279F2B0000C4C477 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89ECC579279F2B0000C4C477 /* RegisterViewController.swift */; };
+		89ECC57C279F330300C4C477 /* RegisterUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89ECC57B279F330300C4C477 /* RegisterUseCase.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -152,6 +155,9 @@
 		89ECC56B279EF43100C4C477 /* Date+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Ext.swift"; sourceTree = "<group>"; };
 		89ECC56D279F011B00C4C477 /* EmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailViewController.swift; sourceTree = "<group>"; };
 		89ECC571279F013700C4C477 /* EmailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailViewModel.swift; sourceTree = "<group>"; };
+		89ECC577279F2AEB00C4C477 /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
+		89ECC579279F2B0000C4C477 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		89ECC57B279F330300C4C477 /* RegisterUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterUseCase.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -318,7 +324,7 @@
 		898B79362799425D00844284 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
-				898B793C279942AD00844284 /* Gender */,
+				898B793C279942AD00844284 /* Register */,
 				89E0559A279D146100E86445 /* Email */,
 				898B793B279942A700844284 /* Birth */,
 				898B793A279942A000844284 /* Nickname */,
@@ -374,11 +380,13 @@
 			path = Birth;
 			sourceTree = "<group>";
 		};
-		898B793C279942AD00844284 /* Gender */ = {
+		898B793C279942AD00844284 /* Register */ = {
 			isa = PBXGroup;
 			children = (
+				89ECC574279F2ACA00C4C477 /* View */,
+				89ECC573279F2AC200C4C477 /* ViewModels */,
 			);
-			path = Gender;
+			path = Register;
 			sourceTree = "<group>";
 		};
 		898B793F279942D600844284 /* View */ = {
@@ -463,6 +471,7 @@
 				898B795027994A4E00844284 /* OnboardingUseCase.swift */,
 				89A8198F279AF9E500F257CA /* PhoneAuthUseCase.swift */,
 				89D721CD279C5BFE00B02A1E /* VerifyUseCase.swift */,
+				89ECC57B279F330300C4C477 /* RegisterUseCase.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -614,6 +623,22 @@
 				89ECC571279F013700C4C477 /* EmailViewModel.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		89ECC573279F2AC200C4C477 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				89ECC577279F2AEB00C4C477 /* RegisterViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		89ECC574279F2ACA00C4C477 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				89ECC579279F2B0000C4C477 /* RegisterViewController.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -833,13 +858,16 @@
 				89A8198A279AE7D100F257CA /* UIView+Ext.swift in Sources */,
 				898B79572799505000844284 /* AppCoordinator.swift in Sources */,
 				89D721C6279C14CC00B02A1E /* PhoneAuthRepository.swift in Sources */,
+				89ECC578279F2AEB00C4C477 /* RegisterViewModel.swift in Sources */,
 				89ECC56A279E99E600C4C477 /* BirthViewModel.swift in Sources */,
 				89E055B1279D9D7800E86445 /* APIErrors.swift in Sources */,
+				89ECC57C279F330300C4C477 /* RegisterUseCase.swift in Sources */,
 				89E055B5279DA6C200E86445 /* NicknameViewController.swift in Sources */,
 				89A81992279B023900F257CA /* String+Ext.swift in Sources */,
 				89ECC56C279EF43100C4C477 /* Date+Ext.swift in Sources */,
 				898B79542799502900844284 /* CoordinatorType.swift in Sources */,
 				89D721C2279B8F8300B02A1E /* BaseTextField.swift in Sources */,
+				89ECC57A279F2B0000C4C477 /* RegisterViewController.swift in Sources */,
 				89E0559E279D1AF100E86445 /* UserTargets.swift in Sources */,
 				89A81983279A81D400F257CA /* OnboardingRepository.swift in Sources */,
 				898B795127994A4E00844284 /* OnboardingUseCase.swift in Sources */,

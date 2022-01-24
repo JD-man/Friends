@@ -16,6 +16,9 @@ enum UserDefaultsKeyType: String {
     case email
     case gender
     case onboardingPassed
+    case yearBirth
+    case monthBirth
+    case dayBirth
 }
 
 @propertyWrapper
@@ -41,4 +44,7 @@ struct UserDefaultsManager {
     @UserDefaultsValue(.email) static var email: String?
     @UserDefaultsValue(.gender) static var gender: String?
     @UserDefaultsValue(.onboardingPassed) static var onboardingPassed: Bool?
+    @UserDefaultsValue(.yearBirth) static var yearBirth: String?
+    @UserDefaultsValue(.monthBirth) static var monthBirth: String?
+    @UserDefaultsValue(.dayBirth) static var dayBirth: String?
 }

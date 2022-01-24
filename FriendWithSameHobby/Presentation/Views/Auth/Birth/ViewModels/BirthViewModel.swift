@@ -20,11 +20,11 @@ final class BirthViewModel: ViewModelType {
     
     struct Output {
         // year string
-        let yearRelay = PublishRelay<String>()
+        let yearRelay = BehaviorRelay<String>(value: "")
         // month string
-        let monthRelay = PublishRelay<String>()
+        let monthRelay = BehaviorRelay<String>(value: "")
         // day string
-        let dayRelay = PublishRelay<String>()
+        let dayRelay = BehaviorRelay<String>(value: "")
         
         // button status
         let buttonStatus = BehaviorRelay<BaseButtonStatus>(value: .disable)
@@ -81,6 +81,9 @@ final class BirthViewModel: ViewModelType {
                 switch output.buttonStatus.value {
                 case .fill:                    
                     UserDefaultsManager.birth = $0.toString
+                    UserDefaultsManager.yearBirth = output.yearRelay.value
+                    UserDefaultsManager.monthBirth = output.monthRelay.value
+                    UserDefaultsManager.dayBirth = output.dayRelay.value
                     self?.coordinator?.pushEmailVC()
                 default:
                     print("toast under 17")

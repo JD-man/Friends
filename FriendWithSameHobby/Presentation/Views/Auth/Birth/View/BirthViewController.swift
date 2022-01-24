@@ -23,9 +23,9 @@ class BirthViewController: UIViewController {
         $0.font = AssetsFonts.NotoSansKR.regular.font(size: 20)
     }
     
-    private let yearTextField = BaseTextField(text: "", status: .inactive)
-    private let monthTextField = BaseTextField(text: "", status: .inactive)
-    private let dayTextField = BaseTextField(text: "", status: .inactive)
+    private let yearTextField = BaseTextField(text: UserDefaultsManager.yearBirth ?? "", status: .inactive)
+    private let monthTextField = BaseTextField(text: UserDefaultsManager.monthBirth ?? "", status: .inactive)
+    private let dayTextField = BaseTextField(text: UserDefaultsManager.dayBirth ?? "", status: .inactive)
     
     private let yearLabel = UILabel().then {
         $0.text = "년"
@@ -45,11 +45,12 @@ class BirthViewController: UIViewController {
     private let nextButton = BaseButton(title: "다음", status: .disable, type: .h48)
     private let datePicker = UIDatePicker().then {
         $0.preferredDatePickerStyle = .wheels
-        $0.datePickerMode = .date
+        $0.datePickerMode = .date        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(UserDefaultsManager.yearBirth)
         viewConfig()
         binding()
     }
@@ -70,7 +71,6 @@ class BirthViewController: UIViewController {
             .forEach { view.addSubview($0) }
         
         let textFieldWidth = (UIScreen.main.bounds.width - (27 * 2) - (4) - (16 * 2) - (15 * 3)) / 3
-        print(textFieldWidth)
         titleLabel.snp.makeConstraints { make in
             make.height.equalTo(32)
             make.top.equalTo(view.safeAreaLayoutGuide).offset(97)
@@ -133,7 +133,8 @@ class BirthViewController: UIViewController {
     private func binding() {
         let input = BirthViewModel.Input(
             date: datePicker.rx.date,
-            tap: nextButton.rx.tap.map { [unowned self] in self.datePicker.date }.asDriver(onErrorJustReturn: Date()))
+            tap: nextButton.rx.tap.withLatestFrom(datePicker.rx.date).asDriver(onErrorJustReturn: Date()))
+        
         let output = viewModel?.transform(input, disposeBag: disposeBag)
         
         output?.yearRelay
@@ -155,6 +156,6 @@ class BirthViewController: UIViewController {
             .asDriver(onErrorJustReturn: .disable)
             .drive { [weak self] in
                 self?.nextButton.statusUpdate(status: $0)
-            }.disposed(by: disposeBag)        
+            }.disposed(by: disposeBag)
     }
 }
