@@ -29,7 +29,7 @@ final class PhoneAuthRepository {
                         return
                     }
                     UserDefaultsManager.phoneNumber = numText.removeHyphen()
-                    single(.failure(PhoneAuthError.authFail))
+                    single(.success(id))
                 }            
             return Disposables.create()
         }
@@ -55,7 +55,7 @@ final class PhoneAuthRepository {
                     guard let idToken = idToken else {
                         print("idToken Fail")
                         return
-                    }
+                    }                    
                     UserDefaultsManager.idToken = idToken
                     single(.success(idToken))
                 })

@@ -28,6 +28,7 @@ final class OnboardingRepository: OnboardingRepositoryInterface {
     ]
     
     func getOnboardingImages(idx: Int) -> ImageAsset {
+        UserDefaultsManager.onboardingPassed = true
         return assetsImage[idx]
     }
     

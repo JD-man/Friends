@@ -17,6 +17,18 @@ final class AuthCoordinator: CoordinateType {
     }
     
     func start() {
+        if UserDefaultsManager.onboardingPassed == nil {            
+            pushOnboardingVC()
+        }
+        else if UserDefaultsManager.idToken == nil {
+            pushPhoneAuthVC()
+        }
+        else {
+            pushNicknameVC()
+        }
+    }
+    
+    func pushOnboardingVC() {
         let onboardingVC = OnboardingViewController()
         let viewModel = OnboardingViewModel()
         viewModel.coordinator = self
@@ -44,11 +56,15 @@ final class AuthCoordinator: CoordinateType {
     
     func pushNicknameVC() {
         // coordinator injection
-        let viewModel = NickNameViewModel(coordinator: self)        
+        let viewModel = NickNameViewModel(coordinator: self)
         // viewModel injection
         let nicknameVC = NicknameViewController(viewModel: viewModel)
-        
-        
         navigationController.viewControllers = [nicknameVC]
+    }
+    
+    func pushBirthVC() {
+        let viewModel = BirthViewModel(coordinator: self)
+        let birthVC = BirthViewController(viewModel: viewModel)
+        navigationController.pushViewController(birthVC, animated: true)
     }
 }

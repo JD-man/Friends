@@ -18,7 +18,9 @@ class NicknameViewController: UIViewController {
         $0.font = AssetsFonts.NotoSansKR.regular.font(size: 20)
     }
     
-    private let nicknameTextField = BaseTextField(text: "10자 이내로 입력", status: .disable)
+    private let nicknameTextField = BaseTextField(text: "10자 이내로 입력", status: .inactive).then {
+        $0.inputTextField.text = UserDefaultsManager.nick
+    }
     private let nextButton = BaseButton(title: "다음", status: .disable, type: .h48)
     
     var viewModel: NickNameViewModel?
@@ -63,18 +65,20 @@ class NicknameViewController: UIViewController {
         }
     }
     
-    func binding() {
-        print("binding")
-        let input = NickNameViewModel.Input(textFieldEditBegin: nicknameTextField.inputTextField.rx.controlEvent(.editingDidBegin).asDriver(onErrorJustReturn: ()),
-                                            textFieldText: nicknameTextField.inputTextField.rx.text.orEmpty.asDriver(),
-                                            nextButtonTap: nextButton.rx.tap.asDriver(onErrorJustReturn: ()))
+    func binding() {        
+        let input = NickNameViewModel.Input(
+            textFieldEditBegin: nicknameTextField.inputTextField.rx.controlEvent(.editingDidBegin).asDriver(onErrorJustReturn: ()),
+            textFieldText: nicknameTextField.inputTextField.rx.text.orEmpty.asDriver(),
+            nextButtonTap: nextButton.rx.tap.asDriver(onErrorJustReturn: ())
+        )
         
         let output = viewModel?.transform(input, disposeBag: disposeBag)
         
         output?.textFieldStatus
             .asDriver(onErrorJustReturn: .inactive)
             .drive { [weak self] in
-                self?.nicknameTextField.statusUpdate(status: $0)
+                guard let status = $0 else { return }
+                self?.nicknameTextField.statusUpdate(status: status)
             }.disposed(by: disposeBag)
         
         output?.nextButtonStatus

@@ -22,7 +22,7 @@ final class NickNameViewModel: ViewModelType {
     
     struct Output {
         // TextField Status
-        let textFieldStatus = BehaviorRelay<BaseTextFieldStatus>(value: .inactive)
+        let textFieldStatus = BehaviorRelay<BaseTextFieldStatus?>(value: .inactive)
         // Button Status
         let nextButtonStatus = BehaviorRelay<BaseButtonStatus>(value: .disable)
         // text
@@ -40,20 +40,28 @@ final class NickNameViewModel: ViewModelType {
         let output = Output()
         
         input.textFieldText
-            .drive {
-                output.textRelay.accept($0)
-                if $0.count > 0 && $0.count <= 10 {
-                    print("why")
-                    output.nextButtonStatus.accept(.fill)
-                    output.textFieldStatus.accept(.focus)
-                }
-                else if $0.count > 10 {
-                    output.nextButtonStatus.accept(.disable)
-                    output.textFieldStatus.accept(.error(message: "10 글자 이내로 작성해주세요."))
-                }
-            }.disposed(by: disposeBag)
+            .drive(output.textRelay)
+            .disposed(by: disposeBag)
+        
+        input.textFieldText
+            .map { (text) -> BaseButtonStatus in
+                return text.count > 0 && text.count <= 10 ? .fill : .disable
+            }.drive(output.nextButtonStatus)
+            .disposed(by: disposeBag)
+        
+        input.textFieldText
+            .map { (text) -> BaseTextFieldStatus? in
+                return text.count > 10 ? .error(message: "10 글자 이내로 작성해주세요.") : nil                
+            }.drive(output.textFieldStatus)
+            .disposed(by: disposeBag)
         
         // Input To Coordinator && UserDefault nick save
+        input.nextButtonTap
+            .asDriver()
+            .drive { [weak self] _ in
+                UserDefaultsManager.nick = output.textRelay.value
+                self?.coordinator?.pushBirthVC()
+            }.disposed(by: disposeBag)
         
         return output
     }

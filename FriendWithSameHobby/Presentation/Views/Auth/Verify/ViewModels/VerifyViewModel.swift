@@ -54,11 +54,28 @@ final class VerifyViewModel: ViewModelType {
             .asDriver()
             .drive { [unowned self] _ in
                 print("tap")
-                self.coordinator?.pushNicknameVC()
-                //self.useCase.excuteAuthNumber(phoneID: self.phoneID)
+                //self.coordinator?.pushNicknameVC()
+                self.useCase?.excuteAuthNumber(phoneID: self.phoneID)
             }.disposed(by: disposeBag)
         
-        // UseCase to Coordinator        
+        // UseCase to Coordinator
+        useCase?.userExistRelay
+            .asDriver(onErrorJustReturn: false)
+            .drive { //[weak self] _ in
+                // view to HomeVC
+            }.disposed(by: disposeBag)
+        
+        useCase?.authErrorRelay
+            .asDriver(onErrorJustReturn: .unknownError)
+            .drive { [weak self] in
+                switch $0 {
+                case .exitedUser:
+                    self?.coordinator?.pushNicknameVC()
+                default:
+                    print($0)
+                }
+                print($0)
+            }.disposed(by: disposeBag)
         
         // UseCase to Output
         useCase?.verifyButtonStatusRelay

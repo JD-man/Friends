@@ -55,7 +55,6 @@ extension UserTargets: TargetType {
     }
     
     var headers: [String: String]? {
-        return ["Content-Type": "application/json",
-                    "idToken": UserDefaultsManager.idToken ?? ""]
+        return URLComponents.header
     }
 }

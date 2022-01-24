@@ -22,10 +22,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         Messaging.messaging().token { token, error in
             if let error = error {
-                print("Error FCM token")
+                print("Error FCM token", error)
             } else if let token = token {
                 UserDefaultsManager.FCMtoken = token
-                print("FCM \(token)")
             }
         }
         return true
@@ -54,6 +53,5 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 
 extension AppDelegate: MessagingDelegate {
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
-        print(fcmToken)
     }
 }

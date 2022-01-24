@@ -9,7 +9,7 @@ import Foundation
 import RxSwift
 import Moya
 
-final class APIService {    
+final class APIService {
     func userRequest<T: Codable, U: TargetType>(of target: U) -> Single<T> {
         return Single<T>.create { single in
             let provider = MoyaProvider<U>()
@@ -17,6 +17,7 @@ final class APIService {
                 switch result {
                 case .success(let response):
                     let data = response.data
+                    print(response.statusCode)
                     if let decoded = try? JSONDecoder().decode(T.self, from: data) {
                         single(.success(decoded))
                     }
@@ -26,9 +27,10 @@ final class APIService {
                 case .failure(let error):
                     let statusCode = error.response?.statusCode ?? 500
                     // Error...
+                    print(statusCode)
                     single(.failure(UserAPIError(rawValue: statusCode) ?? .unknownError))
                 }
-            }            
+            }
             return Disposables.create()
         }
     }

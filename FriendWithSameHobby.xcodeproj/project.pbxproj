@@ -68,6 +68,8 @@
 		89E055B1279D9D7800E86445 /* APIErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E055B0279D9D7800E86445 /* APIErrors.swift */; };
 		89E055B5279DA6C200E86445 /* NicknameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E055B4279DA6C200E86445 /* NicknameViewController.swift */; };
 		89ECC564279E759600C4C477 /* NickNameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89ECC563279E759600C4C477 /* NickNameViewModel.swift */; };
+		89ECC566279E987B00C4C477 /* BirthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89ECC565279E987B00C4C477 /* BirthViewController.swift */; };
+		89ECC56A279E99E600C4C477 /* BirthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89ECC569279E99E600C4C477 /* BirthViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -142,6 +144,8 @@
 		89E055B0279D9D7800E86445 /* APIErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIErrors.swift; sourceTree = "<group>"; };
 		89E055B4279DA6C200E86445 /* NicknameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameViewController.swift; sourceTree = "<group>"; };
 		89ECC563279E759600C4C477 /* NickNameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameViewModel.swift; sourceTree = "<group>"; };
+		89ECC565279E987B00C4C477 /* BirthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthViewController.swift; sourceTree = "<group>"; };
+		89ECC569279E99E600C4C477 /* BirthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -358,6 +362,8 @@
 		898B793B279942A700844284 /* Birth */ = {
 			isa = PBXGroup;
 			children = (
+				89ECC568279E988300C4C477 /* ViewModels */,
+				89ECC567279E987D00C4C477 /* View */,
 			);
 			path = Birth;
 			sourceTree = "<group>";
@@ -565,6 +571,22 @@
 			isa = PBXGroup;
 			children = (
 				89ECC563279E759600C4C477 /* NickNameViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		89ECC567279E987D00C4C477 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				89ECC565279E987B00C4C477 /* BirthViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		89ECC568279E988300C4C477 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				89ECC569279E99E600C4C477 /* BirthViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -786,6 +808,7 @@
 				89A8198A279AE7D100F257CA /* UIView+Ext.swift in Sources */,
 				898B79572799505000844284 /* AppCoordinator.swift in Sources */,
 				89D721C6279C14CC00B02A1E /* PhoneAuthRepository.swift in Sources */,
+				89ECC56A279E99E600C4C477 /* BirthViewModel.swift in Sources */,
 				89E055B1279D9D7800E86445 /* APIErrors.swift in Sources */,
 				89E055B5279DA6C200E86445 /* NicknameViewController.swift in Sources */,
 				89A81992279B023900F257CA /* String+Ext.swift in Sources */,
@@ -807,6 +830,7 @@
 				890CCA222796986600D6185E /* PhoneAuthViewController.swift in Sources */,
 				89E055AF279D9B4400E86445 /* PostUserResponse.swift in Sources */,
 				89D721CC279C5B4A00B02A1E /* VerifyViewModel.swift in Sources */,
+				89ECC566279E987B00C4C477 /* BirthViewController.swift in Sources */,
 				89A8198D279AF95C00F257CA /* PhoneAuthViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
