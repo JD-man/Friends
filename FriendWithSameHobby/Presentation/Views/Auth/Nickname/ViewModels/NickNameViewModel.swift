@@ -11,13 +11,11 @@ import RxRelay
 import RxCocoa
 
 final class NickNameViewModel: ViewModelType {
-    struct Input {
-        // TextField Begin Edit
-        let textFieldEditBegin: Driver<Void>
+    struct Input {        
         // TextField Text
         let textFieldText: Driver<String>
         // Button Tap
-        let nextButtonTap: Driver<Void>
+        let nextButtonTap: Driver<String>
     }
     
     struct Output {
@@ -25,8 +23,6 @@ final class NickNameViewModel: ViewModelType {
         let textFieldStatus = BehaviorRelay<BaseTextFieldStatus?>(value: .inactive)
         // Button Status
         let nextButtonStatus = BehaviorRelay<BaseButtonStatus>(value: .disable)
-        // text
-        var textRelay = BehaviorRelay<String>(value: "")
     }
     
     var useCase: VerifyUseCase? = nil
@@ -38,10 +34,6 @@ final class NickNameViewModel: ViewModelType {
     
     func transform(_ input: Input, disposeBag: DisposeBag) -> Output {
         let output = Output()
-        
-        input.textFieldText
-            .drive(output.textRelay)
-            .disposed(by: disposeBag)
         
         input.textFieldText
             .map { (text) -> BaseButtonStatus in
@@ -58,9 +50,15 @@ final class NickNameViewModel: ViewModelType {
         // Input To Coordinator && UserDefault nick save
         input.nextButtonTap
             .asDriver()
-            .drive { [weak self] _ in
-                UserDefaultsManager.nick = output.textRelay.value
-                self?.coordinator?.pushBirthVC()
+            .drive { [weak self] in
+                switch output.nextButtonStatus.value {
+                case .fill:
+                    UserDefaultsManager.nick = $0
+                    self?.coordinator?.pushBirthVC()
+                default:
+                    print("invalid nickname")
+                }
+
             }.disposed(by: disposeBag)
         
         return output

@@ -66,11 +66,11 @@ class NicknameViewController: UIViewController {
     }
     
     func binding() {        
-        let input = NickNameViewModel.Input(
-            textFieldEditBegin: nicknameTextField.inputTextField.rx.controlEvent(.editingDidBegin).asDriver(onErrorJustReturn: ()),
+        let input = NickNameViewModel.Input(            
             textFieldText: nicknameTextField.inputTextField.rx.text.orEmpty.asDriver(),
-            nextButtonTap: nextButton.rx.tap.asDriver(onErrorJustReturn: ())
-        )
+            nextButtonTap: nextButton.rx.tap.map { [unowned self] in
+                self.nicknameTextField.inputTextField.text ?? ""
+            }.asDriver(onErrorJustReturn: ""))        
         
         let output = viewModel?.transform(input, disposeBag: disposeBag)
         
@@ -85,12 +85,7 @@ class NicknameViewController: UIViewController {
             .asDriver()
             .drive { [weak self] in
                 self?.nextButton.statusUpdate(status: $0)
-            }.disposed(by: disposeBag)
-        
-        output?.textRelay
-            .asDriver()
-            .drive(nicknameTextField.inputTextField.rx.text)
-            .disposed(by: disposeBag)
+            }.disposed(by: disposeBag)        
         
         // Edit Begin
         

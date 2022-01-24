@@ -67,4 +67,10 @@ final class AuthCoordinator: CoordinateType {
         let birthVC = BirthViewController(viewModel: viewModel)
         navigationController.pushViewController(birthVC, animated: true)
     }
+    
+    func pushEmailVC() {
+        let viewModel = EmailViewModel(coordinator: self)
+        let emailVC = EmailViewController(viewModel: viewModel)
+        navigationController.pushViewController(emailVC, animated: true)
+    }
 }

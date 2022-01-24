@@ -14,6 +14,7 @@ import RxRelay
 class BirthViewController: UIViewController {
     
     var viewModel: BirthViewModel?
+    private var disposeBag = DisposeBag()
     
     private let titleLabel = UILabel().then {
         $0.textAlignment = .center
@@ -22,15 +23,9 @@ class BirthViewController: UIViewController {
         $0.font = AssetsFonts.NotoSansKR.regular.font(size: 20)
     }
     
-    private let yearTextField = BaseTextField(text: "1990", status: .inactive).then {
-        $0.tintColor = .clear
-    }
-    private let monthTextField = BaseTextField(text: "1", status: .inactive).then {
-        $0.tintColor = .clear
-    }
-    private let dayTextField = BaseTextField(text: "11", status: .inactive).then {
-        $0.tintColor = .clear
-    }
+    private let yearTextField = BaseTextField(text: "", status: .inactive)
+    private let monthTextField = BaseTextField(text: "", status: .inactive)
+    private let dayTextField = BaseTextField(text: "", status: .inactive)
     
     private let yearLabel = UILabel().then {
         $0.text = "년"
@@ -48,11 +43,15 @@ class BirthViewController: UIViewController {
     }
     
     private let nextButton = BaseButton(title: "다음", status: .disable, type: .h48)
-    private let datePicker = UIDatePicker()
+    private let datePicker = UIDatePicker().then {
+        $0.preferredDatePickerStyle = .wheels
+        $0.datePickerMode = .date
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         viewConfig()
+        binding()
     }
     
     init(viewModel: BirthViewModel) {
@@ -126,11 +125,36 @@ class BirthViewController: UIViewController {
         
         [yearTextField, monthTextField, dayTextField]
             .forEach {
+                $0.tintColor = .clear
                 $0.inputTextField.inputView = datePicker
             }        
     }
     
     private func binding() {
+        let input = BirthViewModel.Input(
+            date: datePicker.rx.date,
+            tap: nextButton.rx.tap.map { [unowned self] in self.datePicker.date }.asDriver(onErrorJustReturn: Date()))
+        let output = viewModel?.transform(input, disposeBag: disposeBag)
         
+        output?.yearRelay
+            .asDriver(onErrorJustReturn: "")
+            .drive(yearTextField.inputTextField.rx.text)
+            .disposed(by: disposeBag)
+        
+        output?.monthRelay
+            .asDriver(onErrorJustReturn: "")
+            .drive(monthTextField.inputTextField.rx.text)
+            .disposed(by: disposeBag)
+        
+        output?.dayRelay
+            .asDriver(onErrorJustReturn: "")
+            .drive(dayTextField.inputTextField.rx.text)
+            .disposed(by: disposeBag)
+        
+        output?.buttonStatus
+            .asDriver(onErrorJustReturn: .disable)
+            .drive { [weak self] in
+                self?.nextButton.statusUpdate(status: $0)
+            }.disposed(by: disposeBag)        
     }
 }

@@ -70,6 +70,9 @@
 		89ECC564279E759600C4C477 /* NickNameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89ECC563279E759600C4C477 /* NickNameViewModel.swift */; };
 		89ECC566279E987B00C4C477 /* BirthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89ECC565279E987B00C4C477 /* BirthViewController.swift */; };
 		89ECC56A279E99E600C4C477 /* BirthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89ECC569279E99E600C4C477 /* BirthViewModel.swift */; };
+		89ECC56C279EF43100C4C477 /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89ECC56B279EF43100C4C477 /* Date+Ext.swift */; };
+		89ECC56E279F011B00C4C477 /* EmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89ECC56D279F011B00C4C477 /* EmailViewController.swift */; };
+		89ECC572279F013800C4C477 /* EmailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89ECC571279F013700C4C477 /* EmailViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -146,6 +149,9 @@
 		89ECC563279E759600C4C477 /* NickNameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameViewModel.swift; sourceTree = "<group>"; };
 		89ECC565279E987B00C4C477 /* BirthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthViewController.swift; sourceTree = "<group>"; };
 		89ECC569279E99E600C4C477 /* BirthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthViewModel.swift; sourceTree = "<group>"; };
+		89ECC56B279EF43100C4C477 /* Date+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Ext.swift"; sourceTree = "<group>"; };
+		89ECC56D279F011B00C4C477 /* EmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailViewController.swift; sourceTree = "<group>"; };
+		89ECC571279F013700C4C477 /* EmailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -499,6 +505,7 @@
 				89A81989279AE7D100F257CA /* UIView+Ext.swift */,
 				89A81991279B023900F257CA /* String+Ext.swift */,
 				89D721C3279B906F00B02A1E /* UITextField+Ext.swift */,
+				89ECC56B279EF43100C4C477 /* Date+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -530,6 +537,8 @@
 		89E0559A279D146100E86445 /* Email */ = {
 			isa = PBXGroup;
 			children = (
+				89ECC570279F012600C4C477 /* ViewModels */,
+				89ECC56F279F012000C4C477 /* View */,
 			);
 			path = Email;
 			sourceTree = "<group>";
@@ -587,6 +596,22 @@
 			isa = PBXGroup;
 			children = (
 				89ECC569279E99E600C4C477 /* BirthViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		89ECC56F279F012000C4C477 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				89ECC56D279F011B00C4C477 /* EmailViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		89ECC570279F012600C4C477 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				89ECC571279F013700C4C477 /* EmailViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -812,6 +837,7 @@
 				89E055B1279D9D7800E86445 /* APIErrors.swift in Sources */,
 				89E055B5279DA6C200E86445 /* NicknameViewController.swift in Sources */,
 				89A81992279B023900F257CA /* String+Ext.swift in Sources */,
+				89ECC56C279EF43100C4C477 /* Date+Ext.swift in Sources */,
 				898B79542799502900844284 /* CoordinatorType.swift in Sources */,
 				89D721C2279B8F8300B02A1E /* BaseTextField.swift in Sources */,
 				89E0559E279D1AF100E86445 /* UserTargets.swift in Sources */,
@@ -828,6 +854,8 @@
 				89AB6650279846A900DFEE95 /* Assets+Colors.swift in Sources */,
 				898B794D279945F100844284 /* ViewModelType.swift in Sources */,
 				890CCA222796986600D6185E /* PhoneAuthViewController.swift in Sources */,
+				89ECC56E279F011B00C4C477 /* EmailViewController.swift in Sources */,
+				89ECC572279F013800C4C477 /* EmailViewModel.swift in Sources */,
 				89E055AF279D9B4400E86445 /* PostUserResponse.swift in Sources */,
 				89D721CC279C5B4A00B02A1E /* VerifyViewModel.swift in Sources */,
 				89ECC566279E987B00C4C477 /* BirthViewController.swift in Sources */,
