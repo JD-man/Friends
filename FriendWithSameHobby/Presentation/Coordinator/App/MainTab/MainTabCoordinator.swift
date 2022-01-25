@@ -7,38 +7,36 @@
 
 import UIKit
 
-final class MainTabCoordinator {
-    weak var parentCoordinator: CoordinateType? // = AppCoordinator
-    var childCoordinators: [CoordinateType] = [] // TabView Coordinators
+final class MainTabCoordinator: CoordinatorType {
+    weak var parentCoordinator: CoordinatorType? // = AppCoordinator
+    var childCoordinators: [CoordinatorType] = [] // TabView Coordinators
     
+    var navigationController: UINavigationController
     var tabbarController: UITabBarController
     
-    init(tab: UITabBarController) {
-        self.tabbarController = tab
+    init(nav: UINavigationController) {
+        self.navigationController = nav
+        self.tabbarController = UITabBarController()
     }
     
     func start() {
-        configHomeVC()
-        configShopVC()
-        configFriendsVC()
-        configAccountVC()
-    }
-    
-    func configHomeVC() {
-        // repo, usecase, vm needed
         let homeVC = HomeViewController()
+        let shopVC = ShopViewController()
+        let accountVC = AccountViewController()
+        let friendsVC = FriendsViewController()
         
-    }
-    
-    func configShopVC() {
+        let homeItem = UITabBarItem(title: "홈", image: nil, selectedImage: nil)
+        let shopItem = UITabBarItem(title: "새싹샵", image: nil, selectedImage: nil)
+        let accountItem = UITabBarItem(title: "내정보", image: nil, selectedImage: nil)
+        let friendsItem = UITabBarItem(title: "새싹친구", image: nil, selectedImage: nil)
         
-    }
-    
-    func configFriendsVC() {
+        homeVC.tabBarItem = homeItem
+        shopVC.tabBarItem = shopItem
+        accountVC.tabBarItem = accountItem
+        friendsVC.tabBarItem = friendsItem
         
-    }
-    
-    func configAccountVC() {
-        
+        navigationController.navigationBar.isHidden = true
+        tabbarController.viewControllers = [homeVC, shopVC, accountVC,friendsVC]
+        navigationController.pushViewController(tabbarController, animated: true)
     }
 }

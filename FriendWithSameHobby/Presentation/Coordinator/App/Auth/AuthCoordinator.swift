@@ -6,10 +6,10 @@
 //
 import UIKit
 
-final class AuthCoordinator: CoordinateType {
+final class AuthCoordinator: CoordinatorType {
     weak var parentCoordinator: AppCoordinator?
     
-    var childCoordinators: [CoordinateType] = []
+    var childCoordinators: [CoordinatorType] = []
     var navigationController: UINavigationController
     
     init(nav: UINavigationController) {

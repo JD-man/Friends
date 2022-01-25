@@ -6,8 +6,14 @@
 //
 import UIKit
 
-final class AppCoordinator: CoordinateType {
-    var childCoordinators: [CoordinateType] = []
+enum StartingCoordinator {
+    case auth
+    case mainTab
+}
+
+final class AppCoordinator: CoordinatorType {
+    
+    var childCoordinators: [CoordinatorType] = []
     var navigationController: UINavigationController
     
     init(nav: UINavigationController) {
@@ -17,7 +23,8 @@ final class AppCoordinator: CoordinateType {
     func start() {
         print("App start")
         // switch user auth status
-        addAuthCoordinator()
+        //addAuthCoordinator()
+        addMainTabCoordinator()
     }
     
     func addAuthCoordinator() {
@@ -27,7 +34,14 @@ final class AppCoordinator: CoordinateType {
         authCoordinator.start()
     }
     
-    func completedChild(_ child: CoordinateType) {
+    func addMainTabCoordinator() {
+        let mainTabCoordinator = MainTabCoordinator(nav: navigationController)
+        mainTabCoordinator.parentCoordinator = self
+        childCoordinators.append(mainTabCoordinator)
+        mainTabCoordinator.start()
+    }
+    
+    func completedChild(_ child: CoordinatorType) {
         print(child)
     }
 }

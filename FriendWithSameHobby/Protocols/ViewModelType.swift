@@ -12,7 +12,7 @@ protocol ViewModelType {
     associatedtype Input
     associatedtype Output
     associatedtype UseCase: UseCaseType
-    associatedtype Coordinator: CoordinateType
+    associatedtype Coordinator: CoordinatorType
     
     var useCase: UseCase? { get set }
     var coordinator: Coordinator? { get set }

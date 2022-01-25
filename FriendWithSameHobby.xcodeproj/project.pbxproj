@@ -445,9 +445,9 @@
 		898B794B279945D200844284 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				89C147ED27A022ED00F0E616 /* CoordinatorProtocol */,
 				898B794C279945F100844284 /* ViewModelType.swift */,
 				898B794E279949D600844284 /* UseCaseType.swift */,
-				898B79532799502900844284 /* CoordinatorType.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -683,6 +683,14 @@
 				89C147E927A00F7700F0E616 /* AccountViewController.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		89C147ED27A022ED00F0E616 /* CoordinatorProtocol */ = {
+			isa = PBXGroup;
+			children = (
+				898B79532799502900844284 /* CoordinatorType.swift */,
+			);
+			path = CoordinatorProtocol;
 			sourceTree = "<group>";
 		};
 		89D721C7279C595100B02A1E /* View */ = {
