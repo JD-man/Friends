@@ -52,6 +52,15 @@
 		89AB665927985B9600DFEE95 /* Assets+Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89AB665827985B9600DFEE95 /* Assets+Fonts.swift */; };
 		89AB665E27985F4200DFEE95 /* UIFont+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89AB665D27985F4200DFEE95 /* UIFont+Ext.swift */; };
 		89C147C6279FCBCA00F0E616 /* UserRepositoryInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C147C5279FCBCA00F0E616 /* UserRepositoryInterface.swift */; };
+		89C147CC27A00DDF00F0E616 /* MainTabCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C147CB27A00DDF00F0E616 /* MainTabCoordinator.swift */; };
+		89C147CF27A00E4B00F0E616 /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C147CE27A00E4B00F0E616 /* HomeCoordinator.swift */; };
+		89C147D127A00E5700F0E616 /* ShopCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C147D027A00E5700F0E616 /* ShopCoordinator.swift */; };
+		89C147D327A00E6400F0E616 /* FriendsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C147D227A00E6400F0E616 /* FriendsCoordinator.swift */; };
+		89C147D527A00E7200F0E616 /* AccountCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C147D427A00E7200F0E616 /* AccountCoordinator.swift */; };
+		89C147E427A00F1300F0E616 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C147E327A00F1300F0E616 /* HomeViewController.swift */; };
+		89C147E627A00F3500F0E616 /* ShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C147E527A00F3500F0E616 /* ShopViewController.swift */; };
+		89C147E827A00F5000F0E616 /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C147E727A00F5000F0E616 /* FriendsViewController.swift */; };
+		89C147EA27A00F7700F0E616 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C147E927A00F7700F0E616 /* AccountViewController.swift */; };
 		89D721C2279B8F8300B02A1E /* BaseTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D721C1279B8F8300B02A1E /* BaseTextField.swift */; };
 		89D721C4279B906F00B02A1E /* UITextField+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D721C3279B906F00B02A1E /* UITextField+Ext.swift */; };
 		89D721C6279C14CC00B02A1E /* PhoneAuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D721C5279C14CC00B02A1E /* PhoneAuthRepository.swift */; };
@@ -137,6 +146,15 @@
 		89AB665827985B9600DFEE95 /* Assets+Fonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Assets+Fonts.swift"; sourceTree = "<group>"; };
 		89AB665D27985F4200DFEE95 /* UIFont+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Ext.swift"; sourceTree = "<group>"; };
 		89C147C5279FCBCA00F0E616 /* UserRepositoryInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepositoryInterface.swift; sourceTree = "<group>"; };
+		89C147CB27A00DDF00F0E616 /* MainTabCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabCoordinator.swift; sourceTree = "<group>"; };
+		89C147CE27A00E4B00F0E616 /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
+		89C147D027A00E5700F0E616 /* ShopCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopCoordinator.swift; sourceTree = "<group>"; };
+		89C147D227A00E6400F0E616 /* FriendsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsCoordinator.swift; sourceTree = "<group>"; };
+		89C147D427A00E7200F0E616 /* AccountCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCoordinator.swift; sourceTree = "<group>"; };
+		89C147E327A00F1300F0E616 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		89C147E527A00F3500F0E616 /* ShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopViewController.swift; sourceTree = "<group>"; };
+		89C147E727A00F5000F0E616 /* FriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
+		89C147E927A00F7700F0E616 /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
 		89D721C1279B8F8300B02A1E /* BaseTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTextField.swift; sourceTree = "<group>"; };
 		89D721C3279B906F00B02A1E /* UITextField+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Ext.swift"; sourceTree = "<group>"; };
 		89D721C5279C14CC00B02A1E /* PhoneAuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneAuthRepository.swift; sourceTree = "<group>"; };
@@ -302,7 +320,7 @@
 		898B79332799422D00844284 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				89C147C7279FEEAC00F0E616 /* Main */,
+				89C147C7279FEEAC00F0E616 /* MainTab */,
 				89A81986279ADF3A00F257CA /* BaseComponent */,
 				898B79362799425D00844284 /* Auth */,
 			);
@@ -437,8 +455,7 @@
 		898B79552799504000844284 /* Coordinator */ = {
 			isa = PBXGroup;
 			children = (
-				898B79562799505000844284 /* AppCoordinator.swift */,
-				898B79592799604700844284 /* AuthCoordinator.swift */,
+				89C147C827A00DAD00F0E616 /* App */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -523,11 +540,149 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		89C147C7279FEEAC00F0E616 /* Main */ = {
+		89C147C7279FEEAC00F0E616 /* MainTab */ = {
+			isa = PBXGroup;
+			children = (
+				89C147D627A00E9E00F0E616 /* Home */,
+				89C147D727A00EA300F0E616 /* Shop */,
+				89C147D827A00EAA00F0E616 /* Friends */,
+				89C147DA27A00EBC00F0E616 /* Account */,
+			);
+			path = MainTab;
+			sourceTree = "<group>";
+		};
+		89C147C827A00DAD00F0E616 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				898B79562799505000844284 /* AppCoordinator.swift */,
+				89C147C927A00DB900F0E616 /* Auth */,
+				89C147CA27A00DBF00F0E616 /* MainTab */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		89C147C927A00DB900F0E616 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				898B79592799604700844284 /* AuthCoordinator.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		89C147CA27A00DBF00F0E616 /* MainTab */ = {
+			isa = PBXGroup;
+			children = (
+				89C147CB27A00DDF00F0E616 /* MainTabCoordinator.swift */,
+				89C147CD27A00DE300F0E616 /* TabViews */,
+			);
+			path = MainTab;
+			sourceTree = "<group>";
+		};
+		89C147CD27A00DE300F0E616 /* TabViews */ = {
+			isa = PBXGroup;
+			children = (
+				89C147CE27A00E4B00F0E616 /* HomeCoordinator.swift */,
+				89C147D027A00E5700F0E616 /* ShopCoordinator.swift */,
+				89C147D227A00E6400F0E616 /* FriendsCoordinator.swift */,
+				89C147D427A00E7200F0E616 /* AccountCoordinator.swift */,
+			);
+			path = TabViews;
+			sourceTree = "<group>";
+		};
+		89C147D627A00E9E00F0E616 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				89C147DB27A00ECF00F0E616 /* View */,
+				89C147DC27A00ED400F0E616 /* ViewModels */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		89C147D727A00EA300F0E616 /* Shop */ = {
+			isa = PBXGroup;
+			children = (
+				89C147DE27A00EEB00F0E616 /* View */,
+				89C147DD27A00EE500F0E616 /* ViewModels */,
+			);
+			path = Shop;
+			sourceTree = "<group>";
+		};
+		89C147D827A00EAA00F0E616 /* Friends */ = {
+			isa = PBXGroup;
+			children = (
+				89C147E027A00EF500F0E616 /* View */,
+				89C147DF27A00EF000F0E616 /* ViewModels */,
+			);
+			path = Friends;
+			sourceTree = "<group>";
+		};
+		89C147DA27A00EBC00F0E616 /* Account */ = {
+			isa = PBXGroup;
+			children = (
+				89C147E227A00F0200F0E616 /* View */,
+				89C147E127A00EFD00F0E616 /* ViewModels */,
+			);
+			path = Account;
+			sourceTree = "<group>";
+		};
+		89C147DB27A00ECF00F0E616 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				89C147E327A00F1300F0E616 /* HomeViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		89C147DC27A00ED400F0E616 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			path = Main;
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		89C147DD27A00EE500F0E616 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		89C147DE27A00EEB00F0E616 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				89C147E527A00F3500F0E616 /* ShopViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		89C147DF27A00EF000F0E616 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		89C147E027A00EF500F0E616 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				89C147E727A00F5000F0E616 /* FriendsViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		89C147E127A00EFD00F0E616 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		89C147E227A00F0200F0E616 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				89C147E927A00F7700F0E616 /* AccountViewController.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		89D721C7279C595100B02A1E /* View */ = {
@@ -864,7 +1019,9 @@
 				890CC9EE2796959C00D6185E /* AppDelegate.swift in Sources */,
 				89E055A5279D296400E86445 /* UserDefaultsManager.swift in Sources */,
 				89A81988279ADF7800F257CA /* BaseButton.swift in Sources */,
+				89C147E827A00F5000F0E616 /* FriendsViewController.swift in Sources */,
 				89A81985279A831A00F257CA /* OnboardingRepositoryInterface.swift in Sources */,
+				89C147E427A00F1300F0E616 /* HomeViewController.swift in Sources */,
 				898B794A279945BC00844284 /* OnboardingViewModel.swift in Sources */,
 				890CC9F02796959C00D6185E /* SceneDelegate.swift in Sources */,
 				89A8198A279AE7D100F257CA /* UIView+Ext.swift in Sources */,
@@ -873,6 +1030,7 @@
 				89ECC578279F2AEB00C4C477 /* RegisterViewModel.swift in Sources */,
 				89ECC56A279E99E600C4C477 /* BirthViewModel.swift in Sources */,
 				89E055B1279D9D7800E86445 /* APIErrors.swift in Sources */,
+				89C147EA27A00F7700F0E616 /* AccountViewController.swift in Sources */,
 				89ECC57C279F330300C4C477 /* RegisterUseCase.swift in Sources */,
 				89E055B5279DA6C200E86445 /* NicknameViewController.swift in Sources */,
 				89A81992279B023900F257CA /* String+Ext.swift in Sources */,
@@ -882,10 +1040,15 @@
 				89ECC57A279F2B0000C4C477 /* RegisterViewController.swift in Sources */,
 				89E0559E279D1AF100E86445 /* UserTargets.swift in Sources */,
 				89A81983279A81D400F257CA /* OnboardingRepository.swift in Sources */,
+				89C147D127A00E5700F0E616 /* ShopCoordinator.swift in Sources */,
+				89C147D527A00E7200F0E616 /* AccountCoordinator.swift in Sources */,
 				898B795127994A4E00844284 /* OnboardingUseCase.swift in Sources */,
+				89C147E627A00F3500F0E616 /* ShopViewController.swift in Sources */,
+				89C147CF27A00E4B00F0E616 /* HomeCoordinator.swift in Sources */,
 				898B794F279949D600844284 /* UseCaseType.swift in Sources */,
 				89E0559C279D18D200E86445 /* UserRepository.swift in Sources */,
 				89A81990279AF9E500F257CA /* PhoneAuthUseCase.swift in Sources */,
+				89C147D327A00E6400F0E616 /* FriendsCoordinator.swift in Sources */,
 				89E055A2279D1B9F00E86445 /* URLComponents.swift in Sources */,
 				898B795A2799604700844284 /* AuthCoordinator.swift in Sources */,
 				898B79442799431000844284 /* OnboardingViewController.swift in Sources */,
@@ -898,6 +1061,7 @@
 				89ECC572279F013800C4C477 /* EmailViewModel.swift in Sources */,
 				89E055AF279D9B4400E86445 /* UserInfoResponse.swift in Sources */,
 				89D721CC279C5B4A00B02A1E /* VerifyViewModel.swift in Sources */,
+				89C147CC27A00DDF00F0E616 /* MainTabCoordinator.swift in Sources */,
 				89ECC566279E987B00C4C477 /* BirthViewController.swift in Sources */,
 				89A8198D279AF95C00F257CA /* PhoneAuthViewModel.swift in Sources */,
 			);

@@ -50,8 +50,7 @@ final class RegisterViewModel: ViewModelType {
             }.disposed(by: disposeBag)
         
         input.mergedTap
-            .drive { [unowned self] in
-                print($0)
+            .drive { [unowned self] in                
                 self.useCase?.updateButtonStatus(gender: $0)
             }.disposed(by: disposeBag)
         

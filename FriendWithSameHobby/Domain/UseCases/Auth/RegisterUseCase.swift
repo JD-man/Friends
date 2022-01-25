@@ -19,8 +19,8 @@ final class RegisterUseCase: UseCaseType {
     
     private var disposeBag = DisposeBag()
     
-    var maleButtonStatus = PublishRelay<Bool>()
-    var femaleButtonStatus = PublishRelay<Bool>()
+    var maleButtonStatus = BehaviorRelay<Bool>(value: false)
+    var femaleButtonStatus = BehaviorRelay<Bool>(value: false)
     
     func execute() {
         userRepository?.registerUser()
@@ -41,15 +41,15 @@ final class RegisterUseCase: UseCaseType {
     func updateButtonStatus(gender: Int) {        
         switch gender {
         case 0:
-            femaleButtonStatus.accept(true)
             maleButtonStatus.accept(false)
+            femaleButtonStatus.accept(!femaleButtonStatus.value)            
+            UserDefaultsManager.gender = femaleButtonStatus.value ? gender : -1
         case 1:
             femaleButtonStatus.accept(false)
-            maleButtonStatus.accept(true)
+            maleButtonStatus.accept(!maleButtonStatus.value)
+            UserDefaultsManager.gender = maleButtonStatus.value ? gender : -1
         default:
             break
         }
-        // 이런게 들어가있으니까..??
-        UserDefaultsManager.gender = gender
     }
 }

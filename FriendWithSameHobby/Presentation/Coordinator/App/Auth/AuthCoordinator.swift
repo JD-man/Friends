@@ -17,7 +17,8 @@ final class AuthCoordinator: CoordinateType {
     }
     
     func start() {
-        pushPhoneAuthVC()
+        pushNicknameVC()
+        //pushPhoneAuthVC()
 //        if UserDefaultsManager.onboardingPassed == nil {
 //            pushOnboardingVC()
 //        }

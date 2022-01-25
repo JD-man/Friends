@@ -96,6 +96,7 @@ final class RegisterViewController: UIViewController {
     private func binding() {
         let maleTapNumber = maleButton.rx.tap.map { 1 }
         let femaleTapNumber = femaleButton.rx.tap.map { 0 }
+        
         let mergedTap = Observable.of(maleTapNumber, femaleTapNumber)
             .merge().asDriver(onErrorJustReturn: -1)
         
