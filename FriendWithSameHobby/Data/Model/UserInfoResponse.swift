@@ -1,5 +1,5 @@
 //
-//  PostUserResponse.swift
+//  UserInfoResponse.swift
 //  FriendWithSameHobby
 //
 //  Created by JD_MacMini on 2022/01/23.
@@ -7,8 +7,8 @@
 
 import Foundation
 
-// MARK: - PostUserResponse
-struct PostUserResponse: Codable {
+// MARK: - UserInfoResponse
+struct UserInfoResponse: Codable {
     let id: String
     let v: Int
     let uid, phoneNumber, email, fcMtoken: String
@@ -24,9 +24,8 @@ struct PostUserResponse: Codable {
     let purchaseToken, transactionID, reviewedBefore: [String]
     let reportedNum: Int
     let reportedUser: [String]
-    let dodgepenalty: Int
-    let dodgepenaltyGetAt: String
-    let dodgeNum, ageMin, ageMax, searchable: Int
+    let dodgepenalty, dodgeNum, ageMin, ageMax: Int
+    let searchable: Int
     let createdAt: String
 
     enum CodingKeys: String, CodingKey {
@@ -36,8 +35,6 @@ struct PostUserResponse: Codable {
         case fcMtoken = "FCMtoken"
         case nick, birth, gender, hobby, comment, reputation, sesac, sesacCollection, background, backgroundCollection, purchaseToken
         case transactionID = "transactionId"
-        case reviewedBefore, reportedNum, reportedUser, dodgepenalty
-        case dodgepenaltyGetAt = "dodgepenalty_getAt"
-        case dodgeNum, ageMin, ageMax, searchable, createdAt
+        case reviewedBefore, reportedNum, reportedUser, dodgepenalty, dodgeNum, ageMin, ageMax, searchable, createdAt
     }
 }

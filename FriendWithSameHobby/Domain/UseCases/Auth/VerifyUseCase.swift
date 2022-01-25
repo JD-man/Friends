@@ -25,8 +25,7 @@ final class VerifyUseCase: UseCaseType {
         phoneAuthRepo?.verifyRegisterNumber(verificationCode: codeRelay.value, id: phoneID)
             .subscribe { [unowned self] event in
                 switch event {
-                case .success(let idToken):
-                    print("idToken", idToken)
+                case .success(let idToken):                    
                     // idToken으로 유저 가입 여부 확인하기
                     self.userRepo?.getUserInfo()
                         .subscribe {

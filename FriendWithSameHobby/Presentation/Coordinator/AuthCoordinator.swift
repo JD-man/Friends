@@ -17,15 +17,16 @@ final class AuthCoordinator: CoordinateType {
     }
     
     func start() {
-        if UserDefaultsManager.onboardingPassed == nil {            
-            pushOnboardingVC()
-        }
-        else if UserDefaultsManager.idToken == nil {
-            pushPhoneAuthVC()
-        }
-        else {
-            pushNicknameVC()
-        }
+        pushPhoneAuthVC()
+//        if UserDefaultsManager.onboardingPassed == nil {
+//            pushOnboardingVC()
+//        }
+//        else if UserDefaultsManager.idToken == nil {
+//            pushPhoneAuthVC()
+//        }
+//        else {
+//            pushNicknameVC()
+//        }
     }
     
     func pushOnboardingVC() {
