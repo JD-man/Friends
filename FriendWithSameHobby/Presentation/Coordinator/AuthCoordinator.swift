@@ -75,7 +75,9 @@ final class AuthCoordinator: CoordinateType {
     }
     
     func pushRegisterVC() {
-        let viewModel = RegisterViewModel(coordinator: self)
+        let repository = UserRepository()
+        let useCase = RegisterUseCase(userRepository: repository)
+        let viewModel = RegisterViewModel(useCase: useCase, coordinator: self)
         let registerVC = RegisterViewController(viewModel: viewModel)
         navigationController.pushViewController(registerVC, animated: true)
     }

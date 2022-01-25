@@ -13,8 +13,7 @@ import RxRelay
 final class PhoneAuthViewModel: ViewModelType {
     struct Input {
         // TextField text
-        let phoneNumberText: Driver<String>
-        
+        let phoneNumberText: Driver<String>        
         // button tap
         let buttonTap: Driver<Void>
     }

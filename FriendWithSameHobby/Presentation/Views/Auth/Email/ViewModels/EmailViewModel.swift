@@ -57,7 +57,7 @@ final class EmailViewModel: ViewModelType {
             .asDriver()
             .drive { [weak self] in
                 switch output.nextButtonStatus.value {
-                case .fill:
+                case .fill:                    
                     UserDefaultsManager.email = $0
                     self?.coordinator?.pushRegisterVC()
                 default:

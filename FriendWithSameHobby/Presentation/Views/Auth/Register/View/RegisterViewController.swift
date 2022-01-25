@@ -26,14 +26,14 @@ final class RegisterViewController: UIViewController {
     }
     
     private let maleButton = UIButton().then {
-        $0.setBackgroundImage(AssetsImages.maleButton.image, for: .normal)
+        $0.setBackgroundImage(AssetsImages.maleButton.image, for: .normal)        
     }
     
     private let femaleButton = UIButton().then {
         $0.setBackgroundImage(AssetsImages.femaleButton.image, for: .normal)
     }
     
-    private let registerButton = BaseButton(title: "다음", status: .disable, type: .h48)
+    private let registerButton = BaseButton(title: "다음", status: .fill, type: .h48)
 
     var viewModel: RegisterViewModel?
     private var disposeBag = DisposeBag()
@@ -50,6 +50,7 @@ final class RegisterViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         viewConfig()
+        binding()
     }
     
     private func viewConfig() {
@@ -93,6 +94,25 @@ final class RegisterViewController: UIViewController {
     }
     
     private func binding() {
+        let maleTapNumber = maleButton.rx.tap.map { 1 }
+        let femaleTapNumber = femaleButton.rx.tap.map { 0 }
+        let mergedTap = Observable.of(maleTapNumber, femaleTapNumber)
+            .merge().asDriver(onErrorJustReturn: -1)
         
+        let input = RegisterViewModel.Input(
+            mergedTap: mergedTap,
+            registerTap: registerButton.rx.tap.asDriver(onErrorJustReturn: ()))
+        
+        let output = viewModel?.transform(input, disposeBag: disposeBag)
+        
+        output?.maleButtonColor
+            .asDriver(onErrorJustReturn: .systemBackground)
+            .drive(maleButton.rx.backgroundColor)
+            .disposed(by: disposeBag)
+        
+        output?.femaleButtonColor
+            .asDriver(onErrorJustReturn: .systemBackground)
+            .drive(femaleButton.rx.backgroundColor)
+            .disposed(by: disposeBag)
     }
 }

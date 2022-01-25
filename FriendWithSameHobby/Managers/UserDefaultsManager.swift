@@ -42,7 +42,7 @@ struct UserDefaultsManager {
     @UserDefaultsValue(.nick) static var nick: String?
     @UserDefaultsValue(.birth) static var birth: String?
     @UserDefaultsValue(.email) static var email: String?
-    @UserDefaultsValue(.gender) static var gender: String?
+    @UserDefaultsValue(.gender) static var gender: Int?
     @UserDefaultsValue(.onboardingPassed) static var onboardingPassed: Bool?
     @UserDefaultsValue(.yearBirth) static var yearBirth: String?
     @UserDefaultsValue(.monthBirth) static var monthBirth: String?

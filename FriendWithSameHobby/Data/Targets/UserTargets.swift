@@ -45,7 +45,7 @@ extension UserTargets: TargetType {
                                          "nick": UserDefaultsManager.nick ?? "",
                                          "birth": UserDefaultsManager.birth ?? "",
                                          "email": UserDefaultsManager.email ?? "",
-                                         "gender": UserDefaultsManager.gender ?? ""],
+                                         "gender": UserDefaultsManager.gender ?? -1],
                                       encoding: URLEncoding.default)
         }
     }
