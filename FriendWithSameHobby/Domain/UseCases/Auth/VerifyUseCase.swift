@@ -35,8 +35,7 @@ final class VerifyUseCase: UseCaseType {
                                 print(response)
                                 self.userExistRelay.accept(true)
                             case .failure(let error):
-                                self.authErrorRelay.accept(.unknownError)
-                                print(error)
+                                self.authErrorRelay.accept(error as? UserAPIError ?? .clientError)
                             }
                         }.disposed(by: self.disposeBag)
                 case .failure(_):

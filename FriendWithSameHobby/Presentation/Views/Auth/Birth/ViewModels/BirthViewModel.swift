@@ -27,14 +27,11 @@ final class BirthViewModel: ViewModelType {
         let dayRelay = BehaviorRelay<String>(value: "")
         
         // button status
-        let buttonStatus = BehaviorRelay<BaseButtonStatus>(value: .disable)
-        //
+        let buttonStatus = BehaviorRelay<BaseButtonStatus>(value: .disable)        
     }
     
     var useCase: VerifyUseCase? = nil
     weak var coordinator: AuthCoordinator?
-    
-    var dateRelay = BehaviorRelay<Date>(value: Date())
     
     init(coordinator: AuthCoordinator) {        
         self.coordinator = coordinator
@@ -71,19 +68,13 @@ final class BirthViewModel: ViewModelType {
         
         // tap to coordinator & data save
         
-        input.date
-            .bind(to: dateRelay)
-            .disposed(by: disposeBag)
-        
         input.tap
             .asDriver()
             .drive { [weak self] in
                 switch output.buttonStatus.value {
-                case .fill:                    
+                case .fill:
+                    print($0.toString)
                     UserDefaultsManager.birth = $0.toString
-                    UserDefaultsManager.yearBirth = output.yearRelay.value
-                    UserDefaultsManager.monthBirth = output.monthRelay.value
-                    UserDefaultsManager.dayBirth = output.dayRelay.value
                     self?.coordinator?.pushEmailVC()
                 default:
                     print("toast under 17")

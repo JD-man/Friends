@@ -72,9 +72,8 @@ final class VerifyViewModel: ViewModelType {
                 case .exitedUser:
                     self?.coordinator?.pushNicknameVC()
                 default:
-                    print($0)
-                }
-                print($0)
+                    print("viewmodel", $0)
+                }                
             }.disposed(by: disposeBag)
         
         // UseCase to Output

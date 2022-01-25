@@ -45,12 +45,12 @@ class BirthViewController: UIViewController {
     private let nextButton = BaseButton(title: "다음", status: .disable, type: .h48)
     private let datePicker = UIDatePicker().then {
         $0.preferredDatePickerStyle = .wheels
-        $0.datePickerMode = .date        
+        $0.datePickerMode = .date
+        $0.date = UserDefaultsManager.birth?.toDate ?? Date()
     }
     
     override func viewDidLoad() {
-        super.viewDidLoad()
-        print(UserDefaultsManager.yearBirth)
+        super.viewDidLoad()        
         viewConfig()
         binding()
     }
@@ -133,7 +133,10 @@ class BirthViewController: UIViewController {
     private func binding() {
         let input = BirthViewModel.Input(
             date: datePicker.rx.date,
-            tap: nextButton.rx.tap.withLatestFrom(datePicker.rx.date).asDriver(onErrorJustReturn: Date()))
+            tap: nextButton.rx.tap
+                .map { [unowned self] in self.datePicker.date }
+                .asDriver(onErrorJustReturn: Date())
+            )
         
         let output = viewModel?.transform(input, disposeBag: disposeBag)
         
