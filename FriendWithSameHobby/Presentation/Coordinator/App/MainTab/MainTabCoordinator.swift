@@ -18,6 +18,7 @@ final class MainTabCoordinator: CoordinatorType {
     
     init(nav: UINavigationController) {
         self.navigationController = nav
+        //print("tabbar init nav", navigationController.viewControllers)
         self.tabbarController = UITabBarController()
     }
     
@@ -43,7 +44,9 @@ final class MainTabCoordinator: CoordinatorType {
         coordinatorConfig(coordinator: accountCoordinator)
         
         navigationController.navigationBar.isHidden = true
-        navigationController.pushViewController(tabbarController, animated: true)
+        
+        // nav viewcontroller issue        
+        navigationController.viewControllers = [tabbarController]
         tabbarController.viewControllers = [homeNav, shopNav, friendsNav, accountNav]
     }
     

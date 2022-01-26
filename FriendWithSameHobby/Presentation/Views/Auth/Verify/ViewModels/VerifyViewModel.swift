@@ -53,8 +53,6 @@ final class VerifyViewModel: ViewModelType {
         input.verifyButtonTap
             .asDriver()
             .drive { [unowned self] _ in
-                print("tap")
-                //self.coordinator?.pushNicknameVC()
                 self.useCase?.excuteAuthNumber(phoneID: self.phoneID)
             }.disposed(by: disposeBag)
         
@@ -62,9 +60,9 @@ final class VerifyViewModel: ViewModelType {
         useCase?.userExistRelay
             .asDriver(onErrorJustReturn: false)
             .drive { [unowned self] in
-                if $0 {
-                    self.coordinator?.finish(to: .mainTab)
-                }
+                if $0 { self.coordinator?.finish(to: .mainTab, completion: {
+                    print("auth to tabbar coordinator")
+                })}
             }.disposed(by: disposeBag)
         
         useCase?.authErrorRelay

@@ -15,7 +15,6 @@ final class OnboardingViewModel: ViewModelType {
     struct Input {        
         // Swipe Gesture
         let didSwipeGesture: SwipeControlEvent
-        
         // Button
         let didTapStartButton: ControlEvent<Void>
     }
@@ -54,8 +53,7 @@ final class OnboardingViewModel: ViewModelType {
         
         input.didTapStartButton
             .bind { [weak self] in
-                self?.coordinator?.pushPhoneAuthVC()
-                print("Start Button Clicked")
+                self?.coordinator?.pushPhoneAuthVC()                
             }.disposed(by: disposeBag)
         
         // UseCase To Output

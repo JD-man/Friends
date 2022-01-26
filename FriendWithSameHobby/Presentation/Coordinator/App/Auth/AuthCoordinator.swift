@@ -18,7 +18,8 @@ final class AuthCoordinator: CoordinatorType {
     }
     
     func start() {
-        pushPhoneAuthVC()
+        pushOnboardingVC()
+        //pushPhoneAuthVC()
 //        if UserDefaultsManager.onboardingPassed == nil {
 //            pushOnboardingVC()
 //        }
@@ -84,7 +85,7 @@ final class AuthCoordinator: CoordinatorType {
         navigationController.pushViewController(registerVC, animated: true)
     }
     
-    func finish(to next: AppCordinatorChild) {
-        finishDelegate?.didFinish(self, next: next)
+    func finish(to next: AppCordinatorChild, completion: @escaping () -> Void) {
+        finishDelegate?.didFinish(self, next: next, completion: completion)
     }
 }
