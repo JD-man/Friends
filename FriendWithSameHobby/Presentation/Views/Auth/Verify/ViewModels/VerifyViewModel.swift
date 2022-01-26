@@ -61,9 +61,10 @@ final class VerifyViewModel: ViewModelType {
         // UseCase to Coordinator
         useCase?.userExistRelay
             .asDriver(onErrorJustReturn: false)
-            .drive {
-                // view to HomeVC
-                if $0 { print("Cururent User exist") }
+            .drive { [unowned self] in
+                if $0 {
+                    self.coordinator?.finish(to: .mainTab)
+                }
             }.disposed(by: disposeBag)
         
         useCase?.authErrorRelay

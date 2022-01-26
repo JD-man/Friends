@@ -7,7 +7,8 @@
 import UIKit
 
 final class AuthCoordinator: CoordinatorType {
-    weak var parentCoordinator: CoordinatorType?
+    weak var parentCoordinator: CoordinatorType?    
+    weak var finishDelegate: AppCoordinatorFinishDelegate?
     
     var childCoordinators: [CoordinatorType] = []
     var navigationController: UINavigationController
@@ -17,8 +18,7 @@ final class AuthCoordinator: CoordinatorType {
     }
     
     func start() {
-        pushNicknameVC()
-        //pushPhoneAuthVC()
+        pushPhoneAuthVC()
 //        if UserDefaultsManager.onboardingPassed == nil {
 //            pushOnboardingVC()
 //        }
@@ -82,5 +82,9 @@ final class AuthCoordinator: CoordinatorType {
         let viewModel = RegisterViewModel(useCase: useCase, coordinator: self)
         let registerVC = RegisterViewController(viewModel: viewModel)
         navigationController.pushViewController(registerVC, animated: true)
+    }
+    
+    func finish(to next: AppCordinatorChild) {
+        finishDelegate?.didFinish(self, next: next)
     }
 }

@@ -9,6 +9,8 @@ import UIKit
 
 final class MainTabCoordinator: CoordinatorType {
     weak var parentCoordinator: CoordinatorType? // = AppCoordinator
+    weak var finishDelegate: AppCoordinatorFinishDelegate?
+    
     var childCoordinators: [CoordinatorType] = [] // TabView Coordinators
     
     var navigationController: UINavigationController
@@ -45,8 +47,7 @@ final class MainTabCoordinator: CoordinatorType {
         tabbarController.viewControllers = [homeNav, shopNav, friendsNav, accountNav]
     }
     
-    private func tabbarNav(title: String, image: UIImage) -> UINavigationController {
-        // config nav
+    private func tabbarNav(title: String, image: UIImage) -> UINavigationController {        
         let nav = UINavigationController()
         let tabbar = UITabBarItem(title: title, image: image, selectedImage: nil)
         nav.tabBarItem = tabbar

@@ -6,9 +6,13 @@
 //
 import UIKit
 
-enum StartingCoordinator {
+enum AppCordinatorChild {
     case auth
     case mainTab
+}
+
+protocol AppCoordinatorFinishDelegate: AnyObject {
+    func didFinish(_ coordinator: CoordinatorType, next: AppCordinatorChild)
 }
 
 final class AppCoordinator: CoordinatorType {
@@ -23,13 +27,14 @@ final class AppCoordinator: CoordinatorType {
     func start() {
         print("App start")
         // switch user auth status
-        //addAuthCoordinator()
-        addMainTabCoordinator()
+        addAuthCoordinator()
+        //addMainTabCoordinator()
     }
     
     func addAuthCoordinator() {
         let authCoordinator = AuthCoordinator(nav: navigationController)
         authCoordinator.parentCoordinator = self
+        authCoordinator.finishDelegate = self
         childCoordinators.append(authCoordinator)
         authCoordinator.start()
     }
@@ -37,11 +42,26 @@ final class AppCoordinator: CoordinatorType {
     func addMainTabCoordinator() {
         let mainTabCoordinator = MainTabCoordinator(nav: navigationController)
         mainTabCoordinator.parentCoordinator = self
+        mainTabCoordinator.finishDelegate = self
         childCoordinators.append(mainTabCoordinator)
         mainTabCoordinator.start()
     }
     
     func completedChild(_ child: CoordinatorType) {
         print(child)
+    }
+}
+
+extension AppCoordinator: AppCoordinatorFinishDelegate {
+    func didFinish(_ coordinator: CoordinatorType, next: AppCordinatorChild) {
+        childCoordinators = childCoordinators.filter { !($0 === coordinator) }
+        navigationController.viewControllers.removeAll()
+        
+        switch next {
+        case .auth:
+            addAuthCoordinator()
+        case .mainTab:
+            addMainTabCoordinator()
+        }
     }
 }
