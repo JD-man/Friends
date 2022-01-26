@@ -20,58 +20,42 @@ final class MainTabCoordinator: CoordinatorType {
     }
     
     func start() {
-        tabbarConfig()
         // 1. Home Coordinator
+        let homeNav = tabbarNav(title: "홈", image: AssetsImages.homeIcon.image)
+        let homeCoordinator = HomeCoordinator(nav: homeNav)
+        coordinatorConfig(coordinator: homeCoordinator)
+        
         // 2. Shop Coordinator
+        let shopNav = tabbarNav(title: "새싹샵", image: AssetsImages.shopIcon.image)
+        let shopCoordinator = ShopCoordinator(nav: shopNav)
+        coordinatorConfig(coordinator: shopCoordinator)
+        
         // 3. Friends Coordinator
+        let friendsNav = tabbarNav(title: "새싹친구", image: AssetsImages.friendsIcon.image)
+        let friendsCoordinator = FriendsCoordinator(nav: friendsNav)
+        coordinatorConfig(coordinator: friendsCoordinator)
         
         // 4. Account Coordinator
-        let accountNav = accountCoordinatorConfig()
+        let accountNav = tabbarNav(title: "내정보", image: AssetsImages.accountIcon.image)
+        let accountCoordinator = AccountCoordinator(nav: accountNav)
+        coordinatorConfig(coordinator: accountCoordinator)
+        
         navigationController.navigationBar.isHidden = true
         navigationController.pushViewController(tabbarController, animated: true)
-        tabbarController.viewControllers = [accountNav]
+        tabbarController.viewControllers = [homeNav, shopNav, friendsNav, accountNav]
     }
     
-    private func accountCoordinatorConfig() -> UINavigationController {
+    private func tabbarNav(title: String, image: UIImage) -> UINavigationController {
         // config nav
-        let accountNav = UINavigationController()
-        let accountTabbar = UITabBarItem(title: "내정보", image: AssetsImages.accountIcon.image, selectedImage: nil)
-        accountNav.tabBarItem = accountTabbar
-        
-        // config coordinator
-        let accountCoordinator = AccountCoordinator(nav: accountNav)
-        accountCoordinator.parentCoordinator = self
-        childCoordinators.append(accountCoordinator)
-        accountCoordinator.start()
-        return accountNav
+        let nav = UINavigationController()
+        let tabbar = UITabBarItem(title: title, image: image, selectedImage: nil)
+        nav.tabBarItem = tabbar
+        return nav
     }
     
-    private func tabbarConfig() {
-        if #available(iOS 15.0, *) {
-            let tabbarAppearance = UITabBarAppearance()
-            tabbarAppearance.configureWithOpaqueBackground()
-            tabbarAppearance.backgroundColor = .systemBackground
-            
-            let tabbarItemAppearance = UITabBarItemAppearance()
-            tabbarItemAppearance.normal.titleTextAttributes = [.font : AssetsFonts.NotoSansKR.regular.font(size: 12)]
-            tabbarItemAppearance.selected.titleTextAttributes = [.font : AssetsFonts.NotoSansKR.regular.font(size: 12)]
-            
-            UITabBar.appearance().standardAppearance = tabbarAppearance
-            UITabBar.appearance().scrollEdgeAppearance = tabbarAppearance
-            tabbarAppearance.stackedLayoutAppearance = tabbarItemAppearance            
-        }
-        else {
-            UITabBar.appearance().barTintColor = .systemBackground
-        }
-        
-        UITabBar.appearance().tintColor = AssetsColors.green.color
-        UITabBar.appearance().unselectedItemTintColor = AssetsColors.gray6.color
-        
-        UITabBarItem.appearance().setTitleTextAttributes(
-            [.font : AssetsFonts.NotoSansKR.regular.font(size: 12)], for: .normal
-        )
-        UITabBarItem.appearance().setTitleTextAttributes(
-            [.font : AssetsFonts.NotoSansKR.regular.font(size: 12)], for: .selected
-        )
+    private func coordinatorConfig(coordinator: CoordinatorType) {
+        coordinator.parentCoordinator = self
+        childCoordinators.append(coordinator)
+        coordinator.start()
     }
 }

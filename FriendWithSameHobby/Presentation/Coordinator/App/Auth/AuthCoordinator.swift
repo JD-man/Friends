@@ -7,7 +7,7 @@
 import UIKit
 
 final class AuthCoordinator: CoordinatorType {
-    weak var parentCoordinator: AppCoordinator?
+    weak var parentCoordinator: CoordinatorType?
     
     var childCoordinators: [CoordinatorType] = []
     var navigationController: UINavigationController

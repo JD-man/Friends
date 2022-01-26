@@ -12,7 +12,7 @@ enum StartingCoordinator {
 }
 
 final class AppCoordinator: CoordinatorType {
-    
+    var parentCoordinator: CoordinatorType? = nil
     var childCoordinators: [CoordinatorType] = []
     var navigationController: UINavigationController
     

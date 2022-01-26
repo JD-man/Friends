@@ -9,7 +9,7 @@ import UIKit
 
 final class AccountCoordinator: CoordinatorType {
     
-    weak var parentCoordinator: MainTabCoordinator?
+    weak var parentCoordinator: CoordinatorType?
     
     var childCoordinators: [CoordinatorType] = []
     

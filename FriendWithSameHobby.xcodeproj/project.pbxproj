@@ -684,9 +684,9 @@
 		89C147E227A00F0200F0E616 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				89C147F027A06D6500F0E616 /* Cells */,
 				89C147E927A00F7700F0E616 /* AccountViewController.swift */,
 				894184DF27A15396007F35AC /* ProfileViewController.swift */,
+				89C147F027A06D6500F0E616 /* Cells */,
 			);
 			path = Views;
 			sourceTree = "<group>";

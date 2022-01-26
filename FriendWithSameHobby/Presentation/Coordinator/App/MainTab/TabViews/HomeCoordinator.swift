@@ -7,17 +7,21 @@
 
 import UIKit
 
-//final class HomeCoordinator: CoordinatorType {
-//    weak var parentCoordinator: MainTabCoordinator?
-//    var childCoordinators: [CoordinatorType]
-//    
-//    var navigationController: UINavigationController
-//    
-//    init(nav: UINavigationController) {
-//        self.navigationController = nav
-//    }
-//    
-//    func start() {
-//        // di
-//    }
-//}
+final class HomeCoordinator: CoordinatorType {
+    weak var parentCoordinator: CoordinatorType?
+    
+    var childCoordinators: [CoordinatorType] = []
+    
+    var navigationController: UINavigationController
+    
+    init(nav: UINavigationController) {
+        // new navi
+        self.navigationController = nav
+    }
+    
+    func start() {
+        // Start with accountVC
+        let homeVC = HomeViewController(coordinator: self)
+        navigationController.pushViewController(homeVC, animated: true)
+    }
+}
