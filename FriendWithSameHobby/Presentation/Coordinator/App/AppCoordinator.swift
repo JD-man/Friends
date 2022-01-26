@@ -15,7 +15,7 @@ protocol AppCoordinatorFinishDelegate: AnyObject {
     func didFinish(_ coordinator: CoordinatorType, next: AppCordinatorChild, completion: @escaping () -> Void)
 }
 
-final class AppCoordinator: CoordinatorType {
+final class AppCoordinator: NSObject, CoordinatorType {
     var parentCoordinator: CoordinatorType? = nil
     var childCoordinators: [CoordinatorType] = []
     var navigationController: UINavigationController
@@ -55,14 +55,39 @@ final class AppCoordinator: CoordinatorType {
 extension AppCoordinator: AppCoordinatorFinishDelegate {
     func didFinish(_ coordinator: CoordinatorType, next: AppCordinatorChild, completion: @escaping () -> Void) {
         childCoordinators = childCoordinators.filter { !($0 === coordinator) }
-        navigationController.viewControllers.removeAll()        
         switch next {
         case .auth:
             addAuthCoordinator()
         case .mainTab:
             addMainTabCoordinator()
         }
-        print(navigationController.viewControllers)
+        
+        var navArr = navigationController.viewControllers
+        print("===============================================")
+        print("before removing navArr: ", navArr)
+        let last = navArr.last
+        print("===============================================")
+        print("lastVC: ", last)
+        navArr.removeAll()
+        navArr.append(last!)
+        
+        print("===============================================")
+        print("after removing navArr: ", navArr)
+        
+        navigationController.viewControllers = navArr
+        
+        print("===============================================")
+        print("after embedding: ", navArr)
+        print("===============================================")
+        
+        if last! is UITabBarController {
+            print("tab")
+        }
+        else {
+            print("not tab")
+        }
+        //last!.view.backgroundColor = .red
         completion()
+        
     }
 }

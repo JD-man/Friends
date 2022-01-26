@@ -9,6 +9,6 @@ import Foundation
 import RxSwift
 
 protocol UserRepositoryInterface {
-    func getUserInfo() -> Single<UserInfoResponse>
+    func getUserInfo() -> Single<UserInfoDTO>
     func registerUser() -> Single<Bool>
 }

@@ -40,7 +40,11 @@ class AccountViewController: UIViewController {
         testButton.rx.tap
             .asDriver()
             .drive { [weak self] _ in
-                self?.coordinator?.pushProfileVC()
+                (self?.coordinator?.parentCoordinator as? MainTabCoordinator)?
+                    .finish(to: .auth, completion: {
+                    print("tabbar to auth")
+                })
+                //self?.coordinator?.pushProfileVC()
             }.disposed(by: disposeBag)
     }
 }

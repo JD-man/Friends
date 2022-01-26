@@ -53,7 +53,10 @@ final class OnboardingViewModel: ViewModelType {
         
         input.didTapStartButton
             .bind { [weak self] in
-                self?.coordinator?.pushPhoneAuthVC()                
+                //self?.coordinator?.pushPhoneAuthVC()
+                self?.coordinator?.finish(to: .mainTab, completion: {
+                    print("onboarding to tabbar")
+                })
             }.disposed(by: disposeBag)
         
         // UseCase To Output

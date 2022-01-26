@@ -9,18 +9,19 @@ import Foundation
 import RxSwift
 import Moya
 
+// DTO ---> Domain (toDomain function)
 final class UserRepository: UserRepositoryInterface {
     
     private var disposeBag = DisposeBag()
     
-    func getUserInfo() -> Single<UserInfoResponse> {
-        return Single<UserInfoResponse>.create { [unowned self] single in
+    func getUserInfo() -> Single<UserInfoDTO> {
+        return Single<UserInfoDTO>.create { [unowned self] single in
             APIService().userRequest(of: UserTargets.getUserInfo)
                 .subscribe { event in
                     switch event {
                     case .success(let data):
                         do {
-                            let decoded = try JSONDecoder().decode(UserInfoResponse.self, from: data)
+                            let decoded = try JSONDecoder().decode(UserInfoDTO.self, from: data)
                             print(decoded)
                             single(.success(decoded))
                         }

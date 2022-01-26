@@ -10,7 +10,7 @@ import Moya
 
 enum UserTargets {
     case getUserInfo
-    case postUser
+    case postUser/*(parameters: [String: Any])*/
 }
 
 extension UserTargets: TargetType {

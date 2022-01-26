@@ -76,7 +76,7 @@
 		89E055A8279D7BCC00E86445 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 89E055A7279D7BCC00E86445 /* FirebaseAuth */; };
 		89E055AA279D7BCC00E86445 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 89E055A9279D7BCC00E86445 /* FirebaseMessaging */; };
 		89E055AD279D946000E86445 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E055AC279D946000E86445 /* APIService.swift */; };
-		89E055AF279D9B4400E86445 /* UserInfoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E055AE279D9B4400E86445 /* UserInfoResponse.swift */; };
+		89E055AF279D9B4400E86445 /* UserInfoDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E055AE279D9B4400E86445 /* UserInfoDTO.swift */; };
 		89E055B1279D9D7800E86445 /* APIErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E055B0279D9D7800E86445 /* APIErrors.swift */; };
 		89E055B5279DA6C200E86445 /* NicknameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E055B4279DA6C200E86445 /* NicknameViewController.swift */; };
 		89ECC564279E759600C4C477 /* NickNameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89ECC563279E759600C4C477 /* NickNameViewModel.swift */; };
@@ -170,7 +170,7 @@
 		89E055A1279D1B9F00E86445 /* URLComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLComponents.swift; sourceTree = "<group>"; };
 		89E055A4279D296400E86445 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		89E055AC279D946000E86445 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
-		89E055AE279D9B4400E86445 /* UserInfoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoResponse.swift; sourceTree = "<group>"; };
+		89E055AE279D9B4400E86445 /* UserInfoDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoDTO.swift; sourceTree = "<group>"; };
 		89E055B0279D9D7800E86445 /* APIErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIErrors.swift; sourceTree = "<group>"; };
 		89E055B4279DA6C200E86445 /* NicknameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameViewController.swift; sourceTree = "<group>"; };
 		89ECC563279E759600C4C477 /* NickNameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameViewModel.swift; sourceTree = "<group>"; };
@@ -294,7 +294,7 @@
 			isa = PBXGroup;
 			children = (
 				89E0559F279D1B5D00E86445 /* Targets */,
-				89E05599279D108100E86445 /* Model */,
+				89E05599279D108100E86445 /* DTO */,
 				89A81982279A81D400F257CA /* OnboardingRepository.swift */,
 				89D721C5279C14CC00B02A1E /* PhoneAuthRepository.swift */,
 				89E0559B279D18D200E86445 /* UserRepository.swift */,
@@ -723,12 +723,12 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
-		89E05599279D108100E86445 /* Model */ = {
+		89E05599279D108100E86445 /* DTO */ = {
 			isa = PBXGroup;
 			children = (
-				89E055AE279D9B4400E86445 /* UserInfoResponse.swift */,
+				89E055AE279D9B4400E86445 /* UserInfoDTO.swift */,
 			);
-			path = Model;
+			path = DTO;
 			sourceTree = "<group>";
 		};
 		89E0559A279D146100E86445 /* Email */ = {
@@ -1083,7 +1083,7 @@
 				890CCA222796986600D6185E /* PhoneAuthViewController.swift in Sources */,
 				89ECC56E279F011B00C4C477 /* EmailViewController.swift in Sources */,
 				89ECC572279F013800C4C477 /* EmailViewModel.swift in Sources */,
-				89E055AF279D9B4400E86445 /* UserInfoResponse.swift in Sources */,
+				89E055AF279D9B4400E86445 /* UserInfoDTO.swift in Sources */,
 				89D721CC279C5B4A00B02A1E /* VerifyViewModel.swift in Sources */,
 				89C147CC27A00DDF00F0E616 /* MainTabCoordinator.swift in Sources */,
 				89ECC566279E987B00C4C477 /* BirthViewController.swift in Sources */,

@@ -46,8 +46,9 @@ final class MainTabCoordinator: CoordinatorType {
         navigationController.navigationBar.isHidden = true
         
         // nav viewcontroller issue        
-        navigationController.viewControllers = [tabbarController]
+        
         tabbarController.viewControllers = [homeNav, shopNav, friendsNav, accountNav]
+        navigationController.pushViewController(tabbarController, animated: true)        
     }
     
     private func tabbarNav(title: String, image: UIImage) -> UINavigationController {        
@@ -61,5 +62,9 @@ final class MainTabCoordinator: CoordinatorType {
         coordinator.parentCoordinator = self
         childCoordinators.append(coordinator)
         coordinator.start()
+    }
+    
+    func finish(to next: AppCordinatorChild, completion: @escaping () -> Void) {
+        finishDelegate?.didFinish(self, next: next, completion: completion)
     }
 }
