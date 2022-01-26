@@ -27,6 +27,7 @@
 		890CCA702797210100D6185E /* RxMoya in Frameworks */ = {isa = PBXBuildFile; productRef = 890CCA6F2797210100D6185E /* RxMoya */; };
 		890CCA732797211F00D6185E /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 890CCA722797211F00D6185E /* Then */; };
 		890CCA762797214000D6185E /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = 890CCA752797214000D6185E /* Toast */; };
+		894184E027A15396007F35AC /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894184DF27A15396007F35AC /* ProfileViewController.swift */; };
 		898B79442799431000844284 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898B79432799431000844284 /* OnboardingViewController.swift */; };
 		898B79462799447600844284 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 898B79452799447600844284 /* Images.xcassets */; };
 		898B79482799456F00844284 /* Assets+Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898B79472799456F00844284 /* Assets+Images.swift */; };
@@ -61,6 +62,7 @@
 		89C147E627A00F3500F0E616 /* ShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C147E527A00F3500F0E616 /* ShopViewController.swift */; };
 		89C147E827A00F5000F0E616 /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C147E727A00F5000F0E616 /* FriendsViewController.swift */; };
 		89C147EA27A00F7700F0E616 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C147E927A00F7700F0E616 /* AccountViewController.swift */; };
+		89C147F227A06E5100F0E616 /* AccountTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C147F127A06E5100F0E616 /* AccountTableHeaderView.swift */; };
 		89D721C2279B8F8300B02A1E /* BaseTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D721C1279B8F8300B02A1E /* BaseTextField.swift */; };
 		89D721C4279B906F00B02A1E /* UITextField+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D721C3279B906F00B02A1E /* UITextField+Ext.swift */; };
 		89D721C6279C14CC00B02A1E /* PhoneAuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D721C5279C14CC00B02A1E /* PhoneAuthRepository.swift */; };
@@ -121,6 +123,7 @@
 		890CCA5027970DDC00D6185E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		890CCA69279717C600D6185E /* FriendWithSameHobby.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FriendWithSameHobby.entitlements; sourceTree = "<group>"; };
 		890CCA6A2797188100D6185E /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		894184DF27A15396007F35AC /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		898B79432799431000844284 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		898B79452799447600844284 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		898B79472799456F00844284 /* Assets+Images.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Assets+Images.swift"; sourceTree = "<group>"; };
@@ -155,6 +158,7 @@
 		89C147E527A00F3500F0E616 /* ShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopViewController.swift; sourceTree = "<group>"; };
 		89C147E727A00F5000F0E616 /* FriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
 		89C147E927A00F7700F0E616 /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
+		89C147F127A06E5100F0E616 /* AccountTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTableHeaderView.swift; sourceTree = "<group>"; };
 		89D721C1279B8F8300B02A1E /* BaseTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTextField.swift; sourceTree = "<group>"; };
 		89D721C3279B906F00B02A1E /* UITextField+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Ext.swift"; sourceTree = "<group>"; };
 		89D721C5279C14CC00B02A1E /* PhoneAuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneAuthRepository.swift; sourceTree = "<group>"; };
@@ -592,7 +596,7 @@
 		89C147D627A00E9E00F0E616 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				89C147DB27A00ECF00F0E616 /* View */,
+				89C147DB27A00ECF00F0E616 /* Views */,
 				89C147DC27A00ED400F0E616 /* ViewModels */,
 			);
 			path = Home;
@@ -601,7 +605,7 @@
 		89C147D727A00EA300F0E616 /* Shop */ = {
 			isa = PBXGroup;
 			children = (
-				89C147DE27A00EEB00F0E616 /* View */,
+				89C147DE27A00EEB00F0E616 /* Views */,
 				89C147DD27A00EE500F0E616 /* ViewModels */,
 			);
 			path = Shop;
@@ -610,7 +614,7 @@
 		89C147D827A00EAA00F0E616 /* Friends */ = {
 			isa = PBXGroup;
 			children = (
-				89C147E027A00EF500F0E616 /* View */,
+				89C147E027A00EF500F0E616 /* Views */,
 				89C147DF27A00EF000F0E616 /* ViewModels */,
 			);
 			path = Friends;
@@ -619,18 +623,18 @@
 		89C147DA27A00EBC00F0E616 /* Account */ = {
 			isa = PBXGroup;
 			children = (
-				89C147E227A00F0200F0E616 /* View */,
+				89C147E227A00F0200F0E616 /* Views */,
 				89C147E127A00EFD00F0E616 /* ViewModels */,
 			);
 			path = Account;
 			sourceTree = "<group>";
 		};
-		89C147DB27A00ECF00F0E616 /* View */ = {
+		89C147DB27A00ECF00F0E616 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				89C147E327A00F1300F0E616 /* HomeViewController.swift */,
 			);
-			path = View;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		89C147DC27A00ED400F0E616 /* ViewModels */ = {
@@ -647,12 +651,12 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
-		89C147DE27A00EEB00F0E616 /* View */ = {
+		89C147DE27A00EEB00F0E616 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				89C147E527A00F3500F0E616 /* ShopViewController.swift */,
 			);
-			path = View;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		89C147DF27A00EF000F0E616 /* ViewModels */ = {
@@ -662,12 +666,12 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
-		89C147E027A00EF500F0E616 /* View */ = {
+		89C147E027A00EF500F0E616 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				89C147E727A00F5000F0E616 /* FriendsViewController.swift */,
 			);
-			path = View;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		89C147E127A00EFD00F0E616 /* ViewModels */ = {
@@ -677,12 +681,14 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
-		89C147E227A00F0200F0E616 /* View */ = {
+		89C147E227A00F0200F0E616 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				89C147F027A06D6500F0E616 /* Cells */,
 				89C147E927A00F7700F0E616 /* AccountViewController.swift */,
+				894184DF27A15396007F35AC /* ProfileViewController.swift */,
 			);
-			path = View;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		89C147ED27A022ED00F0E616 /* CoordinatorProtocol */ = {
@@ -691,6 +697,14 @@
 				898B79532799502900844284 /* CoordinatorType.swift */,
 			);
 			path = CoordinatorProtocol;
+			sourceTree = "<group>";
+		};
+		89C147F027A06D6500F0E616 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				89C147F127A06E5100F0E616 /* AccountTableHeaderView.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		89D721C7279C595100B02A1E /* View */ = {
@@ -1026,6 +1040,7 @@
 				89D721CE279C5BFE00B02A1E /* VerifyUseCase.swift in Sources */,
 				890CC9EE2796959C00D6185E /* AppDelegate.swift in Sources */,
 				89E055A5279D296400E86445 /* UserDefaultsManager.swift in Sources */,
+				894184E027A15396007F35AC /* ProfileViewController.swift in Sources */,
 				89A81988279ADF7800F257CA /* BaseButton.swift in Sources */,
 				89C147E827A00F5000F0E616 /* FriendsViewController.swift in Sources */,
 				89A81985279A831A00F257CA /* OnboardingRepositoryInterface.swift in Sources */,
@@ -1049,6 +1064,7 @@
 				89E0559E279D1AF100E86445 /* UserTargets.swift in Sources */,
 				89A81983279A81D400F257CA /* OnboardingRepository.swift in Sources */,
 				89C147D127A00E5700F0E616 /* ShopCoordinator.swift in Sources */,
+				89C147F227A06E5100F0E616 /* AccountTableHeaderView.swift in Sources */,
 				89C147D527A00E7200F0E616 /* AccountCoordinator.swift in Sources */,
 				898B795127994A4E00844284 /* OnboardingUseCase.swift in Sources */,
 				89C147E627A00F3500F0E616 /* ShopViewController.swift in Sources */,

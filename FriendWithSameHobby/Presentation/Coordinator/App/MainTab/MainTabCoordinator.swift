@@ -20,23 +20,58 @@ final class MainTabCoordinator: CoordinatorType {
     }
     
     func start() {
-        let homeVC = HomeViewController()
-        let shopVC = ShopViewController()
-        let accountVC = AccountViewController()
-        let friendsVC = FriendsViewController()
+        tabbarConfig()
+        // 1. Home Coordinator
+        // 2. Shop Coordinator
+        // 3. Friends Coordinator
         
-        let homeItem = UITabBarItem(title: "홈", image: nil, selectedImage: nil)
-        let shopItem = UITabBarItem(title: "새싹샵", image: nil, selectedImage: nil)
-        let accountItem = UITabBarItem(title: "내정보", image: nil, selectedImage: nil)
-        let friendsItem = UITabBarItem(title: "새싹친구", image: nil, selectedImage: nil)
-        
-        homeVC.tabBarItem = homeItem
-        shopVC.tabBarItem = shopItem
-        accountVC.tabBarItem = accountItem
-        friendsVC.tabBarItem = friendsItem
-        
+        // 4. Account Coordinator
+        let accountNav = accountCoordinatorConfig()
         navigationController.navigationBar.isHidden = true
-        tabbarController.viewControllers = [homeVC, shopVC, accountVC,friendsVC]
         navigationController.pushViewController(tabbarController, animated: true)
+        tabbarController.viewControllers = [accountNav]
+    }
+    
+    private func accountCoordinatorConfig() -> UINavigationController {
+        // config nav
+        let accountNav = UINavigationController()
+        let accountTabbar = UITabBarItem(title: "내정보", image: AssetsImages.accountIcon.image, selectedImage: nil)
+        accountNav.tabBarItem = accountTabbar
+        
+        // config coordinator
+        let accountCoordinator = AccountCoordinator(nav: accountNav)
+        accountCoordinator.parentCoordinator = self
+        childCoordinators.append(accountCoordinator)
+        accountCoordinator.start()
+        return accountNav
+    }
+    
+    private func tabbarConfig() {
+        if #available(iOS 15.0, *) {
+            let tabbarAppearance = UITabBarAppearance()
+            tabbarAppearance.configureWithOpaqueBackground()
+            tabbarAppearance.backgroundColor = .systemBackground
+            
+            let tabbarItemAppearance = UITabBarItemAppearance()
+            tabbarItemAppearance.normal.titleTextAttributes = [.font : AssetsFonts.NotoSansKR.regular.font(size: 12)]
+            tabbarItemAppearance.selected.titleTextAttributes = [.font : AssetsFonts.NotoSansKR.regular.font(size: 12)]
+            
+            UITabBar.appearance().standardAppearance = tabbarAppearance
+            UITabBar.appearance().scrollEdgeAppearance = tabbarAppearance
+            tabbarAppearance.stackedLayoutAppearance = tabbarItemAppearance            
+        }
+        else {
+            UITabBar.appearance().barTintColor = .systemBackground
+        }
+        
+        UITabBar.appearance().tintColor = AssetsColors.green.color
+        UITabBar.appearance().unselectedItemTintColor = AssetsColors.gray6.color
+        
+        UITabBarItem.appearance().setTitleTextAttributes(
+            [.font : AssetsFonts.NotoSansKR.regular.font(size: 12)], for: .normal
+        )
+        UITabBarItem.appearance().setTitleTextAttributes(
+            [.font : AssetsFonts.NotoSansKR.regular.font(size: 12)], for: .selected
+        )
     }
 }

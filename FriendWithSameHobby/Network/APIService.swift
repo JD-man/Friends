@@ -10,6 +10,7 @@ import RxSwift
 import Moya
 
 final class APIService {
+    // decode o
     func userRequest<U: TargetType>(of target: U) -> Single<Data> {
         return Single<Data>.create { single in
             let provider = MoyaProvider<U>()
@@ -28,4 +29,6 @@ final class APIService {
             return Disposables.create()
         }
     }
+    
+    // decode x
 }
