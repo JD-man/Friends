@@ -39,8 +39,34 @@ struct UserInfoDTO: Codable {
     }
 }
 
-extension UserInfoDTO {
-    func toDomain() {
-        
+extension UserInfoDTO  {
+    func toDomain() -> UserInfoModel {
+        return UserInfoModel(id: id,
+                             v: v,
+                             uid: uid,
+                             phoneNumber: phoneNumber,
+                             email: email,
+                             fcMtoken: fcMtoken,
+                             nick: nick,
+                             birth: birth.toDate,
+                             gender: gender,
+                             hobby: hobby,
+                             comment: comment,
+                             reputation: reputation,
+                             sesac: sesac,
+                             sesacCollection: sesacCollection,
+                             background: background,
+                             backgroundCollection: backgroundCollection,
+                             purchaseToken: purchaseToken,
+                             transactionID: transactionID,
+                             reviewedBefore: reviewedBefore,
+                             reportedNum: reportedNum,
+                             reportedUser: reportedUser,
+                             dodgepenalty: dodgepenalty,
+                             dodgeNum: dodgeNum,
+                             ageMin: ageMin,
+                             ageMax: ageMax,
+                             searchable: searchable,
+                             createdAt: createdAt.toDate)
     }
 }

@@ -23,9 +23,9 @@ class BirthViewController: UIViewController {
         $0.font = AssetsFonts.NotoSansKR.regular.font(size: 20)
     }
     
-    private let yearTextField = BaseTextField(text: UserDefaultsManager.yearBirth ?? "", status: .inactive)
-    private let monthTextField = BaseTextField(text: UserDefaultsManager.monthBirth ?? "", status: .inactive)
-    private let dayTextField = BaseTextField(text: UserDefaultsManager.dayBirth ?? "", status: .inactive)
+    private let yearTextField = BaseTextField(text: "", status: .inactive)
+    private let monthTextField = BaseTextField(text: "", status: .inactive)
+    private let dayTextField = BaseTextField(text: "", status: .inactive)
     
     private let yearLabel = UILabel().then {
         $0.text = "년"
@@ -46,7 +46,7 @@ class BirthViewController: UIViewController {
     private let datePicker = UIDatePicker().then {
         $0.preferredDatePickerStyle = .wheels
         $0.datePickerMode = .date
-        $0.date = UserDefaultsManager.birth?.toDate ?? Date()
+        $0.date = UserDefaultsManager.birth ?? Date()
     }
     
     override func viewDidLoad() {

@@ -18,8 +18,9 @@ final class AuthCoordinator: CoordinatorType {
     }
     
     func start() {
-        pushOnboardingVC()
+        //pushOnboardingVC()
         //pushPhoneAuthVC()
+        pushNicknameVC()
 //        if UserDefaultsManager.onboardingPassed == nil {
 //            pushOnboardingVC()
 //        }

@@ -26,8 +26,6 @@ final class OnboardingViewModel: ViewModelType {
         let pageControlRelay = BehaviorRelay<Int>(value: 0)
         // Onboarding Text
         let onboardingTextRelay = BehaviorRelay<NSMutableAttributedString>(value: NSMutableAttributedString())
-        
-        // UserDefaults isOnboardingPassed PublishRelay Bool
     }
     
     var useCase: OnboardingUseCase? = OnboardingUseCase()
@@ -53,10 +51,7 @@ final class OnboardingViewModel: ViewModelType {
         
         input.didTapStartButton
             .bind { [weak self] in
-                //self?.coordinator?.pushPhoneAuthVC()
-                self?.coordinator?.finish(to: .mainTab, completion: {
-                    print("onboarding to tabbar")
-                })
+                self?.coordinator?.pushPhoneAuthVC()
             }.disposed(by: disposeBag)
         
         // UseCase To Output

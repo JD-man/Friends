@@ -23,7 +23,8 @@ final class RegisterUseCase: UseCaseType {
     var femaleButtonStatus = BehaviorRelay<Bool>(value: false)
     
     func execute() {
-        userRepository?.registerUser()
+        let model = UserRegisterModel()
+        userRepository?.registerUser(model: model)
             .subscribe { event in
                 switch event {
                 case .success(let response):

@@ -52,6 +52,9 @@
 		89AB66572798587200DFEE95 /* NotoSansKR-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 89AB66552798584D00DFEE95 /* NotoSansKR-Regular.otf */; };
 		89AB665927985B9600DFEE95 /* Assets+Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89AB665827985B9600DFEE95 /* Assets+Fonts.swift */; };
 		89AB665E27985F4200DFEE95 /* UIFont+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89AB665D27985F4200DFEE95 /* UIFont+Ext.swift */; };
+		89C0F3F427A28C3C0038DACA /* UserInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C0F3F327A28C3C0038DACA /* UserInfoModel.swift */; };
+		89C0F3F627A28ECA0038DACA /* UserRegisterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C0F3F527A28ECA0038DACA /* UserRegisterModel.swift */; };
+		89C0F3F827A28F6D0038DACA /* UserRegisterDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C0F3F727A28F6D0038DACA /* UserRegisterDTO.swift */; };
 		89C147C6279FCBCA00F0E616 /* UserRepositoryInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C147C5279FCBCA00F0E616 /* UserRepositoryInterface.swift */; };
 		89C147CC27A00DDF00F0E616 /* MainTabCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C147CB27A00DDF00F0E616 /* MainTabCoordinator.swift */; };
 		89C147CF27A00E4B00F0E616 /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C147CE27A00E4B00F0E616 /* HomeCoordinator.swift */; };
@@ -148,6 +151,9 @@
 		89AB66552798584D00DFEE95 /* NotoSansKR-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Regular.otf"; sourceTree = "<group>"; };
 		89AB665827985B9600DFEE95 /* Assets+Fonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Assets+Fonts.swift"; sourceTree = "<group>"; };
 		89AB665D27985F4200DFEE95 /* UIFont+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Ext.swift"; sourceTree = "<group>"; };
+		89C0F3F327A28C3C0038DACA /* UserInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoModel.swift; sourceTree = "<group>"; };
+		89C0F3F527A28ECA0038DACA /* UserRegisterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegisterModel.swift; sourceTree = "<group>"; };
+		89C0F3F727A28F6D0038DACA /* UserRegisterDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegisterDTO.swift; sourceTree = "<group>"; };
 		89C147C5279FCBCA00F0E616 /* UserRepositoryInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepositoryInterface.swift; sourceTree = "<group>"; };
 		89C147CB27A00DDF00F0E616 /* MainTabCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabCoordinator.swift; sourceTree = "<group>"; };
 		89C147CE27A00E4B00F0E616 /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
@@ -334,6 +340,8 @@
 		898B79342799423400844284 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
+				89C0F3F327A28C3C0038DACA /* UserInfoModel.swift */,
+				89C0F3F527A28ECA0038DACA /* UserRegisterModel.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -727,6 +735,7 @@
 			isa = PBXGroup;
 			children = (
 				89E055AE279D9B4400E86445 /* UserInfoDTO.swift */,
+				89C0F3F727A28F6D0038DACA /* UserRegisterDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -1038,6 +1047,7 @@
 				89D721CA279C5A0E00B02A1E /* VerifyViewController.swift in Sources */,
 				89E055AD279D946000E86445 /* APIService.swift in Sources */,
 				89D721CE279C5BFE00B02A1E /* VerifyUseCase.swift in Sources */,
+				89C0F3F827A28F6D0038DACA /* UserRegisterDTO.swift in Sources */,
 				890CC9EE2796959C00D6185E /* AppDelegate.swift in Sources */,
 				89E055A5279D296400E86445 /* UserDefaultsManager.swift in Sources */,
 				894184E027A15396007F35AC /* ProfileViewController.swift in Sources */,
@@ -1045,6 +1055,7 @@
 				89C147E827A00F5000F0E616 /* FriendsViewController.swift in Sources */,
 				89A81985279A831A00F257CA /* OnboardingRepositoryInterface.swift in Sources */,
 				89C147E427A00F1300F0E616 /* HomeViewController.swift in Sources */,
+				89C0F3F427A28C3C0038DACA /* UserInfoModel.swift in Sources */,
 				898B794A279945BC00844284 /* OnboardingViewModel.swift in Sources */,
 				890CC9F02796959C00D6185E /* SceneDelegate.swift in Sources */,
 				89A8198A279AE7D100F257CA /* UIView+Ext.swift in Sources */,
@@ -1082,6 +1093,7 @@
 				898B794D279945F100844284 /* ViewModelType.swift in Sources */,
 				890CCA222796986600D6185E /* PhoneAuthViewController.swift in Sources */,
 				89ECC56E279F011B00C4C477 /* EmailViewController.swift in Sources */,
+				89C0F3F627A28ECA0038DACA /* UserRegisterModel.swift in Sources */,
 				89ECC572279F013800C4C477 /* EmailViewModel.swift in Sources */,
 				89E055AF279D9B4400E86445 /* UserInfoDTO.swift in Sources */,
 				89D721CC279C5B4A00B02A1E /* VerifyViewModel.swift in Sources */,

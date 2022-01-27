@@ -10,7 +10,7 @@ import Moya
 
 enum UserTargets {
     case getUserInfo
-    case postUser/*(parameters: [String: Any])*/
+    case postUser(parameters: [String: Any])
 }
 
 extension UserTargets: TargetType {
@@ -38,14 +38,8 @@ extension UserTargets: TargetType {
         switch self {
         case .getUserInfo:
             return .requestParameters(parameters: [:], encoding: URLEncoding.default)
-        case .postUser:
-            return .requestParameters(parameters:
-                                        ["phoneNumber": UserDefaultsManager.phoneNumber ?? "",
-                                         "FCMtoken": UserDefaultsManager.FCMtoken ?? "",
-                                         "nick": UserDefaultsManager.nick ?? "",
-                                         "birth": UserDefaultsManager.birth ?? "",
-                                         "email": UserDefaultsManager.email ?? "",
-                                         "gender": UserDefaultsManager.gender ?? -1],
+        case .postUser(let parameters):
+            return .requestParameters(parameters: parameters,
                                       encoding: URLEncoding.default)
         }
     }

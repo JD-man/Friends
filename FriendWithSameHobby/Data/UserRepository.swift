@@ -14,8 +14,8 @@ final class UserRepository: UserRepositoryInterface {
     
     private var disposeBag = DisposeBag()
     
-    func getUserInfo() -> Single<UserInfoDTO> {
-        return Single<UserInfoDTO>.create { [unowned self] single in
+    func getUserInfo() -> Single<UserInfoModel> {
+        return Single<UserInfoModel>.create { [unowned self] single in
             APIService().userRequest(of: UserTargets.getUserInfo)
                 .subscribe { event in
                     switch event {
@@ -23,7 +23,7 @@ final class UserRepository: UserRepositoryInterface {
                         do {
                             let decoded = try JSONDecoder().decode(UserInfoDTO.self, from: data)
                             print(decoded)
-                            single(.success(decoded))
+                            single(.success(decoded.toDomain()))
                         }
                         catch {
                             print("decode fail")
@@ -38,10 +38,10 @@ final class UserRepository: UserRepositoryInterface {
         }
     }
     
-    func registerUser() -> Single<Bool> {
-        
+    func registerUser(model: UserRegisterModel) -> Single<Bool> {
+        let dto = UserRegisterDTO(model: model).toDict()
         return Single<Bool>.create { [unowned self] single in
-            APIService().userRequest(of: UserTargets.postUser)
+            APIService().userRequest(of: UserTargets.postUser(parameters: dto))
                 .subscribe { event in
                     switch event {
                     case .success(_):

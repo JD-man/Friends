@@ -12,7 +12,7 @@ enum AppCordinatorChild {
 }
 
 protocol AppCoordinatorFinishDelegate: AnyObject {
-    func didFinish(_ coordinator: CoordinatorType, next: AppCordinatorChild, completion: @escaping () -> Void)
+    func didFinish(_ coordinator: CoordinatorType, next: AppCordinatorChild, completion: (() -> Void)?)
 }
 
 final class AppCoordinator: NSObject, CoordinatorType {
@@ -53,7 +53,7 @@ final class AppCoordinator: NSObject, CoordinatorType {
 }
 
 extension AppCoordinator: AppCoordinatorFinishDelegate {
-    func didFinish(_ coordinator: CoordinatorType, next: AppCordinatorChild, completion: @escaping () -> Void) {
+    func didFinish(_ coordinator: CoordinatorType, next: AppCordinatorChild, completion: (() -> Void)?) {
         childCoordinators = childCoordinators.filter { !($0 === coordinator) }
         switch next {
         case .auth:
@@ -61,33 +61,19 @@ extension AppCoordinator: AppCoordinatorFinishDelegate {
         case .mainTab:
             addMainTabCoordinator()
         }
-        
         var navArr = navigationController.viewControllers
-        print("===============================================")
-        print("before removing navArr: ", navArr)
         let last = navArr.last
-        print("===============================================")
-        print("lastVC: ", last)
         navArr.removeAll()
         navArr.append(last!)
-        
-        print("===============================================")
-        print("after removing navArr: ", navArr)
-        
         navigationController.viewControllers = navArr
-        
-        print("===============================================")
-        print("after embedding: ", navArr)
-        print("===============================================")
-        
         if last! is UITabBarController {
             print("tab")
         }
         else {
             print("not tab")
         }
-        //last!.view.backgroundColor = .red
-        completion()
         
+        guard let completion = completion else { return }
+        completion()
     }
 }
