@@ -107,13 +107,17 @@ final class RegisterViewController: UIViewController {
         let output = viewModel?.transform(input, disposeBag: disposeBag)
         
         output?.maleButtonColor
-            .asDriver(onErrorJustReturn: .systemBackground)
-            .drive(maleButton.rx.backgroundColor)
+            .asDriver(onErrorJustReturn: false)
+            .drive { [weak self] in
+                self?.maleButton.backgroundColor = $0 ? AssetsColors.green.color : .systemBackground
+            }
             .disposed(by: disposeBag)
         
         output?.femaleButtonColor
-            .asDriver(onErrorJustReturn: .systemBackground)
-            .drive(femaleButton.rx.backgroundColor)
+            .asDriver(onErrorJustReturn: false)
+            .drive { [weak self] in
+                self?.femaleButton.backgroundColor = $0 ? AssetsColors.green.color : .systemBackground
+            }
             .disposed(by: disposeBag)
     }
 }

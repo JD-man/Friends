@@ -5,7 +5,7 @@
 //  Created by JD_MacMini on 2022/01/20.
 //
 
-import UIKit
+import Foundation
 import RxSwift
 import RxRelay
 import RxCocoa
@@ -21,7 +21,7 @@ final class OnboardingViewModel: ViewModelType {
     
     struct Output {
         // UIImage Relay
-        let imageRelay = BehaviorRelay<UIImage?>(value: UIImage())
+        let imageRelay = BehaviorRelay<ImageAsset>(value: AssetsImages.onboardingImg1)
         // PageControl Current Page Index Relay
         let pageControlRelay = BehaviorRelay<Int>(value: 0)
         // Onboarding Text
@@ -56,7 +56,6 @@ final class OnboardingViewModel: ViewModelType {
         
         // UseCase To Output
         useCase?.assetImageRelay
-            .map { $0.image }
             .bind(to: output.imageRelay)            
             .disposed(by: disposeBag)
         

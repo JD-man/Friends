@@ -79,7 +79,8 @@ class OnboardingViewController: UIViewController {
         let output = viewModel?.transform(input, disposeBag: disposeBag)
         
         output?.imageRelay
-            .asDriver(onErrorJustReturn: UIImage(systemName: "xmark"))
+            .map { $0.image }
+            .asDriver(onErrorJustReturn: UIImage(systemName: "person"))
             .drive(pageImageView.rx.image)
             .disposed(by: disposeBag)
         

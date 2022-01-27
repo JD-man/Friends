@@ -22,23 +22,26 @@ final class RegisterUseCase: UseCaseType {
     var maleButtonStatus = BehaviorRelay<Bool>(value: false)
     var femaleButtonStatus = BehaviorRelay<Bool>(value: false)
     
+    var registerSuccess = PublishRelay<Bool>()
+    var registerError = PublishRelay<UserAPIError>()
+    
     func execute() {
         let model = UserRegisterModel()
         userRepository?.registerUser(model: model)
-            .subscribe { event in
+            .subscribe { [weak self] event in
                 switch event {
                 case .success(let response):
-                    print(response)
+                    self?.registerSuccess.accept(response)
                 case .failure(let error):
                     // 공통 API Error로 캐스팅.
                     // rawvalue로 상태코드를 가져옴
-                    // 그거를 여기에 알맞는 Error 변환후 accept
-                    print(error as? UserAPIError)
+                    // 그거를 여기에 알맞는 Error 변환후 accept                    
+                    self?.registerError.accept(error as? UserAPIError ?? .unknownError)
                 }
             }.disposed(by: disposeBag)
     }
     
-    // 이런거는 UseCase를 거칠 필요가 있나..???
+    // 이런거는 UseCase를 거칠 필요가 있나..??? 없다고 결론나옴.
     func updateButtonStatus(gender: Int) {        
         switch gender {
         case 0:

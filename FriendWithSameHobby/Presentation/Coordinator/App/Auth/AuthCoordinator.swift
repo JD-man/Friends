@@ -5,6 +5,12 @@
 //  Created by JD_MacMini on 2022/01/20.
 //
 import UIKit
+import Toast
+
+enum AuthBackwardPoint {
+    case phoneAuth
+    case nickname
+}
 
 final class AuthCoordinator: CoordinatorType {
     weak var parentCoordinator: CoordinatorType?    
@@ -38,7 +44,7 @@ final class AuthCoordinator: CoordinatorType {
         viewModel.coordinator = self
         onboardingVC.viewModel = viewModel
         navigationController.navigationBar.isHidden = true
-        navigationController.pushViewController(onboardingVC, animated: true)
+        navigationController.setViewControllers([onboardingVC], animated: true)
     }
     
     func pushPhoneAuthVC() {
@@ -47,7 +53,7 @@ final class AuthCoordinator: CoordinatorType {
         viewModel.coordinator = self
         pushPhoneAuthVC.viewModel = viewModel
         navigationController.navigationBar.isHidden = false
-        navigationController.pushViewController(pushPhoneAuthVC, animated: true)
+        navigationController.setViewControllers([pushPhoneAuthVC], animated: true)
     }
     
     func pushVerifyVC(phoneId: String) {
@@ -63,7 +69,7 @@ final class AuthCoordinator: CoordinatorType {
         let viewModel = NickNameViewModel(coordinator: self)
         // viewModel injection
         let nicknameVC = NicknameViewController(viewModel: viewModel)
-        navigationController.viewControllers = [nicknameVC]
+        navigationController.setViewControllers([nicknameVC], animated: true)
     }
     
     func pushBirthVC() {
@@ -86,7 +92,23 @@ final class AuthCoordinator: CoordinatorType {
         navigationController.pushViewController(registerVC, animated: true)
     }
     
-    func finish(to next: AppCordinatorChild, completion: @escaping () -> Void) {
+    func finish(to next: AppCordinatorChild, completion: (() -> Void)? ) {
         finishDelegate?.didFinish(self, next: next, completion: completion)
+    }
+    
+    func pop(to point: AuthBackwardPoint, completion: (() -> Void)? ) {
+        switch point {
+        case .phoneAuth:
+            pushPhoneAuthVC()
+        case .nickname:
+            pushNicknameVC()
+        }
+        
+        guard let completion = completion else { return }
+        completion()
+    }
+    
+    func toasting(message: String) {
+        navigationController.view.makeToast(message)
     }
 }

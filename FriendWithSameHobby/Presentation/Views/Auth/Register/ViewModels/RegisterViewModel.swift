@@ -5,31 +5,24 @@
 //  Created by JD_MacMini on 2022/01/25.
 //
 
-import UIKit
+import Foundation
 import RxSwift
 import RxCocoa
 import RxRelay
 
 final class RegisterViewModel: ViewModelType {
-    struct Input {
-        
+    struct Input {        
         // merged gender tap
         let mergedTap: Driver<Int>
-        
-        // male button tap
-        //let maleTap: ControlEvent<Void>
-        // female button tap
-        //let femaleTap: ControlEvent<Void>
-        
         // register button tap
         let registerTap: Driver<Void>
     }
     
     struct Output {
         // male button status
-        let maleButtonColor = PublishRelay<UIColor>()
+        let maleButtonColor = PublishRelay<Bool>()
         // female button status
-        let femaleButtonColor = PublishRelay<UIColor>()
+        let femaleButtonColor = PublishRelay<Bool>()
     }
     
     var useCase: RegisterUseCase?
@@ -56,16 +49,28 @@ final class RegisterViewModel: ViewModelType {
         
         // Usecase to Output
         useCase?.maleButtonStatus
-            .map { $0 ? AssetsColors.whiteGreen.color : .systemBackground}
             .bind(to: output.maleButtonColor)
             .disposed(by: disposeBag)
         
-        useCase?.femaleButtonStatus
-            .map { $0 ? AssetsColors.whiteGreen.color : .systemBackground}
+        useCase?.femaleButtonStatus            
             .bind(to: output.femaleButtonColor)
             .disposed(by: disposeBag)
                 
         // UseCase to Coordinator
+        
+        useCase?.registerSuccess
+            .asDriver(onErrorJustReturn: false)
+            .drive { [weak self] in
+                if $0 { self?.coordinator?.finish(to: .mainTab, completion: nil) }
+            }.disposed(by: disposeBag)
+        
+        useCase?.registerError
+            .asDriver(onErrorJustReturn: .unknownError)
+            .drive(onNext: { [weak self] err in
+                self?.coordinator?.pop(to: .nickname, completion: {
+                    self?.coordinator?.toasting(message: err.localizedDescription)
+                })
+            }).disposed(by: disposeBag)
         return output
     }
 }
