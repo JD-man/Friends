@@ -46,21 +46,21 @@ final class VerifyViewModel: ViewModelType {
         // Input to UseCase
         input.verifyTextFieldText
             .asDriver()
-            .drive { [unowned self] in
-                self.useCase?.validation(text: $0)
+            .drive { [weak self] in
+                self?.useCase?.validation(text: $0)
             }.disposed(by: disposeBag)
         
         input.verifyButtonTap
             .asDriver()
-            .drive { [unowned self] _ in
-                self.useCase?.excuteAuthNumber(phoneID: self.phoneID)
+            .drive { [weak self] _ in
+                self?.useCase?.excuteAuthNumber(phoneID: self?.phoneID ?? "")
             }.disposed(by: disposeBag)
         
         // UseCase to Coordinator
         useCase?.userExistRelay
             .asDriver(onErrorJustReturn: false)
-            .drive { [unowned self] in
-                if $0 { self.coordinator?.finish(to: .mainTab, completion: {
+            .drive { [weak self] in
+                if $0 { self?.coordinator?.finish(to: .mainTab, completion: {
                     print("auth to tabbar coordinator")
                 })}
             }.disposed(by: disposeBag)

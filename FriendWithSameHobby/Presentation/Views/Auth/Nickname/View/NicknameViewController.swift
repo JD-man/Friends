@@ -68,8 +68,8 @@ class NicknameViewController: UIViewController {
     func binding() {        
         let input = NickNameViewModel.Input(            
             textFieldText: nicknameTextField.inputTextField.rx.text.orEmpty.asDriver(),
-            nextButtonTap: nextButton.rx.tap.map { [unowned self] in
-                self.nicknameTextField.inputTextField.text ?? ""
+            nextButtonTap: nextButton.rx.tap.map { [weak self] in
+                self?.nicknameTextField.inputTextField.text ?? ""
             }.asDriver(onErrorJustReturn: ""))        
         
         let output = viewModel?.transform(input, disposeBag: disposeBag)
@@ -93,7 +93,6 @@ class NicknameViewController: UIViewController {
             .asDriver()
             .drive { [weak self] _ in
                 self?.nicknameTextField.statusUpdate(status: .focus)
-            }.disposed(by: disposeBag)
-            
+            }.disposed(by: disposeBag)            
     }
 }

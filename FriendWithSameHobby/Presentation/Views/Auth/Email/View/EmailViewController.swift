@@ -82,8 +82,8 @@ class EmailViewController: UIViewController {
     private func binding() {
         let input = EmailViewModel.Input(
             textFieldText: emailTextField.inputTextField.rx.text.orEmpty.asDriver(),
-            nextButtonTap: nextButton.rx.tap.map { [unowned self] in
-                self.emailTextField.inputTextField.text ?? ""
+            nextButtonTap: nextButton.rx.tap.map { [weak self] in
+                self?.emailTextField.inputTextField.text ?? ""
             }.asDriver(onErrorJustReturn: ""))
         
         let output = viewModel?.transform(input, disposeBag: disposeBag)
@@ -105,8 +105,8 @@ class EmailViewController: UIViewController {
         
         emailTextField.inputTextField.rx.controlEvent(.editingDidBegin)
             .asDriver()
-            .drive { [unowned self] _ in
-                self.emailTextField.statusUpdate(status: .focus)
+            .drive { [weak self] _ in
+                self?.emailTextField.statusUpdate(status: .focus)
             }.disposed(by: disposeBag)
     }
 }

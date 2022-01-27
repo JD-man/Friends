@@ -45,13 +45,13 @@ final class RegisterViewModel: ViewModelType {
         
         // Input to UseCase
         input.registerTap
-            .drive { [unowned self] _ in                
-                self.useCase?.execute()
+            .drive { [weak self] _ in
+                self?.useCase?.execute()
             }.disposed(by: disposeBag)
         
         input.mergedTap
-            .drive { [unowned self] in                
-                self.useCase?.updateButtonStatus(gender: $0)
+            .drive { [weak self] in
+                self?.useCase?.updateButtonStatus(gender: $0)
             }.disposed(by: disposeBag)
         
         // Usecase to Output

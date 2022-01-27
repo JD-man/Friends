@@ -37,13 +37,13 @@ final class PhoneAuthViewModel: ViewModelType {
         // Input to UseCase
         input.phoneNumberText
             .distinctUntilChanged()
-            .drive { [unowned self] in
-                self.useCase?.validation(text: $0)
+            .drive { [weak self] in
+                self?.useCase?.validation(text: $0)
             }.disposed(by: disposeBag)
         
         input.buttonTap
-            .drive { [unowned self] _ in
-                self.useCase?.execute()
+            .drive { [weak self] _ in
+                self?.useCase?.execute()
                 //self.coordinator?.pushVerifyVC(phoneId: "test")
             }.disposed(by: disposeBag)
         

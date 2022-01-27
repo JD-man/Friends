@@ -37,7 +37,7 @@ final class EmailViewModel: ViewModelType {
         let output = Output()
         
         let validation = input.textFieldText
-            .map { [unowned self] in emailValidation(text: $0) }
+            .map(emailValidation)
             .asDriver()
         
         validation

@@ -134,7 +134,7 @@ class BirthViewController: UIViewController {
         let input = BirthViewModel.Input(
             date: datePicker.rx.date,
             tap: nextButton.rx.tap
-                .map { [unowned self] in self.datePicker.date }
+                .map { [weak self] in self?.datePicker.date ?? Date() }
                 .asDriver(onErrorJustReturn: Date())
             )
         

@@ -23,22 +23,22 @@ final class VerifyUseCase: UseCaseType {
     
     func excuteAuthNumber(phoneID: String) {
         phoneAuthRepo?.verifyRegisterNumber(verificationCode: codeRelay.value, id: phoneID)
-            .subscribe { [unowned self] event in
+            .subscribe { [weak self] event in
                 switch event {
                 case .success(let idToken):                    
                     // idToken으로 유저 가입 여부 확인하기
-                    self.userRepo?.getUserInfo()
+                    self?.userRepo?.getUserInfo()
                         .subscribe {
                             switch $0 {
                             case .success(let response):
                                 print(response)
-                                self.userExistRelay.accept(true)
+                                self?.userExistRelay.accept(true)
                             case .failure(let error):
-                                self.authErrorRelay.accept(error as? UserAPIError ?? .clientError)
+                                self?.authErrorRelay.accept(error as? UserAPIError ?? .clientError)
                             }
-                        }.disposed(by: self.disposeBag)
+                        }.disposed(by: self?.disposeBag ?? DisposeBag())
                 case .failure(_):
-                    authErrorRelay.accept(.unknownError)
+                    self?.authErrorRelay.accept(.unknownError)
                 }
             }.disposed(by: disposeBag)
     }
