@@ -25,7 +25,8 @@ final class UserRepository: UserRepositoryInterface {
                     }
                     single(.success(decoded.toDomain()))
                 case .failure(let error):
-                    single(.failure(error))
+                    let userInfoError = UserInfoError(rawValue: error.response?.statusCode ?? 502) ?? .unknownError
+                    single(.failure(userInfoError))
                 }
             }
             return Disposables.create()
@@ -33,11 +34,11 @@ final class UserRepository: UserRepositoryInterface {
     }
     
     func registerUser(model: UserRegisterModel) -> Single<Bool> {
-        let dto = UserRegisterDTO(model: model).toDict()
+        let dto = UserRegisterDTO(model: model).toParameters()
         return Single<Bool>.create { [weak self] single in
             self?.provider.request(.postUser(parameters: dto)) { result in
                 switch result {
-                case .success(let response):
+                case .success(_):
                     single(.success(true))
                 case .failure(let error):
                     single(.failure(error))

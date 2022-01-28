@@ -67,9 +67,10 @@ final class BaseActivityIndicator: UIView {
         guard let imageView = imageView else {
             return UIImageView()
         }
-        container.addSubview(imageView)
+        addSubview(imageView)
         imageView.contentMode = .scaleAspectFit
         imageView.frame = CGRect(x: self.center.x - 20, y: self.center.y - 20, width: 40, height: 40)
+        print(center)
         return imageView
     }
     
@@ -93,9 +94,9 @@ final class BaseActivityIndicator: UIView {
     
     private func stopAnimation() {
         animator?.removeAllBehaviors()
-        imageView?.removeFromSuperview()
-        container.removeFromSuperview()
+        imageView?.removeFromSuperview()        
         imageView = nil
+        container.removeFromSuperview()
         self.removeFromSuperview()
         //UIApplication.shared.endIgnoringInteractionEvents()
         self.isUserInteractionEnabled = true

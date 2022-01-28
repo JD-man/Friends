@@ -43,8 +43,8 @@ final class PhoneAuthViewModel: ViewModelType {
         
         input.buttonTap
             .drive { [weak self] _ in
+                BaseActivityIndicator.shared.show()
                 self?.useCase?.execute()
-                //self.coordinator?.pushVerifyVC(phoneId: "test")
             }.disposed(by: disposeBag)
         
         // UseCase to Output
@@ -64,17 +64,17 @@ final class PhoneAuthViewModel: ViewModelType {
         useCase?.authSuccessRelay
             .asDriver(onErrorJustReturn: "")
             .drive { [weak self] in
-                if $0 != "" {
-                    print("auth success")
-                    print($0)
+                BaseActivityIndicator.shared.hide()
+                if $0 != "" {                    
                     self?.coordinator?.pushVerifyVC(phoneId: $0)
                 }
             }.disposed(by: disposeBag)
         
         useCase?.authErrorRelay
             .asDriver(onErrorJustReturn: .authFail)
-            .drive {
-                print($0)
+            .drive { [weak self] in
+                BaseActivityIndicator.shared.hide()
+                self?.coordinator?.toasting(message: $0.localizedDescription)
             }
             .disposed(by: disposeBag)
         

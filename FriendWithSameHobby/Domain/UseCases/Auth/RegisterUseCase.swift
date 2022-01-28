@@ -23,7 +23,7 @@ final class RegisterUseCase: UseCaseType {
     var femaleButtonStatus = BehaviorRelay<Bool>(value: false)
     
     var registerSuccess = PublishRelay<Bool>()
-    var registerError = PublishRelay<UserAPIError>()
+    var registerError = PublishRelay<CommonAPIError>()
     
     func execute() {
         let model = UserRegisterModel()
@@ -32,14 +32,8 @@ final class RegisterUseCase: UseCaseType {
                 switch event {
                 case .success(let response):
                     self?.registerSuccess.accept(response)
-                    
-                    // error test
-                    // self?.registerError.accept(.unknownError)
                 case .failure(let error):
-                    // 공통 API Error로 캐스팅.
-                    // rawvalue로 상태코드를 가져옴
-                    // 그거를 여기에 알맞는 Error 변환후 accept                    
-                    self?.registerError.accept(error as? UserAPIError ?? .unknownError)
+                    self?.registerError.accept(error as? CommonAPIError ?? .unknownError)
                 }
             }.disposed(by: disposeBag)
     }

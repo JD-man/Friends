@@ -23,7 +23,7 @@ final class APIService {
                     let statusCode = error.response?.statusCode ?? 500
                     // Error...
                     print(statusCode)
-                    single(.failure(UserAPIError(rawValue: statusCode) ?? .unknownError))
+                    single(.failure(CommonAPIError(rawValue: statusCode) ?? .unknownError))
                 }
             }
             return Disposables.create()

@@ -53,7 +53,6 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 
 extension AppDelegate: MessagingDelegate {
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
-        UserDefaultsManager.FCMtoken = fcmToken
-        print(UserDefaultsManager.FCMtoken)
+        UserDefaultsManager.FCMtoken = fcmToken        
     }
 }

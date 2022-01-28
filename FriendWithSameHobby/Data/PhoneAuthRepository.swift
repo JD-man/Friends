@@ -20,14 +20,10 @@ final class PhoneAuthRepository {
             PhoneAuthProvider.provider()
                 .verifyPhoneNumber(numText, uiDelegate: nil) { id, error in
                     if let error = error {
-                        single(.failure(error))
-                        print(error)
+                        single(.failure(error))                        
                         return
                     }
-                    guard let id = id else {
-                        print("phone auth id is nil")
-                        return
-                    }
+                    guard let id = id else { return }
                     UserDefaultsManager.phoneNumber = numText.removeHyphen()
                     single(.success(id))
                 }            
@@ -41,8 +37,11 @@ final class PhoneAuthRepository {
             
             Auth.auth().signIn(with: credential) { result, error in
                 if let error = error {
-                    single(.failure(error))
-                    print(error)
+                    
+//                    let statusCode = AuthErrorCode(rawValue: error._code)?.rawValue
+//                    let err = UserInfoError(rawValue: statusCode ?? 500)
+//                    
+//                    single(.failure(err))
                     return
                 }
                 

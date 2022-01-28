@@ -26,7 +26,7 @@ struct UserRegisterDTO: Codable {
 }
 
 extension UserRegisterDTO {
-    func toDict() -> [String: Any] {
+    func toParameters() -> [String: Any] {
         return ["phoneNumber": phoneNumber,
          "FCMtoken": FCMtoken,
          "nick": nick,

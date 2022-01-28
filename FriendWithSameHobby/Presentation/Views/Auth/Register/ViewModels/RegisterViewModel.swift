@@ -39,6 +39,7 @@ final class RegisterViewModel: ViewModelType {
         // Input to UseCase
         input.registerTap
             .drive { [weak self] _ in
+                BaseActivityIndicator.shared.show()
                 self?.useCase?.execute()
             }.disposed(by: disposeBag)
         
@@ -61,12 +62,14 @@ final class RegisterViewModel: ViewModelType {
         useCase?.registerSuccess
             .asDriver(onErrorJustReturn: false)
             .drive { [weak self] in
+                BaseActivityIndicator.shared.hide()
                 if $0 { self?.coordinator?.finish(to: .mainTab, completion: nil) }
             }.disposed(by: disposeBag)
         
         useCase?.registerError
             .asDriver(onErrorJustReturn: .unknownError)
             .drive(onNext: { [weak self] err in
+                BaseActivityIndicator.shared.hide()
                 self?.coordinator?.pop(to: .nickname, completion: {
                     self?.coordinator?.toasting(message: err.localizedDescription)
                 })

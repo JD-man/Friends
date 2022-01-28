@@ -36,11 +36,7 @@ class OnboardingViewController: UIViewController {
     private var disposeBag = DisposeBag()
 
     override func viewDidLoad() {
-        super.viewDidLoad()
-        BaseActivityIndicator.shared.show()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-            BaseActivityIndicator.shared.hide()
-        }
+        super.viewDidLoad()        
         viewConfig()
         binding()
     }

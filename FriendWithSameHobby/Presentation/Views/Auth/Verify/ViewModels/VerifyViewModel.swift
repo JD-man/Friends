@@ -53,6 +53,7 @@ final class VerifyViewModel: ViewModelType {
         input.verifyButtonTap
             .asDriver()
             .drive { [weak self] _ in
+                BaseActivityIndicator.shared.show()
                 self?.useCase?.excuteAuthNumber(phoneID: self?.phoneID ?? "")
             }.disposed(by: disposeBag)
         
@@ -60,17 +61,18 @@ final class VerifyViewModel: ViewModelType {
         useCase?.userExistRelay
             .asDriver(onErrorJustReturn: false)
             .drive { [weak self] in
+                BaseActivityIndicator.shared.hide()
                 if $0 { self?.coordinator?.finish(to: .mainTab, completion: nil) }
             }.disposed(by: disposeBag)
         
         useCase?.authErrorRelay
             .asDriver(onErrorJustReturn: .unknownError)
             .drive { [weak self] error in
+                BaseActivityIndicator.shared.hide()
                 switch error {
-                case .exitedUser:
+                case .unregistered:
                     self?.coordinator?.pushNicknameVC()
-                default:
-                    print(self?.coordinator, error)
+                default:                    
                     self?.coordinator?.pop(to: .phoneAuth, completion: {
                         self?.coordinator?.toasting(message: error.localizedDescription)
                     })

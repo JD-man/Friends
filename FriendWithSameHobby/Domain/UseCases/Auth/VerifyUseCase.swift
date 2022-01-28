@@ -19,7 +19,7 @@ final class VerifyUseCase: UseCaseType {
     private var disposeBag = DisposeBag()
     
     let userExistRelay = PublishRelay<Bool>()
-    let authErrorRelay = PublishRelay<UserAPIError>()
+    let authErrorRelay = PublishRelay<UserInfoError>()
     
     func excuteAuthNumber(phoneID: String) {
         phoneAuthRepo?.verifyRegisterNumber(verificationCode: codeRelay.value, id: phoneID)
@@ -32,16 +32,14 @@ final class VerifyUseCase: UseCaseType {
                             switch $0 {
                             case .success(let response):
                                 print(response)
-                                //self?.userExistRelay.accept(true)
-                                
-                                // error test
-                                self?.authErrorRelay.accept(.unknownError)
+                                self?.userExistRelay.accept(true)
                             case .failure(let error):
-                                self?.authErrorRelay.accept(error as? UserAPIError ?? .clientError)
+                                guard let userInfoError = error as? UserInfoError else { return }
+                                self?.authErrorRelay.accept(userInfoError)
                             }
                         }.disposed(by: self?.disposeBag ?? DisposeBag())
-                case .failure(_):
-                    self?.authErrorRelay.accept(.unknownError)
+                case .failure(let error):                    
+                    self?.authErrorRelay.accept(.firebaseAuthError)
                 }
             }.disposed(by: disposeBag)
     }
