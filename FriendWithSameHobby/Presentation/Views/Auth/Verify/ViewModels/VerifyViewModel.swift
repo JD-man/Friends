@@ -60,19 +60,20 @@ final class VerifyViewModel: ViewModelType {
         useCase?.userExistRelay
             .asDriver(onErrorJustReturn: false)
             .drive { [weak self] in
-                if $0 { self?.coordinator?.finish(to: .mainTab, completion: {
-                    print("auth to tabbar coordinator")
-                })}
+                if $0 { self?.coordinator?.finish(to: .mainTab, completion: nil) }
             }.disposed(by: disposeBag)
         
         useCase?.authErrorRelay
             .asDriver(onErrorJustReturn: .unknownError)
-            .drive { [weak self] in
-                switch $0 {
+            .drive { [weak self] error in
+                switch error {
                 case .exitedUser:
                     self?.coordinator?.pushNicknameVC()
                 default:
-                    print("viewmodel", $0)
+                    print(self?.coordinator, error)
+                    self?.coordinator?.pop(to: .phoneAuth, completion: {
+                        self?.coordinator?.toasting(message: error.localizedDescription)
+                    })
                 }                
             }.disposed(by: disposeBag)
         

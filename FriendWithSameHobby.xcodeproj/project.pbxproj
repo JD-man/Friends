@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		890C52B427A3E32F009E54E9 /* BaseActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890C52B327A3E32F009E54E9 /* BaseActivityIndicator.swift */; };
 		890CC9EE2796959C00D6185E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890CC9ED2796959C00D6185E /* AppDelegate.swift */; };
 		890CC9F02796959C00D6185E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890CC9EF2796959C00D6185E /* SceneDelegate.swift */; };
 		890CC9F72796959D00D6185E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 890CC9F62796959D00D6185E /* Assets.xcassets */; };
@@ -111,6 +112,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		890C52B327A3E32F009E54E9 /* BaseActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseActivityIndicator.swift; sourceTree = "<group>"; };
 		890CC9EA2796959C00D6185E /* FriendWithSameHobby.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FriendWithSameHobby.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		890CC9ED2796959C00D6185E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		890CC9EF2796959C00D6185E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -486,6 +488,7 @@
 			children = (
 				89A81987279ADF7800F257CA /* BaseButton.swift */,
 				89D721C1279B8F8300B02A1E /* BaseTextField.swift */,
+				890C52B327A3E32F009E54E9 /* BaseActivityIndicator.swift */,
 			);
 			path = BaseComponent;
 			sourceTree = "<group>";
@@ -1088,6 +1091,7 @@
 				898B795A2799604700844284 /* AuthCoordinator.swift in Sources */,
 				898B79442799431000844284 /* OnboardingViewController.swift in Sources */,
 				89ECC564279E759600C4C477 /* NickNameViewModel.swift in Sources */,
+				890C52B427A3E32F009E54E9 /* BaseActivityIndicator.swift in Sources */,
 				89D721C4279B906F00B02A1E /* UITextField+Ext.swift in Sources */,
 				89AB6650279846A900DFEE95 /* Assets+Colors.swift in Sources */,
 				898B794D279945F100844284 /* ViewModelType.swift in Sources */,

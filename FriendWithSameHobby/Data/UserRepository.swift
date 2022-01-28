@@ -19,9 +19,13 @@ final class UserRepository: UserRepositoryInterface {
             self?.provider.request(.getUserInfo) { result in
                 switch result {
                 case .success(let response):
-                    print(response)
+                    guard let decoded = try? JSONDecoder().decode(UserInfoDTO.self, from: response.data) else {
+                        print("decode fail")
+                        return
+                    }
+                    single(.success(decoded.toDomain()))
                 case .failure(let error):
-                    print(error)
+                    single(.failure(error))
                 }
             }
             return Disposables.create()
@@ -34,9 +38,9 @@ final class UserRepository: UserRepositoryInterface {
             self?.provider.request(.postUser(parameters: dto)) { result in
                 switch result {
                 case .success(let response):
-                    print(response)
+                    single(.success(true))
                 case .failure(let error):
-                    print(error)
+                    single(.failure(error))
                 }
             }
             return Disposables.create()

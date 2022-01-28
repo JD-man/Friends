@@ -32,7 +32,10 @@ final class VerifyUseCase: UseCaseType {
                             switch $0 {
                             case .success(let response):
                                 print(response)
-                                self?.userExistRelay.accept(true)
+                                //self?.userExistRelay.accept(true)
+                                
+                                // error test
+                                self?.authErrorRelay.accept(.unknownError)
                             case .failure(let error):
                                 self?.authErrorRelay.accept(error as? UserAPIError ?? .clientError)
                             }

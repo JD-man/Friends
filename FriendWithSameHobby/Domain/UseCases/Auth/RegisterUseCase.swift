@@ -32,6 +32,9 @@ final class RegisterUseCase: UseCaseType {
                 switch event {
                 case .success(let response):
                     self?.registerSuccess.accept(response)
+                    
+                    // error test
+                    // self?.registerError.accept(.unknownError)
                 case .failure(let error):
                     // 공통 API Error로 캐스팅.
                     // rawvalue로 상태코드를 가져옴
