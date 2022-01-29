@@ -54,7 +54,7 @@ final class VerifyViewModel: ViewModelType {
         // Input to UseCase
         input.verifyTextFieldText
             .asDriver()
-            .drive { [weak self] in                
+            .drive { [weak self] in
                 if self?.remain != 0 {
                     self?.useCase?.validation(text: $0)
                 }
@@ -68,6 +68,7 @@ final class VerifyViewModel: ViewModelType {
                 }
                 else {
                     BaseActivityIndicator.shared.show()
+                    self?.timer?.dispose()
                     self?.useCase?.excuteAuthNumber()
                 }
             }.disposed(by: disposeBag)

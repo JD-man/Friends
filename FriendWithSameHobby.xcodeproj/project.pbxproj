@@ -33,6 +33,8 @@
 		895E1D7F27A51EB50054742F /* EmptyUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895E1D7E27A51EB50054742F /* EmptyUseCase.swift */; };
 		895E1D8127A52B1B0054742F /* UpdateFCMtokenDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895E1D8027A52B1B0054742F /* UpdateFCMtokenDTO.swift */; };
 		895E1D8327A52B8D0054742F /* UpdateFCMtokenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895E1D8227A52B8D0054742F /* UpdateFCMtokenModel.swift */; };
+		895E1D8527A5B0A70054742F /* AccountTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895E1D8427A5B0A70054742F /* AccountTableViewCell.swift */; };
+		895E1D8727A5B5420054742F /* Cell+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895E1D8627A5B5420054742F /* Cell+Ext.swift */; };
 		898B79442799431000844284 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898B79432799431000844284 /* OnboardingViewController.swift */; };
 		898B79462799447600844284 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 898B79452799447600844284 /* Images.xcassets */; };
 		898B79482799456F00844284 /* Assets+Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898B79472799456F00844284 /* Assets+Images.swift */; };
@@ -136,6 +138,8 @@
 		895E1D7E27A51EB50054742F /* EmptyUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyUseCase.swift; sourceTree = "<group>"; };
 		895E1D8027A52B1B0054742F /* UpdateFCMtokenDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateFCMtokenDTO.swift; sourceTree = "<group>"; };
 		895E1D8227A52B8D0054742F /* UpdateFCMtokenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateFCMtokenModel.swift; sourceTree = "<group>"; };
+		895E1D8427A5B0A70054742F /* AccountTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTableViewCell.swift; sourceTree = "<group>"; };
+		895E1D8627A5B5420054742F /* Cell+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Cell+Ext.swift"; sourceTree = "<group>"; };
 		898B79432799431000844284 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		898B79452799447600844284 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		898B79472799456F00844284 /* Assets+Images.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Assets+Images.swift"; sourceTree = "<group>"; };
@@ -560,6 +564,7 @@
 				89A81991279B023900F257CA /* String+Ext.swift */,
 				89D721C3279B906F00B02A1E /* UITextField+Ext.swift */,
 				89ECC56B279EF43100C4C477 /* Date+Ext.swift */,
+				895E1D8627A5B5420054742F /* Cell+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -723,6 +728,7 @@
 			isa = PBXGroup;
 			children = (
 				89C147F127A06E5100F0E616 /* AccountTableHeaderView.swift */,
+				895E1D8427A5B0A70054742F /* AccountTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -1065,6 +1071,7 @@
 				89A81988279ADF7800F257CA /* BaseButton.swift in Sources */,
 				89C147E827A00F5000F0E616 /* FriendsViewController.swift in Sources */,
 				89A81985279A831A00F257CA /* OnboardingRepositoryInterface.swift in Sources */,
+				895E1D8527A5B0A70054742F /* AccountTableViewCell.swift in Sources */,
 				89C147E427A00F1300F0E616 /* HomeViewController.swift in Sources */,
 				89C0F3F427A28C3C0038DACA /* UserInfoModel.swift in Sources */,
 				898B794A279945BC00844284 /* OnboardingViewModel.swift in Sources */,
@@ -1098,6 +1105,7 @@
 				89A81990279AF9E500F257CA /* PhoneAuthUseCase.swift in Sources */,
 				895E1D7F27A51EB50054742F /* EmptyUseCase.swift in Sources */,
 				89C147D327A00E6400F0E616 /* FriendsCoordinator.swift in Sources */,
+				895E1D8727A5B5420054742F /* Cell+Ext.swift in Sources */,
 				89E055A2279D1B9F00E86445 /* URLComponents.swift in Sources */,
 				898B795A2799604700844284 /* AuthCoordinator.swift in Sources */,
 				898B79442799431000844284 /* OnboardingViewController.swift in Sources */,

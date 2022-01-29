@@ -24,10 +24,17 @@ internal enum AssetsImages {
   internal static let homeIcon = ImageAsset(name: "HomeIcon")
   internal static let shopIcon = ImageAsset(name: "ShopIcon")
   internal static let socialLifeCuate = ImageAsset(name: "Social life-cuate")
+  internal static let faq = ImageAsset(name: "faq")
   internal static let femaleButton = ImageAsset(name: "femaleButton")
   internal static let maleButton = ImageAsset(name: "maleButton")
+  internal static let moreArrow = ImageAsset(name: "more_arrow")
+  internal static let notice = ImageAsset(name: "notice")
   internal static let onboardingImg1 = ImageAsset(name: "onboarding_img1")
   internal static let onboardingImg2 = ImageAsset(name: "onboarding_img2")
+  internal static let permit = ImageAsset(name: "permit")
+  internal static let profileImg = ImageAsset(name: "profile_img")
+  internal static let qna = ImageAsset(name: "qna")
+  internal static let settingAlarm = ImageAsset(name: "setting_alarm")
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name
 

@@ -29,8 +29,7 @@ class VerifyViewController: UIViewController {
         $0.font = AssetsFonts.NotoSansKR.regular.font(size: 16)
     }
     
-    let timerLabel = UILabel().then {
-        $0.text = "01:00"
+    let timerLabel = UILabel().then {        
         $0.textColor = AssetsColors.green.color
         $0.font = AssetsFonts.NotoSansKR.medium.font(size: 14)
     }
