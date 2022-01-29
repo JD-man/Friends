@@ -51,16 +51,9 @@ final class UserRepository: UserRepositoryInterface {
                 completion(.success(true))
             case .failure(let error):
                 let statusCode = error.response?.statusCode ?? -1
+                UserProgressManager.registered = true
                 completion(.failure(UserRegisterError(rawValue: statusCode) ?? .unknownError))
             }
         }
     }
 }
-
-/*
- cX1zUKLzSU3Suzg7GFI_W7:APA91bGrseh18do-lYTrBIy3Atk1eyHQs9IGyDny6LQ4N5R6nTvgY6x0giQFUmG_0PP5NKorxSar292nCWjhaQSlufZGz4VbrXyuZ1ApVoKPGVryMI5AEclkDExH-faNWfxvA4ScN0ha
- */
-
-/*
- cX1zUKLzSU3Suzg7GFI_W7:APA91bGrseh18do-lYTrBIy3Atk1eyHQs9IGyDny6LQ4N5R6nTvgY6x0giQFUmG_0PP5NKorxSar292nCWjhaQSlufZGz4VbrXyuZ1ApVoKPGVryMI5AEclkDExH-faNWfxvA4ScN0ha
- */

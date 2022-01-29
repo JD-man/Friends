@@ -58,7 +58,7 @@ final class EmailViewModel: ViewModelType {
             .drive { [weak self] in
                 switch output.nextButtonStatus.value {
                 case .fill:                    
-                    UserDefaultsManager.email = $0
+                    UserInfoManager.email = $0
                     self?.coordinator?.pushRegisterVC()
                 default:
                     print("invalid nickname")

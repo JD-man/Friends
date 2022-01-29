@@ -42,11 +42,11 @@ final class RegisterUseCase: UseCaseType {
         case 0:
             maleButtonStatus.accept(false)
             femaleButtonStatus.accept(!femaleButtonStatus.value)            
-            UserDefaultsManager.gender = femaleButtonStatus.value ? gender : -1
+            UserInfoManager.gender = femaleButtonStatus.value ? gender : -1
         case 1:
             femaleButtonStatus.accept(false)
             maleButtonStatus.accept(!maleButtonStatus.value)
-            UserDefaultsManager.gender = maleButtonStatus.value ? gender : -1
+            UserInfoManager.gender = maleButtonStatus.value ? gender : -1
         default:
             break
         }

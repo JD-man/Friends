@@ -31,7 +31,7 @@ final class PhoneAuthRepository: PhoneAuthRepositoryInterface {
                     return
                 }
                 guard let id = id else { return }
-                UserDefaultsManager.phoneNumber = numText.removeHyphen()
+                UserInfoManager.phoneNumber = numText
                 completion(.success(id))
             }
     }
@@ -52,6 +52,22 @@ final class PhoneAuthRepository: PhoneAuthRepositoryInterface {
         }
     }
     
+    func retryPhoneNumber(completion: @escaping (Result<String, UserInfoError>) -> Void) {
+        let phoneNumber = UserInfoManager.phoneNumber ?? ""
+        PhoneAuthProvider.provider()
+            .verifyPhoneNumber(phoneNumber, uiDelegate: nil) { [weak self] id, error in
+                if let error = error {
+                    let statusCode = AuthErrorCode(rawValue: error._code)?.rawValue ?? -1
+                    print(statusCode)
+                    completion(.failure(UserInfoError(rawValue: statusCode) ?? .unknownError))
+                    return
+                }
+                guard let id = id else { return }
+                self?.phoneID = id
+                completion(.success(id))
+            }
+    }
+    
     private func refreshingIDtoken(completion: @escaping (Result<String, UserInfoError>) -> Void) {
         let currentUser = Auth.auth().currentUser
         currentUser?.getIDTokenForcingRefresh(true, completion: { idToken, error in
@@ -63,7 +79,8 @@ final class PhoneAuthRepository: PhoneAuthRepositoryInterface {
             guard let idToken = idToken else {
                 return
             }
-            UserDefaultsManager.idToken = idToken
+            UserInfoManager.idToken = idToken
+            UserProgressManager.loggedIn = true
             completion(.success(idToken))
         })
     }

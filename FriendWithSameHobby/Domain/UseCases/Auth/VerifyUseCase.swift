@@ -19,6 +19,7 @@ final class VerifyUseCase: UseCaseType {
     private var disposeBag = DisposeBag()
     
     let authSuccessRelay = PublishRelay<Bool>()
+    let retrySuccessRelay = PublishRelay<Bool>()
     let authErrorRelay = PublishRelay<UserInfoError>()
     
     init(userRepo: UserRepositoryInterface, phoneAuthRepo: PhoneAuthRepositoryInterface) {
@@ -26,8 +27,7 @@ final class VerifyUseCase: UseCaseType {
         self.phoneAuthRepo = phoneAuthRepo
     }
     
-    
-    // MARK: - Excute
+    // MARK: - Verify Register code
     func excuteAuthNumber() {
         phoneAuthRepo?.verifyRegisterNumber(verificationCode: codeRelay.value,
                                             completion: { [weak self] result in
@@ -44,7 +44,7 @@ final class VerifyUseCase: UseCaseType {
     private func getUserInfo() {
         userRepo?.getUserInfo(completion: { [weak self] result in
             switch result {
-            case .success(let response):
+            case .success(_):
                 self?.updateFCMtoken()
             case .failure(let error):
                 self?.authErrorRelay.accept(error)
@@ -58,6 +58,18 @@ final class VerifyUseCase: UseCaseType {
             switch result {
             case .success(let isCompleted):
                 self?.authSuccessRelay.accept(isCompleted)
+            case .failure(let error):
+                self?.authErrorRelay.accept(error)
+            }
+        })
+    }
+    
+    // MARK: - Request Register Code for Retry
+    func requestRegisterCode() {
+        phoneAuthRepo?.retryPhoneNumber(completion: { [weak self] result in
+            switch result {
+            case .success(_):
+                self?.retrySuccessRelay.accept(true)
             case .failure(let error):
                 self?.authErrorRelay.accept(error)
             }

@@ -27,7 +27,7 @@ class EmailViewController: UIViewController {
     }
     
     private let emailTextField = BaseTextField(text: "SeSAC@email.com", status: .inactive).then {
-        $0.inputTextField.text = UserDefaultsManager.email
+        $0.inputTextField.text = UserInfoManager.email
     }
     private let nextButton = BaseButton(title: "다음", status: .disable, type: .h48)
     

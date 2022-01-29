@@ -56,6 +56,13 @@ final class VerifyViewModel: ViewModelType {
                 self?.useCase?.excuteAuthNumber()
             }.disposed(by: disposeBag)
         
+        input.retryButtonTap
+            .asDriver()
+            .drive { [weak self] _ in
+                BaseActivityIndicator.shared.show()
+                self?.useCase?.requestRegisterCode()
+            }.disposed(by: disposeBag)
+        
         // UseCase to Coordinator
         useCase?.authSuccessRelay
             .asDriver(onErrorJustReturn: false)
@@ -75,6 +82,12 @@ final class VerifyViewModel: ViewModelType {
                 default:
                     self?.coordinator?.toasting(message: error.description)                    
                 }                
+            }.disposed(by: disposeBag)
+        
+        useCase?.retrySuccessRelay
+            .asDriver(onErrorJustReturn: false)
+            .drive { _ in
+                BaseActivityIndicator.shared.hide()
             }.disposed(by: disposeBag)
         
         // UseCase to Output

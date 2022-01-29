@@ -24,18 +24,18 @@ final class AuthCoordinator: CoordinatorType {
     }
     
     func start() {
-        pushOnboardingVC()
+        //pushOnboardingVC()
         //pushPhoneAuthVC()
         //pushNicknameVC()
-//        if UserDefaultsManager.onboardingPassed == nil {
-//            pushOnboardingVC()
-//        }
-//        else if UserDefaultsManager.idToken == nil {
-//            pushPhoneAuthVC()
-//        }
-//        else {
-//            pushNicknameVC()
-//        }
+        if UserProgressManager.onboardingPassed == nil {
+            pushOnboardingVC()
+        }
+        else if UserProgressManager.loggedIn == nil {
+            pushPhoneAuthVC()
+        }
+        else {
+            pushNicknameVC()
+        }
     }
     
     func pushOnboardingVC() {

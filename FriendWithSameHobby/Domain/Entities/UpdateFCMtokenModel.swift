@@ -11,6 +11,6 @@ struct UpdateFCMtokenModel {
     let fcmToken: String
     
     init() {
-        self.fcmToken = UserDefaultsManager.fcmToken ?? ""
+        self.fcmToken = UserInfoManager.fcmToken ?? ""
     }
 }

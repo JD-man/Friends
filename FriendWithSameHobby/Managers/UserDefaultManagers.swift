@@ -8,6 +8,7 @@
 import Foundation
 
 enum UserDefaultsKeyType: String {
+    // User Info
     case idToken
     case phoneNumber
     case FCMtoken
@@ -15,7 +16,11 @@ enum UserDefaultsKeyType: String {
     case birth
     case email
     case gender
+    
+    // User Progress
     case onboardingPassed
+    case loggedIn
+    case registered
 }
 
 @propertyWrapper
@@ -32,7 +37,7 @@ struct UserDefaultsValue<T> {
     }
 }
 
-struct UserDefaultsManager {
+struct UserInfoManager {
     @UserDefaultsValue(.idToken) static var idToken: String?
     @UserDefaultsValue(.phoneNumber) static var phoneNumber: String?
     @UserDefaultsValue(.FCMtoken) static var fcmToken: String?
@@ -40,5 +45,10 @@ struct UserDefaultsManager {
     @UserDefaultsValue(.birth) static var birth: Date?
     @UserDefaultsValue(.email) static var email: String?
     @UserDefaultsValue(.gender) static var gender: Int?
+}
+
+struct UserProgressManager {
     @UserDefaultsValue(.onboardingPassed) static var onboardingPassed: Bool?
+    @UserDefaultsValue(.loggedIn) static var loggedIn: Bool?
+    @UserDefaultsValue(.registered) static var registered: Bool?
 }

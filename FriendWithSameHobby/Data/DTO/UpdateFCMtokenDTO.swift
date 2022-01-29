@@ -20,4 +20,3 @@ extension UpdateFCMtokenDTO {
         return ["FCMtoken": fcmToken]
     }
 }
-

@@ -27,7 +27,7 @@ struct UserRegisterDTO: Codable {
 
 extension UserRegisterDTO {
     func toParameters() -> [String: Any] {
-        return ["phoneNumber": phoneNumber,
+        return ["phoneNumber": phoneNumber.removeHyphen(),
          "FCMtoken": fcmToken,
          "nick": nick,
          "birth": birth,

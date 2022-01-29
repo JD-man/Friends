@@ -16,11 +16,11 @@ struct UserRegisterModel {
     let gender: Int
     
     init() {
-        self.phoneNumber = UserDefaultsManager.phoneNumber ?? ""
-        self.fcmToken = UserDefaultsManager.fcmToken ?? ""
-        self.nick = UserDefaultsManager.nick ?? ""
-        self.birth = UserDefaultsManager.birth ?? Date()
-        self.email = UserDefaultsManager.email ?? ""
-        self.gender = UserDefaultsManager.gender ?? -1
+        self.phoneNumber = UserInfoManager.phoneNumber ?? ""
+        self.fcmToken = UserInfoManager.fcmToken ?? ""
+        self.nick = UserInfoManager.nick ?? ""
+        self.birth = UserInfoManager.birth ?? Date()
+        self.email = UserInfoManager.email ?? ""
+        self.gender = UserInfoManager.gender ?? -1
     }
 }

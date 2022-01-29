@@ -19,7 +19,7 @@ class NicknameViewController: UIViewController {
     }
     
     private let nicknameTextField = BaseTextField(text: "10자 이내로 입력", status: .inactive).then {
-        $0.inputTextField.text = UserDefaultsManager.nick
+        $0.inputTextField.text = UserInfoManager.nick
     }
     private let nextButton = BaseButton(title: "다음", status: .disable, type: .h48)
     

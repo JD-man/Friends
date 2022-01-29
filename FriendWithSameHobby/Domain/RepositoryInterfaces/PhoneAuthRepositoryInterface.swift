@@ -10,6 +10,7 @@ import Foundation
 protocol PhoneAuthRepositoryInterface {
     func verifyPhoneNumber(_ numText: String,
                            completion: @escaping (Result<String, UserInfoError>) -> Void)
+    func retryPhoneNumber(completion: @escaping (Result<String, UserInfoError>) -> Void)
     func verifyRegisterNumber(verificationCode: String,                              
                               completion: @escaping (Result<String, UserInfoError>) -> Void)
 }

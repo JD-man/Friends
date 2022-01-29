@@ -54,7 +54,7 @@ final class NickNameViewModel: ViewModelType {
             .drive { [weak self] in
                 switch output.nextButtonStatus.value {
                 case .fill:
-                    UserDefaultsManager.nick = $0
+                    UserInfoManager.nick = $0
                     self?.coordinator?.pushBirthVC()
                 default:
                     print("invalid nickname")

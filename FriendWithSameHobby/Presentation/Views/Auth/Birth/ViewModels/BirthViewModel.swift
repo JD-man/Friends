@@ -74,7 +74,7 @@ final class BirthViewModel: ViewModelType {
                 switch output.buttonStatus.value {
                 case .fill:
                     print($0.toString)
-                    UserDefaultsManager.birth = $0
+                    UserInfoManager.birth = $0
                     self?.coordinator?.pushEmailVC()
                 default:
                     print("toast under 17")

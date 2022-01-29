@@ -46,7 +46,7 @@ class BirthViewController: UIViewController {
     private let datePicker = UIDatePicker().then {
         $0.preferredDatePickerStyle = .wheels
         $0.datePickerMode = .date
-        $0.date = UserDefaultsManager.birth ?? Date()
+        $0.date = UserInfoManager.birth ?? Date()
     }
     
     override func viewDidLoad() {
