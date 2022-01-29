@@ -18,7 +18,7 @@ final class VerifyUseCase: UseCaseType {
     let codeRelay = BehaviorRelay<String>(value: "")
     private var disposeBag = DisposeBag()
     
-    let userExistRelay = PublishRelay<Bool>()
+    let authSuccessRelay = PublishRelay<Bool>()
     let authErrorRelay = PublishRelay<UserInfoError>()
     
     init(userRepo: UserRepositoryInterface, phoneAuthRepo: PhoneAuthRepositoryInterface) {
@@ -26,27 +26,45 @@ final class VerifyUseCase: UseCaseType {
         self.phoneAuthRepo = phoneAuthRepo
     }
     
+    
+    // MARK: - Excute
     func excuteAuthNumber() {
         phoneAuthRepo?.verifyRegisterNumber(verificationCode: codeRelay.value,
                                             completion: { [weak self] result in
             switch result {
-            case .success(let idToken):
+            case .success(let idToken):                
+                self?.getUserInfo()
                 print(idToken)
-                self?.userRepo?.getUserInfo(completion: { result in
-                    switch result {
-                    case .success(let response):
-                        self?.userExistRelay.accept(true)
-                        // FCM 토큰 갱신 필요!!!!!!!!!!
-                    case .failure(let error):
-                        self?.authErrorRelay.accept(error)
-                    }
-                })
             case .failure(let error):
                 self?.authErrorRelay.accept(error)
             }
         })
     }
     
+    private func getUserInfo() {
+        userRepo?.getUserInfo(completion: { [weak self] result in
+            switch result {
+            case .success(let response):
+                self?.updateFCMtoken()
+            case .failure(let error):
+                self?.authErrorRelay.accept(error)
+            }
+        })
+    }
+    
+    private func updateFCMtoken() {
+        let model = UpdateFCMtokenModel()
+        userRepo?.updateFCMtoken(model: model, completion: { [weak self] result in
+            switch result {
+            case .success(let isCompleted):
+                self?.authSuccessRelay.accept(isCompleted)
+            case .failure(let error):
+                self?.authErrorRelay.accept(error)
+            }
+        })
+    }
+    
+    // MARK: - Validation
     func validation(text: String) {
         codeRelay.accept(text)
         

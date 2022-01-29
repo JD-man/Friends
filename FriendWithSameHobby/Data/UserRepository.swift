@@ -28,10 +28,24 @@ final class UserRepository: UserRepositoryInterface {
         }
     }
     
+    func updateFCMtoken(model: UpdateFCMtokenModel,
+                        completion: @escaping (Result<Bool, UserInfoError>) -> Void) {
+        let dto = UpdateFCMtokenDTO(model: model)
+        provider.request(.updateFCMtoken(dto: dto)) { result in
+            switch result {
+            case .success(_):
+                completion(.success(true))
+            case .failure(let error):
+                let statusCode = error.response?.statusCode ?? -1
+                completion(.failure(UserInfoError(rawValue: statusCode) ?? .unknownError))
+            }
+        }
+    }
+    
     func registerUser(model: UserRegisterModel,
                       completion: @escaping (Result<Bool, UserRegisterError>) -> Void) {
-        let dto = UserRegisterDTO(model: model).toParameters()
-        provider.request(.postUser(parameters: dto)) { result in
+        let dto = UserRegisterDTO(model: model)
+        provider.request(.postUser(dto: dto)) { result in
             switch result {
             case .success(_):
                 completion(.success(true))
@@ -42,3 +56,11 @@ final class UserRepository: UserRepositoryInterface {
         }
     }
 }
+
+/*
+ cX1zUKLzSU3Suzg7GFI_W7:APA91bGrseh18do-lYTrBIy3Atk1eyHQs9IGyDny6LQ4N5R6nTvgY6x0giQFUmG_0PP5NKorxSar292nCWjhaQSlufZGz4VbrXyuZ1ApVoKPGVryMI5AEclkDExH-faNWfxvA4ScN0ha
+ */
+
+/*
+ cX1zUKLzSU3Suzg7GFI_W7:APA91bGrseh18do-lYTrBIy3Atk1eyHQs9IGyDny6LQ4N5R6nTvgY6x0giQFUmG_0PP5NKorxSar292nCWjhaQSlufZGz4VbrXyuZ1ApVoKPGVryMI5AEclkDExH-faNWfxvA4ScN0ha
+ */

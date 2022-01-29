@@ -57,7 +57,7 @@ final class VerifyViewModel: ViewModelType {
             }.disposed(by: disposeBag)
         
         // UseCase to Coordinator
-        useCase?.userExistRelay
+        useCase?.authSuccessRelay
             .asDriver(onErrorJustReturn: false)
             .drive { [weak self] in
                 BaseActivityIndicator.shared.hide()

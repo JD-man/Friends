@@ -9,7 +9,7 @@ import Foundation
 
 struct UserRegisterDTO: Codable {
     let phoneNumber: String
-    let FCMtoken: String
+    let fcmToken: String
     let nick: String
     let birth: String
     let email: String
@@ -17,7 +17,7 @@ struct UserRegisterDTO: Codable {
     
     init(model: UserRegisterModel) {
         self.phoneNumber = model.phoneNumber
-        self.FCMtoken = model.FCMtoken
+        self.fcmToken = model.fcmToken
         self.nick = model.nick
         self.birth = model.birth.toString
         self.email = model.email
@@ -28,7 +28,7 @@ struct UserRegisterDTO: Codable {
 extension UserRegisterDTO {
     func toParameters() -> [String: Any] {
         return ["phoneNumber": phoneNumber,
-         "FCMtoken": FCMtoken,
+         "FCMtoken": fcmToken,
          "nick": nick,
          "birth": birth,
          "email": email,

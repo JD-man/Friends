@@ -35,7 +35,7 @@ struct UserDefaultsValue<T> {
 struct UserDefaultsManager {
     @UserDefaultsValue(.idToken) static var idToken: String?
     @UserDefaultsValue(.phoneNumber) static var phoneNumber: String?
-    @UserDefaultsValue(.FCMtoken) static var FCMtoken: String?
+    @UserDefaultsValue(.FCMtoken) static var fcmToken: String?
     @UserDefaultsValue(.nick) static var nick: String?
     @UserDefaultsValue(.birth) static var birth: Date?
     @UserDefaultsValue(.email) static var email: String?

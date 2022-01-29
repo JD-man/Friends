@@ -9,7 +9,7 @@ import Foundation
 
 struct UserRegisterModel {
     let phoneNumber: String
-    let FCMtoken: String
+    let fcmToken: String
     let nick: String
     let birth: Date
     let email: String
@@ -17,7 +17,7 @@ struct UserRegisterModel {
     
     init() {
         self.phoneNumber = UserDefaultsManager.phoneNumber ?? ""
-        self.FCMtoken = UserDefaultsManager.FCMtoken ?? ""
+        self.fcmToken = UserDefaultsManager.fcmToken ?? ""
         self.nick = UserDefaultsManager.nick ?? ""
         self.birth = UserDefaultsManager.birth ?? Date()
         self.email = UserDefaultsManager.email ?? ""

@@ -31,6 +31,8 @@
 		894184E027A15396007F35AC /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894184DF27A15396007F35AC /* ProfileViewController.swift */; };
 		895E1D7D27A518F00054742F /* PhoneAuthRepositoryInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895E1D7C27A518F00054742F /* PhoneAuthRepositoryInterface.swift */; };
 		895E1D7F27A51EB50054742F /* EmptyUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895E1D7E27A51EB50054742F /* EmptyUseCase.swift */; };
+		895E1D8127A52B1B0054742F /* UpdateFCMtokenDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895E1D8027A52B1B0054742F /* UpdateFCMtokenDTO.swift */; };
+		895E1D8327A52B8D0054742F /* UpdateFCMtokenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895E1D8227A52B8D0054742F /* UpdateFCMtokenModel.swift */; };
 		898B79442799431000844284 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898B79432799431000844284 /* OnboardingViewController.swift */; };
 		898B79462799447600844284 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 898B79452799447600844284 /* Images.xcassets */; };
 		898B79482799456F00844284 /* Assets+Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898B79472799456F00844284 /* Assets+Images.swift */; };
@@ -132,6 +134,8 @@
 		894184DF27A15396007F35AC /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		895E1D7C27A518F00054742F /* PhoneAuthRepositoryInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneAuthRepositoryInterface.swift; sourceTree = "<group>"; };
 		895E1D7E27A51EB50054742F /* EmptyUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyUseCase.swift; sourceTree = "<group>"; };
+		895E1D8027A52B1B0054742F /* UpdateFCMtokenDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateFCMtokenDTO.swift; sourceTree = "<group>"; };
+		895E1D8227A52B8D0054742F /* UpdateFCMtokenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateFCMtokenModel.swift; sourceTree = "<group>"; };
 		898B79432799431000844284 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		898B79452799447600844284 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		898B79472799456F00844284 /* Assets+Images.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Assets+Images.swift"; sourceTree = "<group>"; };
@@ -346,6 +350,7 @@
 			children = (
 				89C0F3F327A28C3C0038DACA /* UserInfoModel.swift */,
 				89C0F3F527A28ECA0038DACA /* UserRegisterModel.swift */,
+				895E1D8227A52B8D0054742F /* UpdateFCMtokenModel.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -743,6 +748,7 @@
 			children = (
 				89E055AE279D9B4400E86445 /* UserInfoDTO.swift */,
 				89C0F3F727A28F6D0038DACA /* UserRegisterDTO.swift */,
+				895E1D8027A52B1B0054742F /* UpdateFCMtokenDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -1073,6 +1079,7 @@
 				89ECC57C279F330300C4C477 /* RegisterUseCase.swift in Sources */,
 				89E055B5279DA6C200E86445 /* NicknameViewController.swift in Sources */,
 				89A81992279B023900F257CA /* String+Ext.swift in Sources */,
+				895E1D8127A52B1B0054742F /* UpdateFCMtokenDTO.swift in Sources */,
 				89ECC56C279EF43100C4C477 /* Date+Ext.swift in Sources */,
 				898B79542799502900844284 /* CoordinatorType.swift in Sources */,
 				89D721C2279B8F8300B02A1E /* BaseTextField.swift in Sources */,
@@ -1108,6 +1115,7 @@
 				89C147CC27A00DDF00F0E616 /* MainTabCoordinator.swift in Sources */,
 				89ECC566279E987B00C4C477 /* BirthViewController.swift in Sources */,
 				89A8198D279AF95C00F257CA /* PhoneAuthViewModel.swift in Sources */,
+				895E1D8327A52B8D0054742F /* UpdateFCMtokenModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

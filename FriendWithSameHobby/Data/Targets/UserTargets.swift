@@ -10,7 +10,8 @@ import Moya
 
 enum UserTargets {
     case getUserInfo
-    case postUser(parameters: [String: Any])
+    case postUser(dto: UserRegisterDTO)
+    case updateFCMtoken(dto: UpdateFCMtokenDTO)
 }
 
 extension UserTargets: TargetType {
@@ -22,6 +23,8 @@ extension UserTargets: TargetType {
         switch self {
         case .getUserInfo, .postUser:
             return "/user"
+        case .updateFCMtoken:
+            return "/user/update_fcm_token"
         }
     }
     
@@ -31,6 +34,8 @@ extension UserTargets: TargetType {
             return .get
         case .postUser:
             return .post
+        case .updateFCMtoken:
+            return .put            
         }
     }
     
@@ -38,8 +43,11 @@ extension UserTargets: TargetType {
         switch self {
         case .getUserInfo:
             return .requestParameters(parameters: [:], encoding: URLEncoding.default)
-        case .postUser(let parameters):
-            return .requestParameters(parameters: parameters,
+        case .postUser(let dto):
+            return .requestParameters(parameters: dto.toParameters(),
+                                      encoding: URLEncoding.default)
+        case .updateFCMtoken(let dto):
+            return .requestParameters(parameters: dto.toParameters(),
                                       encoding: URLEncoding.default)
         }
     }
