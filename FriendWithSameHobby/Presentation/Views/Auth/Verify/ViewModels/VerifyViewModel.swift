@@ -31,35 +31,52 @@ final class VerifyViewModel: ViewModelType {
         // textField status
         let textFieldStatus = PublishRelay<BaseTextFieldStatus>()
         // verifyButton status
-        let verifyButtonStatus = PublishRelay<BaseButtonStatus>()
-        
+        let verifyButtonStatus = PublishRelay<BaseButtonStatus>()        
         // edit begin empty string
         let emptyStringRelay = PublishRelay<String>()
+        // timer text
+        let timerTextRelay = PublishRelay<String>()
     }
     
     var useCase: VerifyUseCase?
     weak var coordinator: AuthCoordinator?
+    private var disposeBag = DisposeBag()
+    
+    var remain: Int = 60
+    var timer: Disposable?
     
     func transform(_ input: Input, disposeBag: DisposeBag) -> Output {
         let output = Output()
+        
+        // timer
+        startTimer(time: output.timerTextRelay, status: output.verifyButtonStatus)
+        
         // Input to UseCase
         input.verifyTextFieldText
             .asDriver()
-            .drive { [weak self] in
-                self?.useCase?.validation(text: $0)
+            .drive { [weak self] in                
+                if self?.remain != 0 {
+                    self?.useCase?.validation(text: $0)
+                }
             }.disposed(by: disposeBag)
         
         input.verifyButtonTap
             .asDriver()
             .drive { [weak self] _ in
-                BaseActivityIndicator.shared.show()
-                self?.useCase?.excuteAuthNumber()
+                if self?.remain == 0 {
+                    self?.coordinator?.toasting(message: "입력시간이 초과됐습니다.")
+                }
+                else {
+                    BaseActivityIndicator.shared.show()
+                    self?.useCase?.excuteAuthNumber()
+                }
             }.disposed(by: disposeBag)
         
         input.retryButtonTap
             .asDriver()
             .drive { [weak self] _ in
                 BaseActivityIndicator.shared.show()
+                self?.timer?.dispose()
                 self?.useCase?.requestRegisterCode()
             }.disposed(by: disposeBag)
         
@@ -86,8 +103,10 @@ final class VerifyViewModel: ViewModelType {
         
         useCase?.retrySuccessRelay
             .asDriver(onErrorJustReturn: false)
-            .drive { _ in
+            .drive { [weak self] _ in
+                self?.remain = 60
                 BaseActivityIndicator.shared.hide()
+                self?.startTimer(time: output.timerTextRelay, status: output.verifyButtonStatus)
             }.disposed(by: disposeBag)
         
         // UseCase to Output
@@ -95,5 +114,26 @@ final class VerifyViewModel: ViewModelType {
             .bind(to: output.verifyButtonStatus)
             .disposed(by: disposeBag)
         return output
+    }
+    
+    private func startTimer(time: PublishRelay<String>, status: PublishRelay<BaseButtonStatus>) {
+        timer = Observable<Int>.interval(.seconds(1), scheduler: MainScheduler.instance)
+            .subscribe { [weak self] _ in
+                let remain = self?.remain ?? 0
+                let min = remain / 60
+                let sec = remain % 60
+                time.accept(String(format: "%02d:%02d", min, sec))
+                if remain == 0 {
+                    self?.timer?.dispose()
+                    status.accept(.disable)
+                }
+                else {
+                    self?.remain -= 1
+                }
+            } onDisposed: {
+                print("disposed")
+            }
+        
+        timer?.disposed(by: disposeBag)
     }
 }

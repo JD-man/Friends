@@ -116,6 +116,11 @@ class VerifyViewController: UIViewController {
                 self?.verifyTextField.statusUpdate(status: $0)
             }.disposed(by: disposeBag)
         
+        output?.timerTextRelay
+            .asDriver(onErrorJustReturn: "")
+            .drive(timerLabel.rx.text)
+            .disposed(by: disposeBag)
+        
         // Edit begin
         verifyTextField.inputTextField.rx.controlEvent(.editingDidBegin)
             .asDriver()

@@ -25,7 +25,7 @@ final class PhoneAuthRepository: PhoneAuthRepositoryInterface {
         PhoneAuthProvider.provider()
             .verifyPhoneNumber(numText, uiDelegate: nil) { id, error in
                 if let error = error {
-                    let statusCode = AuthErrorCode(rawValue: error._code)?.rawValue ?? -1
+                    let statusCode = AuthErrorCode(rawValue: (error as NSError).code)?.rawValue ?? -1
                     print(statusCode)
                     completion(.failure(UserInfoError(rawValue: statusCode) ?? .unknownError))
                     return
@@ -42,7 +42,7 @@ final class PhoneAuthRepository: PhoneAuthRepositoryInterface {
                                                                  verificationCode: verificationCode)
         Auth.auth().signIn(with: credential) { [weak self] result, error in
             if let error = error {
-                let statusCode = AuthErrorCode(rawValue: error._code)?.rawValue ?? -1
+                let statusCode = AuthErrorCode(rawValue: (error as NSError).code)?.rawValue ?? -1
                 print(statusCode)
                 completion(.failure(UserInfoError(rawValue: statusCode) ?? .unknownError))
             }
@@ -57,7 +57,7 @@ final class PhoneAuthRepository: PhoneAuthRepositoryInterface {
         PhoneAuthProvider.provider()
             .verifyPhoneNumber(phoneNumber, uiDelegate: nil) { [weak self] id, error in
                 if let error = error {
-                    let statusCode = AuthErrorCode(rawValue: error._code)?.rawValue ?? -1
+                    let statusCode = AuthErrorCode(rawValue: (error as NSError).code)?.rawValue ?? -1
                     print(statusCode)
                     completion(.failure(UserInfoError(rawValue: statusCode) ?? .unknownError))
                     return
@@ -72,7 +72,7 @@ final class PhoneAuthRepository: PhoneAuthRepositoryInterface {
         let currentUser = Auth.auth().currentUser
         currentUser?.getIDTokenForcingRefresh(true, completion: { idToken, error in
             if let error = error {
-                let statusCode = AuthErrorCode(rawValue: error._code)?.rawValue ?? -1
+                let statusCode = AuthErrorCode(rawValue: (error as NSError).code)?.rawValue ?? -1
                 print(statusCode)
                 completion(.failure(UserInfoError(rawValue: statusCode) ?? .unknownError))
             }
