@@ -11,6 +11,10 @@ import RxRelay
 import RxCocoa
 
 final class EmailViewModel: ViewModelType {
+    init(useCase: EmptyUseCase?, coordinator: AuthCoordinator?) {
+        self.useCase = useCase
+        self.coordinator = coordinator
+    }
     
     struct Input {
         // TextField Text
@@ -26,12 +30,8 @@ final class EmailViewModel: ViewModelType {
         let nextButtonStatus = BehaviorRelay<BaseButtonStatus>(value: .disable)
     }
     
-    var useCase: VerifyUseCase? = nil
+    var useCase: EmptyUseCase? = nil
     weak var coordinator: AuthCoordinator?
-    
-    init(coordinator: AuthCoordinator) {
-        self.coordinator = coordinator
-    }
     
     func transform(_ input: Input, disposeBag: DisposeBag) -> Output {
         let output = Output()

@@ -11,6 +11,11 @@ import RxCocoa
 import RxRelay
 
 final class PhoneAuthViewModel: ViewModelType {
+    init(useCase: PhoneAuthUseCase?, coordinator: AuthCoordinator?) {
+        self.useCase = useCase
+        self.coordinator = coordinator
+    }
+    
     struct Input {
         // TextField text
         let phoneNumberText: Driver<String>        
@@ -27,9 +32,9 @@ final class PhoneAuthViewModel: ViewModelType {
         let buttonStatusRelay = PublishRelay<BaseButtonStatus>()
     }
     
-    var useCase: PhoneAuthUseCase? = PhoneAuthUseCase()
-    private var disposeBag = DisposeBag()
+    var useCase: PhoneAuthUseCase?    
     weak var coordinator: AuthCoordinator?
+    private var disposeBag = DisposeBag()
     
     func transform(_ input: Input, disposeBag: DisposeBag) -> Output {
         let output = Output()
@@ -65,16 +70,14 @@ final class PhoneAuthViewModel: ViewModelType {
             .asDriver(onErrorJustReturn: "")
             .drive { [weak self] in
                 BaseActivityIndicator.shared.hide()
-                if $0 != "" {                    
-                    self?.coordinator?.pushVerifyVC(phoneId: $0)
-                }
+                if $0 != "" { self?.coordinator?.pushVerifyVC(phoneId: $0) }
             }.disposed(by: disposeBag)
         
         useCase?.authErrorRelay
-            .asDriver(onErrorJustReturn: .authFail)
+            .asDriver(onErrorJustReturn: .unknownError)
             .drive { [weak self] in
                 BaseActivityIndicator.shared.hide()
-                self?.coordinator?.toasting(message: $0.localizedDescription)
+                self?.coordinator?.toasting(message: $0.description)
             }
             .disposed(by: disposeBag)
         

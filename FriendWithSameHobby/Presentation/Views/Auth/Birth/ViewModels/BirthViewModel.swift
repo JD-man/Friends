@@ -11,6 +11,11 @@ import RxCocoa
 import RxRelay
 
 final class BirthViewModel: ViewModelType {
+    init(useCase: EmptyUseCase?, coordinator: AuthCoordinator?) {
+        self.useCase = useCase
+        self.coordinator = coordinator
+    }
+    
     struct Input {
         // datepicker date
         let date: ControlProperty<Date>
@@ -29,12 +34,8 @@ final class BirthViewModel: ViewModelType {
         let buttonStatus = BehaviorRelay<BaseButtonStatus>(value: .disable)        
     }
     
-    var useCase: VerifyUseCase? = nil
+    var useCase: EmptyUseCase? = nil
     weak var coordinator: AuthCoordinator?
-    
-    init(coordinator: AuthCoordinator) {        
-        self.coordinator = coordinator
-    }
     
     func transform(_ input: Input, disposeBag: DisposeBag) -> Output {
         let output = Output()

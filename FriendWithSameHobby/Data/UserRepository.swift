@@ -6,45 +6,39 @@
 //
 
 import Foundation
-import RxSwift
 import Moya
 
 // DTO ---> Domain (toDomain function)
 final class UserRepository: UserRepositoryInterface {
-    private var disposeBag = DisposeBag()
     private let provider = MoyaProvider<UserTargets>()
     
-    func getUserInfo() -> Single<UserInfoModel> {
-        return Single<UserInfoModel>.create { [weak self] single in
-            self?.provider.request(.getUserInfo) { result in
-                switch result {
-                case .success(let response):
-                    guard let decoded = try? JSONDecoder().decode(UserInfoDTO.self, from: response.data) else {
-                        print("decode fail")
-                        return
-                    }
-                    single(.success(decoded.toDomain()))
-                case .failure(let error):
-                    let userInfoError = UserInfoError(rawValue: error.response?.statusCode ?? 502) ?? .unknownError
-                    single(.failure(userInfoError))
+    func getUserInfo(completion: @escaping(Result<UserInfoModel, UserInfoError>) -> Void) {
+        provider.request(.getUserInfo) { result in
+            switch result {
+            case .success(let response):
+                guard let decoded = try? JSONDecoder().decode(UserInfoDTO.self, from: response.data) else {
+                    print("decode fail")
+                    return
                 }
+                completion(.success(decoded.toDomain()))
+            case .failure(let error):
+                let statusCode = error.response?.statusCode ?? -1
+                completion(.failure(UserInfoError(rawValue: statusCode) ?? .unknownError))
             }
-            return Disposables.create()
         }
     }
     
-    func registerUser(model: UserRegisterModel) -> Single<Bool> {
+    func registerUser(model: UserRegisterModel,
+                      completion: @escaping (Result<Bool, UserRegisterError>) -> Void) {
         let dto = UserRegisterDTO(model: model).toParameters()
-        return Single<Bool>.create { [weak self] single in
-            self?.provider.request(.postUser(parameters: dto)) { result in
-                switch result {
-                case .success(_):
-                    single(.success(true))
-                case .failure(let error):
-                    single(.failure(error))
-                }
+        provider.request(.postUser(parameters: dto)) { result in
+            switch result {
+            case .success(_):
+                completion(.success(true))
+            case .failure(let error):
+                let statusCode = error.response?.statusCode ?? -1
+                completion(.failure(UserRegisterError(rawValue: statusCode) ?? .unknownError))
             }
-            return Disposables.create()
         }
     }
 }

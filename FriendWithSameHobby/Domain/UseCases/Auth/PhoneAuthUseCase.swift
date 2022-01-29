@@ -11,16 +11,20 @@ import RxRelay
 
 final class PhoneAuthUseCase: UseCaseType {
     
-    var repository = PhoneAuthRepository()
+    var phoneAuthRepo: PhoneAuthRepositoryInterface?
     
     let formattedTextRelay = BehaviorRelay<String>(value: "")
     let buttonStatusRelay = BehaviorRelay<BaseButtonStatus>(value: .disable)
     let textFieldStatusRelay = BehaviorRelay<BaseTextFieldStatus>(value: .disable)
     
     let authSuccessRelay = PublishRelay<String>()
-    let authErrorRelay = PublishRelay<PhoneAuthError>()
+    let authErrorRelay = PublishRelay<UserInfoError>()
     
     private var disposeBag = DisposeBag()
+    
+    init(phoneAuthRepo: PhoneAuthRepositoryInterface) {
+        self.phoneAuthRepo = phoneAuthRepo
+    }
     
     func validation(text: String) {
         numberFormatting(text: text)
@@ -28,18 +32,17 @@ final class PhoneAuthUseCase: UseCaseType {
     
     func execute() {        
         if buttonStatusRelay.value == .fill {
-            repository.verifyPhoneNumber("+82" + formattedTextRelay.value)
-                .subscribe { [weak self] in
-                    switch $0 {
-                    case .success(let id):
-                        self?.authSuccessRelay.accept(id)
-                    case .failure(_):
-                        self?.authErrorRelay.accept(.authFail)
-                    }
-                }.disposed(by: disposeBag)
+            phoneAuthRepo?.verifyPhoneNumber("+82" + formattedTextRelay.value) { [weak self] result in
+                switch result {
+                case .success(let id):
+                    self?.authSuccessRelay.accept(id)
+                case .failure(let error):
+                    self?.authErrorRelay.accept(error)
+                }
+            }
         }
         else {
-            authErrorRelay.accept(.notFillButton)
+            print("button status not fill")
         }
     }
     

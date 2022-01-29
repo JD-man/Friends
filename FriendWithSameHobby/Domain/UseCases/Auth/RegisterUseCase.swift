@@ -12,7 +12,6 @@ import RxRelay
 
 final class RegisterUseCase: UseCaseType {
     var userRepository: UserRepositoryInterface?
-    
     init(userRepository: UserRepositoryInterface) {
         self.userRepository = userRepository
     }
@@ -23,19 +22,18 @@ final class RegisterUseCase: UseCaseType {
     var femaleButtonStatus = BehaviorRelay<Bool>(value: false)
     
     var registerSuccess = PublishRelay<Bool>()
-    var registerError = PublishRelay<CommonAPIError>()
+    var registerError = PublishRelay<UserRegisterError>()
     
     func execute() {
         let model = UserRegisterModel()
-        userRepository?.registerUser(model: model)
-            .subscribe { [weak self] event in
-                switch event {
-                case .success(let response):
-                    self?.registerSuccess.accept(response)
-                case .failure(let error):
-                    self?.registerError.accept(error as? CommonAPIError ?? .unknownError)
-                }
-            }.disposed(by: disposeBag)
+        userRepository?.registerUser(model: model, completion: { [weak self] result in
+            switch result {
+            case .success(let isRegistered):
+                self?.registerSuccess.accept(isRegistered)
+            case .failure(let error):
+                self?.registerError.accept(error)
+            }
+        })
     }
     
     // 이런거는 UseCase를 거칠 필요가 있나..??? 없다고 결론나옴.

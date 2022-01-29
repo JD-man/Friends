@@ -11,6 +11,11 @@ import RxCocoa
 import RxRelay
 
 final class RegisterViewModel: ViewModelType {
+    init(useCase: RegisterUseCase?, coordinator: AuthCoordinator?) {
+        self.useCase = useCase
+        self.coordinator = coordinator
+    }
+    
     struct Input {        
         // merged gender tap
         let mergedTap: Driver<Int>
@@ -27,11 +32,6 @@ final class RegisterViewModel: ViewModelType {
     
     var useCase: RegisterUseCase?
     weak var coordinator: AuthCoordinator?
-    
-    init(useCase: RegisterUseCase, coordinator: AuthCoordinator) {
-        self.useCase = useCase
-        self.coordinator = coordinator
-    }
     
     func transform(_ input: Input, disposeBag: DisposeBag) -> Output {
         let output = Output()

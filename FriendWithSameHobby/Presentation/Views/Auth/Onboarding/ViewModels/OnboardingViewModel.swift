@@ -12,6 +12,11 @@ import RxCocoa
 import RxGesture
 
 final class OnboardingViewModel: ViewModelType {
+    init(useCase: OnboardingUseCase?, coordinator: AuthCoordinator?) {
+        self.useCase = useCase
+        self.coordinator = coordinator
+    }
+    
     struct Input {        
         // Swipe Gesture
         let didSwipeGesture: SwipeControlEvent
@@ -28,7 +33,7 @@ final class OnboardingViewModel: ViewModelType {
         let onboardingTextRelay = BehaviorRelay<NSMutableAttributedString>(value: NSMutableAttributedString())
     }
     
-    var useCase: OnboardingUseCase? = OnboardingUseCase()
+    var useCase: OnboardingUseCase?
     weak var coordinator: AuthCoordinator?
     
     func transform(_ input: Input, disposeBag: DisposeBag) -> Output {

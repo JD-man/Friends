@@ -11,6 +11,11 @@ import RxRelay
 import RxCocoa
 
 final class VerifyViewModel: ViewModelType {
+    init(useCase: VerifyUseCase?, coordinator: AuthCoordinator?) {
+        self.useCase = useCase
+        self.coordinator = coordinator
+    }
+    
     struct Input {
         // verifyButton tap
         let verifyButtonTap: ControlEvent<Void>
@@ -32,14 +37,8 @@ final class VerifyViewModel: ViewModelType {
         let emptyStringRelay = PublishRelay<String>()
     }
     
-    var useCase: VerifyUseCase? = VerifyUseCase()
+    var useCase: VerifyUseCase?
     weak var coordinator: AuthCoordinator?
-    
-    var phoneID: String
-    
-    init(phoneId: String) {
-        self.phoneID = phoneId
-    }
     
     func transform(_ input: Input, disposeBag: DisposeBag) -> Output {
         let output = Output()
@@ -54,7 +53,7 @@ final class VerifyViewModel: ViewModelType {
             .asDriver()
             .drive { [weak self] _ in
                 BaseActivityIndicator.shared.show()
-                self?.useCase?.excuteAuthNumber(phoneID: self?.phoneID ?? "")
+                self?.useCase?.excuteAuthNumber()
             }.disposed(by: disposeBag)
         
         // UseCase to Coordinator
@@ -71,11 +70,10 @@ final class VerifyViewModel: ViewModelType {
                 BaseActivityIndicator.shared.hide()
                 switch error {
                 case .unregistered:
+                    print(error)
                     self?.coordinator?.pushNicknameVC()
-                default:                    
-                    self?.coordinator?.pop(to: .phoneAuth, completion: {
-                        self?.coordinator?.toasting(message: error.localizedDescription)
-                    })
+                default:
+                    self?.coordinator?.toasting(message: error.description)                    
                 }                
             }.disposed(by: disposeBag)
         

@@ -9,6 +9,6 @@ import Foundation
 import RxSwift
 
 protocol UserRepositoryInterface {
-    func getUserInfo() -> Single<UserInfoModel>
-    func registerUser(model: UserRegisterModel) -> Single<Bool>
+    func getUserInfo(completion: @escaping(Result<UserInfoModel, UserInfoError>) -> Void)
+    func registerUser(model: UserRegisterModel, completion: @escaping (Result<Bool, UserRegisterError>) -> Void)
 }

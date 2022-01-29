@@ -40,7 +40,8 @@ final class AuthCoordinator: CoordinatorType {
     
     func pushOnboardingVC() {
         let onboardingVC = OnboardingViewController()
-        let viewModel = OnboardingViewModel()
+        let useCase = OnboardingUseCase()
+        let viewModel = OnboardingViewModel(useCase: useCase, coordinator: self)
         viewModel.coordinator = self
         onboardingVC.viewModel = viewModel
         navigationController.navigationBar.isHidden = true
@@ -49,7 +50,9 @@ final class AuthCoordinator: CoordinatorType {
     
     func pushPhoneAuthVC() {
         let pushPhoneAuthVC = PhoneAuthViewController()
-        let viewModel = PhoneAuthViewModel()
+        let phoneAuthRepo = PhoneAuthRepository(phoneID: nil)
+        let useCase = PhoneAuthUseCase(phoneAuthRepo: phoneAuthRepo)
+        let viewModel = PhoneAuthViewModel(useCase: useCase, coordinator: self)
         viewModel.coordinator = self
         pushPhoneAuthVC.viewModel = viewModel
         navigationController.navigationBar.isHidden = false
@@ -58,28 +61,29 @@ final class AuthCoordinator: CoordinatorType {
     
     func pushVerifyVC(phoneId: String) {
         let verifyVC = VerifyViewController()
-        let viewModel = VerifyViewModel(phoneId: phoneId)
+        let phoneAuthRepo = PhoneAuthRepository(phoneID: phoneId)
+        let userRepo = UserRepository()
+        let useCase = VerifyUseCase(userRepo: userRepo, phoneAuthRepo: phoneAuthRepo)
+        let viewModel = VerifyViewModel(useCase: useCase, coordinator: self)
         verifyVC.viewModel = viewModel
         viewModel.coordinator = self
         navigationController.pushViewController(verifyVC, animated: true)
     }
     
-    func pushNicknameVC() {
-        // coordinator injection
-        let viewModel = NickNameViewModel(coordinator: self)
-        // viewModel injection
+    func pushNicknameVC() {        
+        let viewModel = NickNameViewModel(useCase: nil, coordinator: self)
         let nicknameVC = NicknameViewController(viewModel: viewModel)
         navigationController.setViewControllers([nicknameVC], animated: true)
     }
     
     func pushBirthVC() {
-        let viewModel = BirthViewModel(coordinator: self)
+        let viewModel = BirthViewModel(useCase: nil, coordinator: self)
         let birthVC = BirthViewController(viewModel: viewModel)
         navigationController.pushViewController(birthVC, animated: true)
     }
     
     func pushEmailVC() {
-        let viewModel = EmailViewModel(coordinator: self)
+        let viewModel = EmailViewModel(useCase: nil, coordinator: self)
         let emailVC = EmailViewController(viewModel: viewModel)
         navigationController.pushViewController(emailVC, animated: true)
     }

@@ -10,8 +10,8 @@ import RxSwift
 import RxRelay
 
 final class VerifyUseCase: UseCaseType {
-    let userRepo: UserRepository? = UserRepository()
-    let phoneAuthRepo: PhoneAuthRepository? = PhoneAuthRepository()
+    let userRepo: UserRepositoryInterface?
+    let phoneAuthRepo: PhoneAuthRepositoryInterface?
     
     let verifyButtonStatusRelay = PublishRelay<BaseButtonStatus>()
     
@@ -21,27 +21,30 @@ final class VerifyUseCase: UseCaseType {
     let userExistRelay = PublishRelay<Bool>()
     let authErrorRelay = PublishRelay<UserInfoError>()
     
-    func excuteAuthNumber(phoneID: String) {
-        phoneAuthRepo?.verifyRegisterNumber(verificationCode: codeRelay.value, id: phoneID)
-            .subscribe { [weak self] event in
-                switch event {
-                case .success(let idToken):                    
-                    // idToken으로 유저 가입 여부 확인하기
-                    self?.userRepo?.getUserInfo()
-                        .subscribe {
-                            switch $0 {
-                            case .success(let response):
-                                print(response)
-                                self?.userExistRelay.accept(true)
-                            case .failure(let error):
-                                guard let userInfoError = error as? UserInfoError else { return }
-                                self?.authErrorRelay.accept(userInfoError)
-                            }
-                        }.disposed(by: self?.disposeBag ?? DisposeBag())
-                case .failure(let error):                    
-                    self?.authErrorRelay.accept(.firebaseAuthError)
-                }
-            }.disposed(by: disposeBag)
+    init(userRepo: UserRepositoryInterface, phoneAuthRepo: PhoneAuthRepositoryInterface) {
+        self.userRepo = userRepo
+        self.phoneAuthRepo = phoneAuthRepo
+    }
+    
+    func excuteAuthNumber() {
+        phoneAuthRepo?.verifyRegisterNumber(verificationCode: codeRelay.value,
+                                            completion: { [weak self] result in
+            switch result {
+            case .success(let idToken):
+                print(idToken)
+                self?.userRepo?.getUserInfo(completion: { result in
+                    switch result {
+                    case .success(let response):
+                        self?.userExistRelay.accept(true)
+                        // FCM 토큰 갱신 필요!!!!!!!!!!
+                    case .failure(let error):
+                        self?.authErrorRelay.accept(error)
+                    }
+                })
+            case .failure(let error):
+                self?.authErrorRelay.accept(error)
+            }
+        })
     }
     
     func validation(text: String) {
