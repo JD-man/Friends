@@ -68,20 +68,22 @@ final class BaseCardView: UIView {
         sesacReviewView.snp.makeConstraints { make in
             make.top.equalTo(sesacTitleView.snp.bottom).offset(24)
             make.leading.trailing.equalTo(self).inset(16)
-            make.bottom.equalTo(self).offset(-16)
+            make.bottom.equalTo(self).offset(-16).priority(.low)
         }
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
         reviewViewHeight = Int(sesacReviewView.frame.height)
-        titleViewHeight = Int(sesacTitleView.frame.height)
+        titleViewHeight = Int(sesacTitleView.frame.height)        
     }
     
     func expanding(isExpanding: Bool) {
-        let constant = isExpanding ? 30 + reviewViewHeight + titleViewHeight : -16
+        sesacTitleView.isHidden = isExpanding
+        sesacReviewView.isHidden = isExpanding
+        let constant = isExpanding ? 30 + reviewViewHeight + titleViewHeight : -16        
         sesacReviewView.snp.updateConstraints({ make in
-            make.bottom.equalTo(self).offset(constant)
+            make.bottom.equalTo(self).offset(constant).priority(.low)
         })
     }
 }

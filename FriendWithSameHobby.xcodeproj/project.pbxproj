@@ -61,6 +61,7 @@
 		89AB66572798587200DFEE95 /* NotoSansKR-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 89AB66552798584D00DFEE95 /* NotoSansKR-Regular.otf */; };
 		89AB665927985B9600DFEE95 /* Assets+Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89AB665827985B9600DFEE95 /* Assets+Fonts.swift */; };
 		89AB665E27985F4200DFEE95 /* UIFont+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89AB665D27985F4200DFEE95 /* UIFont+Ext.swift */; };
+		89BF2C9527A6DA4200D693F6 /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BF2C9427A6DA4200D693F6 /* ProfileTableViewCell.swift */; };
 		89C0F3F427A28C3C0038DACA /* UserInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C0F3F327A28C3C0038DACA /* UserInfoModel.swift */; };
 		89C0F3F627A28ECA0038DACA /* UserRegisterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C0F3F527A28ECA0038DACA /* UserRegisterModel.swift */; };
 		89C0F3F827A28F6D0038DACA /* UserRegisterDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C0F3F727A28F6D0038DACA /* UserRegisterDTO.swift */; };
@@ -169,6 +170,7 @@
 		89AB66552798584D00DFEE95 /* NotoSansKR-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Regular.otf"; sourceTree = "<group>"; };
 		89AB665827985B9600DFEE95 /* Assets+Fonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Assets+Fonts.swift"; sourceTree = "<group>"; };
 		89AB665D27985F4200DFEE95 /* UIFont+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Ext.swift"; sourceTree = "<group>"; };
+		89BF2C9427A6DA4200D693F6 /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
 		89C0F3F327A28C3C0038DACA /* UserInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoModel.swift; sourceTree = "<group>"; };
 		89C0F3F527A28ECA0038DACA /* UserRegisterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegisterModel.swift; sourceTree = "<group>"; };
 		89C0F3F727A28F6D0038DACA /* UserRegisterDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegisterDTO.swift; sourceTree = "<group>"; };
@@ -746,6 +748,7 @@
 			children = (
 				89C147F127A06E5100F0E616 /* AccountTableHeaderView.swift */,
 				895E1D8427A5B0A70054742F /* AccountTableViewCell.swift */,
+				89BF2C9427A6DA4200D693F6 /* ProfileTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -1118,6 +1121,7 @@
 				89C147E627A00F3500F0E616 /* ShopViewController.swift in Sources */,
 				89C147CF27A00E4B00F0E616 /* HomeCoordinator.swift in Sources */,
 				895E1D7D27A518F00054742F /* PhoneAuthRepositoryInterface.swift in Sources */,
+				89BF2C9527A6DA4200D693F6 /* ProfileTableViewCell.swift in Sources */,
 				898B794F279949D600844284 /* UseCaseType.swift in Sources */,
 				89235B3727A688130069EFB5 /* SeSACReviewView.swift in Sources */,
 				89E0559C279D18D200E86445 /* UserRepository.swift in Sources */,
