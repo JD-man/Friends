@@ -35,8 +35,6 @@ final class BaseCardView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         viewConfig()
-        binding()
-        
     }
     
     required init?(coder: NSCoder) {
@@ -80,26 +78,10 @@ final class BaseCardView: UIView {
         titleViewHeight = Int(sesacTitleView.frame.height)
     }
     
-    private func binding() {
-        moreButton.rx.tap
-            .asDriver()
-            .drive { [weak self] _ in
-                self?.sesacTitleView.isHidden.toggle()
-                self?.sesacReviewView.isHidden.toggle()
-                
-                let isExpanding = self?.sesacTitleView.isHidden ?? false
-                self?.expanding(isExpanding: isExpanding)
-            }.disposed(by: disposeBag)
-    }
-    
-    private func expanding(isExpanding: Bool) {
+    func expanding(isExpanding: Bool) {
         let constant = isExpanding ? 30 + reviewViewHeight + titleViewHeight : -16
-        
-        UIView.animate(withDuration: 5) {
-            self.sesacReviewView.snp.updateConstraints({ make in
-                make.bottom.equalTo(self).offset(constant)
-            })
-            self.layoutIfNeeded()
-        }
+        sesacReviewView.snp.updateConstraints({ make in
+            make.bottom.equalTo(self).offset(constant)
+        })
     }
 }
