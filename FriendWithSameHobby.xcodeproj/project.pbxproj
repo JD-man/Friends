@@ -28,6 +28,8 @@
 		890CCA702797210100D6185E /* RxMoya in Frameworks */ = {isa = PBXBuildFile; productRef = 890CCA6F2797210100D6185E /* RxMoya */; };
 		890CCA732797211F00D6185E /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 890CCA722797211F00D6185E /* Then */; };
 		890CCA762797214000D6185E /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = 890CCA752797214000D6185E /* Toast */; };
+		89235B3527A67A260069EFB5 /* SeSACTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89235B3427A67A260069EFB5 /* SeSACTitleView.swift */; };
+		89235B3727A688130069EFB5 /* SeSACReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89235B3627A688130069EFB5 /* SeSACReviewView.swift */; };
 		894184E027A15396007F35AC /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894184DF27A15396007F35AC /* ProfileViewController.swift */; };
 		895E1D7D27A518F00054742F /* PhoneAuthRepositoryInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895E1D7C27A518F00054742F /* PhoneAuthRepositoryInterface.swift */; };
 		895E1D7F27A51EB50054742F /* EmptyUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895E1D7E27A51EB50054742F /* EmptyUseCase.swift */; };
@@ -134,6 +136,8 @@
 		890CCA5027970DDC00D6185E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		890CCA69279717C600D6185E /* FriendWithSameHobby.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FriendWithSameHobby.entitlements; sourceTree = "<group>"; };
 		890CCA6A2797188100D6185E /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		89235B3427A67A260069EFB5 /* SeSACTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeSACTitleView.swift; sourceTree = "<group>"; };
+		89235B3627A688130069EFB5 /* SeSACReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeSACReviewView.swift; sourceTree = "<group>"; };
 		894184DF27A15396007F35AC /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		895E1D7C27A518F00054742F /* PhoneAuthRepositoryInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneAuthRepositoryInterface.swift; sourceTree = "<group>"; };
 		895E1D7E27A51EB50054742F /* EmptyUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyUseCase.swift; sourceTree = "<group>"; };
@@ -341,6 +345,16 @@
 			path = Presentation;
 			sourceTree = "<group>";
 		};
+		89235B3327A679F80069EFB5 /* BaseCardView */ = {
+			isa = PBXGroup;
+			children = (
+				89EF953727A6482A0070BB38 /* BaseCardView.swift */,
+				89235B3427A67A260069EFB5 /* SeSACTitleView.swift */,
+				89235B3627A688130069EFB5 /* SeSACReviewView.swift */,
+			);
+			path = BaseCardView;
+			sourceTree = "<group>";
+		};
 		898B79332799422D00844284 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -500,10 +514,10 @@
 		89A81986279ADF3A00F257CA /* BaseComponent */ = {
 			isa = PBXGroup;
 			children = (
+				89235B3327A679F80069EFB5 /* BaseCardView */,
 				89A81987279ADF7800F257CA /* BaseButton.swift */,
 				89D721C1279B8F8300B02A1E /* BaseTextField.swift */,
 				890C52B327A3E32F009E54E9 /* BaseActivityIndicator.swift */,
-				89EF953727A6482A0070BB38 /* BaseCardView.swift */,
 			);
 			path = BaseComponent;
 			sourceTree = "<group>";
@@ -1105,9 +1119,11 @@
 				89C147CF27A00E4B00F0E616 /* HomeCoordinator.swift in Sources */,
 				895E1D7D27A518F00054742F /* PhoneAuthRepositoryInterface.swift in Sources */,
 				898B794F279949D600844284 /* UseCaseType.swift in Sources */,
+				89235B3727A688130069EFB5 /* SeSACReviewView.swift in Sources */,
 				89E0559C279D18D200E86445 /* UserRepository.swift in Sources */,
 				89A81990279AF9E500F257CA /* PhoneAuthUseCase.swift in Sources */,
 				895E1D7F27A51EB50054742F /* EmptyUseCase.swift in Sources */,
+				89235B3527A67A260069EFB5 /* SeSACTitleView.swift in Sources */,
 				89C147D327A00E6400F0E616 /* FriendsCoordinator.swift in Sources */,
 				895E1D8727A5B5420054742F /* Cell+Ext.swift in Sources */,
 				89E055A2279D1B9F00E86445 /* URLComponents.swift in Sources */,

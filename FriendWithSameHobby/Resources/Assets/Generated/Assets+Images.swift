@@ -34,6 +34,8 @@ internal enum AssetsImages {
   internal static let permit = ImageAsset(name: "permit")
   internal static let profileImg = ImageAsset(name: "profile_img")
   internal static let qna = ImageAsset(name: "qna")
+  internal static let sesacBg01 = ImageAsset(name: "sesac_bg_01")
+  internal static let sesacFace2 = ImageAsset(name: "sesac_face_2")
   internal static let settingAlarm = ImageAsset(name: "setting_alarm")
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name
