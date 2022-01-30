@@ -9,6 +9,7 @@ import UIKit
 import SnapKit
 import RxSwift
 import RxCocoa
+import RxGesture
 
 struct AccountCellModel {
     let iconImage: UIImage
@@ -29,6 +30,7 @@ class AccountViewController: UIViewController {
     
     private var disposeBag = DisposeBag()
     private let accountCellRelay = BehaviorRelay<[AccountCellModel]>(value: [])
+    private let accountHeaderView = AccountTableHeaderView()
     
     private var accountTableView = UITableView().then {
         $0.rowHeight = 74
@@ -68,6 +70,13 @@ class AccountViewController: UIViewController {
                 cell.configure(with: model)
             }.disposed(by: disposeBag)
         
+        accountHeaderView.rx
+            .tapGesture()
+            .when(.ended)
+            .subscribe(onNext: { [weak self] _ in
+                self?.coordinator?.pushProfileVC()
+            }).disposed(by: disposeBag)
+        
         accountTableView.rx.setDelegate(self)
             .disposed(by: disposeBag)
     }
@@ -75,8 +84,7 @@ class AccountViewController: UIViewController {
 
 extension AccountViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: AccountTableHeaderView.identifier) as? AccountTableHeaderView else { return nil }
-        return header
+        return accountHeaderView
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

@@ -97,6 +97,7 @@
 		89ECC578279F2AEB00C4C477 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89ECC577279F2AEB00C4C477 /* RegisterViewModel.swift */; };
 		89ECC57A279F2B0000C4C477 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89ECC579279F2B0000C4C477 /* RegisterViewController.swift */; };
 		89ECC57C279F330300C4C477 /* RegisterUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89ECC57B279F330300C4C477 /* RegisterUseCase.swift */; };
+		89EF953827A6482A0070BB38 /* BaseCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EF953727A6482A0070BB38 /* BaseCardView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -200,6 +201,7 @@
 		89ECC577279F2AEB00C4C477 /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
 		89ECC579279F2B0000C4C477 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		89ECC57B279F330300C4C477 /* RegisterUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterUseCase.swift; sourceTree = "<group>"; };
+		89EF953727A6482A0070BB38 /* BaseCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCardView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -501,6 +503,7 @@
 				89A81987279ADF7800F257CA /* BaseButton.swift */,
 				89D721C1279B8F8300B02A1E /* BaseTextField.swift */,
 				890C52B327A3E32F009E54E9 /* BaseActivityIndicator.swift */,
+				89EF953727A6482A0070BB38 /* BaseCardView.swift */,
 			);
 			path = BaseComponent;
 			sourceTree = "<group>";
@@ -649,6 +652,7 @@
 			isa = PBXGroup;
 			children = (
 				89C147E227A00F0200F0E616 /* Views */,
+				89C147F027A06D6500F0E616 /* Cells */,
 				89C147E127A00EFD00F0E616 /* ViewModels */,
 			);
 			path = Account;
@@ -711,7 +715,6 @@
 			children = (
 				89C147E927A00F7700F0E616 /* AccountViewController.swift */,
 				894184DF27A15396007F35AC /* ProfileViewController.swift */,
-				89C147F027A06D6500F0E616 /* Cells */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1092,6 +1095,7 @@
 				89D721C2279B8F8300B02A1E /* BaseTextField.swift in Sources */,
 				89ECC57A279F2B0000C4C477 /* RegisterViewController.swift in Sources */,
 				89E0559E279D1AF100E86445 /* UserTargets.swift in Sources */,
+				89EF953827A6482A0070BB38 /* BaseCardView.swift in Sources */,
 				89A81983279A81D400F257CA /* OnboardingRepository.swift in Sources */,
 				89C147D127A00E5700F0E616 /* ShopCoordinator.swift in Sources */,
 				89C147F227A06E5100F0E616 /* AccountTableHeaderView.swift in Sources */,
