@@ -8,10 +8,23 @@
 import UIKit
 import SnapKit
 import RxSwift
+import Then
 
 class ProfileTableViewCell: UITableViewCell {
     deinit {
         print("cell deinit")
+    }
+    
+    let backgroundImageView = UIImageView().then {
+        $0.clipsToBounds = true
+        $0.contentMode = .scaleAspectFill
+        $0.addCorner(rad: 5, borderColor: nil)
+        $0.image = AssetsImages.sesacBg01.image
+    }
+    
+    let sesacImageView = UIImageView().then {
+        $0.contentMode = .scaleAspectFit
+        $0.image = AssetsImages.sesacFace2.image
     }
     
     var baseCardView = BaseCardView()
@@ -28,9 +41,25 @@ class ProfileTableViewCell: UITableViewCell {
     
     private func viewConfig() {
         selectionStyle = .none
-        contentView.addSubview(baseCardView)
+        [backgroundImageView, sesacImageView, baseCardView]
+            .forEach { contentView.addSubview($0) }
+        
+        backgroundImageView.snp.makeConstraints { make in
+            make.top.equalTo(contentView).offset(16)
+            make.leading.trailing.equalTo(contentView)
+            make.height.equalTo(backgroundImageView.snp.width).multipliedBy(194.0 / 343.0)
+        }
+        
+        sesacImageView.snp.makeConstraints { make in            
+            make.bottom.equalTo(backgroundImageView.snp.bottom)
+            make.centerX.equalTo(backgroundImageView.snp.centerX)
+            make.width.height.equalTo(backgroundImageView.snp.width).multipliedBy(0.5)
+        }
+        
         baseCardView.snp.makeConstraints { make in
-            make.edges.equalTo(contentView)
+            make.top.equalTo(backgroundImageView.snp.bottom)
+            make.leading.trailing.equalTo(backgroundImageView)
+            make.bottom.equalTo(contentView).offset(-16)
         }
     }
     

@@ -7,12 +7,8 @@
 
 import UIKit
 import SnapKit
-import RxSwift
-import RxCocoa
 
 final class BaseCardView: UIView {
-    
-    private var disposeBag = DisposeBag()
     
     let nicknameLabel = UILabel().then {
         $0.text = UserInfoManager.nick ?? "Tester"
@@ -26,8 +22,6 @@ final class BaseCardView: UIView {
     
     let sesacTitleView = SeSACTitleView()
     let sesacReviewView = SeSACReviewView()
-    
-    let verticalStackView = UIStackView()
     
     var titleViewHeight = 0
     var reviewViewHeight = 0

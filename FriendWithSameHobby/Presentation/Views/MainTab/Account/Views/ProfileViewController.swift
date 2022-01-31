@@ -18,6 +18,8 @@ class ProfileViewController: UIViewController {
     }
     
     let profileTableView = UITableView().then {
+        $0.separatorStyle = .none
+        $0.showsVerticalScrollIndicator = false        
         $0.rowHeight = UITableView.automaticDimension
         $0.register(ProfileTableViewCell.self, forCellReuseIdentifier: ProfileTableViewCell.identifier)
     }
