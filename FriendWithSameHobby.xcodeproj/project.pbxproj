@@ -37,6 +37,8 @@
 		894F5C2C27A7EB2400E583B9 /* ProfileAllowSearchingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894F5C2B27A7EB2400E583B9 /* ProfileAllowSearchingView.swift */; };
 		894F5C2E27A7F52400E583B9 /* ProfileAgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894F5C2D27A7F52400E583B9 /* ProfileAgeView.swift */; };
 		894F5C3127A7F56F00E583B9 /* DoubleSlider in Frameworks */ = {isa = PBXBuildFile; productRef = 894F5C3027A7F56F00E583B9 /* DoubleSlider */; };
+		894F5C3427A81C2100E583B9 /* ProfileUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894F5C3327A81C2100E583B9 /* ProfileUseCase.swift */; };
+		894F5C3627A81D4D00E583B9 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894F5C3527A81D4D00E583B9 /* ProfileViewModel.swift */; };
 		895E1D7D27A518F00054742F /* PhoneAuthRepositoryInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895E1D7C27A518F00054742F /* PhoneAuthRepositoryInterface.swift */; };
 		895E1D7F27A51EB50054742F /* EmptyUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895E1D7E27A51EB50054742F /* EmptyUseCase.swift */; };
 		895E1D8127A52B1B0054742F /* UpdateFCMtokenDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895E1D8027A52B1B0054742F /* UpdateFCMtokenDTO.swift */; };
@@ -151,6 +153,8 @@
 		894F5C2927A7E95A00E583B9 /* ProfileHobbyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHobbyView.swift; sourceTree = "<group>"; };
 		894F5C2B27A7EB2400E583B9 /* ProfileAllowSearchingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAllowSearchingView.swift; sourceTree = "<group>"; };
 		894F5C2D27A7F52400E583B9 /* ProfileAgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAgeView.swift; sourceTree = "<group>"; };
+		894F5C3327A81C2100E583B9 /* ProfileUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUseCase.swift; sourceTree = "<group>"; };
+		894F5C3527A81D4D00E583B9 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		895E1D7C27A518F00054742F /* PhoneAuthRepositoryInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneAuthRepositoryInterface.swift; sourceTree = "<group>"; };
 		895E1D7E27A51EB50054742F /* EmptyUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyUseCase.swift; sourceTree = "<group>"; };
 		895E1D8027A52B1B0054742F /* UpdateFCMtokenDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateFCMtokenDTO.swift; sourceTree = "<group>"; };
@@ -381,6 +385,14 @@
 			path = ProfileTableViewFooter;
 			sourceTree = "<group>";
 		};
+		894F5C3227A81C1000E583B9 /* MainTab */ = {
+			isa = PBXGroup;
+			children = (
+				894F5C3327A81C2100E583B9 /* ProfileUseCase.swift */,
+			);
+			path = MainTab;
+			sourceTree = "<group>";
+		};
 		898B79332799422D00844284 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -404,6 +416,7 @@
 		898B79352799423A00844284 /* UseCases */ = {
 			isa = PBXGroup;
 			children = (
+				894F5C3227A81C1000E583B9 /* MainTab */,
 				89A8198E279AF9C600F257CA /* Auth */,
 			);
 			path = UseCases;
@@ -746,6 +759,7 @@
 		89C147E127A00EFD00F0E616 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				894F5C3527A81D4D00E583B9 /* ProfileViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -1167,6 +1181,7 @@
 				89ECC564279E759600C4C477 /* NickNameViewModel.swift in Sources */,
 				890C52B427A3E32F009E54E9 /* BaseActivityIndicator.swift in Sources */,
 				89D721C4279B906F00B02A1E /* UITextField+Ext.swift in Sources */,
+				894F5C3627A81D4D00E583B9 /* ProfileViewModel.swift in Sources */,
 				894F5C2827A7BF7B00E583B9 /* ProfileGenderView.swift in Sources */,
 				89AB6650279846A900DFEE95 /* Assets+Colors.swift in Sources */,
 				898B794D279945F100844284 /* ViewModelType.swift in Sources */,
@@ -1178,6 +1193,7 @@
 				89D721CC279C5B4A00B02A1E /* VerifyViewModel.swift in Sources */,
 				89C147CC27A00DDF00F0E616 /* MainTabCoordinator.swift in Sources */,
 				89ECC566279E987B00C4C477 /* BirthViewController.swift in Sources */,
+				894F5C3427A81C2100E583B9 /* ProfileUseCase.swift in Sources */,
 				89A8198D279AF95C00F257CA /* PhoneAuthViewModel.swift in Sources */,
 				895E1D8327A52B8D0054742F /* UpdateFCMtokenModel.swift in Sources */,
 			);

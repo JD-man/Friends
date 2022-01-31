@@ -9,7 +9,7 @@ import DoubleSlider
 
 final class ProfileAgeView: UIView {
     let titleLabel = UILabel().then {
-        $0.text = "내 번호 검색 허용"
+        $0.text = "상대방 연령대"
         $0.font = AssetsFonts.NotoSansKR.regular.font(size: 14)
     }
     
@@ -41,6 +41,7 @@ final class ProfileAgeView: UIView {
         ageSlider.numberOfSteps = labels.count
         ageSlider.smoothStepping = true
         
+        ageSlider.labelsAreHidden = true
         ageSlider.lowerValueStepIndex = 0
         ageSlider.upperValueStepIndex = labels.count - 1
         
@@ -63,11 +64,12 @@ final class ProfileAgeView: UIView {
             .forEach { addSubview($0) }
         
         titleLabel.snp.makeConstraints { make in
-            make.leading.centerY.equalTo(self)
+            make.top.equalTo(self)
+            make.leading.equalTo(self)
         }
         
         ageLabel.snp.makeConstraints { make in
-            make.centerY.equalTo(titleLabel)
+            make.top.equalTo(titleLabel)
             make.trailing.equalTo(self)
         }
         

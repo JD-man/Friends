@@ -13,6 +13,17 @@ import RxCocoa
 
 class ProfileViewController: UIViewController {
     
+    var viewModel: ProfileViewModel?
+    
+    init(profileViewModel: ProfileViewModel?) {
+        super.init(nibName: nil, bundle: nil)
+        self.viewModel = profileViewModel
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+    
     deinit {
         print("ProfileVC deinit")
     }
@@ -37,6 +48,7 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         viewConfig()
         profileTableViewConfig()
+        binding()
     }
     
     private func viewConfig() {
@@ -66,6 +78,14 @@ class ProfileViewController: UIViewController {
         
         profileTableView.rx.setDelegate(self)
             .disposed(by: disposeBag)
+    }
+    
+    private func binding() {
+        let input = ProfileViewModel.Input(
+            withdrawTap: footerView.withdrawButton.rx.tap)
+        let output = viewModel?.transform(input, disposeBag: disposeBag)
+        
+        
     }
 }
 

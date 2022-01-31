@@ -13,5 +13,5 @@ protocol UserRepositoryInterface {
     func updateFCMtoken(model: UpdateFCMtokenModel,
                         completion: @escaping (Result<Bool, UserInfoError>) -> Void)
     func registerUser(model: UserRegisterModel, completion: @escaping (Result<Bool, UserRegisterError>) -> Void)
-    
+    func withdrawUser(completion: @escaping (Result<Bool, UserWithdrawError>) -> Void)
 }

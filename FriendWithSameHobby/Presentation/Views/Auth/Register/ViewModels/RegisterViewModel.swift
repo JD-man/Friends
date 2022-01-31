@@ -40,7 +40,7 @@ final class RegisterViewModel: ViewModelType {
         input.registerTap
             .drive { [weak self] _ in
                 BaseActivityIndicator.shared.show()
-                self?.useCase?.execute()
+                self?.useCase?.executeWithdraw()
             }.disposed(by: disposeBag)
         
         input.mergedTap

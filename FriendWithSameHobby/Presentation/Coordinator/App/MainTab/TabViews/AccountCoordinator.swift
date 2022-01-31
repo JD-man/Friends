@@ -27,7 +27,10 @@ final class AccountCoordinator: CoordinatorType {
     }
     
     func pushProfileVC() {
-        let profileVC = ProfileViewController()
+        let repository = UserRepository()
+        let useCase = ProfileUseCase(userRepo: repository)
+        let viewModel = ProfileViewModel(useCase: useCase, coordinator: self)
+        let profileVC = ProfileViewController(profileViewModel: viewModel)
         navigationController.pushViewController(profileVC, animated: true)
     }
 }

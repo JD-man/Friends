@@ -15,6 +15,12 @@ class ProfileTableViewFooter: UITableViewHeaderFooterView {
     let allowSearchingView = ProfileAllowSearchingView()
     let ageView = ProfileAgeView()
     
+    let withdrawButton = UIButton().then {
+        $0.setTitle("회원탈퇴", for: .normal)
+        $0.setTitleColor(AssetsColors.black.color, for: .normal)
+        $0.titleLabel?.font = AssetsFonts.NotoSansKR.regular.font(size: 14)
+    }
+    
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
         viewConfig()
@@ -26,7 +32,7 @@ class ProfileTableViewFooter: UITableViewHeaderFooterView {
     
     private func viewConfig() {
         backgroundColor = .systemBackground
-        [genderView, hobbyView, allowSearchingView, ageView]
+        [genderView, hobbyView, allowSearchingView, ageView, withdrawButton]
             .forEach { addSubview($0) }
         
         genderView.snp.makeConstraints { make in
@@ -47,8 +53,14 @@ class ProfileTableViewFooter: UITableViewHeaderFooterView {
         }
         
         ageView.snp.makeConstraints { make in
-            make.top.equalTo(allowSearchingView.snp.bottom).offset(8)
-            make.leading.trailing.equalTo(self)            
+            make.top.equalTo(allowSearchingView.snp.bottom).offset(16)
+            make.leading.trailing.equalTo(self)
+        }
+        
+        withdrawButton.snp.makeConstraints { make in
+            make.height.equalTo(22)
+            make.leading.equalTo(self)
+            make.top.equalTo(ageView.snp.bottom).offset(16)
             make.bottom.equalTo(self).priority(.low)
         }
     }

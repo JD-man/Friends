@@ -67,3 +67,23 @@ enum UserRegisterError: Int, CustomError {
         }
     }
 }
+
+enum UserWithdrawError: Int, CustomError {
+    case unknownError = -1
+    case tokenError = 401
+    case withdrawed = 406
+    case serverError = 500
+    
+    var description: String {
+        switch self {
+        case .unknownError:
+            return "오류가 발생했습니다. 다시 시도해 주세요."
+        case .tokenError:
+            return "토큰 에러"
+        case .withdrawed:
+            return "이미 탈퇴한 회원입니다."
+        case .serverError:
+            return "서버 에러"
+        }
+    }
+}

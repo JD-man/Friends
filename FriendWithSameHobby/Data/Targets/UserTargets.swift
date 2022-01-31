@@ -12,6 +12,7 @@ enum UserTargets {
     case getUserInfo
     case postUser(dto: UserRegisterDTO)
     case updateFCMtoken(dto: UpdateFCMtokenDTO)
+    case withdraw
 }
 
 extension UserTargets: TargetType {
@@ -25,6 +26,8 @@ extension UserTargets: TargetType {
             return "/user"
         case .updateFCMtoken:
             return "/user/update_fcm_token"
+        case .withdraw:
+            return "/user/withdraw"
         }
     }
     
@@ -34,6 +37,8 @@ extension UserTargets: TargetType {
             return .get
         case .postUser:
             return .post
+        case .withdraw:
+            return .post
         case .updateFCMtoken:
             return .put            
         }
@@ -41,7 +46,7 @@ extension UserTargets: TargetType {
     
     var task: Task {
         switch self {
-        case .getUserInfo:
+        case .getUserInfo, .withdraw:
             return .requestParameters(parameters: [:], encoding: URLEncoding.default)
         case .postUser(let dto):
             return .requestParameters(parameters: dto.toParameters(),
