@@ -17,16 +17,18 @@ class ProfileViewController: UIViewController {
         print("ProfileVC deinit")
     }
     
-    let profileTableView = UITableView().then {
+    let profileTableView = UITableView(frame: .zero, style: .grouped).then {
         $0.separatorStyle = .none
+        $0.backgroundColor = .systemBackground
         $0.showsVerticalScrollIndicator = false        
         $0.rowHeight = UITableView.automaticDimension
         $0.register(ProfileTableViewCell.self, forCellReuseIdentifier: ProfileTableViewCell.identifier)
+        $0.register(ProfileTableViewFooter.self, forHeaderFooterViewReuseIdentifier: ProfileTableViewFooter.identifier)
     }
     
-    var testRelay = BehaviorRelay<[Bool]>(value: [
-        false, false, false, false, false,        
-    ])
+    let footerView = ProfileTableViewFooter()
+    
+    var testRelay = BehaviorRelay<[Bool]>(value: [false])
     var cellRelay = PublishRelay<ProfileTableViewCell>()
     
     private var disposeBag = DisposeBag()
@@ -61,5 +63,26 @@ class ProfileViewController: UIViewController {
                             strongSelf.testRelay.accept(value)
                         }.disposed(by: cell.disposeBag)
                 }.disposed(by: disposeBag)
+        
+        profileTableView.rx.setDelegate(self)
+            .disposed(by: disposeBag)
+    }
+}
+
+extension ProfileViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {        
+        return footerView
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return UITableView.automaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return nil
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return .leastNonzeroMagnitude
     }
 }

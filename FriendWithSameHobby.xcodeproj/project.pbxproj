@@ -31,6 +31,12 @@
 		89235B3527A67A260069EFB5 /* SeSACTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89235B3427A67A260069EFB5 /* SeSACTitleView.swift */; };
 		89235B3727A688130069EFB5 /* SeSACReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89235B3627A688130069EFB5 /* SeSACReviewView.swift */; };
 		894184E027A15396007F35AC /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894184DF27A15396007F35AC /* ProfileViewController.swift */; };
+		894F5C2527A7BC6100E583B9 /* ProfileTableViewFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894F5C2427A7BC6100E583B9 /* ProfileTableViewFooter.swift */; };
+		894F5C2827A7BF7B00E583B9 /* ProfileGenderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894F5C2727A7BF7B00E583B9 /* ProfileGenderView.swift */; };
+		894F5C2A27A7E95A00E583B9 /* ProfileHobbyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894F5C2927A7E95A00E583B9 /* ProfileHobbyView.swift */; };
+		894F5C2C27A7EB2400E583B9 /* ProfileAllowSearchingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894F5C2B27A7EB2400E583B9 /* ProfileAllowSearchingView.swift */; };
+		894F5C2E27A7F52400E583B9 /* ProfileAgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894F5C2D27A7F52400E583B9 /* ProfileAgeView.swift */; };
+		894F5C3127A7F56F00E583B9 /* DoubleSlider in Frameworks */ = {isa = PBXBuildFile; productRef = 894F5C3027A7F56F00E583B9 /* DoubleSlider */; };
 		895E1D7D27A518F00054742F /* PhoneAuthRepositoryInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895E1D7C27A518F00054742F /* PhoneAuthRepositoryInterface.swift */; };
 		895E1D7F27A51EB50054742F /* EmptyUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895E1D7E27A51EB50054742F /* EmptyUseCase.swift */; };
 		895E1D8127A52B1B0054742F /* UpdateFCMtokenDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895E1D8027A52B1B0054742F /* UpdateFCMtokenDTO.swift */; };
@@ -140,6 +146,11 @@
 		89235B3427A67A260069EFB5 /* SeSACTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeSACTitleView.swift; sourceTree = "<group>"; };
 		89235B3627A688130069EFB5 /* SeSACReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeSACReviewView.swift; sourceTree = "<group>"; };
 		894184DF27A15396007F35AC /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		894F5C2427A7BC6100E583B9 /* ProfileTableViewFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewFooter.swift; sourceTree = "<group>"; };
+		894F5C2727A7BF7B00E583B9 /* ProfileGenderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileGenderView.swift; sourceTree = "<group>"; };
+		894F5C2927A7E95A00E583B9 /* ProfileHobbyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHobbyView.swift; sourceTree = "<group>"; };
+		894F5C2B27A7EB2400E583B9 /* ProfileAllowSearchingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAllowSearchingView.swift; sourceTree = "<group>"; };
+		894F5C2D27A7F52400E583B9 /* ProfileAgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAgeView.swift; sourceTree = "<group>"; };
 		895E1D7C27A518F00054742F /* PhoneAuthRepositoryInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneAuthRepositoryInterface.swift; sourceTree = "<group>"; };
 		895E1D7E27A51EB50054742F /* EmptyUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyUseCase.swift; sourceTree = "<group>"; };
 		895E1D8027A52B1B0054742F /* UpdateFCMtokenDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateFCMtokenDTO.swift; sourceTree = "<group>"; };
@@ -223,6 +234,7 @@
 				890CCA622797134F00D6185E /* RxKeyboard in Frameworks */,
 				890CCA6E2797210100D6185E /* Moya in Frameworks */,
 				890CCA5F279712FC00D6185E /* RxSwift in Frameworks */,
+				894F5C3127A7F56F00E583B9 /* DoubleSlider in Frameworks */,
 				89E055A8279D7BCC00E86445 /* FirebaseAuth in Frameworks */,
 				890CCA5D279712FC00D6185E /* RxRelay in Frameworks */,
 				890CCA58279712E800D6185E /* SnapKit in Frameworks */,
@@ -355,6 +367,18 @@
 				89235B3627A688130069EFB5 /* SeSACReviewView.swift */,
 			);
 			path = BaseCardView;
+			sourceTree = "<group>";
+		};
+		894F5C2627A7BF4D00E583B9 /* ProfileTableViewFooter */ = {
+			isa = PBXGroup;
+			children = (
+				894F5C2427A7BC6100E583B9 /* ProfileTableViewFooter.swift */,
+				894F5C2727A7BF7B00E583B9 /* ProfileGenderView.swift */,
+				894F5C2927A7E95A00E583B9 /* ProfileHobbyView.swift */,
+				894F5C2B27A7EB2400E583B9 /* ProfileAllowSearchingView.swift */,
+				894F5C2D27A7F52400E583B9 /* ProfileAgeView.swift */,
+			);
+			path = ProfileTableViewFooter;
 			sourceTree = "<group>";
 		};
 		898B79332799422D00844284 /* Views */ = {
@@ -746,6 +770,7 @@
 		89C147F027A06D6500F0E616 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				894F5C2627A7BF4D00E583B9 /* ProfileTableViewFooter */,
 				89C147F127A06E5100F0E616 /* AccountTableHeaderView.swift */,
 				895E1D8427A5B0A70054742F /* AccountTableViewCell.swift */,
 				89BF2C9427A6DA4200D693F6 /* ProfileTableViewCell.swift */,
@@ -907,6 +932,7 @@
 				890CCA752797214000D6185E /* Toast */,
 				89E055A7279D7BCC00E86445 /* FirebaseAuth */,
 				89E055A9279D7BCC00E86445 /* FirebaseMessaging */,
+				894F5C3027A7F56F00E583B9 /* DoubleSlider */,
 			);
 			productName = FriendWithSameHobby;
 			productReference = 890CC9EA2796959C00D6185E /* FriendWithSameHobby.app */;
@@ -989,6 +1015,7 @@
 				890CCA712797211F00D6185E /* XCRemoteSwiftPackageReference "Then" */,
 				890CCA742797214000D6185E /* XCRemoteSwiftPackageReference "Toast-Swift" */,
 				89E055A6279D7BCC00E86445 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				894F5C2F27A7F56E00E583B9 /* XCRemoteSwiftPackageReference "DoubleSlider" */,
 			);
 			productRefGroup = 890CC9EB2796959C00D6185E /* Products */;
 			projectDirPath = "";
@@ -1079,6 +1106,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				89C147C6279FCBCA00F0E616 /* UserRepositoryInterface.swift in Sources */,
+				894F5C2C27A7EB2400E583B9 /* ProfileAllowSearchingView.swift in Sources */,
 				89AB665E27985F4200DFEE95 /* UIFont+Ext.swift in Sources */,
 				89AB665927985B9600DFEE95 /* Assets+Fonts.swift in Sources */,
 				898B79482799456F00844284 /* Assets+Images.swift in Sources */,
@@ -1100,6 +1128,7 @@
 				898B79572799505000844284 /* AppCoordinator.swift in Sources */,
 				89D721C6279C14CC00B02A1E /* PhoneAuthRepository.swift in Sources */,
 				89ECC578279F2AEB00C4C477 /* RegisterViewModel.swift in Sources */,
+				894F5C2E27A7F52400E583B9 /* ProfileAgeView.swift in Sources */,
 				89ECC56A279E99E600C4C477 /* BirthViewModel.swift in Sources */,
 				89E055B1279D9D7800E86445 /* APIErrors.swift in Sources */,
 				89C147EA27A00F7700F0E616 /* AccountViewController.swift in Sources */,
@@ -1130,12 +1159,15 @@
 				89235B3527A67A260069EFB5 /* SeSACTitleView.swift in Sources */,
 				89C147D327A00E6400F0E616 /* FriendsCoordinator.swift in Sources */,
 				895E1D8727A5B5420054742F /* Cell+Ext.swift in Sources */,
+				894F5C2A27A7E95A00E583B9 /* ProfileHobbyView.swift in Sources */,
+				894F5C2527A7BC6100E583B9 /* ProfileTableViewFooter.swift in Sources */,
 				89E055A2279D1B9F00E86445 /* URLComponents.swift in Sources */,
 				898B795A2799604700844284 /* AuthCoordinator.swift in Sources */,
 				898B79442799431000844284 /* OnboardingViewController.swift in Sources */,
 				89ECC564279E759600C4C477 /* NickNameViewModel.swift in Sources */,
 				890C52B427A3E32F009E54E9 /* BaseActivityIndicator.swift in Sources */,
 				89D721C4279B906F00B02A1E /* UITextField+Ext.swift in Sources */,
+				894F5C2827A7BF7B00E583B9 /* ProfileGenderView.swift in Sources */,
 				89AB6650279846A900DFEE95 /* Assets+Colors.swift in Sources */,
 				898B794D279945F100844284 /* ViewModelType.swift in Sources */,
 				890CCA222796986600D6185E /* PhoneAuthViewController.swift in Sources */,
@@ -1547,6 +1579,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		894F5C2F27A7F56E00E583B9 /* XCRemoteSwiftPackageReference "DoubleSlider" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/yhkaplan/DoubleSlider";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		89E055A6279D7BCC00E86445 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -1607,6 +1647,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 890CCA742797214000D6185E /* XCRemoteSwiftPackageReference "Toast-Swift" */;
 			productName = Toast;
+		};
+		894F5C3027A7F56F00E583B9 /* DoubleSlider */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 894F5C2F27A7F56E00E583B9 /* XCRemoteSwiftPackageReference "DoubleSlider" */;
+			productName = DoubleSlider;
 		};
 		89E055A7279D7BCC00E86445 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
