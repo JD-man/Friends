@@ -45,9 +45,9 @@ final class NickNameViewModel: ViewModelType {
         input.textFieldText
             .map {
                 if $0.count > 1 && $0.count <= 10 {
-                    return .error(message: "10 글자 이내로 작성해주세요.")
+                    return .active                    
                 } else if $0.count > 10 {
-                    return .active
+                    return .error(message: "10 글자 이내로 작성해주세요.")
                 } else {
                     return .inactive
                 }

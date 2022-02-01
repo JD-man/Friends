@@ -40,12 +40,11 @@ class ProfileViewController: UIViewController {
     let footerView = ProfileTableViewFooter()
     
     var testRelay = BehaviorRelay<[Bool]>(value: [false])
-    var cellRelay = PublishRelay<ProfileTableViewCell>()
     
     private var disposeBag = DisposeBag()
     
     override func viewDidLoad() {
-        super.viewDidLoad()
+        super.viewDidLoad()        
         viewConfig()
         profileTableViewConfig()
         binding()
@@ -86,6 +85,35 @@ class ProfileViewController: UIViewController {
             withdrawTap: footerView.withdrawButton.rx.tap)
         let output = viewModel?.transform(input, disposeBag: disposeBag)
         
+        output?.gender
+            .asDriver(onErrorJustReturn: .unselected)
+            .drive(footerView.genderView.rx.gender)
+            .disposed(by: disposeBag)
+        
+        output?.hobby
+            .asDriver(onErrorJustReturn: "")
+            .drive(footerView.hobbyView.hobbyTextField.inputTextField.rx.text)
+            .disposed(by: disposeBag)
+        
+        output?.searchable
+            .asDriver(onErrorJustReturn: false)
+            .drive(footerView.allowSearchingView.rx.searchable)
+            .disposed(by: disposeBag)
+        
+        output?.minAgeIndex
+            .asDriver(onErrorJustReturn: 0)
+            .drive(footerView.ageView.ageSlider.rx.lowerValueStepIndex)
+            .disposed(by: disposeBag)
+        
+        output?.maxAgeIndex
+            .asDriver(onErrorJustReturn: 47)
+            .drive(footerView.ageView.ageSlider.rx.upperValueStepIndex)
+            .disposed(by: disposeBag)
+        
+        output?.ageRange
+            .asDriver(onErrorJustReturn: "18-65")
+            .drive(footerView.ageView.ageLabel.rx.text)
+            .disposed(by: disposeBag)
     }
 }
 

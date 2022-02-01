@@ -68,4 +68,9 @@ final class UserRepository: UserRepositoryInterface {
             }
         }
     }
+    
+    func updateUserMyPage(model: UserMyPageModel, completion: @escaping (Result<Bool, UserMyPageError>) -> Void) {
+        let dto = UserMyPageDTO(model: model)
+        print(dto)
+    }
 }

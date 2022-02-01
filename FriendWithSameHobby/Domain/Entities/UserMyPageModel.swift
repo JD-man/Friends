@@ -8,7 +8,7 @@
 import Foundation
 
 enum UserGender: Int {
-    case unknown = -1
+    case unselected = -1
     case female = 0
     case male = 1
 }
@@ -17,6 +17,6 @@ struct UserMyPageModel {
     var gender: UserGender
     var hobby: String
     var searchable: Bool
-    var ageMin: Int
-    var ageMax: Int
+    var minAge: Int
+    var maxAge: Int
 }

@@ -11,15 +11,15 @@ struct UserMyPageDTO: Codable {
     var gender: Int
     var hobby: String
     var searchable: Int
-    var ageMin: Int
-    var ageMax: Int
+    var minAge: Int
+    var maxAge: Int
     
     init(model: UserMyPageModel) {
         self.gender = model.gender.rawValue
         self.hobby = model.hobby
         self.searchable = model.searchable ? 1 : 0
-        self.ageMin = model.ageMin
-        self.ageMax = model.ageMax
+        self.minAge = model.minAge
+        self.maxAge = model.maxAge
     }
 }
 
@@ -28,7 +28,7 @@ extension UserMyPageDTO {
         return ["gender": gender,
          "hobby": hobby,
          "searchable": searchable,
-         "ageMin": ageMin,
-         "ageMax": ageMax]
+         "ageMin": minAge,
+         "ageMax": maxAge]
     }
 }

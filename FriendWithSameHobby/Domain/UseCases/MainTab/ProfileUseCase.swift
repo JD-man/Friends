@@ -47,11 +47,12 @@ final class ProfileUseCase: UseCaseType {
         userRepo?.getUserInfo(completion: { [weak self] result in
             switch result {
             case .success(let model):
-                let footerModel = UserMyPageModel(gender: UserGender(rawValue: model.gender) ?? .unknown,
+                let footerModel = UserMyPageModel(gender: UserGender(rawValue: model.gender) ?? .unselected,
                                                   hobby: model.hobby,
                                                   searchable: model.searchable == 1 ? true : false,
-                                                  ageMin: model.ageMin,
-                                                  ageMax: model.ageMax)
+                                                  minAge: model.ageMin,
+                                                  maxAge: model.ageMax)
+                print(footerModel)
                 self?.footerModel.accept(footerModel)
             case .failure(let error):
                 self?.getUserInfoFail.accept(error)
@@ -63,8 +64,8 @@ final class ProfileUseCase: UseCaseType {
         let model = UserMyPageModel(gender: gender,
                                     hobby: hobby,
                                     searchable: searchable,
-                                    ageMin: ageMin,
-                                    ageMax: ageMax)
+                                    minAge: ageMin,
+                                    maxAge: ageMax)
         // update user info
     }
     

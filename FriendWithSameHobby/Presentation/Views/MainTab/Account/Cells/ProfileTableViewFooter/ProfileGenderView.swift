@@ -18,6 +18,22 @@ final class ProfileGenderView: UIView {
     let maleButton = BaseButton(title: "남자", status: .inactive, type: .h48)
     let femaleButton = BaseButton(title: "여자", status: .inactive, type: .h48)
     
+    var gender: UserGender = .unselected {
+        didSet {
+            switch gender {
+            case .unselected:
+                maleButton.backgroundColor = .systemBackground
+                femaleButton.backgroundColor = .systemBackground
+            case .female:
+                maleButton.backgroundColor = .systemBackground
+                femaleButton.backgroundColor = AssetsColors.green.color
+            case .male:
+                femaleButton.backgroundColor = .systemBackground
+                maleButton.backgroundColor = AssetsColors.green.color
+            }
+        }
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         viewConfig()

@@ -7,6 +7,12 @@
 import UIKit
 
 final class ProfileAllowSearchingView: UIView {
+    var searchable: Bool = false {
+        didSet {
+            allowSwitch.isOn = searchable
+        }
+    }
+    
     let titleLabel = UILabel().then {
         $0.text = "내 번호 검색 허용"
         $0.font = AssetsFonts.NotoSansKR.regular.font(size: 14)
