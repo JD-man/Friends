@@ -53,8 +53,7 @@ final class VerifyUseCase: UseCaseType {
         let model = UpdateFCMtokenModel()
         userRepo?.updateFCMtoken(model: model, completion: { [weak self] result in
             switch result {
-            case .success(let isCompleted):
-                UserProgressManager.loggedIn = true
+            case .success(let isCompleted):                                
                 self?.authSuccessRelay.accept(isCompleted)
             case .failure(let error):
                 self?.authErrorRelay.accept(error)

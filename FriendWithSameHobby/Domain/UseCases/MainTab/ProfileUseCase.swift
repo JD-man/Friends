@@ -43,6 +43,7 @@ final class ProfileUseCase: UseCaseType {
             switch result {
             case .success(let idToken):
                 UserInfoManager.idToken = idToken
+                print("new idtoken : ", UserInfoManager.idToken)
                 self?.execute()
             case .failure(_):
                 self?.withdrawFail.accept(.unknownError)

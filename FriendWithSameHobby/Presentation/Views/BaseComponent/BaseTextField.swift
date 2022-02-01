@@ -29,9 +29,16 @@ final class BaseTextField: UIView {
         super.init(coder: coder)
     }
     
+    var status: BaseTextFieldStatus = .inactive {
+        didSet {
+            statusUpdate(status: status)
+        }
+    }
+    
     convenience init(text: String, status: BaseTextFieldStatus) {
         self.init()
-        viewConfig()        
+        viewConfig()
+        self.status = status
         statusUpdate(status: status)
         inputTextField.placeHolderConfig(text: text)
     }
@@ -61,7 +68,7 @@ final class BaseTextField: UIView {
         }
     }
     
-    func statusUpdate(status: BaseTextFieldStatus) {
+    private func statusUpdate(status: BaseTextFieldStatus) {
         backgroundColor = status.backGroundColor
         inputTextField.textColor = status.textColor
         lineView.backgroundColor = status.lineColor

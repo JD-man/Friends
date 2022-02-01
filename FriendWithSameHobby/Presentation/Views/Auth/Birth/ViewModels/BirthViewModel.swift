@@ -20,7 +20,7 @@ final class BirthViewModel: ViewModelType {
         // datepicker date
         let date: ControlProperty<Date>
         // button tap
-        let tap: Driver<Date>
+        let tap: Driver<(BaseButtonStatus, Date)>
     }
     
     struct Output {
@@ -71,13 +71,14 @@ final class BirthViewModel: ViewModelType {
         input.tap
             .asDriver()
             .drive { [weak self] in
-                switch output.buttonStatus.value {
+                let buttonStatus = $0.0
+                let date = $0.1
+                switch buttonStatus {
                 case .fill:
-                    print($0.toString)
-                    UserInfoManager.birth = $0
+                    UserInfoManager.birth = date
                     self?.coordinator?.pushEmailVC()
                 default:
-                    print("toast under 17")
+                    self?.coordinator?.toasting(message: "새싹친구는 만 17세 이상만 사용할 수 있습니다.")
                 }
             }.disposed(by: disposeBag)
         return output

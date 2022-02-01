@@ -84,15 +84,14 @@ class PhoneAuthViewController: UIViewController {
         
         output?.textFieldStatusRelay
             .asDriver(onErrorJustReturn: .disable)
-            .drive { [weak self] in
-                self?.phoneNumberTextField.statusUpdate(status: $0)
-            }.disposed(by: disposeBag)
+            .drive(phoneNumberTextField.rx.status)
+            .disposed(by: disposeBag)
         
         // Edit Begin
         phoneNumberTextField.inputTextField.rx.controlEvent(.editingDidBegin)
-            .asDriver()
-            .drive { [weak self] _ in
-                self?.phoneNumberTextField.statusUpdate(status: .focus)
-            }.disposed(by: disposeBag)
+            .map { BaseTextFieldStatus.active }
+            .asDriver(onErrorJustReturn: .inactive)
+            .drive(phoneNumberTextField.rx.status)
+            .disposed(by: disposeBag)
     }
 }

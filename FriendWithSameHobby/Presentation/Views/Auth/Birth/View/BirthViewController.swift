@@ -133,10 +133,11 @@ class BirthViewController: UIViewController {
     private func binding() {
         let input = BirthViewModel.Input(
             date: datePicker.rx.date,
-            tap: nextButton.rx.tap
-                .map { [weak self] in self?.datePicker.date ?? Date() }
-                .asDriver(onErrorJustReturn: Date())
-            )
+            tap: nextButton.rx.tap.map({ [weak self] in
+                guard let strongSelf = self else { return (.disable, Date()) }
+                return (strongSelf.nextButton.status,
+                        strongSelf.datePicker.date)
+            }).asDriver(onErrorJustReturn: (.disable, Date())))
         
         let output = viewModel?.transform(input, disposeBag: disposeBag)
         

@@ -17,3 +17,12 @@ extension Reactive where Base: BaseButton {
 //        }
 //    }
 }
+
+extension Reactive where Base: BaseTextField {
+    
+//    var textFieldstatus: Binder<BaseTextFieldStatus?> {
+//        return Binder(base) { (textField, status) in
+//            textField.status = status ?? .inactive
+//        }        
+//    }
+}

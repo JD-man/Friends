@@ -68,30 +68,29 @@ class NicknameViewController: UIViewController {
     func binding() {        
         let input = NickNameViewModel.Input(            
             textFieldText: nicknameTextField.inputTextField.rx.text.orEmpty.asDriver(),
-            nextButtonTap: nextButton.rx.tap.map { [weak self] in
-                self?.nicknameTextField.inputTextField.text ?? ""
-            }.asDriver(onErrorJustReturn: ""))        
+            nextButtonTap: nextButton.rx.tap.map({ [weak self] in
+                guard let strongSelf = self else { return (.disable, "") }
+                return (strongSelf.nextButton.status,
+                        strongSelf.nicknameTextField.inputTextField.text ?? "")
+            }).asDriver(onErrorJustReturn: (.disable, "")))
         
         let output = viewModel?.transform(input, disposeBag: disposeBag)
         
         output?.textFieldStatus
             .asDriver(onErrorJustReturn: .inactive)
-            .drive { [weak self] in
-                guard let status = $0 else { return }
-                self?.nicknameTextField.statusUpdate(status: status)
-            }.disposed(by: disposeBag)
+            .drive(nicknameTextField.rx.status)
+            .disposed(by: disposeBag)
         
         output?.nextButtonStatus
             .asDriver()
             .drive(nextButton.rx.status)
             .disposed(by: disposeBag)        
         
-        // Edit Begin
-        
+        // Edit Begin        
         nicknameTextField.inputTextField.rx.controlEvent(.editingDidBegin)
-            .asDriver()
-            .drive { [weak self] _ in
-                self?.nicknameTextField.statusUpdate(status: .focus)
-            }.disposed(by: disposeBag)            
+            .map { BaseTextFieldStatus.active }
+            .asDriver(onErrorJustReturn: .inactive)
+            .drive(nicknameTextField.rx.status)
+            .disposed(by: disposeBag)
     }
 }

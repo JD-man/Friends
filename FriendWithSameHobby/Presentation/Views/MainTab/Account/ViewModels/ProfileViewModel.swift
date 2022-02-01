@@ -46,9 +46,9 @@ final class ProfileViewModel: ViewModelType {
                 guard let mainTabCoordinator = self?.coordinator?.parentCoordinator as? MainTabCoordinator else {
                     return
                 }
-                mainTabCoordinator.finishDelegate?.didFinish(mainTabCoordinator, next: .auth, completion: {
+                mainTabCoordinator.finish(to: .auth) {
                     print("withdraw success")
-                })
+                }
             }.disposed(by: disposeBag)
         
         return output

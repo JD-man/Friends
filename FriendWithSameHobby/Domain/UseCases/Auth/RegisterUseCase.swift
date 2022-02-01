@@ -11,6 +11,8 @@ import RxCocoa
 import RxRelay
 
 final class RegisterUseCase: UseCaseType {
+    
+    
     var userRepository: UserRepositoryInterface?
     init(userRepository: UserRepositoryInterface) {
         self.userRepository = userRepository

@@ -25,7 +25,7 @@ final class EmailViewModel: ViewModelType {
     
     struct Output {
         // TextField Status
-        let textFieldStatus = BehaviorRelay<BaseTextFieldStatus?>(value: .inactive)
+        let textFieldStatus = BehaviorRelay<BaseTextFieldStatus>(value: .inactive)
         // Button Status
         let nextButtonStatus = BehaviorRelay<BaseButtonStatus>(value: .disable)
     }
@@ -47,7 +47,7 @@ final class EmailViewModel: ViewModelType {
             .disposed(by: disposeBag)
         
         validation
-            .map { (isValidated) -> BaseTextFieldStatus? in
+            .map { isValidated in
                 return isValidated ? .focus : .error(message: "이메일 형식으로 입력해주세요.")
             }.drive(output.textFieldStatus)
             .disposed(by: disposeBag)

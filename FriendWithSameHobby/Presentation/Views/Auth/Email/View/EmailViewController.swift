@@ -90,22 +90,20 @@ class EmailViewController: UIViewController {
         
         output?.textFieldStatus
             .asDriver(onErrorJustReturn: .inactive)
-            .drive {
-                guard let status = $0 else { return }
-                self.emailTextField.statusUpdate(status: status)
-            }.disposed(by: self.disposeBag)
+            .drive(emailTextField.rx.status)
+            .disposed(by: disposeBag)
         
         output?.nextButtonStatus
             .asDriver()
             .drive(nextButton.rx.status)
-            .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
         
         // Edit Begin
         
         emailTextField.inputTextField.rx.controlEvent(.editingDidBegin)
-            .asDriver()
-            .drive { [weak self] _ in
-                self?.emailTextField.statusUpdate(status: .focus)
-            }.disposed(by: disposeBag)
+            .map { BaseTextFieldStatus.active }
+            .asDriver(onErrorJustReturn: .inactive)
+            .drive(emailTextField.rx.status)
+            .disposed(by: disposeBag)
     }
 }

@@ -59,7 +59,7 @@ final class UserRepository: UserRepositoryInterface {
     func withdrawUser(completion: @escaping (Result<Bool, UserWithdrawError>) -> Void) {
         provider.request(.withdraw) { result in
             switch result {
-            case .success(let response):
+            case .success(_):
                 completion(.success(true))
             case .failure(let error):
                 let statusCode = error.response?.statusCode ?? -1

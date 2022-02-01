@@ -114,9 +114,8 @@ class VerifyViewController: UIViewController {
         
         output?.textFieldStatus
             .asDriver(onErrorJustReturn: .disable)
-            .drive { [weak self] in
-                self?.verifyTextField.statusUpdate(status: $0)
-            }.disposed(by: disposeBag)
+            .drive(verifyTextField.rx.status)
+            .disposed(by: disposeBag)
         
         output?.timerTextRelay
             .asDriver(onErrorJustReturn: "")
@@ -125,9 +124,9 @@ class VerifyViewController: UIViewController {
         
         // Edit begin
         verifyTextField.inputTextField.rx.controlEvent(.editingDidBegin)
-            .asDriver()
-            .drive { [weak self] _ in
-                self?.verifyTextField.statusUpdate(status: .focus)
-            }.disposed(by: disposeBag)
+            .map { BaseTextFieldStatus.active }
+            .asDriver(onErrorJustReturn: .inactive)
+            .drive(verifyTextField.rx.status)
+            .disposed(by: disposeBag)
     }
 }

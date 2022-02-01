@@ -31,6 +31,7 @@ final class AuthCoordinator: CoordinatorType {
             pushOnboardingVC()
         }
         else if UserProgressManager.loggedIn == nil {
+            print(UserProgressManager.loggedIn)
             pushPhoneAuthVC()
         }
         else {

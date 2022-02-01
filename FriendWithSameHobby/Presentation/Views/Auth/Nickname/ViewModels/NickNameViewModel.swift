@@ -20,12 +20,12 @@ final class NickNameViewModel: ViewModelType {
         // TextField Text
         let textFieldText: Driver<String>
         // Button Tap
-        let nextButtonTap: Driver<String>
+        let nextButtonTap: Driver<(BaseButtonStatus, String)>
     }
     
     struct Output {
         // TextField Status
-        let textFieldStatus = BehaviorRelay<BaseTextFieldStatus?>(value: .inactive)
+        let textFieldStatus = BehaviorRelay<BaseTextFieldStatus>(value: .inactive)
         // Button Status
         let nextButtonStatus = BehaviorRelay<BaseButtonStatus>(value: .disable)
     }
@@ -43,8 +43,14 @@ final class NickNameViewModel: ViewModelType {
             .disposed(by: disposeBag)
         
         input.textFieldText
-            .map { (text) -> BaseTextFieldStatus? in
-                return text.count > 10 ? .error(message: "10 글자 이내로 작성해주세요.") : nil                
+            .map {
+                if $0.count > 1 && $0.count <= 10 {
+                    return .error(message: "10 글자 이내로 작성해주세요.")
+                } else if $0.count > 10 {
+                    return .active
+                } else {
+                    return .inactive
+                }
             }.drive(output.textFieldStatus)
             .disposed(by: disposeBag)
         
@@ -52,14 +58,15 @@ final class NickNameViewModel: ViewModelType {
         input.nextButtonTap
             .asDriver()
             .drive { [weak self] in
-                switch output.nextButtonStatus.value {
+                let buttonStatus = $0.0
+                let nick = $0.1
+                switch buttonStatus {
                 case .fill:
-                    UserInfoManager.nick = $0
+                    UserInfoManager.nick = nick
                     self?.coordinator?.pushBirthVC()
                 default:
-                    print("invalid nickname")
+                    self?.coordinator?.toasting(message: "닉네임은 1자 이상 10자 이내로 부탁드려요.")
                 }
-
             }.disposed(by: disposeBag)
         
         return output
