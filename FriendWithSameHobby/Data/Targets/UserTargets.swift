@@ -8,10 +8,12 @@
 import Foundation
 import Moya
 
+typealias Parameters = [String: Any]
+
 enum UserTargets {
     case getUserInfo
-    case postUser(dto: UserRegisterDTO)
-    case updateFCMtoken(dto: UpdateFCMtokenDTO)
+    case postUser(parameters: Parameters )
+    case updateFCMtoken(parameters: Parameters)
     case withdraw
 }
 
@@ -48,11 +50,11 @@ extension UserTargets: TargetType {
         switch self {
         case .getUserInfo, .withdraw:
             return .requestParameters(parameters: [:], encoding: URLEncoding.default)
-        case .postUser(let dto):
-            return .requestParameters(parameters: dto.toParameters(),
+        case .postUser(let parameters):
+            return .requestParameters(parameters: parameters,
                                       encoding: URLEncoding.default)
-        case .updateFCMtoken(let dto):
-            return .requestParameters(parameters: dto.toParameters(),
+        case .updateFCMtoken(let parameters):
+            return .requestParameters(parameters: parameters,
                                       encoding: URLEncoding.default)
         }
     }

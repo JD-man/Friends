@@ -30,8 +30,8 @@ final class UserRepository: UserRepositoryInterface {
     
     func updateFCMtoken(model: UpdateFCMtokenModel,
                         completion: @escaping (Result<Bool, UserInfoError>) -> Void) {
-        let dto = UpdateFCMtokenDTO(model: model)
-        provider.request(.updateFCMtoken(dto: dto)) { result in
+        let parameters = UpdateFCMtokenDTO(model: model).toParameters()
+        provider.request(.updateFCMtoken(parameters: parameters)) { result in
             switch result {
             case .success(_):
                 completion(.success(true))
@@ -44,8 +44,8 @@ final class UserRepository: UserRepositoryInterface {
     
     func registerUser(model: UserRegisterModel,
                       completion: @escaping (Result<Bool, UserRegisterError>) -> Void) {
-        let dto = UserRegisterDTO(model: model)
-        provider.request(.postUser(dto: dto)) { result in
+        let parameters = UserRegisterDTO(model: model).toParameters()
+        provider.request(.postUser(parameters: parameters)) { result in
             switch result {
             case .success(_):
                 completion(.success(true))
@@ -57,6 +57,7 @@ final class UserRepository: UserRepositoryInterface {
     }
     
     func withdrawUser(completion: @escaping (Result<Bool, UserWithdrawError>) -> Void) {
+        print(UserTargets.withdraw.headers)
         provider.request(.withdraw) { result in
             switch result {
             case .success(_):

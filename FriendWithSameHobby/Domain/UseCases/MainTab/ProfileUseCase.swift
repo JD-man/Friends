@@ -15,12 +15,16 @@ final class ProfileUseCase: UseCaseType {
     let withdrawSuccess = PublishRelay<Bool>()
     let withdrawFail = PublishRelay<UserWithdrawError>()
     
+    let footerModel = PublishRelay<UserMyPageModel>()
+    
+    let getUserInfoFail = PublishRelay<UserInfoError>()
+    
     init(phoneAuthRepo: PhoneAuthRepository, userRepo: UserRepositoryInterface?) {
         self.phoneAuthRepo = phoneAuthRepo
         self.userRepo = userRepo
     }
     
-    func execute() {
+    func executeWithdraw() {
         userRepo?.withdrawUser(completion: { [weak self] result in
             switch result {
             case .success(let isWithdrawed):
@@ -32,19 +36,45 @@ final class ProfileUseCase: UseCaseType {
                     print("tokenError")
                     self?.tokenErrorHandling()
                 default:
+                    print(error)
                     self?.withdrawFail.accept(error)
                 }            
             }
         })
     }
     
-    func tokenErrorHandling() {
+    func executeFetchUserInfo() {
+        userRepo?.getUserInfo(completion: { [weak self] result in
+            switch result {
+            case .success(let model):
+                let footerModel = UserMyPageModel(gender: UserGender(rawValue: model.gender) ?? .unknown,
+                                                  hobby: model.hobby,
+                                                  searchable: model.searchable == 1 ? true : false,
+                                                  ageMin: model.ageMin,
+                                                  ageMax: model.ageMax)
+                self?.footerModel.accept(footerModel)
+            case .failure(let error):
+                self?.getUserInfoFail.accept(error)
+            }
+        })
+    }
+    
+    func excuteUpdateUserInfo(gender: UserGender, hobby: String, searchable: Bool, ageMin: Int, ageMax: Int) {
+        let model = UserMyPageModel(gender: gender,
+                                    hobby: hobby,
+                                    searchable: searchable,
+                                    ageMin: ageMin,
+                                    ageMax: ageMax)
+        // update user info
+    }
+    
+    private func tokenErrorHandling() {
         phoneAuthRepo?.refreshingIDtoken(completion: { [weak self] result in
             switch result {
             case .success(let idToken):
                 UserInfoManager.idToken = idToken
                 print("new idtoken : ", UserInfoManager.idToken)
-                self?.execute()
+                self?.executeWithdraw()
             case .failure(_):
                 self?.withdrawFail.accept(.unknownError)
             }

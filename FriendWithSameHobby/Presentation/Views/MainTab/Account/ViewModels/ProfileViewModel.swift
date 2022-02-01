@@ -12,12 +12,17 @@ import RxRelay
 
 final class ProfileViewModel: ViewModelType {
     struct Input {
+        
+        // viewWillAppear
+        let viewWillAppear: Driver<Void>
+        
         // withdraw button tap
         let withdrawTap: ControlEvent<Void>
     }
     
     struct Output {
-        
+        // viewWillAppear Test
+        let viewWillAppear = PublishRelay<String>()
     }
     
     var useCase: ProfileUseCase?
@@ -36,7 +41,12 @@ final class ProfileViewModel: ViewModelType {
         input.withdrawTap
             .asDriver()
             .drive { [weak self] _ in
-                self?.useCase?.execute()
+                self?.useCase?.executeWithdraw()
+            }.disposed(by: disposeBag)
+        
+        input.viewWillAppear
+            .drive { [weak self] in
+                
             }.disposed(by: disposeBag)
         
         // usecase to coordinator
@@ -50,6 +60,13 @@ final class ProfileViewModel: ViewModelType {
                     print("withdraw success")
                 }
             }.disposed(by: disposeBag)
+        
+        
+        // Usecase to
+//        useCase?.footerModel
+//            .map({
+//                $0.searchable
+//            }).bind(to: <#T##Int...##Int#>)
         
         return output
     }

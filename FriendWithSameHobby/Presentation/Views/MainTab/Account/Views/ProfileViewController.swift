@@ -82,9 +82,9 @@ class ProfileViewController: UIViewController {
     
     private func binding() {
         let input = ProfileViewModel.Input(
+            viewWillAppear: self.rx.methodInvoked(#selector(viewWillAppear(_:))).map { _ in return () }.asDriver(onErrorJustReturn: ()),
             withdrawTap: footerView.withdrawButton.rx.tap)
         let output = viewModel?.transform(input, disposeBag: disposeBag)
-        
         
     }
 }

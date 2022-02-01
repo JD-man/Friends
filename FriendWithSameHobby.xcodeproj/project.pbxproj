@@ -46,6 +46,8 @@
 		895E1D8327A52B8D0054742F /* UpdateFCMtokenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895E1D8227A52B8D0054742F /* UpdateFCMtokenModel.swift */; };
 		895E1D8527A5B0A70054742F /* AccountTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895E1D8427A5B0A70054742F /* AccountTableViewCell.swift */; };
 		895E1D8727A5B5420054742F /* Cell+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895E1D8627A5B5420054742F /* Cell+Ext.swift */; };
+		89636BF227A996D100DD8B91 /* UserMyPageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89636BF127A996D100DD8B91 /* UserMyPageModel.swift */; };
+		89636BF427A9A97600DD8B91 /* UserMyPageDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89636BF327A9A97600DD8B91 /* UserMyPageDTO.swift */; };
 		898B79442799431000844284 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898B79432799431000844284 /* OnboardingViewController.swift */; };
 		898B79462799447600844284 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 898B79452799447600844284 /* Images.xcassets */; };
 		898B79482799456F00844284 /* Assets+Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898B79472799456F00844284 /* Assets+Images.swift */; };
@@ -163,6 +165,8 @@
 		895E1D8227A52B8D0054742F /* UpdateFCMtokenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateFCMtokenModel.swift; sourceTree = "<group>"; };
 		895E1D8427A5B0A70054742F /* AccountTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTableViewCell.swift; sourceTree = "<group>"; };
 		895E1D8627A5B5420054742F /* Cell+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Cell+Ext.swift"; sourceTree = "<group>"; };
+		89636BF127A996D100DD8B91 /* UserMyPageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMyPageModel.swift; sourceTree = "<group>"; };
+		89636BF327A9A97600DD8B91 /* UserMyPageDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMyPageDTO.swift; sourceTree = "<group>"; };
 		898B79432799431000844284 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		898B79452799447600844284 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		898B79472799456F00844284 /* Assets+Images.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Assets+Images.swift"; sourceTree = "<group>"; };
@@ -411,6 +415,7 @@
 				89C0F3F327A28C3C0038DACA /* UserInfoModel.swift */,
 				89C0F3F527A28ECA0038DACA /* UserRegisterModel.swift */,
 				895E1D8227A52B8D0054742F /* UpdateFCMtokenModel.swift */,
+				89636BF127A996D100DD8B91 /* UserMyPageModel.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -817,6 +822,7 @@
 				89E055AE279D9B4400E86445 /* UserInfoDTO.swift */,
 				89C0F3F727A28F6D0038DACA /* UserRegisterDTO.swift */,
 				895E1D8027A52B1B0054742F /* UpdateFCMtokenDTO.swift */,
+				89636BF327A9A97600DD8B91 /* UserMyPageDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -1161,6 +1167,7 @@
 				89E0559E279D1AF100E86445 /* UserTargets.swift in Sources */,
 				89EF953827A6482A0070BB38 /* BaseCardView.swift in Sources */,
 				89A81983279A81D400F257CA /* OnboardingRepository.swift in Sources */,
+				89636BF427A9A97600DD8B91 /* UserMyPageDTO.swift in Sources */,
 				89C147D127A00E5700F0E616 /* ShopCoordinator.swift in Sources */,
 				89C147F227A06E5100F0E616 /* AccountTableHeaderView.swift in Sources */,
 				89C147D527A00E7200F0E616 /* AccountCoordinator.swift in Sources */,
@@ -1197,6 +1204,7 @@
 				89D721CC279C5B4A00B02A1E /* VerifyViewModel.swift in Sources */,
 				89C147CC27A00DDF00F0E616 /* MainTabCoordinator.swift in Sources */,
 				89ECC566279E987B00C4C477 /* BirthViewController.swift in Sources */,
+				89636BF227A996D100DD8B91 /* UserMyPageModel.swift in Sources */,
 				894F5C3427A81C2100E583B9 /* ProfileUseCase.swift in Sources */,
 				89A8198D279AF95C00F257CA /* PhoneAuthViewModel.swift in Sources */,
 				895E1D8327A52B8D0054742F /* UpdateFCMtokenModel.swift in Sources */,
