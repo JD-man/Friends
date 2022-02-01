@@ -28,7 +28,9 @@ final class ProfileUseCase: UseCaseType {
         userRepo?.withdrawUser(completion: { [weak self] result in
             switch result {
             case .success(let isWithdrawed):
+                UserProgressManager.loggedIn = nil
                 UserProgressManager.registered = nil
+                UserProgressManager.onboardingPassed = nil
                 self?.withdrawSuccess.accept(isWithdrawed)
             case .failure(let error):
                 switch error {
@@ -38,7 +40,7 @@ final class ProfileUseCase: UseCaseType {
                 default:
                     print(error)
                     self?.withdrawFail.accept(error)
-                }            
+                }
             }
         })
     }
@@ -55,6 +57,7 @@ final class ProfileUseCase: UseCaseType {
                 print(footerModel)
                 self?.footerModel.accept(footerModel)
             case .failure(let error):
+                print(error)
                 self?.getUserInfoFail.accept(error)
             }
         })
