@@ -8,6 +8,9 @@
 import UIKit
 
 final class AccountCoordinator: CoordinatorType {
+    deinit {
+        print("Account coordinator deinit")
+    }
     
     weak var parentCoordinator: CoordinatorType?
     
@@ -27,8 +30,9 @@ final class AccountCoordinator: CoordinatorType {
     }
     
     func pushProfileVC() {
-        let repository = UserRepository()
-        let useCase = ProfileUseCase(userRepo: repository)
+        let userRepo = UserRepository()
+        let phoneAuthRepo = PhoneAuthRepository(phoneID: nil)
+        let useCase = ProfileUseCase(phoneAuthRepo: phoneAuthRepo, userRepo: userRepo)
         let viewModel = ProfileViewModel(useCase: useCase, coordinator: self)
         let profileVC = ProfileViewController(profileViewModel: viewModel)
         navigationController.pushViewController(profileVC, animated: true)

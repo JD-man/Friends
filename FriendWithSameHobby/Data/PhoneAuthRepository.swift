@@ -68,7 +68,7 @@ final class PhoneAuthRepository: PhoneAuthRepositoryInterface {
             }
     }
     
-    private func refreshingIDtoken(completion: @escaping (Result<String, UserInfoError>) -> Void) {
+    func refreshingIDtoken(completion: @escaping (Result<String, UserInfoError>) -> Void) {
         let currentUser = Auth.auth().currentUser
         currentUser?.getIDTokenForcingRefresh(true, completion: { idToken, error in
             if let error = error {
@@ -79,6 +79,7 @@ final class PhoneAuthRepository: PhoneAuthRepositoryInterface {
             guard let idToken = idToken else {
                 return
             }
+            print(idToken)
             UserInfoManager.idToken = idToken
             UserProgressManager.loggedIn = true
             completion(.success(idToken))

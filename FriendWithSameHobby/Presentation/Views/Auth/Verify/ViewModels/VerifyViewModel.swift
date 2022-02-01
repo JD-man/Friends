@@ -91,7 +91,7 @@ final class VerifyViewModel: ViewModelType {
         
         useCase?.authErrorRelay
             .asDriver(onErrorJustReturn: .unknownError)
-            .drive { [weak self] error in
+            .drive { [weak self] error in                
                 BaseActivityIndicator.shared.hide()
                 switch error {
                 case .unregistered:

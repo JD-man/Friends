@@ -26,14 +26,14 @@ final class AppCoordinator: NSObject, CoordinatorType {
     
     func start() {
         print("App start")
-        addMainTabCoordinator()
-        
-//        if UserProgressManager.registered == nil {
-//            addAuthCoordinator()
-//        }
-//        else {
-//            addMainTabCoordinator()
-//        }
+        //addMainTabCoordinator()
+        print(UserProgressManager.registered)
+        if UserProgressManager.registered == nil {
+            addAuthCoordinator()
+        }
+        else {
+            addMainTabCoordinator()
+        }
     }
     
     func addAuthCoordinator() {

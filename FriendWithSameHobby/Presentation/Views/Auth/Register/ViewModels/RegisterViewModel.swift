@@ -40,7 +40,7 @@ final class RegisterViewModel: ViewModelType {
         input.registerTap
             .drive { [weak self] _ in
                 BaseActivityIndicator.shared.show()
-                self?.useCase?.executeWithdraw()
+                self?.useCase?.executeRegister()
             }.disposed(by: disposeBag)
         
         input.mergedTap
@@ -71,7 +71,7 @@ final class RegisterViewModel: ViewModelType {
             .drive(onNext: { [weak self] err in
                 BaseActivityIndicator.shared.hide()
                 self?.coordinator?.pop(to: .nickname, completion: {
-                    self?.coordinator?.toasting(message: err.localizedDescription)
+                    self?.coordinator?.toasting(message: err.description)
                 })
             }).disposed(by: disposeBag)
         return output

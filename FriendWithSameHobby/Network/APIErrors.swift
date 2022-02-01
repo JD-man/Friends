@@ -69,7 +69,7 @@ enum UserRegisterError: Int, CustomError {
 }
 
 enum UserWithdrawError: Int, CustomError {
-    case unknownError = -1
+    case unknownError = -1    
     case tokenError = 401
     case withdrawed = 406
     case serverError = 500

@@ -8,6 +8,9 @@
 import UIKit
 
 final class MainTabCoordinator: CoordinatorType {
+    deinit {
+        print("MainTab deinit")
+    }
     weak var parentCoordinator: CoordinatorType? // = AppCoordinator
     weak var finishDelegate: AppCoordinatorFinishDelegate?
     

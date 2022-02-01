@@ -24,11 +24,12 @@ final class RegisterUseCase: UseCaseType {
     var registerSuccess = PublishRelay<Bool>()
     var registerError = PublishRelay<UserRegisterError>()
     
-    func executeWithdraw() {
+    func executeRegister() {
         let model = UserRegisterModel()
         userRepository?.registerUser(model: model, completion: { [weak self] result in
             switch result {
             case .success(let isRegistered):
+                UserProgressManager.registered = true
                 self?.registerSuccess.accept(isRegistered)
             case .failure(let error):
                 self?.registerError.accept(error)

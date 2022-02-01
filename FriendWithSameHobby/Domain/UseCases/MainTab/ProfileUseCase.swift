@@ -9,12 +9,14 @@ import Foundation
 import RxRelay
 
 final class ProfileUseCase: UseCaseType {
+    var phoneAuthRepo: PhoneAuthRepository?
     var userRepo: UserRepositoryInterface?
     
     let withdrawSuccess = PublishRelay<Bool>()
     let withdrawFail = PublishRelay<UserWithdrawError>()
     
-    init(userRepo: UserRepositoryInterface?) {
+    init(phoneAuthRepo: PhoneAuthRepository, userRepo: UserRepositoryInterface?) {
+        self.phoneAuthRepo = phoneAuthRepo
         self.userRepo = userRepo
     }
     
@@ -22,14 +24,28 @@ final class ProfileUseCase: UseCaseType {
         userRepo?.withdrawUser(completion: { [weak self] result in
             switch result {
             case .success(let isWithdrawed):
+                UserProgressManager.registered = nil
                 self?.withdrawSuccess.accept(isWithdrawed)
             case .failure(let error):
                 switch error {
                 case .tokenError:
-                    print("token error")
+                    print("tokenError")
+                    self?.tokenErrorHandling()
                 default:
                     self?.withdrawFail.accept(error)
                 }            
+            }
+        })
+    }
+    
+    func tokenErrorHandling() {
+        phoneAuthRepo?.refreshingIDtoken(completion: { [weak self] result in
+            switch result {
+            case .success(let idToken):
+                UserInfoManager.idToken = idToken
+                self?.execute()
+            case .failure(_):
+                self?.withdrawFail.accept(.unknownError)
             }
         })
     }

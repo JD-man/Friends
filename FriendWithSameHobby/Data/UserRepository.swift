@@ -50,8 +50,7 @@ final class UserRepository: UserRepositoryInterface {
             case .success(_):
                 completion(.success(true))
             case .failure(let error):
-                let statusCode = error.response?.statusCode ?? -1
-                UserProgressManager.registered = true
+                let statusCode = error.response?.statusCode ?? -1                
                 completion(.failure(UserRegisterError(rawValue: statusCode) ?? .unknownError))
             }
         }

@@ -22,20 +22,14 @@ final class BaseActivityIndicator: UIView {
     private var container = UIView()
     
     func show() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
-            if self?.imageView == nil {
-                self?.setUpView()
-                DispatchQueue.main.async {
-                    self?.showLoadingActivity()
-                }
-            }
+        if imageView == nil {
+            setUpView()
+            showLoadingActivity()
         }
     }
     
     func hide() {
-        DispatchQueue.main.async { [weak self] in
-            self?.stopAnimation()
-        }
+        stopAnimation()
     }
     
     private func setUpView() {
@@ -69,8 +63,7 @@ final class BaseActivityIndicator: UIView {
         }
         addSubview(imageView)
         imageView.contentMode = .scaleAspectFit
-        imageView.frame = CGRect(x: self.center.x - 20, y: self.center.y - 20, width: 40, height: 40)
-        print(center)
+        imageView.frame = CGRect(x: self.center.x - 20, y: self.center.y - 20, width: 40, height: 40)        
         return imageView
     }
     
@@ -93,12 +86,14 @@ final class BaseActivityIndicator: UIView {
     }
     
     private func stopAnimation() {
+        print("stop animation")        
+        imageView?.removeFromSuperview()
         animator?.removeAllBehaviors()
-        imageView?.removeFromSuperview()        
+        
         imageView = nil
         container.removeFromSuperview()
-        self.removeFromSuperview()
-        //UIApplication.shared.endIgnoringInteractionEvents()
+        
+        self.removeFromSuperview()        
         self.isUserInteractionEnabled = true
     }
 }

@@ -32,10 +32,23 @@ final class ProfileViewModel: ViewModelType {
     func transform(_ input: Input, disposeBag: DisposeBag) -> Output {
         let output = Output()
         
+        // input to usecase
         input.withdrawTap
             .asDriver()
             .drive { [weak self] _ in
                 self?.useCase?.execute()
+            }.disposed(by: disposeBag)
+        
+        // usecase to coordinator
+        useCase?.withdrawSuccess
+            .asDriver(onErrorJustReturn: false)
+            .drive { [weak self] _ in
+                guard let mainTabCoordinator = self?.coordinator?.parentCoordinator as? MainTabCoordinator else {
+                    return
+                }
+                mainTabCoordinator.finishDelegate?.didFinish(mainTabCoordinator, next: .auth, completion: {
+                    print("withdraw success")
+                })
             }.disposed(by: disposeBag)
         
         return output
