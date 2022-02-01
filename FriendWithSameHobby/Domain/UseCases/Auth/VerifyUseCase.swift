@@ -32,9 +32,9 @@ final class VerifyUseCase: UseCaseType {
         phoneAuthRepo?.verifyRegisterNumber(verificationCode: codeRelay.value,
                                             completion: { [weak self] result in
             switch result {
-            case .success(let idToken):                
+            case .success(let idToken):
+                UserInfoManager.idToken = idToken
                 self?.getUserInfo()
-                print(idToken)
             case .failure(let error):
                 self?.authErrorRelay.accept(error)
             }
@@ -57,6 +57,7 @@ final class VerifyUseCase: UseCaseType {
         userRepo?.updateFCMtoken(model: model, completion: { [weak self] result in
             switch result {
             case .success(let isCompleted):
+                UserProgressManager.loggedIn = true
                 self?.authSuccessRelay.accept(isCompleted)
             case .failure(let error):
                 self?.authErrorRelay.accept(error)

@@ -62,9 +62,13 @@ class PhoneAuthViewController: UIViewController {
         let textFieldRx = phoneNumberTextField.inputTextField.rx
         
         let input = PhoneAuthViewModel.Input(
-            phoneNumberText: textFieldRx.text.orEmpty.asDriver(onErrorJustReturn: ""),
-            buttonTap: requestPhoneNumberButton.rx.tap.asDriver()
-        )
+            phoneNumberText: textFieldRx.text.orEmpty.asDriver(onErrorJustReturn: "").distinctUntilChanged(),
+            buttonTap: requestPhoneNumberButton.rx.tap.map({ [weak self] in
+                guard let strongSelf = self else { return (.disable, "") }
+                return (strongSelf.requestPhoneNumberButton.status,
+                        strongSelf.phoneNumberTextField.inputTextField.text ?? "")
+            }).asDriver(onErrorJustReturn: (.disable, ""))
+        ) // 여기 너무 긴데 팁좀...
         
         let output = viewModel?.transform(input, disposeBag: disposeBag)
         
@@ -75,9 +79,8 @@ class PhoneAuthViewController: UIViewController {
         
         output?.buttonStatusRelay
             .asDriver(onErrorJustReturn: .disable)
-            .drive { [weak self] in
-                self?.requestPhoneNumberButton.statusUpdate(status: $0)
-            }.disposed(by: disposeBag)
+            .drive(requestPhoneNumberButton.rx.status)
+            .disposed(by: disposeBag)
         
         output?.textFieldStatusRelay
             .asDriver(onErrorJustReturn: .disable)

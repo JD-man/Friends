@@ -16,6 +16,12 @@ final class BaseButton: UIButton {
         super.init(coder: coder)
     }
     
+    var status: BaseButtonStatus = .inactive {
+        didSet {
+            statusUpdate(status: status)
+        }
+    }
+    
     convenience init(title: String, status: BaseButtonStatus, type: BaseButtonType) {
         self.init(type: .system)
         statusUpdate(status: status)

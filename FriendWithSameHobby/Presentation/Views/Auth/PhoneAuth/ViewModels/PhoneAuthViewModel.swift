@@ -20,7 +20,7 @@ final class PhoneAuthViewModel: ViewModelType {
         // TextField text
         let phoneNumberText: Driver<String>        
         // button tap
-        let buttonTap: Driver<Void>
+        let buttonTap: Driver<(BaseButtonStatus, String)>
     }
     
     struct Output {
@@ -40,29 +40,33 @@ final class PhoneAuthViewModel: ViewModelType {
         let output = Output()
         
         // Input to UseCase
-        input.phoneNumberText
-            .distinctUntilChanged()
-            .drive { [weak self] in
-                self?.useCase?.validation(text: $0)
-            }.disposed(by: disposeBag)
         
         input.buttonTap
-            .drive { [weak self] _ in
-                BaseActivityIndicator.shared.show()
-                self?.useCase?.execute()
+            .drive { [weak self] in
+                let buttonStatus = $0.0
+                let phoneNumber = $0.1
+                switch buttonStatus {
+                case .inactive:
+                    self?.coordinator?.toasting(message: "잘못된 전화번호 형식입니다.")
+                case .fill:
+                    BaseActivityIndicator.shared.show()
+                    self?.coordinator?.toasting(message: "전화 번호 인증 시작")
+                    self?.useCase?.execute(phoneNumber: phoneNumber)
+                default:
+                    break
+                }                
             }.disposed(by: disposeBag)
         
-        // UseCase to Output
-        useCase?.formattedTextRelay
-            .bind(to: output.formattedNumberRelay)
+        // Input to Output (Validation)
+        
+        input.phoneNumberText
+            .map(numberFormatting)
+            .drive { output.formattedNumberRelay.accept($0) }
             .disposed(by: disposeBag)
         
-        useCase?.buttonStatusRelay
-            .bind(to: output.buttonStatusRelay)
-            .disposed(by: disposeBag)
-        
-        useCase?.textFieldStatusRelay
-            .bind(to: output.textFieldStatusRelay)
+        input.phoneNumberText
+            .map(validatePhoneNumber)
+            .drive { output.buttonStatusRelay.accept($0) }
             .disposed(by: disposeBag)
         
         // UseCase to Coordinator
@@ -79,8 +83,20 @@ final class PhoneAuthViewModel: ViewModelType {
                 BaseActivityIndicator.shared.hide()
                 self?.coordinator?.toasting(message: $0.description)
             }
-            .disposed(by: disposeBag)
-        
+            .disposed(by: disposeBag)        
         return output
+    }
+    
+    private func numberFormatting(text: String) -> String {
+        var temp = text
+        if temp.count == 3 || temp.count == 8 { temp += "-" }
+        return temp
+    }
+    
+    private func validatePhoneNumber(text: String) -> BaseButtonStatus {
+        let phoneNumberRegex = "^01([0-9])-([0-9]{3,4})-([0-9]{4})$"
+        let phoneNumberPred = NSPredicate(format: "SELF MATCHES %@", phoneNumberRegex)        
+        guard phoneNumberPred.evaluate(with: text) else { return .disable }
+        return .fill
     }
 }
