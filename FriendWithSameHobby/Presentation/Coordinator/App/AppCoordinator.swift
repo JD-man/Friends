@@ -27,7 +27,6 @@ final class AppCoordinator: NSObject, CoordinatorType {
     func start() {
         print("App start")
         //addMainTabCoordinator()
-        print(UserProgressManager.registered)
         if UserProgressManager.registered == nil {
             addAuthCoordinator()
         }
@@ -52,9 +51,9 @@ final class AppCoordinator: NSObject, CoordinatorType {
         mainTabCoordinator.start()
     }
     
-    func completedChild(_ child: CoordinatorType) {
-        print(child)
-    }
+//    func completedChild(_ child: CoordinatorType) {
+//        print(child)
+//    }
 }
 
 extension AppCoordinator: AppCoordinatorFinishDelegate {
@@ -72,10 +71,10 @@ extension AppCoordinator: AppCoordinatorFinishDelegate {
         navArr.append(last!)
         navigationController.viewControllers = navArr
         if last! is UITabBarController {
-            print("tab")
+            print("tab cooirdnator")
         }
         else {
-            print("not tab")
+            print("auth coordinator")
         }
         
         guard let completion = completion else { return }

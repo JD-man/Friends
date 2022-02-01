@@ -46,7 +46,7 @@ final class PhoneAuthViewModel: ViewModelType {
                 let buttonStatus = $0.0
                 let phoneNumber = $0.1
                 switch buttonStatus {
-                case .inactive:
+                case .disable:
                     self?.coordinator?.toasting(message: "잘못된 전화번호 형식입니다.")
                 case .fill:
                     BaseActivityIndicator.shared.show()

@@ -83,9 +83,8 @@ class NicknameViewController: UIViewController {
         
         output?.nextButtonStatus
             .asDriver()
-            .drive { [weak self] in
-                self?.nextButton.statusUpdate(status: $0)
-            }.disposed(by: disposeBag)        
+            .drive(nextButton.rx.status)
+            .disposed(by: disposeBag)        
         
         // Edit Begin
         

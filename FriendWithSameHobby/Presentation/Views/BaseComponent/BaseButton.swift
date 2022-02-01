@@ -16,22 +16,22 @@ final class BaseButton: UIButton {
         super.init(coder: coder)
     }
     
-    var status: BaseButtonStatus = .inactive {
-        didSet {
+    var status: BaseButtonStatus = .disable {
+        didSet {            
             statusUpdate(status: status)
         }
     }
     
     convenience init(title: String, status: BaseButtonStatus, type: BaseButtonType) {
         self.init(type: .system)
+        self.status = status
         statusUpdate(status: status)
         setTitle(title, for: .normal)
         frame.size.height = type.height
-        titleLabel?.font = AssetsFonts.NotoSansKR.regular.font(size: 14)
-        
+        titleLabel?.font = AssetsFonts.NotoSansKR.regular.font(size: 14)        
     }
     
-    func statusUpdate(status: BaseButtonStatus) {
+    private func statusUpdate(status: BaseButtonStatus) {
         backgroundColor = status.backgroundColor
         setTitleColor(status.titleColor, for: .normal)
         addCorner(rad: 8,borderColor: status.cornerColor)

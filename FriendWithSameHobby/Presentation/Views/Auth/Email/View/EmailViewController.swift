@@ -97,9 +97,8 @@ class EmailViewController: UIViewController {
         
         output?.nextButtonStatus
             .asDriver()
-            .drive {
-                self.nextButton.statusUpdate(status: $0)
-            }.disposed(by: self.disposeBag)
+            .drive(nextButton.rx.status)
+            .disposed(by: self.disposeBag)
         
         // Edit Begin
         

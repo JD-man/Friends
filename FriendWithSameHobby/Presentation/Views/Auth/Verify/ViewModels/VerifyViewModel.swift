@@ -18,9 +18,7 @@ final class VerifyViewModel: ViewModelType {
     
     struct Input {
         // verifyButton tap
-        let verifyButtonTap: ControlEvent<Void>
-        // timer
-        
+        let verifyButtonTap: Driver<(BaseButtonStatus, String)>
         // retryButton tap
         let retryButtonTap: ControlEvent<Void>
         // verifyTextField text
@@ -47,29 +45,22 @@ final class VerifyViewModel: ViewModelType {
     
     func transform(_ input: Input, disposeBag: DisposeBag) -> Output {
         let output = Output()
-        
         // timer
         startTimer(time: output.timerTextRelay, status: output.verifyButtonStatus)
         
         // Input to UseCase
-        input.verifyTextFieldText
-            .asDriver()
-            .drive { [weak self] in
-                if self?.remain != 0 {
-                    self?.useCase?.validation(text: $0)
-                }
-            }.disposed(by: disposeBag)
-        
         input.verifyButtonTap
-            .asDriver()
-            .drive { [weak self] _ in
+            .drive { [weak self] in
+                let buttonStatus = $0.0
+                let code = $0.1
                 if self?.remain == 0 {
                     self?.coordinator?.toasting(message: "입력시간이 초과됐습니다.")
-                }
-                else {
+                } else if buttonStatus == .disable {
+                    self?.coordinator?.toasting(message: "전화 번호 인증 실패")
+                } else {
                     BaseActivityIndicator.shared.show()
                     self?.timer?.dispose()
-                    self?.useCase?.excuteAuthNumber()
+                    self?.useCase?.excuteAuthNumber(code: code)
                 }
             }.disposed(by: disposeBag)
         
@@ -80,6 +71,12 @@ final class VerifyViewModel: ViewModelType {
                 self?.timer?.dispose()
                 self?.useCase?.requestRegisterCode()
             }.disposed(by: disposeBag)
+        
+        // Input to Output
+        input.verifyTextFieldText
+            .map(validation)
+            .bind(to: output.verifyButtonStatus)
+            .disposed(by: disposeBag)
         
         // UseCase to Coordinator
         useCase?.authSuccessRelay
@@ -95,7 +92,7 @@ final class VerifyViewModel: ViewModelType {
                 BaseActivityIndicator.shared.hide()
                 switch error {
                 case .unregistered:
-                    print(error)
+                    self?.timer?.dispose()
                     self?.coordinator?.pushNicknameVC()
                 default:
                     self?.coordinator?.toasting(message: error.description)                    
@@ -110,13 +107,10 @@ final class VerifyViewModel: ViewModelType {
                 self?.startTimer(time: output.timerTextRelay, status: output.verifyButtonStatus)
             }.disposed(by: disposeBag)
         
-        // UseCase to Output
-        useCase?.verifyButtonStatusRelay
-            .bind(to: output.verifyButtonStatus)
-            .disposed(by: disposeBag)
         return output
     }
     
+    // MARK: - Timer
     private func startTimer(time: PublishRelay<String>, status: PublishRelay<BaseButtonStatus>) {
         timer = Observable<Int>.interval(.seconds(1), scheduler: MainScheduler.instance)
             .subscribe { [weak self] _ in
@@ -134,7 +128,20 @@ final class VerifyViewModel: ViewModelType {
             } onDisposed: {
                 print("disposed")
             }
-        
         timer?.disposed(by: disposeBag)
+    }
+    
+    // MARK: - Validation
+    func validation(text: String) -> BaseButtonStatus {
+        if remain > 0 {
+            let registerNumberRegex = "^([0-9]{6})$"
+            let registerNumberPred = NSPredicate(format: "SELF MATCHES %@", registerNumberRegex)
+            
+            guard registerNumberPred.evaluate(with: text) else { return .disable }
+            return .fill
+        }
+        else {
+            return .disable
+        }
     }
 }

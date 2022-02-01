@@ -157,8 +157,7 @@ class BirthViewController: UIViewController {
         
         output?.buttonStatus
             .asDriver(onErrorJustReturn: .disable)
-            .drive { [weak self] in
-                self?.nextButton.statusUpdate(status: $0)
-            }.disposed(by: disposeBag)
+            .drive(nextButton.rx.status)
+            .disposed(by: disposeBag)
     }
 }

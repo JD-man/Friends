@@ -85,8 +85,7 @@ final class BaseActivityIndicator: UIView {
         }
     }
     
-    private func stopAnimation() {
-        print("stop animation")        
+    private func stopAnimation() {             
         imageView?.removeFromSuperview()
         animator?.removeAllBehaviors()
         

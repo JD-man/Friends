@@ -91,7 +91,11 @@ class VerifyViewController: UIViewController {
     
     private func binding() {
         let input = VerifyViewModel.Input(
-            verifyButtonTap: verifyButton.rx.tap,
+            verifyButtonTap: verifyButton.rx.tap.map({ [weak self] in
+                guard let strongSelf = self else { return (.disable, "") }
+                return (strongSelf.verifyButton.status,
+                        strongSelf.verifyTextField.inputTextField.text ?? "")
+            }).asDriver(onErrorJustReturn: (.disable, "")),
             retryButtonTap: retryButton.rx.tap,
             verifyTextFieldText: verifyTextField.inputTextField.rx.text.orEmpty
             )
@@ -100,9 +104,8 @@ class VerifyViewController: UIViewController {
         
         output?.verifyButtonStatus
             .asDriver(onErrorJustReturn: .disable)
-            .drive { [weak self] in
-                self?.verifyButton.statusUpdate(status: $0)
-            }.disposed(by: disposeBag)
+            .drive(verifyButton.rx.status)
+            .disposed(by: disposeBag)
         
         output?.emptyStringRelay
             .asDriver(onErrorJustReturn: "")

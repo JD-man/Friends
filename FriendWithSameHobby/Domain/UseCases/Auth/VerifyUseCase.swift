@@ -13,9 +13,6 @@ final class VerifyUseCase: UseCaseType {
     let userRepo: UserRepositoryInterface?
     let phoneAuthRepo: PhoneAuthRepositoryInterface?
     
-    let verifyButtonStatusRelay = PublishRelay<BaseButtonStatus>()
-    
-    let codeRelay = BehaviorRelay<String>(value: "")
     private var disposeBag = DisposeBag()
     
     let authSuccessRelay = PublishRelay<Bool>()
@@ -28,8 +25,8 @@ final class VerifyUseCase: UseCaseType {
     }
     
     // MARK: - Verify Register code
-    func excuteAuthNumber() {
-        phoneAuthRepo?.verifyRegisterNumber(verificationCode: codeRelay.value,
+    func excuteAuthNumber(code: String) {
+        phoneAuthRepo?.verifyRegisterNumber(verificationCode: code,
                                             completion: { [weak self] result in
             switch result {
             case .success(let idToken):
@@ -75,19 +72,5 @@ final class VerifyUseCase: UseCaseType {
                 self?.authErrorRelay.accept(error)
             }
         })
-    }
-    
-    // MARK: - Validation
-    func validation(text: String) {
-        codeRelay.accept(text)
-        
-        let registerNumberRegex = "^([0-9]{6})$"
-        let registerNumberPred = NSPredicate(format: "SELF MATCHES %@", registerNumberRegex)
-        
-        guard registerNumberPred.evaluate(with: text) else {
-            verifyButtonStatusRelay.accept(.disable)
-            return
-        }
-        verifyButtonStatusRelay.accept(.fill)
     }
 }
