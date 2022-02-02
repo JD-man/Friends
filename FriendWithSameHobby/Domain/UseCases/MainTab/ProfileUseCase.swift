@@ -12,12 +12,17 @@ final class ProfileUseCase: UseCaseType {
     var phoneAuthRepo: PhoneAuthRepository?
     var userRepo: UserRepositoryInterface?
     
+    // withdraw relay
     let withdrawSuccess = PublishRelay<Bool>()
     let withdrawFail = PublishRelay<UserWithdrawError>()
     
-    let footerModel = PublishRelay<UserMyPageModel>()
-    
+    // fetch user page relay
+    let userInfoData = PublishRelay<UserMyPageModel>()
     let getUserInfoFail = PublishRelay<UserInfoError>()
+    
+    // update user page relay
+    let updateSuccess = PublishRelay<Bool>()
+    let updateFail = PublishRelay<UserMyPageError>()
     
     init(phoneAuthRepo: PhoneAuthRepository, userRepo: UserRepositoryInterface?) {
         self.phoneAuthRepo = phoneAuthRepo
@@ -55,7 +60,7 @@ final class ProfileUseCase: UseCaseType {
                                                   minAge: model.ageMin,
                                                   maxAge: model.ageMax)
                 print(footerModel)
-                self?.footerModel.accept(footerModel)
+                self?.userInfoData.accept(footerModel)
             case .failure(let error):
                 print(error)
                 self?.getUserInfoFail.accept(error)
@@ -70,14 +75,21 @@ final class ProfileUseCase: UseCaseType {
                                     minAge: ageMin,
                                     maxAge: ageMax)
         // update user info
+        userRepo?.updateUserMyPage(model: model, completion: { [weak self] result in
+            switch result {
+            case .success(let isUpdated):
+                self?.updateSuccess.accept(isUpdated)
+            case .failure(let error):
+                self?.updateFail.accept(error)
+            }
+        })
     }
     
     private func tokenErrorHandling() {
         phoneAuthRepo?.refreshingIDtoken(completion: { [weak self] result in
             switch result {
             case .success(let idToken):
-                UserInfoManager.idToken = idToken
-                print("new idtoken : ", UserInfoManager.idToken)
+                UserInfoManager.idToken = idToken                
                 self?.executeWithdraw()
             case .failure(_):
                 self?.withdrawFail.accept(.unknownError)

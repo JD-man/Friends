@@ -26,6 +26,7 @@ final class PhoneAuthUseCase: UseCaseType {
         phoneAuthRepo?.verifyPhoneNumber("+82" + phoneNumber) { [weak self] result in
             switch result {
             case .success(let id):
+                UserInfoManager.phoneNumber = phoneNumber
                 UserProgressManager.loggedIn = true
                 self?.authSuccessRelay.accept(id)
             case .failure(let error):

@@ -109,14 +109,14 @@ final class RegisterViewController: UIViewController {
         output?.maleButtonColor
             .asDriver(onErrorJustReturn: false)
             .drive { [weak self] in
-                self?.maleButton.backgroundColor = $0 ? AssetsColors.green.color : .systemBackground
+                self?.maleButton.backgroundColor = $0 ? AssetsColors.whiteGreen.color : .systemBackground
             }
             .disposed(by: disposeBag)
         
         output?.femaleButtonColor
             .asDriver(onErrorJustReturn: false)
             .drive { [weak self] in
-                self?.femaleButton.backgroundColor = $0 ? AssetsColors.green.color : .systemBackground
+                self?.femaleButton.backgroundColor = $0 ? AssetsColors.whiteGreen.color : .systemBackground
             }
             .disposed(by: disposeBag)
     }

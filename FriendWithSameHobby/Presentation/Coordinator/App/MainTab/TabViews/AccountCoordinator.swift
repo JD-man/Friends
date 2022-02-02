@@ -35,6 +35,17 @@ final class AccountCoordinator: CoordinatorType {
         let useCase = ProfileUseCase(phoneAuthRepo: phoneAuthRepo, userRepo: userRepo)
         let viewModel = ProfileViewModel(useCase: useCase, coordinator: self)
         let profileVC = ProfileViewController(profileViewModel: viewModel)
+        navigationController.navigationItem.hidesBackButton = true
         navigationController.pushViewController(profileVC, animated: true)
+    }
+    
+    func pop(completion: (() -> Void)? ) {
+        navigationController.popViewController(animated: true)
+        guard let completion = completion else { return }
+        completion()
+    }
+    
+    func toasting(message: String) {
+        navigationController.view.makeToast(message)
     }
 }

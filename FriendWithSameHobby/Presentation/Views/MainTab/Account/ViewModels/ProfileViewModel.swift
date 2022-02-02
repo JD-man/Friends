@@ -11,17 +11,17 @@ import RxCocoa
 import RxRelay
 
 final class ProfileViewModel: ViewModelType {
+    typealias UserMyPageData = (UserGender, String, Bool, Int, Int)
     struct Input {
         // viewWillAppear
         let viewWillAppear: Driver<Void>
         // withdraw button tap
-        let withdrawTap: ControlEvent<Void>
+        let withdrawTap: Driver<Void>
+        // update button tap
+        let updateButtonTap: Driver<UserMyPageData>
     }
     
     struct Output {
-        // viewWillAppear Test
-        let viewWillAppear = PublishRelay<String>()
-        
         let gender = PublishRelay<UserGender>()
         let hobby = PublishRelay<String>()
         let searchable = PublishRelay<Bool>()
@@ -44,7 +44,6 @@ final class ProfileViewModel: ViewModelType {
         
         // input to usecase
         input.withdrawTap
-            .asDriver()
             .drive { [weak self] _ in
                 self?.useCase?.executeWithdraw()
             }.disposed(by: disposeBag)
@@ -54,45 +53,58 @@ final class ProfileViewModel: ViewModelType {
                 self?.useCase?.executeFetchUserInfo()
             }.disposed(by: disposeBag)
         
+        input.updateButtonTap
+            .drive { [weak self] in
+                self?.useCase?.excuteUpdateUserInfo(gender: $0.0,
+                                                    hobby: $0.1,
+                                                    searchable: $0.2,
+                                                    ageMin: $0.3 + 18,
+                                                    ageMax: $0.4 + 18)
+            }.disposed(by: disposeBag)
+        
         // usecase to coordinator
         useCase?.withdrawSuccess
             .asDriver(onErrorJustReturn: false)
             .drive { [weak self] _ in
-                guard let mainTabCoordinator = self?.coordinator?.parentCoordinator as? MainTabCoordinator else {
-                    return
-                }
-                mainTabCoordinator.finish(to: .auth) {
-                    print("withdraw success")
-                }
+                guard let mainTabCoordinator = self?.coordinator?.parentCoordinator as? MainTabCoordinator else { return }
+                mainTabCoordinator.finish(to: .auth, completion: nil)
+            }.disposed(by: disposeBag)
+        
+        useCase?.updateSuccess
+            .asDriver(onErrorJustReturn: false)
+            .drive { [weak self] _ in
+                self?.coordinator?.pop(completion: {
+                    self?.coordinator?.toasting(message: "회원정보가 변경됐습니다.")
+                })
             }.disposed(by: disposeBag)
         
         // Usecase to Output
-        useCase?.footerModel
+        useCase?.userInfoData
             .map { $0.gender }
             .bind(to: output.gender)
             .disposed(by: disposeBag)
         
-        useCase?.footerModel
+        useCase?.userInfoData
             .map { $0.hobby }
             .bind(to: output.hobby)
             .disposed(by: disposeBag)
         
-        useCase?.footerModel
+        useCase?.userInfoData
             .map { $0.searchable }
             .bind(to: output.searchable)
             .disposed(by: disposeBag)
         
-        useCase?.footerModel
+        useCase?.userInfoData
             .map { $0.minAge - 18 }
             .bind(to: output.minAgeIndex)
             .disposed(by: disposeBag)
         
-        useCase?.footerModel
+        useCase?.userInfoData
             .map { $0.maxAge - 18 }
             .bind(to: output.maxAgeIndex)
             .disposed(by: disposeBag)
         
-        useCase?.footerModel
+        useCase?.userInfoData
             .map { "\($0.minAge)-\($0.maxAge)" }
             .bind(to: output.ageRange)
             .disposed(by: disposeBag)

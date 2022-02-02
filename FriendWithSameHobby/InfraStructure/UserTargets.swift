@@ -15,6 +15,7 @@ enum UserTargets {
     case postUser(parameters: Parameters )
     case updateFCMtoken(parameters: Parameters)
     case withdraw
+    case updateUserPage(parameters: Parameters)
 }
 
 extension UserTargets: TargetType {
@@ -30,6 +31,8 @@ extension UserTargets: TargetType {
             return "/user/update_fcm_token"
         case .withdraw:
             return "/user/withdraw"
+        case .updateUserPage:
+            return "/user/update/mypage"
         }
     }
     
@@ -42,7 +45,9 @@ extension UserTargets: TargetType {
         case .withdraw:
             return .post
         case .updateFCMtoken:
-            return .put            
+            return .put
+        case .updateUserPage:
+            return .post
         }
     }
     
@@ -54,6 +59,9 @@ extension UserTargets: TargetType {
             return .requestParameters(parameters: parameters,
                                       encoding: URLEncoding.default)
         case .updateFCMtoken(let parameters):
+            return .requestParameters(parameters: parameters,
+                                      encoding: URLEncoding.default)
+        case .updateUserPage(let parameters):
             return .requestParameters(parameters: parameters,
                                       encoding: URLEncoding.default)
         }

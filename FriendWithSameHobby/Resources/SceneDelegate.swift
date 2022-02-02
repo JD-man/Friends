@@ -17,6 +17,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         // Tabbar Appearance Config
         tabbarConfig()
+        // Nav Appearance Config
+        navigationConfig()
         
         window = UIWindow(windowScene: windowScene)
         let nav = UINavigationController()
@@ -82,5 +84,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         UITabBarItem.appearance().setTitleTextAttributes(
             [.font : AssetsFonts.NotoSansKR.regular.font(size: 12)], for: .selected
         )
+    }
+    
+    private func navigationConfig() {
+        UINavigationBar.appearance().backIndicatorImage = AssetsImages.arrow.image
+        UINavigationBar.appearance().backIndicatorTransitionMaskImage = AssetsImages.arrow.image        
+        UINavigationBar.appearance().tintColor = AssetsColors.black.color        
     }
 }

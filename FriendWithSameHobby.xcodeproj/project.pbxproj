@@ -294,6 +294,7 @@
 		890CC9EC2796959C00D6185E /* FriendWithSameHobby */ = {
 			isa = PBXGroup;
 			children = (
+				89E0559F279D1B5D00E86445 /* InfraStructure */,
 				89E055AB279D942B00E86445 /* Network */,
 				89E055A0279D1B8500E86445 /* APIKey */,
 				89A8198B279AF32500F257CA /* Managers */,
@@ -341,7 +342,6 @@
 		890CCA1E2796983D00D6185E /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				89E0559F279D1B5D00E86445 /* Targets */,
 				89E05599279D108100E86445 /* DTO */,
 				89A81982279A81D400F257CA /* OnboardingRepository.swift */,
 				89D721C5279C14CC00B02A1E /* PhoneAuthRepository.swift */,
@@ -836,12 +836,12 @@
 			path = Email;
 			sourceTree = "<group>";
 		};
-		89E0559F279D1B5D00E86445 /* Targets */ = {
+		89E0559F279D1B5D00E86445 /* InfraStructure */ = {
 			isa = PBXGroup;
 			children = (
 				89E0559D279D1AF100E86445 /* UserTargets.swift */,
 			);
-			path = Targets;
+			path = InfraStructure;
 			sourceTree = "<group>";
 		};
 		89E055A0279D1B8500E86445 /* APIKey */ = {

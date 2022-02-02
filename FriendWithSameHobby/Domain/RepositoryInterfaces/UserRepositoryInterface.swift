@@ -14,4 +14,5 @@ protocol UserRepositoryInterface {
                         completion: @escaping (Result<Bool, UserInfoError>) -> Void)
     func registerUser(model: UserRegisterModel, completion: @escaping (Result<Bool, UserRegisterError>) -> Void)
     func withdrawUser(completion: @escaping (Result<Bool, UserWithdrawError>) -> Void)
+    func updateUserMyPage(model: UserMyPageModel, completion: @escaping (Result<Bool, UserMyPageError>) -> Void)
 }

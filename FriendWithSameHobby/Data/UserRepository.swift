@@ -56,8 +56,7 @@ final class UserRepository: UserRepositoryInterface {
         }
     }
     
-    func withdrawUser(completion: @escaping (Result<Bool, UserWithdrawError>) -> Void) {
-        print(UserTargets.withdraw.headers)
+    func withdrawUser(completion: @escaping (Result<Bool, UserWithdrawError>) -> Void) {        
         provider.request(.withdraw) { result in
             switch result {
             case .success(_):

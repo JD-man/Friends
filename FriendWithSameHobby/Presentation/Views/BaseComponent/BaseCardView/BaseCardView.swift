@@ -78,6 +78,6 @@ final class BaseCardView: UIView {
         let constant = isExpanding ? 30 + reviewViewHeight + titleViewHeight : -16        
         sesacReviewView.snp.updateConstraints({ make in
             make.bottom.equalTo(self).offset(constant).priority(.low)
-        })
+        })        
     }
 }

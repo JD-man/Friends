@@ -30,8 +30,7 @@ final class PhoneAuthRepository: PhoneAuthRepositoryInterface {
                     completion(.failure(UserInfoError(rawValue: statusCode) ?? .unknownError))
                     return
                 }
-                guard let id = id else { return }
-                UserInfoManager.phoneNumber = numText
+                guard let id = id else { return }                
                 completion(.success(id))
             }
     }

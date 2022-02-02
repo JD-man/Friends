@@ -12,7 +12,7 @@ import RxSwift
 import RxCocoa
 
 class ProfileViewController: UIViewController {
-    
+    typealias UserMyPageData = (UserGender, String, Bool, Int, Int)
     var viewModel: ProfileViewModel?
     
     init(profileViewModel: ProfileViewModel?) {
@@ -37,10 +37,13 @@ class ProfileViewController: UIViewController {
         $0.register(ProfileTableViewFooter.self, forHeaderFooterViewReuseIdentifier: ProfileTableViewFooter.identifier)
     }
     
+    let updateBarButton = UIBarButtonItem().then {
+        $0.title = "저장"
+        $0.style = .plain
+    }
+    
     let footerView = ProfileTableViewFooter()
-    
     var testRelay = BehaviorRelay<[Bool]>(value: [false])
-    
     private var disposeBag = DisposeBag()
     
     override func viewDidLoad() {
@@ -56,6 +59,10 @@ class ProfileViewController: UIViewController {
         profileTableView.snp.makeConstraints { make in
             make.edges.equalTo(view.safeAreaLayoutGuide).inset(16)
         }
+        
+        // Nav config
+        navigationController?.navigationBar.topItem?.title = ""
+        navigationItem.rightBarButtonItem = updateBarButton
     }
     
     private func profileTableViewConfig() {
@@ -82,7 +89,9 @@ class ProfileViewController: UIViewController {
     private func binding() {
         let input = ProfileViewModel.Input(
             viewWillAppear: self.rx.methodInvoked(#selector(viewWillAppear(_:))).map { _ in return () }.asDriver(onErrorJustReturn: ()),
-            withdrawTap: footerView.withdrawButton.rx.tap)
+            withdrawTap: footerView.withdrawButton.rx.tap.asDriver(),
+            updateButtonTap: updateBarButton.rx.tap.map(makeUpdateData).asDriver(onErrorJustReturn: (.unselected, "", false, 0, 1))
+        )
         let output = viewModel?.transform(input, disposeBag: disposeBag)
         
         output?.gender
@@ -114,6 +123,16 @@ class ProfileViewController: UIViewController {
             .asDriver(onErrorJustReturn: "18-65")
             .drive(footerView.ageView.ageLabel.rx.text)
             .disposed(by: disposeBag)
+    }
+    
+    private func makeUpdateData() -> UserMyPageData {
+        let gender = footerView.genderView.gender
+        let hobby = footerView.hobbyView.hobbyTextField.inputTextField.text ?? ""
+        let searchable = footerView.allowSearchingView.searchable
+        let minAgeIndex = footerView.ageView.ageSlider.lowerValueStepIndex
+        let maxAgeIndex = footerView.ageView.ageSlider.upperValueStepIndex
+        
+        return (gender, hobby, searchable, minAgeIndex, maxAgeIndex)
     }
 }
 
