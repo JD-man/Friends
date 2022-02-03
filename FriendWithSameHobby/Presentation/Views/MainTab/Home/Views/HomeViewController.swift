@@ -6,14 +6,18 @@
 //
 
 import UIKit
+import NMapsMap
 
 class HomeViewController: UIViewController {
 
     weak var coordinator: HomeCoordinator?
     
+    let mapView = NMFMapView()
+    
     init(coordinator: HomeCoordinator) {
         super.init(nibName: nil, bundle: nil)
         self.coordinator = coordinator
+        viewConfig()
     }
     
     required init?(coder: NSCoder) {
@@ -23,5 +27,10 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemGreen
+    }
+    
+    private func viewConfig() {
+        view.addSubview(mapView)
+        mapView.frame = view.bounds
     }
 }
