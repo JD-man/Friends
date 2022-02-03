@@ -13,4 +13,5 @@ protocol PhoneAuthRepositoryInterface {
     func retryPhoneNumber(completion: @escaping (Result<String, UserInfoError>) -> Void)
     func verifyRegisterNumber(verificationCode: String,                              
                               completion: @escaping (Result<String, UserInfoError>) -> Void)
+    func refreshingIDtoken(completion: @escaping (Result<String, UserInfoError>) -> Void)
 }

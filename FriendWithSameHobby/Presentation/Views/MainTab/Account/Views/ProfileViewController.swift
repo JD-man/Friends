@@ -13,6 +13,7 @@ import RxCocoa
 
 class ProfileViewController: UIViewController {
     typealias UserMyPageData = (UserGender, String, Bool, Int, Int)
+    typealias UserAgeRange = (Int, Int)
     var viewModel: ProfileViewModel?
     
     init(profileViewModel: ProfileViewModel?) {
@@ -115,7 +116,7 @@ class ProfileViewController: UIViewController {
             .disposed(by: disposeBag)
         
         output?.maxAgeIndex
-            .asDriver(onErrorJustReturn: 47)
+            .asDriver(onErrorJustReturn: 47)            
             .drive(footerView.ageView.ageSlider.rx.upperValueStepIndex)
             .disposed(by: disposeBag)
         

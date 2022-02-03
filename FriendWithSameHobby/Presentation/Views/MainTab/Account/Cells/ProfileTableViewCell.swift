@@ -51,9 +51,10 @@ class ProfileTableViewCell: UITableViewCell {
         }
         
         sesacImageView.snp.makeConstraints { make in            
-            make.bottom.equalTo(backgroundImageView.snp.bottom)
-            make.centerX.equalTo(backgroundImageView.snp.centerX)
-            make.width.height.equalTo(backgroundImageView.snp.width).multipliedBy(0.5)
+            make.bottom.equalTo(backgroundImageView.snp.bottom).offset(9)            
+            make.leading.equalTo(backgroundImageView.snp.leading).offset(75)
+            make.trailing.equalTo(backgroundImageView.snp.trailing).offset(-84)
+            make.height.equalTo(backgroundImageView.snp.width).multipliedBy(184.0 / 343.0)
         }
         
         baseCardView.snp.makeConstraints { make in

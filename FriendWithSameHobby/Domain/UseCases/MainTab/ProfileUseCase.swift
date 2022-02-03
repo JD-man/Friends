@@ -9,7 +9,7 @@ import Foundation
 import RxRelay
 
 final class ProfileUseCase: UseCaseType {
-    var phoneAuthRepo: PhoneAuthRepository?
+    var phoneAuthRepo: PhoneAuthRepositoryInterface?
     var userRepo: UserRepositoryInterface?
     
     // withdraw relay
@@ -40,8 +40,9 @@ final class ProfileUseCase: UseCaseType {
             case .failure(let error):
                 switch error {
                 case .tokenError:
-                    print("tokenError")
-                    self?.tokenErrorHandling()
+                    self?.tokenErrorHandling { [weak self] in
+                        self?.executeWithdraw()
+                    }
                 default:
                     print(error)
                     self?.withdrawFail.accept(error)
@@ -59,11 +60,17 @@ final class ProfileUseCase: UseCaseType {
                                                   searchable: model.searchable == 1 ? true : false,
                                                   minAge: model.ageMin,
                                                   maxAge: model.ageMax)
-                print(footerModel)
                 self?.userInfoData.accept(footerModel)
             case .failure(let error):
-                print(error)
-                self?.getUserInfoFail.accept(error)
+                switch error {
+                case .tokenError:
+                    self?.tokenErrorHandling { [weak self] in
+                        self?.executeFetchUserInfo()
+                    }
+                default:
+                    self?.getUserInfoFail.accept(error)
+                }
+                
             }
         })
     }
@@ -80,19 +87,31 @@ final class ProfileUseCase: UseCaseType {
             case .success(let isUpdated):
                 self?.updateSuccess.accept(isUpdated)
             case .failure(let error):
-                self?.updateFail.accept(error)
+                switch error {
+                case .tokenError:
+                    self?.tokenErrorHandling { [weak self] in
+                        self?.excuteUpdateUserInfo(gender: gender,
+                                                   hobby: hobby,
+                                                   searchable: searchable,
+                                                   ageMin: ageMin,
+                                                   ageMax: ageMax)}
+                default:
+                    self?.updateFail.accept(error)
+                }
+                
             }
         })
     }
     
-    private func tokenErrorHandling() {
-        phoneAuthRepo?.refreshingIDtoken(completion: { [weak self] result in
+    private func tokenErrorHandling(completion: @escaping () -> Void) {
+        phoneAuthRepo?.refreshingIDtoken(completion: { result in
             switch result {
             case .success(let idToken):
                 UserInfoManager.idToken = idToken                
-                self?.executeWithdraw()
-            case .failure(_):
-                self?.withdrawFail.accept(.unknownError)
+                completion()
+            case .failure(let error):
+                print(error)
+                break
             }
         })
     }

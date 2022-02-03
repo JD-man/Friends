@@ -6,6 +6,7 @@
 //
 import UIKit
 import DoubleSlider
+import RxSwift
 
 final class ProfileAgeView: UIView {
     let titleLabel = UILabel().then {
@@ -25,10 +26,13 @@ final class ProfileAgeView: UIView {
     var lowerCircleLayer = CALayer()
     var upperCircleLayer = CALayer()
     
+    private var disposeBag = DisposeBag()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         ageSliderConfig()
         viewConfig()
+        binding()
     }
     
     required init?(coder: NSCoder) {
@@ -79,6 +83,18 @@ final class ProfileAgeView: UIView {
             make.height.equalTo(40)
             make.bottom.equalTo(self)
         }
+    }
+    
+    private func binding() {
+        ageSlider.rx.controlEvent(.valueChanged)
+            .map { [weak self] in
+                let lowerValue = self?.ageSlider.lowerValueStepIndex ?? 0
+                let upperValue = self?.ageSlider.upperValueStepIndex ?? 47
+                return "\(lowerValue + 18)-\(upperValue + 18)"
+            }
+            .asDriver(onErrorJustReturn: "")
+            .drive(ageLabel.rx.text)
+            .disposed(by: disposeBag)
     }
 }
 

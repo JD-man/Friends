@@ -50,6 +50,7 @@ final class ProfileViewModel: ViewModelType {
         
         input.viewWillAppear
             .drive { [weak self] _ in
+                print("viewwillappear")
                 self?.useCase?.executeFetchUserInfo()
             }.disposed(by: disposeBag)
         
@@ -70,12 +71,30 @@ final class ProfileViewModel: ViewModelType {
                 mainTabCoordinator.finish(to: .auth, completion: nil)
             }.disposed(by: disposeBag)
         
+        useCase?.withdrawFail
+            .asDriver(onErrorJustReturn: .unknownError)
+            .drive { [weak self] in
+                self?.coordinator?.toasting(message: $0.description)
+            }.disposed(by: disposeBag)
+        
+        useCase?.getUserInfoFail
+            .asDriver(onErrorJustReturn: .unknownError)
+            .drive { [weak self] in
+                self?.coordinator?.toasting(message: $0.description)
+            }.disposed(by: disposeBag)
+        
         useCase?.updateSuccess
             .asDriver(onErrorJustReturn: false)
             .drive { [weak self] _ in
                 self?.coordinator?.pop(completion: {
                     self?.coordinator?.toasting(message: "회원정보가 변경됐습니다.")
                 })
+            }.disposed(by: disposeBag)
+        
+        useCase?.updateFail
+            .asDriver(onErrorJustReturn: .unknownError)
+            .drive { [weak self] in
+                self?.coordinator?.toasting(message: $0.description)
             }.disposed(by: disposeBag)
         
         // Usecase to Output

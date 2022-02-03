@@ -69,7 +69,15 @@ final class UserRepository: UserRepositoryInterface {
     }
     
     func updateUserMyPage(model: UserMyPageModel, completion: @escaping (Result<Bool, UserMyPageError>) -> Void) {
-        let dto = UserMyPageDTO(model: model)
-        print(dto)
+        let parameters = UserMyPageDTO(model: model).toParameters()
+        provider.request(.updateUserPage(parameters: parameters)) { result in
+            switch result {
+            case .success(_):
+                completion(.success(true))
+            case .failure(let error):
+                let statusCode = error.response?.statusCode ?? -1
+                completion(.failure(UserMyPageError(rawValue: statusCode) ?? .unknownError))
+            }
+        }
     }
 }

@@ -8,6 +8,7 @@
 import UIKit
 import Then
 import SnapKit
+import RxSwift
 
 final class ProfileGenderView: UIView {
     let titleLabel = UILabel().then {
@@ -18,6 +19,8 @@ final class ProfileGenderView: UIView {
     let maleButton = BaseButton(title: "남자", status: .inactive, type: .h48)
     let femaleButton = BaseButton(title: "여자", status: .inactive, type: .h48)
     
+    private var disposeBag = DisposeBag()
+    
     var gender: UserGender = .unselected {
         didSet {
             switch gender {
@@ -26,10 +29,10 @@ final class ProfileGenderView: UIView {
                 femaleButton.backgroundColor = .systemBackground
             case .female:
                 maleButton.backgroundColor = .systemBackground
-                femaleButton.backgroundColor = AssetsColors.green.color
+                femaleButton.backgroundColor = AssetsColors.whiteGreen.color
             case .male:
                 femaleButton.backgroundColor = .systemBackground
-                maleButton.backgroundColor = AssetsColors.green.color
+                maleButton.backgroundColor = AssetsColors.whiteGreen.color
             }
         }
     }
@@ -37,6 +40,7 @@ final class ProfileGenderView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         viewConfig()
+        binding()
     }
     
     required init?(coder: NSCoder) {
@@ -64,5 +68,15 @@ final class ProfileGenderView: UIView {
             make.centerY.equalTo(titleLabel)
             make.height.equalTo(maleButton.frame.height)
         }
+    }
+    
+    private func binding() {
+        Observable.merge(
+            maleButton.rx.tap.map { UserGender.male },
+            femaleButton.rx.tap.map { UserGender.female })
+            .asDriver(onErrorJustReturn: .unselected)
+            .drive { [weak self] in
+                self?.gender = $0
+            }.disposed(by: disposeBag)
     }
 }
