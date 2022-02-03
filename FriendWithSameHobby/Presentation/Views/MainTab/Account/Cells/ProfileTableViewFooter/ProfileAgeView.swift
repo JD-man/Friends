@@ -90,8 +90,7 @@ final class ProfileAgeView: UIView {
             .map { [weak self] in
                 let lowerValue = self?.ageSlider.lowerValueStepIndex ?? 0
                 let upperValue = self?.ageSlider.upperValueStepIndex ?? 47
-                return "\(lowerValue + 18)-\(upperValue + 18)"
-            }
+                return "\(lowerValue + 18)-\(upperValue + 18)" }
             .asDriver(onErrorJustReturn: "")
             .drive(ageLabel.rx.text)
             .disposed(by: disposeBag)

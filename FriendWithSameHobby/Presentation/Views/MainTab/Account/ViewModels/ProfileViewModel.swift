@@ -56,6 +56,7 @@ final class ProfileViewModel: ViewModelType {
         
         input.updateButtonTap
             .drive { [weak self] in
+                BaseActivityIndicator.shared.show()
                 self?.useCase?.excuteUpdateUserInfo(gender: $0.0,
                                                     hobby: $0.1,
                                                     searchable: $0.2,
@@ -86,6 +87,7 @@ final class ProfileViewModel: ViewModelType {
         useCase?.updateSuccess
             .asDriver(onErrorJustReturn: false)
             .drive { [weak self] _ in
+                BaseActivityIndicator.shared.hide()
                 self?.coordinator?.pop(completion: {
                     self?.coordinator?.toasting(message: "회원정보가 변경됐습니다.")
                 })

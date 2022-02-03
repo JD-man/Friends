@@ -29,10 +29,10 @@ final class ProfileGenderView: UIView {
                 femaleButton.backgroundColor = .systemBackground
             case .female:
                 maleButton.backgroundColor = .systemBackground
-                femaleButton.backgroundColor = AssetsColors.whiteGreen.color
+                femaleButton.backgroundColor = AssetsColors.green.color
             case .male:
                 femaleButton.backgroundColor = .systemBackground
-                maleButton.backgroundColor = AssetsColors.whiteGreen.color
+                maleButton.backgroundColor = AssetsColors.green.color
             }
         }
     }

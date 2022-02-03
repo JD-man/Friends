@@ -91,7 +91,9 @@ class ProfileViewController: UIViewController {
         let input = ProfileViewModel.Input(
             viewWillAppear: self.rx.methodInvoked(#selector(viewWillAppear(_:))).map { _ in return () }.asDriver(onErrorJustReturn: ()),
             withdrawTap: footerView.withdrawButton.rx.tap.asDriver(),
-            updateButtonTap: updateBarButton.rx.tap.map(makeUpdateData).asDriver(onErrorJustReturn: (.unselected, "", false, 0, 1))
+            updateButtonTap: updateBarButton.rx.tap.map { [weak self] in
+                self?.makeUpdateData() ?? (.unselected, "", false, 0, 1) }
+                .asDriver(onErrorJustReturn: (.unselected, "", false, 0, 1))
         )
         let output = viewModel?.transform(input, disposeBag: disposeBag)
         
@@ -126,7 +128,7 @@ class ProfileViewController: UIViewController {
             .disposed(by: disposeBag)
     }
     
-    private func makeUpdateData() -> UserMyPageData {
+    func makeUpdateData() -> UserMyPageData {
         let gender = footerView.genderView.gender
         let hobby = footerView.hobbyView.hobbyTextField.inputTextField.text ?? ""
         let searchable = footerView.allowSearchingView.allowSwitch.isOn

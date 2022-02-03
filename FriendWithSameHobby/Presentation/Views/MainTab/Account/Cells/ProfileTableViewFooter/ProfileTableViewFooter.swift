@@ -10,6 +10,10 @@ import SnapKit
 
 class ProfileTableViewFooter: UITableViewHeaderFooterView {
     
+    deinit {
+        print("footer deinit")
+    }
+    
     let genderView = ProfileGenderView()
     let hobbyView = ProfileHobbyView()
     let allowSearchingView = ProfileAllowSearchingView()
