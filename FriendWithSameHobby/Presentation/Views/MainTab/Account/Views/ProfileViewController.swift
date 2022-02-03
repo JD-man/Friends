@@ -107,7 +107,7 @@ class ProfileViewController: UIViewController {
         
         output?.searchable
             .asDriver(onErrorJustReturn: false)
-            .drive(footerView.allowSearchingView.rx.searchable)
+            .drive(footerView.allowSearchingView.allowSwitch.rx.isOn)
             .disposed(by: disposeBag)
         
         output?.minAgeIndex
@@ -129,7 +129,7 @@ class ProfileViewController: UIViewController {
     private func makeUpdateData() -> UserMyPageData {
         let gender = footerView.genderView.gender
         let hobby = footerView.hobbyView.hobbyTextField.inputTextField.text ?? ""
-        let searchable = footerView.allowSearchingView.searchable
+        let searchable = footerView.allowSearchingView.allowSwitch.isOn
         let minAgeIndex = footerView.ageView.ageSlider.lowerValueStepIndex
         let maxAgeIndex = footerView.ageView.ageSlider.upperValueStepIndex
         
