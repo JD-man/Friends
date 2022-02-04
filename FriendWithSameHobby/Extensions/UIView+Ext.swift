@@ -13,4 +13,11 @@ extension UIView {
         layer.cornerRadius = rad
         layer.borderColor = (borderColor ?? .clear).cgColor
     }
+    
+    func addshadow(rad: CGFloat) {
+        layer.shadowColor = UIColor.black.cgColor
+        layer.shadowOffset = .zero
+        layer.shadowRadius = rad
+        layer.shadowOpacity = 0.5
+    }
 }

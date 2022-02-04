@@ -8,11 +8,14 @@
 import UIKit
 import NMapsMap
 
-class HomeViewController: UIViewController {
+final class HomeViewController: UIViewController {
 
     weak var coordinator: HomeCoordinator?
     
-    let mapView = NMFMapView()
+    //private let mapView = NMFMapView()
+    private let genderStackView = HomeGenderView().then {
+        $0.addshadow(rad: 2.5)
+    }
     
     init(coordinator: HomeCoordinator) {
         super.init(nibName: nil, bundle: nil)
@@ -30,7 +33,18 @@ class HomeViewController: UIViewController {
     }
     
     private func viewConfig() {
-        view.addSubview(mapView)
-        mapView.frame = view.bounds
+//        [mapView, genderStackView]
+//            .forEach { view.addSubview($0) }
+        
+//        mapView.snp.makeConstraints { make in
+//            make.edges.equalToSuperview()
+//        }
+        
+        genderStackView.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(52)
+            make.leading.equalTo(view.safeAreaLayoutGuide).offset(16)
+            make.height.equalTo(48 * 3)
+            make.width.equalTo(48)
+        }
     }
 }

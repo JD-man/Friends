@@ -16,7 +16,7 @@ struct AccountCellModel {
     let titleText: String
 }
 
-class AccountViewController: UIViewController {
+final class AccountViewController: UIViewController {
     
     weak var coordinator: AccountCoordinator?
     

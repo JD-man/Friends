@@ -11,7 +11,7 @@ import SnapKit
 import RxSwift
 import RxCocoa
 
-class ProfileViewController: UIViewController {
+final class ProfileViewController: UIViewController {
     typealias UserMyPageData = (UserGender, String, Bool, Int, Int)
     typealias UserAgeRange = (Int, Int)
     var viewModel: ProfileViewModel?
@@ -29,7 +29,7 @@ class ProfileViewController: UIViewController {
         print("ProfileVC deinit")
     }
     
-    let profileTableView = UITableView(frame: .zero, style: .grouped).then {
+    private let profileTableView = UITableView(frame: .zero, style: .grouped).then {
         $0.separatorStyle = .none
         $0.backgroundColor = .systemBackground
         $0.showsVerticalScrollIndicator = false        
@@ -38,13 +38,13 @@ class ProfileViewController: UIViewController {
         $0.register(ProfileTableViewFooter.self, forHeaderFooterViewReuseIdentifier: ProfileTableViewFooter.identifier)
     }
     
-    let updateBarButton = UIBarButtonItem().then {
+    private let updateBarButton = UIBarButtonItem().then {
         $0.title = "저장"
         $0.style = .plain
     }
     
-    let footerView = ProfileTableViewFooter()
-    var testRelay = BehaviorRelay<[Bool]>(value: [false])
+    private let footerView = ProfileTableViewFooter()
+    private var testRelay = BehaviorRelay<[Bool]>(value: [false])
     private var disposeBag = DisposeBag()
     
     override func viewDidLoad() {

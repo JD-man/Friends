@@ -103,6 +103,7 @@
 		89E055AF279D9B4400E86445 /* UserInfoDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E055AE279D9B4400E86445 /* UserInfoDTO.swift */; };
 		89E055B1279D9D7800E86445 /* APIErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E055B0279D9D7800E86445 /* APIErrors.swift */; };
 		89E055B5279DA6C200E86445 /* NicknameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E055B4279DA6C200E86445 /* NicknameViewController.swift */; };
+		89EC76CB27ACCFB600CDA0A4 /* HomeGenderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EC76CA27ACCFB600CDA0A4 /* HomeGenderView.swift */; };
 		89ECC564279E759600C4C477 /* NickNameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89ECC563279E759600C4C477 /* NickNameViewModel.swift */; };
 		89ECC566279E987B00C4C477 /* BirthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89ECC565279E987B00C4C477 /* BirthViewController.swift */; };
 		89ECC56A279E99E600C4C477 /* BirthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89ECC569279E99E600C4C477 /* BirthViewModel.swift */; };
@@ -227,6 +228,7 @@
 		89E055AE279D9B4400E86445 /* UserInfoDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoDTO.swift; sourceTree = "<group>"; };
 		89E055B0279D9D7800E86445 /* APIErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIErrors.swift; sourceTree = "<group>"; };
 		89E055B4279DA6C200E86445 /* NicknameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameViewController.swift; sourceTree = "<group>"; };
+		89EC76CA27ACCFB600CDA0A4 /* HomeGenderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeGenderView.swift; sourceTree = "<group>"; };
 		89ECC563279E759600C4C477 /* NickNameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameViewModel.swift; sourceTree = "<group>"; };
 		89ECC565279E987B00C4C477 /* BirthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthViewController.swift; sourceTree = "<group>"; };
 		89ECC569279E99E600C4C477 /* BirthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthViewModel.swift; sourceTree = "<group>"; };
@@ -294,7 +296,6 @@
 				C6795BB25530FBCCE40C531A /* Pods-FriendWithSameHobbyTests.debug.xcconfig */,
 				D9BB018176EA3AEFE41F2C29 /* Pods-FriendWithSameHobbyTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -764,6 +765,7 @@
 			isa = PBXGroup;
 			children = (
 				89C147E327A00F1300F0E616 /* HomeViewController.swift */,
+				89EC76CA27ACCFB600CDA0A4 /* HomeGenderView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1283,6 +1285,7 @@
 				89D721CA279C5A0E00B02A1E /* VerifyViewController.swift in Sources */,
 				89D721CE279C5BFE00B02A1E /* VerifyUseCase.swift in Sources */,
 				89C0F3F827A28F6D0038DACA /* UserRegisterDTO.swift in Sources */,
+				89EC76CB27ACCFB600CDA0A4 /* HomeGenderView.swift in Sources */,
 				890CC9EE2796959C00D6185E /* AppDelegate.swift in Sources */,
 				89E055A5279D296400E86445 /* UserDefaultManagers.swift in Sources */,
 				894184E027A15396007F35AC /* ProfileViewController.swift in Sources */,
