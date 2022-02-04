@@ -12,11 +12,25 @@ import RxRelay
 
 final class HomeViewModel: ViewModelType {
     struct Input {
+        // matching button tap to push hobby VC
         let matchingButtonTap: Driver<Void>
+        
+        // gender button tap
+        let allGenderButtonTap: Driver<Void>
+        let maleButtonTap: Driver<Void>
+        let femaleButtonTap: Driver<Void>
+        
+        // user location button tap
+        let userLocationButtonTap: Driver<Void>
+               
+        // coord input relay
+        
     }
     
     struct Output {
+        // friends coord
         
+        // center marker
     }
     
     var useCase: HomeUseCase?

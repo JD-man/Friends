@@ -35,8 +35,12 @@ final class HomeViewController: UIViewController {
             coordRelay.accept(currentCoord)
         }
     }
+    
     private lazy var coordRelay = BehaviorRelay<NMGLatLng>(value: currentCoord)
-    private let userMarker = NMFMarker()
+    private let userMarker = UIImageView().then {
+        $0.frame.size.width = 48
+        $0.image = AssetsImages.mapMarker.image
+    }
     
     init(viewModel: HomeViewModel) {
         super.init(nibName: nil, bundle: nil)
@@ -56,7 +60,7 @@ final class HomeViewController: UIViewController {
     
     private func viewConfig() {
         view.backgroundColor = .systemGreen
-        [mapView, genderStackView, locationButton, matchingButton]
+        [mapView, genderStackView, locationButton, matchingButton, userMarker]
             .forEach { view.addSubview($0) }
         
         mapView.snp.makeConstraints { make in
@@ -80,17 +84,25 @@ final class HomeViewController: UIViewController {
             make.trailing.bottom.equalTo(view.safeAreaLayoutGuide).inset(16)
             make.width.height.equalTo(matchingButton.frame.width)
         }
+        
+        userMarker.snp.makeConstraints { make in
+            make.center.equalTo(view.safeAreaLayoutGuide)
+            make.width.height.equalTo(userMarker.frame.width)
+        }
     }
     
     private func locationManagerConfig() {
         locationManager.delegate = self
+        mapView.addCameraDelegate(delegate: self)
         checkUserLocationServiceAuthorization()
     }
     
     private func binding() {
         // requestRelay가 하나 필요할듯
-        let input = HomeViewModel.Input(matchingButtonTap: matchingButton.rx.tap.asDriver())
-        let output = viewModel?.transform(input, disposeBag: disposeBag)
+//        let input = HomeViewModel.Input(matchingButtonTap: matchingButton.rx.tap.asDriver())
+//        let output = viewModel?.transform(input, disposeBag: disposeBag)
+        
+        // 첫시작 -> 현재 기기 위치
         
         coordRelay
             .asDriver()
@@ -98,31 +110,16 @@ final class HomeViewController: UIViewController {
                 self?.cameraMoving(coord: $0)
             }.disposed(by: disposeBag)
         
-        Observable<Int>.interval(.seconds(2), scheduler: MainScheduler.instance)
-            .map { [weak self] _ in
-                self?.projectionCoord() }
-            .subscribe(onNext: { [weak self] in
-                print($0)
-            }).disposed(by: disposeBag)
-        
         locationButton.rx.tap
             .asDriver()
             .drive { [weak self] _ in
-                let centerCoord = self?.projectionCoord()
-                self?.marking(coord: centerCoord!)
+                self?.checkUserLocationServiceAuthorization()
             }.disposed(by: disposeBag)
-    }
-    
-    private func marking(coord: NMGLatLng) {
-        userMarker.mapView = nil
-        userMarker.position = coord
-        userMarker.mapView = mapView
     }
     
     private func cameraMoving(coord: NMGLatLng) {
         let cameraUpdate = NMFCameraUpdate(scrollTo: coord, zoomTo: 18)
         mapView.moveCamera(cameraUpdate)
-        marking(coord: coord)
     }
     
     private func projectionCoord() -> NMGLatLng {
@@ -198,5 +195,11 @@ extension HomeViewController: CLLocationManagerDelegate {
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         print(#function)
         checkUserLocationServiceAuthorization()
+    }
+}
+
+extension HomeViewController: NMFMapViewCameraDelegate {
+    func mapViewCameraIdle(_ mapView: NMFMapView) {
+        currentCoord = projectionCoord()
     }
 }

@@ -36,6 +36,7 @@ internal enum AssetsImages {
   internal static let friendsPlus = ImageAsset(name: "friends_plus")
   internal static let logout = ImageAsset(name: "logout")
   internal static let maleButton = ImageAsset(name: "maleButton")
+  internal static let mapMarker = ImageAsset(name: "map_marker")
   internal static let message = ImageAsset(name: "message")
   internal static let more = ImageAsset(name: "more")
   internal static let moreArrow = ImageAsset(name: "more_arrow")
