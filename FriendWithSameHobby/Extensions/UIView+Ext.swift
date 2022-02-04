@@ -14,10 +14,10 @@ extension UIView {
         layer.borderColor = (borderColor ?? .clear).cgColor
     }
     
-    func addshadow(rad: CGFloat) {
+    func addshadow(rad: CGFloat, opacity: Float) {
         layer.shadowColor = UIColor.black.cgColor
         layer.shadowOffset = .zero
         layer.shadowRadius = rad
-        layer.shadowOpacity = 0.5
+        layer.shadowOpacity = opacity        
     }
 }

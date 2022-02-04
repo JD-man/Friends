@@ -43,7 +43,7 @@ final class HomeMatchingButton: UIButton {
         frame.size.height = 64
         matchingStatus = status
         addCorner(rad: 32, borderColor: nil)
-        addshadow(rad: 2.5)
+        addshadow(rad: 3, opacity: 0.3)
         backgroundColor = AssetsColors.black.color
         setImage(status.matchingImage, for: .normal)
     }

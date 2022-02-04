@@ -17,10 +17,10 @@ final class HomeViewController: UIViewController {
     private let locationManager = CLLocationManager()
     
     private let genderStackView = HomeGenderView().then {
-        $0.addshadow(rad: 2)
+        $0.addshadow(rad: 3, opacity: 0.3)
     }
     private let locationButton = UIButton().then {
-        $0.addshadow(rad: 2)
+        $0.addshadow(rad: 3, opacity: 0.3)
         $0.addCorner(rad: 10, borderColor: nil)
         $0.backgroundColor = .systemBackground
         $0.setImage(AssetsImages.place.image, for: .normal)
@@ -36,6 +36,7 @@ final class HomeViewController: UIViewController {
         }
     }
     private lazy var coordRelay = BehaviorRelay<NMGLatLng>(value: currentCoord)
+    private let userMarker = NMFMarker()
     
     init(viewModel: HomeViewModel) {
         super.init(nibName: nil, bundle: nil)
@@ -93,17 +94,42 @@ final class HomeViewController: UIViewController {
         
         coordRelay
             .asDriver()
-            .throttle(.milliseconds(800))
-            .distinctUntilChanged()
             .drive { [weak self] in
-                let cameraUpdate = NMFCameraUpdate(scrollTo: $0, zoomTo: 10)
-                self?.mapView.moveCamera(cameraUpdate)
-                
-                let marker = NMFMarker()
-                marker.position = $0
-                marker.mapView = self?.mapView
-                print($0)
+                self?.cameraMoving(coord: $0)
             }.disposed(by: disposeBag)
+        
+        Observable<Int>.interval(.seconds(2), scheduler: MainScheduler.instance)
+            .map { [weak self] _ in
+                self?.projectionCoord() }
+            .subscribe(onNext: { [weak self] in
+                print($0)
+            }).disposed(by: disposeBag)
+        
+        locationButton.rx.tap
+            .asDriver()
+            .drive { [weak self] _ in
+                let centerCoord = self?.projectionCoord()
+                self?.marking(coord: centerCoord!)
+            }.disposed(by: disposeBag)
+    }
+    
+    private func marking(coord: NMGLatLng) {
+        userMarker.mapView = nil
+        userMarker.position = coord
+        userMarker.mapView = mapView
+    }
+    
+    private func cameraMoving(coord: NMGLatLng) {
+        let cameraUpdate = NMFCameraUpdate(scrollTo: coord, zoomTo: 18)
+        mapView.moveCamera(cameraUpdate)
+        marking(coord: coord)
+    }
+    
+    private func projectionCoord() -> NMGLatLng {
+        let center = view.center
+        let projection = mapView.projection
+        let coord = projection.latlng(from: center)
+        return coord
     }
 }
 
@@ -153,7 +179,7 @@ extension HomeViewController: CLLocationManagerDelegate {
             let lat = coordinate.latitude
             let lng = coordinate.longitude
             currentCoord = NMGLatLng(lat: lat, lng: lng)
-            //locationManager.stopUpdatingLocation()
+            locationManager.stopUpdatingLocation()
         }
         else {
             print("Location CanNot Find")
