@@ -33,9 +33,9 @@ final class HomeGenderView: UIView {
         $0.titleLabel?.font = AssetsFonts.NotoSansKR.medium.font(size: 14)
     }
     
-    private lazy var buttonsStackView = UIStackView(
-        arrangedSubviews: [allGenderButton, maleButton, femaleButton]).then
-    {
+    private lazy var buttons = [allGenderButton, maleButton, femaleButton]
+    
+    private lazy var buttonsStackView = UIStackView(arrangedSubviews: buttons).then {
         $0.axis = .vertical
         $0.distribution = .fillEqually
         $0.clipsToBounds = true
@@ -46,14 +46,16 @@ final class HomeGenderView: UIView {
         didSet {
             switch gender {
             case .unselected:
-                setButtonStatus(button: allGenderButton)
+                setButtonStatus(selectedButton: allGenderButton)
             case .male:
-                setButtonStatus(button: maleButton)
+                setButtonStatus(selectedButton: maleButton)
             case .female:
-                setButtonStatus(button: femaleButton)
+                setButtonStatus(selectedButton: femaleButton)
             }
         }
     }
+    
+    private var disposeBag = DisposeBag()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -75,11 +77,25 @@ final class HomeGenderView: UIView {
     }
     
     private func binding() {
-        
+        Observable.merge(
+            allGenderButton.rx.tap.map { UserGender.unselected },
+            maleButton.rx.tap.map { UserGender.male },
+            femaleButton.rx.tap.map { UserGender.female })
+            .asDriver(onErrorJustReturn: .unselected)
+            .drive { [weak self] in
+                self?.gender = $0
+            }.disposed(by: disposeBag)
     }
     
-    private func setButtonStatus(button: UIButton) {
-        button.backgroundColor = AssetsColors.green.color
-        button.setTitleColor(AssetsColors.white.color, for: .normal)
+    private func setButtonStatus(selectedButton: UIButton) {
+        buttons.forEach {
+            if $0 == selectedButton {
+                $0.backgroundColor = AssetsColors.green.color
+                $0.setTitleColor(AssetsColors.white.color, for: .normal)
+            } else {
+                $0.backgroundColor = AssetsColors.white.color
+                $0.setTitleColor(AssetsColors.black.color, for: .normal)
+            }
+        }
     }
 }

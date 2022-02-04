@@ -77,7 +77,8 @@ final class PhoneAuthRepository: PhoneAuthRepositoryInterface {
             }
             guard let idToken = idToken else {
                 return
-            }                        
+            }
+            print(idToken)
             completion(.success(idToken))
         })
     }

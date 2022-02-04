@@ -20,7 +20,7 @@ enum UserTargets {
 
 extension UserTargets: TargetType {
     var baseURL: URL {
-        return URL(string: "http://test.monocoding.com:35484")!
+        return URL(string: URLComponents.baseURL)!
     }
     
     var path: String {
