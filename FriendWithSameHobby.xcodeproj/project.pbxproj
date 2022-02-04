@@ -104,6 +104,7 @@
 		89E055B1279D9D7800E86445 /* APIErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E055B0279D9D7800E86445 /* APIErrors.swift */; };
 		89E055B5279DA6C200E86445 /* NicknameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E055B4279DA6C200E86445 /* NicknameViewController.swift */; };
 		89EC76CB27ACCFB600CDA0A4 /* HomeGenderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EC76CA27ACCFB600CDA0A4 /* HomeGenderView.swift */; };
+		89EC76CF27ACF29700CDA0A4 /* HomeMatchingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EC76CE27ACF29700CDA0A4 /* HomeMatchingButton.swift */; };
 		89ECC564279E759600C4C477 /* NickNameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89ECC563279E759600C4C477 /* NickNameViewModel.swift */; };
 		89ECC566279E987B00C4C477 /* BirthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89ECC565279E987B00C4C477 /* BirthViewController.swift */; };
 		89ECC56A279E99E600C4C477 /* BirthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89ECC569279E99E600C4C477 /* BirthViewModel.swift */; };
@@ -229,6 +230,7 @@
 		89E055B0279D9D7800E86445 /* APIErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIErrors.swift; sourceTree = "<group>"; };
 		89E055B4279DA6C200E86445 /* NicknameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameViewController.swift; sourceTree = "<group>"; };
 		89EC76CA27ACCFB600CDA0A4 /* HomeGenderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeGenderView.swift; sourceTree = "<group>"; };
+		89EC76CE27ACF29700CDA0A4 /* HomeMatchingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeMatchingButton.swift; sourceTree = "<group>"; };
 		89ECC563279E759600C4C477 /* NickNameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameViewModel.swift; sourceTree = "<group>"; };
 		89ECC565279E987B00C4C477 /* BirthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthViewController.swift; sourceTree = "<group>"; };
 		89ECC569279E99E600C4C477 /* BirthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthViewModel.swift; sourceTree = "<group>"; };
@@ -766,6 +768,7 @@
 			children = (
 				89C147E327A00F1300F0E616 /* HomeViewController.swift */,
 				89EC76CA27ACCFB600CDA0A4 /* HomeGenderView.swift */,
+				89EC76CE27ACF29700CDA0A4 /* HomeMatchingButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1293,6 +1296,7 @@
 				89C147E827A00F5000F0E616 /* FriendsViewController.swift in Sources */,
 				89A81985279A831A00F257CA /* OnboardingRepositoryInterface.swift in Sources */,
 				895E1D8527A5B0A70054742F /* AccountTableViewCell.swift in Sources */,
+				89EC76CF27ACF29700CDA0A4 /* HomeMatchingButton.swift in Sources */,
 				89C147E427A00F1300F0E616 /* HomeViewController.swift in Sources */,
 				89C0F3F427A28C3C0038DACA /* UserInfoModel.swift in Sources */,
 				898B794A279945BC00844284 /* OnboardingViewModel.swift in Sources */,
