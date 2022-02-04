@@ -105,6 +105,9 @@
 		89E055B5279DA6C200E86445 /* NicknameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E055B4279DA6C200E86445 /* NicknameViewController.swift */; };
 		89EC76CB27ACCFB600CDA0A4 /* HomeGenderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EC76CA27ACCFB600CDA0A4 /* HomeGenderView.swift */; };
 		89EC76CF27ACF29700CDA0A4 /* HomeMatchingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EC76CE27ACF29700CDA0A4 /* HomeMatchingButton.swift */; };
+		89EC76D127AD07C500CDA0A4 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EC76D027AD07C500CDA0A4 /* HomeViewModel.swift */; };
+		89EC76D327AD09F100CDA0A4 /* HomeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EC76D227AD09F100CDA0A4 /* HomeUseCase.swift */; };
+		89EC76D627AD0A8500CDA0A4 /* HobbyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EC76D527AD0A8500CDA0A4 /* HobbyViewController.swift */; };
 		89ECC564279E759600C4C477 /* NickNameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89ECC563279E759600C4C477 /* NickNameViewModel.swift */; };
 		89ECC566279E987B00C4C477 /* BirthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89ECC565279E987B00C4C477 /* BirthViewController.swift */; };
 		89ECC56A279E99E600C4C477 /* BirthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89ECC569279E99E600C4C477 /* BirthViewModel.swift */; };
@@ -231,6 +234,9 @@
 		89E055B4279DA6C200E86445 /* NicknameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameViewController.swift; sourceTree = "<group>"; };
 		89EC76CA27ACCFB600CDA0A4 /* HomeGenderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeGenderView.swift; sourceTree = "<group>"; };
 		89EC76CE27ACF29700CDA0A4 /* HomeMatchingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeMatchingButton.swift; sourceTree = "<group>"; };
+		89EC76D027AD07C500CDA0A4 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		89EC76D227AD09F100CDA0A4 /* HomeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeUseCase.swift; sourceTree = "<group>"; };
+		89EC76D527AD0A8500CDA0A4 /* HobbyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HobbyViewController.swift; sourceTree = "<group>"; };
 		89ECC563279E759600C4C477 /* NickNameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameViewModel.swift; sourceTree = "<group>"; };
 		89ECC565279E987B00C4C477 /* BirthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthViewController.swift; sourceTree = "<group>"; };
 		89ECC569279E99E600C4C477 /* BirthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthViewModel.swift; sourceTree = "<group>"; };
@@ -439,6 +445,7 @@
 			isa = PBXGroup;
 			children = (
 				894F5C3327A81C2100E583B9 /* ProfileUseCase.swift */,
+				89EC76D227AD09F100CDA0A4 /* HomeUseCase.swift */,
 			);
 			path = MainTab;
 			sourceTree = "<group>";
@@ -766,9 +773,9 @@
 		89C147DB27A00ECF00F0E616 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				89EC76D427AD0A6A00CDA0A4 /* Subviews */,
 				89C147E327A00F1300F0E616 /* HomeViewController.swift */,
-				89EC76CA27ACCFB600CDA0A4 /* HomeGenderView.swift */,
-				89EC76CE27ACF29700CDA0A4 /* HomeMatchingButton.swift */,
+				89EC76D527AD0A8500CDA0A4 /* HobbyViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -776,6 +783,7 @@
 		89C147DC27A00ED400F0E616 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				89EC76D027AD07C500CDA0A4 /* HomeViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -920,6 +928,15 @@
 				89ECC563279E759600C4C477 /* NickNameViewModel.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		89EC76D427AD0A6A00CDA0A4 /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				89EC76CA27ACCFB600CDA0A4 /* HomeGenderView.swift */,
+				89EC76CE27ACF29700CDA0A4 /* HomeMatchingButton.swift */,
+			);
+			path = Subviews;
 			sourceTree = "<group>";
 		};
 		89ECC567279E987D00C4C477 /* View */ = {
@@ -1281,6 +1298,7 @@
 			files = (
 				89C147C6279FCBCA00F0E616 /* UserRepositoryInterface.swift in Sources */,
 				89370A4C27A9129D00D3A720 /* Rx+Ext.swift in Sources */,
+				89EC76D627AD0A8500CDA0A4 /* HobbyViewController.swift in Sources */,
 				894F5C2C27A7EB2400E583B9 /* ProfileAllowSearchingView.swift in Sources */,
 				89AB665E27985F4200DFEE95 /* UIFont+Ext.swift in Sources */,
 				89AB665927985B9600DFEE95 /* Assets+Fonts.swift in Sources */,
@@ -1357,9 +1375,11 @@
 				89D721CC279C5B4A00B02A1E /* VerifyViewModel.swift in Sources */,
 				89C147CC27A00DDF00F0E616 /* MainTabCoordinator.swift in Sources */,
 				89ECC566279E987B00C4C477 /* BirthViewController.swift in Sources */,
+				89EC76D327AD09F100CDA0A4 /* HomeUseCase.swift in Sources */,
 				89636BF227A996D100DD8B91 /* UserMyPageModel.swift in Sources */,
 				894F5C3427A81C2100E583B9 /* ProfileUseCase.swift in Sources */,
 				89A8198D279AF95C00F257CA /* PhoneAuthViewModel.swift in Sources */,
+				89EC76D127AD07C500CDA0A4 /* HomeViewModel.swift in Sources */,
 				895E1D8327A52B8D0054742F /* UpdateFCMtokenModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

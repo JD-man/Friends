@@ -21,7 +21,14 @@ final class HomeCoordinator: CoordinatorType {
     
     func start() {
         // Start with accountVC
-        let homeVC = HomeViewController(coordinator: self)
+        let useCase = HomeUseCase()
+        let viewModel = HomeViewModel(useCase: useCase, coordinator: self)
+        let homeVC = HomeViewController(viewModel: viewModel)
         navigationController.pushViewController(homeVC, animated: true)
+    }
+    
+    func pushHobbyVC() {
+        let hobbyVC = HobbyViewController()
+        navigationController.pushViewController(hobbyVC, animated: true)
     }
 }

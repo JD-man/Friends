@@ -7,10 +7,9 @@
 
 import UIKit
 import NMapsMap
+import RxSwift
 
 final class HomeViewController: UIViewController {
-
-    weak var coordinator: HomeCoordinator?
     
     private let mapView = NMFMapView()
     private let genderStackView = HomeGenderView().then {
@@ -25,11 +24,14 @@ final class HomeViewController: UIViewController {
     }
     
     private let matchingButton = HomeMatchingButton(status: .normal)
+    private var viewModel: HomeViewModel?
+    private var disposeBag = DisposeBag()
     
-    init(coordinator: HomeCoordinator) {
+    init(viewModel: HomeViewModel) {
         super.init(nibName: nil, bundle: nil)
-        self.coordinator = coordinator
+        self.viewModel = viewModel
         viewConfig()
+        binding()
     }
     
     required init?(coder: NSCoder) {
@@ -66,5 +68,10 @@ final class HomeViewController: UIViewController {
             make.trailing.bottom.equalTo(view.safeAreaLayoutGuide).inset(16)
             make.width.height.equalTo(matchingButton.frame.width)
         }
+    }
+    
+    private func binding() {
+        let input = HomeViewModel.Input(matchingButtonTap: matchingButton.rx.tap.asDriver())
+        let output = viewModel?.transform(input, disposeBag: disposeBag)
     }
 }
