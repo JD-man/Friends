@@ -64,6 +64,7 @@ final class ProfileUseCase: UseCaseType {
             case .failure(let error):
                 switch error {
                 case .tokenError:
+                    print("token error")
                     self?.tokenErrorHandling { [weak self] in
                         self?.executeFetchUserInfo()
                     }

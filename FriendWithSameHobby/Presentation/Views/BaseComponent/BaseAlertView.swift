@@ -109,8 +109,7 @@ final class BaseAlertView: UIView {
     }
     
     private func dismiss() {
-        [container, titleLabel, subtitleLabel, cancelButton, confirmButton]
-            .forEach { $0.removeFromSuperview() }
-        self.removeFromSuperview()
+        [container, titleLabel, subtitleLabel, cancelButton, confirmButton, self]
+            .forEach { $0.removeFromSuperview() }        
     }
 }

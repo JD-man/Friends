@@ -30,13 +30,7 @@ final class HomeViewController: UIViewController {
     private var viewModel: HomeViewModel?
     private var disposeBag = DisposeBag()
     
-    private var currentCoord = NMGLatLng(lat: 37.517819364682694, lng: 126.88647317074734) {
-        didSet {
-            coordRelay.accept(currentCoord)
-        }
-    }
-    
-    private lazy var coordRelay = BehaviorRelay<NMGLatLng>(value: currentCoord)
+    private let coordRelay = PublishRelay<NMGLatLng>()
     private let userMarker = UIImageView().then {
         $0.frame.size.width = 48
         $0.image = AssetsImages.mapMarker.image
@@ -105,9 +99,9 @@ final class HomeViewController: UIViewController {
         // 첫시작 -> 현재 기기 위치
         
         coordRelay
-            .asDriver()
+            .asDriver(onErrorJustReturn: NMGLatLng(lat: 0.0, lng: 0.0))
             .drive { [weak self] in
-                self?.cameraMoving(coord: $0)
+                print($0)
             }.disposed(by: disposeBag)
         
         locationButton.rx.tap
@@ -175,7 +169,8 @@ extension HomeViewController: CLLocationManagerDelegate {
         if let coordinate = locations.last?.coordinate {
             let lat = coordinate.latitude
             let lng = coordinate.longitude
-            currentCoord = NMGLatLng(lat: lat, lng: lng)
+            let nmg = NMGLatLng(lat: lat, lng: lng)            
+            cameraMoving(coord: nmg)
             locationManager.stopUpdatingLocation()
         }
         else {
@@ -200,6 +195,6 @@ extension HomeViewController: CLLocationManagerDelegate {
 
 extension HomeViewController: NMFMapViewCameraDelegate {
     func mapViewCameraIdle(_ mapView: NMFMapView) {
-        currentCoord = projectionCoord()
+        coordRelay.accept(projectionCoord())
     }
 }
