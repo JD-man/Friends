@@ -45,7 +45,8 @@ final class ProfileViewModel: ViewModelType {
         // input to usecase
         input.withdrawTap
             .drive { [weak self] _ in
-                self?.useCase?.executeWithdraw()
+                let alert = BaseAlertView { self?.useCase?.executeWithdraw() }
+                alert.show()
             }.disposed(by: disposeBag)
         
         input.viewWillAppear
