@@ -11,6 +11,24 @@ import SnapKit
 import RxSwift
 import RxCocoa
 
+enum BaseAlertMessage {
+    case withdraw
+    
+    var title: String {
+        switch self {
+        case .withdraw:
+            return "정말 탈퇴하시겠습니까?"
+        }
+    }
+    
+    var subtitle: String {
+        switch self {
+        case .withdraw:
+            return "탈퇴하시면 새싹 프렌즈를 이용할 수 업어요ㅋ"
+        }
+    }
+}
+
 final class BaseAlertView: UIView {
     
     deinit {
@@ -24,13 +42,11 @@ final class BaseAlertView: UIView {
     
     private let titleLabel = UILabel().then {
         $0.textAlignment = .center
-        $0.text = "정말 탈퇴하시겠습니까?"
         $0.font = AssetsFonts.NotoSansKR.medium.font(size: 16)
     }
     
     private let subtitleLabel = UILabel().then {
         $0.textAlignment = .center
-        $0.text = "탈퇴하시면 새싹 프렌즈를 이용할 수 업어요ㅋ"
         $0.font = AssetsFonts.NotoSansKR.regular.font(size: 14)
     }
     
@@ -47,13 +63,13 @@ final class BaseAlertView: UIView {
         super.init(coder: coder)
     }
     
-    convenience init(confirm: @escaping () -> Void) {
+    convenience init(message: BaseAlertMessage, confirm: @escaping () -> Void) {
         self.init(frame: UIScreen.main.bounds)
-        viewConfig()
+        viewConfig(with: message)
         binding(confirm: confirm)
     }
     
-    private func viewConfig() {
+    private func viewConfig(with message: BaseAlertMessage) {
         backgroundColor = AssetsColors.black.color.withAlphaComponent(0.5)
         [container, titleLabel, subtitleLabel, cancelButton, confirmButton]
             .forEach { addSubview($0) }
@@ -87,6 +103,9 @@ final class BaseAlertView: UIView {
             make.height.equalTo(confirmButton.frame.height)
             make.leading.equalTo(container.snp.centerX).offset(4)
         }
+        
+        titleLabel.text = message.title
+        subtitleLabel.text = message.subtitle
     }
     
     private func binding(confirm: @escaping () -> Void) {
