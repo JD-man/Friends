@@ -8,21 +8,25 @@
 import Foundation
 import Moya
 
-final class QueueRepository/*: QueueRepositoryInterface */ {
+final class QueueRepository: QueueRepositoryInterface {
+    typealias OnqueueResult = Result<OnqueueResponseModel, OnqueueError>
     let provider = MoyaProvider<QueueTarget>()
     
-    func searchFriends() {
-        let parameter = [
-            "region" : "1274830692",
-            "lat" : "37.482733667903865",
-            "long" : "126.92983890550006"
-        ]
-        provider.request(.searchFriends(parameters: parameter)) { result in
+    func requestOnqueue(model: OnqueueBodyModel, completion: @escaping (OnqueueResult) -> Void) {
+        let parameters = OnqueueBodyDTO(model: model).toParamteres()
+        provider.request(.searchFriends(parameters: parameters)) { result in
             switch result {
             case .success(let response):
                 print(response)
+                guard let decoded = try? JSONDecoder().decode(OnqueueResponseDTO.self,
+                                                              from: response.data) else {
+                    print("decoded fail")
+                    return
+                }
+                completion(.success(decoded.toDomain()))                
             case .failure(let error):
-                print(error)
+                let statusCode = error.response?.statusCode ?? -1
+                completion(.failure(OnqueueError(rawValue: statusCode) ?? .unknownError))
             }
         }
     }

@@ -11,14 +11,14 @@ import RxRelay
 
 final class PhoneAuthUseCase: UseCaseType {
     
-    var phoneAuthRepo: PhoneAuthRepositoryInterface?
+    var phoneAuthRepo: FirebaseAuthRepositoryInterface?
     
     let authSuccessRelay = PublishRelay<String>()
     let authErrorRelay = PublishRelay<UserInfoError>()
     
     private var disposeBag = DisposeBag()
     
-    init(phoneAuthRepo: PhoneAuthRepositoryInterface) {
+    init(phoneAuthRepo: FirebaseAuthRepositoryInterface) {
         self.phoneAuthRepo = phoneAuthRepo
     }
     

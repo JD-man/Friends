@@ -21,7 +21,9 @@ final class HomeCoordinator: CoordinatorType {
     
     func start() {
         // Start with accountVC
-        let useCase = HomeUseCase()
+        let firebaseRepo = FirebaseAuthRepository(phoneID: nil)
+        let queueRepo = QueueRepository()
+        let useCase = HomeUseCase(firebaseRepo: firebaseRepo, queueRepo: queueRepo)
         let viewModel = HomeViewModel(useCase: useCase, coordinator: self)
         let homeVC = HomeViewController(viewModel: viewModel)
         navigationController.pushViewController(homeVC, animated: true)

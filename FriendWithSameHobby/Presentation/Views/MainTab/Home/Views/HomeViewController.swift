@@ -12,6 +12,7 @@ import CoreLocation
 import RxRelay
 
 final class HomeViewController: UIViewController {
+    typealias OnqueueInput = (UserGender, Double, Double)
     
     private let mapView = NMFMapView()
     private let locationManager = CLLocationManager()
@@ -25,16 +26,38 @@ final class HomeViewController: UIViewController {
         $0.backgroundColor = .systemBackground
         $0.setImage(AssetsImages.place.image, for: .normal)
     }
+    
+    private let userMarker = UIImageView().then {
+        $0.frame.size.width = 48
+        $0.image = AssetsImages.mapMarker.image
+    }
+    
     private let matchingButton = HomeMatchingButton(status: .normal)
     
     private var viewModel: HomeViewModel?
     private var disposeBag = DisposeBag()
     
-    private let coordRelay = PublishRelay<NMGLatLng>()
-    private let userMarker = UIImageView().then {
-        $0.frame.size.width = 48
-        $0.image = AssetsImages.mapMarker.image
+    private var currentCoord: NMGLatLng = NMGLatLng() {
+        didSet {
+            print("didSet")
+            let gender = genderStackView.gender
+            let lat = currentCoord.lat
+            let lng = currentCoord.lng
+            inputRelay.accept((gender, lat, lng))
+        }
     }
+    
+    private var friendsMarkers: [NMFMarker] = [] {
+        willSet {
+            friendsMarkers.forEach { $0.mapView = nil }
+        }
+        
+        didSet {
+            friendsMarkers.forEach { $0.mapView = mapView }
+        }
+    }
+    
+    private let inputRelay = PublishRelay<OnqueueInput>()
     
     init(viewModel: HomeViewModel) {
         super.init(nibName: nil, bundle: nil)
@@ -89,20 +112,29 @@ final class HomeViewController: UIViewController {
         locationManager.delegate = self
         mapView.addCameraDelegate(delegate: self)
         checkUserLocationServiceAuthorization()
+        print("location start")
     }
     
     private func binding() {
-        // requestRelay가 하나 필요할듯
-//        let input = HomeViewModel.Input(matchingButtonTap: matchingButton.rx.tap.asDriver())
-//        let output = viewModel?.transform(input, disposeBag: disposeBag)
+        let input = HomeViewModel.Input(
+            matchingButtonTap: matchingButton.rx.tap.asDriver(),
+            inputRelay: self.inputRelay
+        )
+        
+        let output = viewModel?.transform(input, disposeBag: disposeBag)
+        
+        output?.userCoord
+            .asDriver(onErrorJustReturn: [(0.0, 0.0)])
+            .drive { [weak self] in
+                let markers = $0.map {
+                    NMFMarker(position: NMGLatLng(lat: $0.0, lng: $0.1),
+                              iconImage: NMFOverlayImage(image: AssetsImages.sesacFace1.image))
+                    }
+                self?.friendsMarkers = markers
+                print(markers)
+            }.disposed(by: disposeBag)
         
         // 첫시작 -> 현재 기기 위치
-        
-        coordRelay
-            .asDriver(onErrorJustReturn: NMGLatLng(lat: 0.0, lng: 0.0))
-            .drive { [weak self] in
-                print($0)
-            }.disposed(by: disposeBag)
         
         locationButton.rx.tap
             .asDriver()
@@ -117,7 +149,7 @@ final class HomeViewController: UIViewController {
     }
     
     private func projectionCoord() -> NMGLatLng {
-        let center = view.center
+        let center = mapView.center
         let projection = mapView.projection
         let coord = projection.latlng(from: center)
         return coord
@@ -163,14 +195,11 @@ extension HomeViewController: CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        print(#function)
-        print(locations)
-        
         if let coordinate = locations.last?.coordinate {
             let lat = coordinate.latitude
             let lng = coordinate.longitude
-            let nmg = NMGLatLng(lat: lat, lng: lng)            
-            cameraMoving(coord: nmg)
+            let nmg = NMGLatLng(lat: lat, lng: lng)
+            cameraMoving(coord: nmg)            
             locationManager.stopUpdatingLocation()
         }
         else {
@@ -183,18 +212,18 @@ extension HomeViewController: CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        print(#function)
         checkUserLocationServiceAuthorization()
     }
     
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        print(#function)
         checkUserLocationServiceAuthorization()
     }
 }
 
 extension HomeViewController: NMFMapViewCameraDelegate {
     func mapViewCameraIdle(_ mapView: NMFMapView) {
-        coordRelay.accept(projectionCoord())
+        currentCoord = projectionCoord()
     }
 }
+
+// 실행 ->

@@ -14,7 +14,7 @@ enum PhoneAuthError: Error {
     case notFillButton
 }
 
-final class PhoneAuthRepository: PhoneAuthRepositoryInterface {
+final class FirebaseAuthRepository: FirebaseAuthRepositoryInterface {
     var phoneID: String?
     init(phoneID: String?) {
         self.phoneID = phoneID

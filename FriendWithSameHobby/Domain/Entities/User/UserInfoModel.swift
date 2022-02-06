@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 // DTO -> Model : birth, createdAt => Date Type
 // gender, phoneNumber ??
 struct UserInfoModel {

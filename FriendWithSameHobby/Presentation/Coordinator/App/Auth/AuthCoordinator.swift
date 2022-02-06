@@ -51,7 +51,7 @@ final class AuthCoordinator: CoordinatorType {
     
     func pushPhoneAuthVC() {
         let pushPhoneAuthVC = PhoneAuthViewController()
-        let phoneAuthRepo = PhoneAuthRepository(phoneID: nil)
+        let phoneAuthRepo = FirebaseAuthRepository(phoneID: nil)
         let useCase = PhoneAuthUseCase(phoneAuthRepo: phoneAuthRepo)
         let viewModel = PhoneAuthViewModel(useCase: useCase, coordinator: self)
         viewModel.coordinator = self
@@ -62,7 +62,7 @@ final class AuthCoordinator: CoordinatorType {
     
     func pushVerifyVC(phoneId: String) {
         let verifyVC = VerifyViewController()
-        let phoneAuthRepo = PhoneAuthRepository(phoneID: phoneId)
+        let phoneAuthRepo = FirebaseAuthRepository(phoneID: phoneId)
         let userRepo = UserRepository()
         let useCase = VerifyUseCase(userRepo: userRepo, phoneAuthRepo: phoneAuthRepo)
         let viewModel = VerifyViewModel(useCase: useCase, coordinator: self)

@@ -11,7 +11,7 @@ import RxRelay
 
 final class VerifyUseCase: UseCaseType {
     let userRepo: UserRepositoryInterface?
-    let phoneAuthRepo: PhoneAuthRepositoryInterface?
+    let phoneAuthRepo: FirebaseAuthRepositoryInterface?
     
     private var disposeBag = DisposeBag()
     
@@ -19,7 +19,7 @@ final class VerifyUseCase: UseCaseType {
     let retrySuccessRelay = PublishRelay<Bool>()
     let authErrorRelay = PublishRelay<UserInfoError>()
     
-    init(userRepo: UserRepositoryInterface, phoneAuthRepo: PhoneAuthRepositoryInterface) {
+    init(userRepo: UserRepositoryInterface, phoneAuthRepo: FirebaseAuthRepositoryInterface) {
         self.userRepo = userRepo
         self.phoneAuthRepo = phoneAuthRepo
     }

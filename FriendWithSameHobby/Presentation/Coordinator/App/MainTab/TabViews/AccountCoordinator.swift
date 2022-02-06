@@ -31,7 +31,7 @@ final class AccountCoordinator: CoordinatorType {
     
     func pushProfileVC() {
         let userRepo = UserRepository()
-        let phoneAuthRepo = PhoneAuthRepository(phoneID: nil)
+        let phoneAuthRepo = FirebaseAuthRepository(phoneID: nil)
         let useCase = ProfileUseCase(phoneAuthRepo: phoneAuthRepo, userRepo: userRepo)
         let viewModel = ProfileViewModel(useCase: useCase, coordinator: self)
         let profileVC = ProfileViewController(profileViewModel: viewModel)

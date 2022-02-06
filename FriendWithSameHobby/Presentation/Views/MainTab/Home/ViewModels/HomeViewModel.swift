@@ -11,30 +11,24 @@ import RxCocoa
 import RxRelay
 
 final class HomeViewModel: ViewModelType {
+    typealias OnqueueInput = (UserGender, Double, Double)
+    
     struct Input {
         // matching button tap to push hobby VC
         let matchingButtonTap: Driver<Void>
         
-        // gender button tap
-        let allGenderButtonTap: Driver<Void>
-        let maleButtonTap: Driver<Void>
-        let femaleButtonTap: Driver<Void>
-        
-        // user location button tap
-        let userLocationButtonTap: Driver<Void>
-               
         // coord input relay
-        
+        let inputRelay: PublishRelay<OnqueueInput>        
     }
     
     struct Output {
         // friends coord
-        
-        // center marker
+        let userCoord = PublishRelay<[(Double, Double)]>()
     }
     
     var useCase: HomeUseCase?
     weak var coordinator: HomeCoordinator?
+    private var disposeBag = DisposeBag()
     
     init(useCase: HomeUseCase?, coordinator: HomeCoordinator?) {
         self.useCase = useCase
@@ -44,10 +38,27 @@ final class HomeViewModel: ViewModelType {
     func transform(_ input: Input, disposeBag: DisposeBag) -> Output {
         let output = Output()
         
+        // Input to UseCase
+        
+        input.inputRelay
+            .skip(1)
+            .bind { [weak self] in
+                self?.useCase?.excuteFriendsCoord(gender: $0.0, lat: $0.1, long: $0.2)
+            }.disposed(by: disposeBag)
+        
         input.matchingButtonTap
             .drive { [weak self] _ in
                 self?.coordinator?.pushHobbyVC()
             }.disposed(by: disposeBag)
+        
+        // UseCase to Output
+        useCase?.fromQueueSuccess
+            .map {
+                $0.map { ($0.lat, $0.long) }
+            }.bind(to: output.userCoord)
+            .disposed(by: disposeBag)
+        
+        // UseCase to Coordinator
         
         return output
     }

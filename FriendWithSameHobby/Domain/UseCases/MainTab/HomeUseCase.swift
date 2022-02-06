@@ -6,7 +6,55 @@
 //
 
 import Foundation
+import RxRelay
 
 final class HomeUseCase: UseCaseType {
+    var firebaseRepo: FirebaseAuthRepositoryInterface?
+    var queueRepo: QueueRepositoryInterface?
     
+    let fromQueueSuccess = PublishRelay<[FromQueueDBModel]>()
+    let fromQueueFail = PublishRelay<OnqueueError>()
+    
+    init(
+        firebaseRepo: FirebaseAuthRepositoryInterface,
+        queueRepo: QueueRepositoryInterface
+    ) {
+        self.firebaseRepo = firebaseRepo
+        self.queueRepo = queueRepo
+    }
+    
+    func excuteFriendsCoord(gender: UserGender, lat: Double, long: Double) {
+        let model = OnqueueBodyModel(lat: lat, long: long)
+        queueRepo?.requestOnqueue(model: model, completion: { [weak self] result in
+            switch result {
+            case .success(let model):
+                let queueDB = model.fromQueueDB
+                let filtered = gender == .unselected ? queueDB : queueDB.filter { $0.gender == gender }
+                print(filtered)
+                self?.fromQueueSuccess.accept(filtered)
+            case .failure(let error):
+                switch error {
+                case .tokenError:
+                    self?.tokenErrorHandling {
+                        self?.excuteFriendsCoord(gender: gender, lat: lat, long: long)
+                    }
+                default:
+                    self?.fromQueueFail.accept(error)
+                }
+            }
+        })
+    }
+    
+    private func tokenErrorHandling(completion: @escaping () -> Void) {
+        firebaseRepo?.refreshingIDtoken(completion: { result in
+            switch result {
+            case .success(let idToken):
+                UserInfoManager.idToken = idToken
+                completion()
+            case .failure(let error):
+                print(error)
+                break
+            }
+        })
+    }
 }

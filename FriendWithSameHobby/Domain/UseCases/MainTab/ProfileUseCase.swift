@@ -9,7 +9,7 @@ import Foundation
 import RxRelay
 
 final class ProfileUseCase: UseCaseType {
-    var phoneAuthRepo: PhoneAuthRepositoryInterface?
+    var phoneAuthRepo: FirebaseAuthRepositoryInterface?
     var userRepo: UserRepositoryInterface?
     
     // withdraw relay
@@ -24,7 +24,7 @@ final class ProfileUseCase: UseCaseType {
     let updateSuccess = PublishRelay<Bool>()
     let updateFail = PublishRelay<UserMyPageError>()
     
-    init(phoneAuthRepo: PhoneAuthRepository, userRepo: UserRepositoryInterface?) {
+    init(phoneAuthRepo: FirebaseAuthRepository, userRepo: UserRepositoryInterface?) {
         self.phoneAuthRepo = phoneAuthRepo
         self.userRepo = userRepo
     }

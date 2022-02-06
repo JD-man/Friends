@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol PhoneAuthRepositoryInterface {
+protocol FirebaseAuthRepositoryInterface {
     func verifyPhoneNumber(_ numText: String,
                            completion: @escaping (Result<String, UserInfoError>) -> Void)
     func retryPhoneNumber(completion: @escaping (Result<String, UserInfoError>) -> Void)
