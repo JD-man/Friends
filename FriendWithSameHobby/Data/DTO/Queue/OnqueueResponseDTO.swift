@@ -41,7 +41,7 @@ extension FromQueueDB {
                                 reviews: reviews,
                                 gender: gender == 0 ? .female : .male,
                                 type: gender == 0 ? .female : .male,
-                                sesac: sesac,
+                                sesac: SeSACFace(rawValue: sesac) ?? .basic,
                                 background: background)
     }
 }

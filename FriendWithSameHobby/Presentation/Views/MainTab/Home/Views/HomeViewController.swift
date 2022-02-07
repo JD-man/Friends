@@ -53,7 +53,11 @@ final class HomeViewController: UIViewController {
         }
         
         didSet {
-            friendsMarkers.forEach { $0.mapView = mapView }
+            friendsMarkers.forEach {
+                $0.width = 80
+                $0.height = 80
+                $0.mapView = mapView
+            }
         }
     }
     
@@ -118,23 +122,29 @@ final class HomeViewController: UIViewController {
     private func binding() {
         let input = HomeViewModel.Input(
             matchingButtonTap: matchingButton.rx.tap.asDriver(),
-            inputRelay: self.inputRelay
+            inputRelay: inputRelay
         )
-        
         let output = viewModel?.transform(input, disposeBag: disposeBag)
         
         output?.userCoord
-            .asDriver(onErrorJustReturn: [(0.0, 0.0)])
+            .asDriver(onErrorJustReturn: [(0.0, 0.0, SeSACFace.basic)])
             .drive { [weak self] in
                 let markers = $0.map {
                     NMFMarker(position: NMGLatLng(lat: $0.0, lng: $0.1),
-                              iconImage: NMFOverlayImage(image: AssetsImages.sesacFace1.image))
-                    }
-                self?.friendsMarkers = markers
-                print(markers)
+                              iconImage: NMFOverlayImage(image: $0.2.imageAsset.image)) }
+                self?.friendsMarkers = markers                
             }.disposed(by: disposeBag)
         
-        // 첫시작 -> 현재 기기 위치
+        // MARK: - Relay Input
+        Observable.merge(
+            genderStackView.allGenderButton.rx.tap.map { UserGender.unselected },
+            genderStackView.maleButton.rx.tap.map { UserGender.male },
+            genderStackView.femaleButton.rx.tap.map { UserGender.female })
+            .asDriver(onErrorJustReturn: .unselected)
+            .drive { [weak self] in
+                self?.genderStackView.gender = $0
+                self?.projectionCoord()
+            }.disposed(by: disposeBag)
         
         locationButton.rx.tap
             .asDriver()
@@ -144,15 +154,12 @@ final class HomeViewController: UIViewController {
     }
     
     private func cameraMoving(coord: NMGLatLng) {
-        let cameraUpdate = NMFCameraUpdate(scrollTo: coord, zoomTo: 18)
+        let cameraUpdate = NMFCameraUpdate(scrollTo: coord, zoomTo: 12)
         mapView.moveCamera(cameraUpdate)
     }
     
-    private func projectionCoord() -> NMGLatLng {
-        let center = mapView.center
-        let projection = mapView.projection
-        let coord = projection.latlng(from: center)
-        return coord
+    private func projectionCoord() {
+        currentCoord = mapView.cameraPosition.target
     }
 }
 
@@ -222,8 +229,6 @@ extension HomeViewController: CLLocationManagerDelegate {
 
 extension HomeViewController: NMFMapViewCameraDelegate {
     func mapViewCameraIdle(_ mapView: NMFMapView) {
-        currentCoord = projectionCoord()
+        projectionCoord()
     }
 }
-
-// 실행 ->

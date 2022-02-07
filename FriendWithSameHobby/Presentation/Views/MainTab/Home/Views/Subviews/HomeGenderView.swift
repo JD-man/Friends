@@ -12,21 +12,21 @@ import RxSwift
 import RxCocoa
 
 final class HomeGenderView: UIView {
-    private let allGenderButton = UIButton().then {
+    let allGenderButton = UIButton().then {
         $0.clipsToBounds = true
         $0.setTitle("전체", for: .normal)
         $0.setTitleColor(AssetsColors.black.color, for: .normal)
         $0.titleLabel?.font = AssetsFonts.NotoSansKR.medium.font(size: 14)
     }
     
-    private let maleButton = UIButton().then {
+    let maleButton = UIButton().then {
         $0.clipsToBounds = true
         $0.setTitle("남자", for: .normal)
         $0.setTitleColor(AssetsColors.black.color, for: .normal)
         $0.titleLabel?.font = AssetsFonts.NotoSansKR.medium.font(size: 14)
     }
     
-    private let femaleButton = UIButton().then {
+    let femaleButton = UIButton().then {
         $0.clipsToBounds = true
         $0.setTitle("여자", for: .normal)
         $0.setTitleColor(AssetsColors.black.color, for: .normal)
@@ -59,8 +59,7 @@ final class HomeGenderView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        viewConfig()
-        binding()
+        viewConfig()        
     }
     
     required init?(coder: NSCoder) {
@@ -74,17 +73,6 @@ final class HomeGenderView: UIView {
         buttonsStackView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-    }
-    
-    private func binding() {
-        Observable.merge(
-            allGenderButton.rx.tap.map { UserGender.unselected },
-            maleButton.rx.tap.map { UserGender.male },
-            femaleButton.rx.tap.map { UserGender.female })
-            .asDriver(onErrorJustReturn: .unselected)
-            .drive { [weak self] in
-                self?.gender = $0
-            }.disposed(by: disposeBag)
     }
     
     private func setButtonStatus(selectedButton: UIButton) {

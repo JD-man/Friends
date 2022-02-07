@@ -23,7 +23,7 @@ final class HomeViewModel: ViewModelType {
     
     struct Output {
         // friends coord
-        let userCoord = PublishRelay<[(Double, Double)]>()
+        let userCoord = PublishRelay<[(Double, Double, SeSACFace)]>()
     }
     
     var useCase: HomeUseCase?
@@ -54,7 +54,7 @@ final class HomeViewModel: ViewModelType {
         // UseCase to Output
         useCase?.fromQueueSuccess
             .map {
-                $0.map { ($0.lat, $0.long) }
+                $0.map { ($0.lat, $0.long, $0.sesac) }
             }.bind(to: output.userCoord)
             .disposed(by: disposeBag)
         
