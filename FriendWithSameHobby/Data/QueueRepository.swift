@@ -16,8 +16,7 @@ final class QueueRepository: QueueRepositoryInterface {
         let parameters = OnqueueBodyDTO(model: model).toParamteres()
         provider.request(.searchFriends(parameters: parameters)) { result in
             switch result {
-            case .success(let response):
-                print(response)
+            case .success(let response):                
                 guard let decoded = try? JSONDecoder().decode(OnqueueResponseDTO.self,
                                                               from: response.data) else {
                     print("decoded fail")

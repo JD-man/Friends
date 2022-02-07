@@ -30,7 +30,11 @@ final class HomeCoordinator: CoordinatorType {
     }
     
     func pushHobbyVC() {
-        let hobbyVC = HobbyViewController()
+        let firebaseRepo = FirebaseAuthRepository(phoneID: nil)
+        let queueRepo = QueueRepository()
+        let useCase = HobbyUseCase(firebaseRepo: firebaseRepo, queueRepo: queueRepo)
+        let viewModel = HobbyViewModel(useCase: useCase, coordinator: self)
+        let hobbyVC = HobbyViewController(viewModel: viewModel)
         navigationController.pushViewController(hobbyVC, animated: true)
     }
 }

@@ -42,6 +42,7 @@ final class HomeViewModel: ViewModelType {
         
         input.inputRelay
             .skip(1)
+            .debounce(.milliseconds(800), scheduler: MainScheduler.instance)
             .bind { [weak self] in
                 self?.useCase?.excuteFriendsCoord(gender: $0.0, lat: $0.1, long: $0.2)
             }.disposed(by: disposeBag)

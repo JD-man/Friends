@@ -26,17 +26,13 @@ final class HomeViewController: UIViewController {
         $0.backgroundColor = .systemBackground
         $0.setImage(AssetsImages.place.image, for: .normal)
     }
-    
     private let userMarker = UIImageView().then {
         $0.frame.size.width = 48
         $0.image = AssetsImages.mapMarker.image
     }
-    
     private let matchingButton = HomeMatchingButton(status: .normal)
-    
     private var viewModel: HomeViewModel?
     private var disposeBag = DisposeBag()
-    
     private var currentCoord: NMGLatLng = NMGLatLng() {
         didSet {
             print("didSet")
@@ -46,7 +42,6 @@ final class HomeViewController: UIViewController {
             inputRelay.accept((gender, lat, lng))
         }
     }
-    
     private var friendsMarkers: [NMFMarker] = [] {
         willSet {
             friendsMarkers.forEach { $0.mapView = nil }
@@ -59,8 +54,7 @@ final class HomeViewController: UIViewController {
                 $0.mapView = mapView
             }
         }
-    }
-    
+    }    
     private let inputRelay = PublishRelay<OnqueueInput>()
     
     init(viewModel: HomeViewModel) {
@@ -116,7 +110,6 @@ final class HomeViewController: UIViewController {
         locationManager.delegate = self
         mapView.addCameraDelegate(delegate: self)
         checkUserLocationServiceAuthorization()
-        print("location start")
     }
     
     private func binding() {
@@ -154,7 +147,7 @@ final class HomeViewController: UIViewController {
     }
     
     private func cameraMoving(coord: NMGLatLng) {
-        let cameraUpdate = NMFCameraUpdate(scrollTo: coord, zoomTo: 12)
+        let cameraUpdate = NMFCameraUpdate(scrollTo: coord, zoomTo: 15)
         mapView.moveCamera(cameraUpdate)
     }
     

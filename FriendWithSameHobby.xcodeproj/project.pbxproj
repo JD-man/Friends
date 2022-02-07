@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		2B1035122F717AC70E9D4AAE /* Pods_FriendWithSameHobby_FriendWithSameHobbyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4197D51F6DEFCF6F658B42FC /* Pods_FriendWithSameHobby_FriendWithSameHobbyUITests.framework */; };
+		890A905E27B0FD61002A4DF6 /* HobbyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890A905D27B0FD61002A4DF6 /* HobbyViewModel.swift */; };
+		890A906027B0FDE5002A4DF6 /* HobbyUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890A905F27B0FDE5002A4DF6 /* HobbyUseCase.swift */; };
 		890C52B427A3E32F009E54E9 /* BaseActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890C52B327A3E32F009E54E9 /* BaseActivityIndicator.swift */; };
 		890CC9EE2796959C00D6185E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890CC9ED2796959C00D6185E /* AppDelegate.swift */; };
 		890CC9F02796959C00D6185E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890CC9EF2796959C00D6185E /* SceneDelegate.swift */; };
@@ -155,6 +157,8 @@
 		31909DB87B1F292BD134B6E5 /* Pods-FriendWithSameHobby.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FriendWithSameHobby.debug.xcconfig"; path = "Target Support Files/Pods-FriendWithSameHobby/Pods-FriendWithSameHobby.debug.xcconfig"; sourceTree = "<group>"; };
 		4197D51F6DEFCF6F658B42FC /* Pods_FriendWithSameHobby_FriendWithSameHobbyUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FriendWithSameHobby_FriendWithSameHobbyUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		712EAAB0941D444D06A42692 /* Pods_FriendWithSameHobby.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FriendWithSameHobby.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		890A905D27B0FD61002A4DF6 /* HobbyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HobbyViewModel.swift; sourceTree = "<group>"; };
+		890A905F27B0FDE5002A4DF6 /* HobbyUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HobbyUseCase.swift; sourceTree = "<group>"; };
 		890C52B327A3E32F009E54E9 /* BaseActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseActivityIndicator.swift; sourceTree = "<group>"; };
 		890CC9EA2796959C00D6185E /* FriendWithSameHobby.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FriendWithSameHobby.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		890CC9ED2796959C00D6185E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -467,6 +471,7 @@
 			children = (
 				894F5C3327A81C2100E583B9 /* ProfileUseCase.swift */,
 				89EC76D227AD09F100CDA0A4 /* HomeUseCase.swift */,
+				890A905F27B0FDE5002A4DF6 /* HobbyUseCase.swift */,
 			);
 			path = MainTab;
 			sourceTree = "<group>";
@@ -806,6 +811,7 @@
 			isa = PBXGroup;
 			children = (
 				89EC76D027AD07C500CDA0A4 /* HomeViewModel.swift */,
+				890A905D27B0FD61002A4DF6 /* HobbyViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -1405,6 +1411,7 @@
 				89E0559E279D1AF100E86445 /* UserTargets.swift in Sources */,
 				89EF953827A6482A0070BB38 /* BaseCardView.swift in Sources */,
 				89A81983279A81D400F257CA /* OnboardingRepository.swift in Sources */,
+				890A905E27B0FD61002A4DF6 /* HobbyViewModel.swift in Sources */,
 				89636BF427A9A97600DD8B91 /* UserMyPageDTO.swift in Sources */,
 				89C147D127A00E5700F0E616 /* ShopCoordinator.swift in Sources */,
 				89C147F227A06E5100F0E616 /* AccountTableHeaderView.swift in Sources */,
@@ -1453,6 +1460,7 @@
 				89EC76D127AD07C500CDA0A4 /* HomeViewModel.swift in Sources */,
 				895E1D8327A52B8D0054742F /* UpdateFCMtokenModel.swift in Sources */,
 				89EC76D827AD200000CDA0A4 /* QueueRepository.swift in Sources */,
+				890A906027B0FDE5002A4DF6 /* HobbyUseCase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

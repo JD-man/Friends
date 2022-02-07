@@ -30,7 +30,6 @@ final class HomeUseCase: UseCaseType {
             case .success(let model):
                 let queueDB = model.fromQueueDB
                 let filtered = gender == .unselected ? queueDB : queueDB.filter { $0.gender == gender }
-                print(filtered)
                 self?.fromQueueSuccess.accept(filtered)
             case .failure(let error):
                 switch error {
