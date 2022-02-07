@@ -54,6 +54,19 @@ final class HobbyViewController: UIViewController {
         let input = HobbyViewModel.Input(
             viewWillAppear: self.rx.methodInvoked(#selector(viewWillAppear(_:))).map { _ in () }.asDriver(onErrorJustReturn: ())
         )
+        let output = viewModel?.transform(input, disposeBag: disposeBag)
+        
+        output?.aroundTag
+            .asDriver(onErrorJustReturn: [])
+            .drive {
+                print("around tag", $0)
+            }.disposed(by: disposeBag)
+        
+        output?.fromRecommend
+            .asDriver(onErrorJustReturn: [])
+            .drive {
+                print("from recommed", $0)
+            }.disposed(by: disposeBag)
         
         // MARK: - Keyboard handling
         RxKeyboard.instance.willShowVisibleHeight
@@ -79,47 +92,6 @@ final class HobbyViewController: UIViewController {
         findButton.addCorner(rad: status.cornerRadius, borderColor: nil)
         UIView.animate(withDuration: 0.5) { [weak self] in
             self?.view.layoutIfNeeded()
-        }
-    }
-}
-
-enum KeyboardStatus {
-    case show(height: CGFloat, safeAreaBottom: CGFloat)
-    case hide
-    
-    var height: CGFloat {
-        switch self {
-        case .show(let height, _):
-            return height - 16
-        case .hide:
-            return 0
-        }
-    }
-    
-    var safeAreaBottom: CGFloat {
-        switch self {
-        case .show(_, let safeAreaBottom):
-            return safeAreaBottom
-        case .hide:
-            return 0
-        }
-    }
-    
-    var sideInset: CGFloat {
-        switch self {
-        case .show:
-            return 0
-        case .hide:
-            return 16
-        }
-    }
-    
-    var cornerRadius: CGFloat {
-        switch self {
-        case .show:
-            return 0
-        case .hide:
-            return 8
         }
     }
 }

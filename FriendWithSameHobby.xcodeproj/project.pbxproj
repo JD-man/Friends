@@ -10,6 +10,7 @@
 		2B1035122F717AC70E9D4AAE /* Pods_FriendWithSameHobby_FriendWithSameHobbyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4197D51F6DEFCF6F658B42FC /* Pods_FriendWithSameHobby_FriendWithSameHobbyUITests.framework */; };
 		890A905E27B0FD61002A4DF6 /* HobbyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890A905D27B0FD61002A4DF6 /* HobbyViewModel.swift */; };
 		890A906027B0FDE5002A4DF6 /* HobbyUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890A905F27B0FDE5002A4DF6 /* HobbyUseCase.swift */; };
+		890A906327B19164002A4DF6 /* KeyboardStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890A906227B19164002A4DF6 /* KeyboardStatus.swift */; };
 		890C52B427A3E32F009E54E9 /* BaseActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890C52B327A3E32F009E54E9 /* BaseActivityIndicator.swift */; };
 		890CC9EE2796959C00D6185E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890CC9ED2796959C00D6185E /* AppDelegate.swift */; };
 		890CC9F02796959C00D6185E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890CC9EF2796959C00D6185E /* SceneDelegate.swift */; };
@@ -159,6 +160,7 @@
 		712EAAB0941D444D06A42692 /* Pods_FriendWithSameHobby.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FriendWithSameHobby.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		890A905D27B0FD61002A4DF6 /* HobbyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HobbyViewModel.swift; sourceTree = "<group>"; };
 		890A905F27B0FDE5002A4DF6 /* HobbyUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HobbyUseCase.swift; sourceTree = "<group>"; };
+		890A906227B19164002A4DF6 /* KeyboardStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardStatus.swift; sourceTree = "<group>"; };
 		890C52B327A3E32F009E54E9 /* BaseActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseActivityIndicator.swift; sourceTree = "<group>"; };
 		890CC9EA2796959C00D6185E /* FriendWithSameHobby.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FriendWithSameHobby.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		890CC9ED2796959C00D6185E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -341,6 +343,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		890A906127B19157002A4DF6 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				890A906227B19164002A4DF6 /* KeyboardStatus.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		890CC9E12796959C00D6185E = {
 			isa = PBXGroup;
 			children = (
@@ -438,6 +448,7 @@
 		890CCA202796984C00D6185E /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				890A906127B19157002A4DF6 /* Utils */,
 				898B79552799504000844284 /* Coordinator */,
 				898B79332799422D00844284 /* Views */,
 			);
@@ -1394,6 +1405,7 @@
 				89FDC55627AFF0EA0088B32A /* OnqueueResponseModel.swift in Sources */,
 				89FDC55827AFFE4F0088B32A /* QueueRepositoryInterface.swift in Sources */,
 				89D721C6279C14CC00B02A1E /* FirebaseAuthRepository.swift in Sources */,
+				890A906327B19164002A4DF6 /* KeyboardStatus.swift in Sources */,
 				89ECC578279F2AEB00C4C477 /* RegisterViewModel.swift in Sources */,
 				894F5C2E27A7F52400E583B9 /* ProfileAgeView.swift in Sources */,
 				89ECC56A279E99E600C4C477 /* BirthViewModel.swift in Sources */,

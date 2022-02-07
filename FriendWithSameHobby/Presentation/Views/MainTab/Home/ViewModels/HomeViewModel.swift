@@ -15,7 +15,7 @@ final class HomeViewModel: ViewModelType {
     
     struct Input {
         // matching button tap to push hobby VC
-        let matchingButtonTap: Driver<Void>
+        let matchingButtonTap: Driver<(Double, Double)>
         
         // coord input relay
         let inputRelay: PublishRelay<OnqueueInput>        
@@ -51,18 +51,15 @@ final class HomeViewModel: ViewModelType {
             }.disposed(by: disposeBag)
         
         input.matchingButtonTap
-            .drive { [weak self] _ in
-                self?.coordinator?.pushHobbyVC()
+            .drive { [weak self] in
+                self?.coordinator?.pushHobbyVC(lat: $0.0, long: $0.1)
             }.disposed(by: disposeBag)
         
         // UseCase to Output
         useCase?.fromQueueSuccess
             .map { [weak self] in
-                if self?.gender == UserGender.unselected {
-                    return $0.fromQueueDB
-                } else {
-                    return $0.fromQueueDB.filter { $0.gender == self?.gender ?? .unselected }
-                }
+                if self?.gender == UserGender.unselected { return $0.fromQueueDB }
+                else { return $0.fromQueueDB.filter { $0.gender == self?.gender ?? .unselected } }
             }
             .bind(to: output.userCoord)
             .disposed(by: disposeBag)

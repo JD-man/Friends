@@ -43,10 +43,7 @@ final class HomeViewController: UIViewController {
         }
     }
     private var friendsMarkers: [NMFMarker] = [] {
-        willSet {
-            friendsMarkers.forEach { $0.mapView = nil }
-        }
-        
+        willSet { friendsMarkers.forEach { $0.mapView = nil } }        
         didSet {
             friendsMarkers.forEach {
                 $0.width = 80
@@ -114,7 +111,9 @@ final class HomeViewController: UIViewController {
     
     private func binding() {
         let input = HomeViewModel.Input(
-            matchingButtonTap: matchingButton.rx.tap.asDriver(),
+            matchingButtonTap: matchingButton.rx.tap.map({ [weak self] in
+                let coord = self?.mapView.cameraPosition.target ?? NMGLatLng()
+                return (coord.lat, coord.lng) }).asDriver(onErrorJustReturn: (0.0, 0.0)),
             inputRelay: inputRelay
         )
         let output = viewModel?.transform(input, disposeBag: disposeBag)
