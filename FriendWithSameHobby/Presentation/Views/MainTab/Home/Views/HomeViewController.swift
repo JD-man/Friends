@@ -120,11 +120,12 @@ final class HomeViewController: UIViewController {
         let output = viewModel?.transform(input, disposeBag: disposeBag)
         
         output?.userCoord
-            .asDriver(onErrorJustReturn: [(0.0, 0.0, SeSACFace.basic)])
+            .asDriver(onErrorJustReturn: [])
             .drive { [weak self] in
+                print($0)
                 let markers = $0.map {
-                    NMFMarker(position: NMGLatLng(lat: $0.0, lng: $0.1),
-                              iconImage: NMFOverlayImage(image: $0.2.imageAsset.image)) }
+                    NMFMarker(position: NMGLatLng(lat: $0.lat, lng: $0.long),
+                              iconImage: NMFOverlayImage(image: $0.sesac.imageAsset.image)) }
                 self?.friendsMarkers = markers                
             }.disposed(by: disposeBag)
         

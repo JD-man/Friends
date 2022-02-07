@@ -52,7 +52,7 @@ final class HomeGenderView: UIView {
             case .female:
                 setButtonStatus(selectedButton: femaleButton)
             }
-        }
+        }        
     }
     
     private var disposeBag = DisposeBag()

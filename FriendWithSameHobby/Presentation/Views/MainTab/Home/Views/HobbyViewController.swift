@@ -51,6 +51,10 @@ final class HobbyViewController: UIViewController {
     }
     
     private func binding() {
+        let input = HobbyViewModel.Input(
+            viewWillAppear: self.rx.methodInvoked(#selector(viewWillAppear(_:))).map { _ in () }.asDriver(onErrorJustReturn: ())
+        )
+        
         // MARK: - Keyboard handling
         RxKeyboard.instance.willShowVisibleHeight
             .drive { [weak self] in

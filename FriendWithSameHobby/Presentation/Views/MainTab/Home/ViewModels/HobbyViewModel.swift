@@ -7,13 +7,16 @@
 
 import Foundation
 import RxSwift
+import RxCocoa
+import RxRelay
 
 final class HobbyViewModel: ViewModelType {
     struct Input {
-        
+        // view will appear
+        let viewWillAppear: Driver<Void>        
     }
     struct Output {
-        
+        let aroundTag = PublishRelay<[String]>()
     }
     
     private var disposeBag = DisposeBag()
@@ -27,6 +30,11 @@ final class HobbyViewModel: ViewModelType {
     
     func transform(_ input: Input, disposeBag: DisposeBag) -> Output {
         let output = Output()
+        
+        input.viewWillAppear
+            .drive { [weak self] _ in
+                self?.useCase?.executeRequestedHobby()
+            }.disposed(by: disposeBag)
         
         return output
     }

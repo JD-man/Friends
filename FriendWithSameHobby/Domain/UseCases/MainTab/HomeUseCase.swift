@@ -12,7 +12,7 @@ final class HomeUseCase: UseCaseType {
     var firebaseRepo: FirebaseAuthRepositoryInterface?
     var queueRepo: QueueRepositoryInterface?
     
-    let fromQueueSuccess = PublishRelay<[FromQueueDBModel]>()
+    let fromQueueSuccess = PublishRelay<OnqueueResponseModel>()
     let fromQueueFail = PublishRelay<OnqueueError>()
     
     init(
@@ -23,19 +23,17 @@ final class HomeUseCase: UseCaseType {
         self.queueRepo = queueRepo
     }
     
-    func excuteFriendsCoord(gender: UserGender, lat: Double, long: Double) {
+    func excuteFriendsCoord(lat: Double, long: Double) {
         let model = OnqueueBodyModel(lat: lat, long: long)
         queueRepo?.requestOnqueue(model: model, completion: { [weak self] result in
             switch result {
             case .success(let model):
-                let queueDB = model.fromQueueDB
-                let filtered = gender == .unselected ? queueDB : queueDB.filter { $0.gender == gender }
-                self?.fromQueueSuccess.accept(filtered)
+                self?.fromQueueSuccess.accept(model)
             case .failure(let error):
                 switch error {
                 case .tokenError:
                     self?.tokenErrorHandling {
-                        self?.excuteFriendsCoord(gender: gender, lat: lat, long: long)
+                        self?.excuteFriendsCoord(lat: lat, long: long)
                     }
                 default:
                     self?.fromQueueFail.accept(error)

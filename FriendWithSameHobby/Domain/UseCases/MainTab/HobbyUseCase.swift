@@ -19,7 +19,7 @@ final class HobbyUseCase: UseCaseType {
         self.queueRepo = queueRepo
     }
     
-    func execute() {
+    func executeRequestedHobby() {
         
     }
 }
