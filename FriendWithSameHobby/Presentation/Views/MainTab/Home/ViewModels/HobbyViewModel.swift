@@ -11,11 +11,14 @@ import RxCocoa
 import RxRelay
 
 final class HobbyViewModel: ViewModelType {
+    
     struct Input {
         // view will appear
         let viewWillAppear: Driver<Void>
         // search bar text
         let searchBarText: Driver<String>
+        // item selected
+        let itemSelected: PublishRelay<(Int,String)>
     }
     struct Output {
         // collection view section
@@ -48,26 +51,34 @@ final class HobbyViewModel: ViewModelType {
         
         // input to search text relay
         input.searchBarText
-            .map { $0.components(separatedBy: " ") }
-            .drive(searchTextRelay)
+            .map { [weak self] in
+                self?.makeTagFromSearchbar(text: $0) ?? []
+            }.drive(searchTextRelay)
             .disposed(by: disposeBag)
+        
+        input.itemSelected
+            .asDriver(onErrorJustReturn: (0, ""))
+            .drive { [weak self] in
+                self?.makeTagFromButton(section: $0.0, title: $0.1)
+            }.disposed(by: disposeBag)
         
         // usecase to output
         let fromRequestedHF = useCase.fromQueueSuccess
             .map {
                 Set($0.fromQueueDBRequested.flatMap { $0.hf })
-                    .map { HobbyCell(identity: $0, cellTitle: $0.addSideSpace(), status: .around) }
+                    .map { HobbyCellModel(identity: "hf\($0)", cellTitle: $0, status: .around) }
             }
         
         let fromRecommend = useCase.fromQueueSuccess
             .map {
                 Set($0.fromRecommend)
-                    .map { HobbyCell(identity: $0, cellTitle: $0.addSideSpace(), status: .recommend) }
+                    .map { HobbyCellModel(identity: "recommend\($0)", cellTitle: $0, status: .recommend) }
             }
         
         let fromSearchText = searchTextRelay
             .map {
-                Set($0).map { HobbyCell(identity: $0, cellTitle: $0.addSideSpace(), status: .added) }
+                Set($0)
+                    .map { HobbyCellModel(identity: "search\($0)", cellTitle: $0, status: .added) }
             }
         
         Observable.combineLatest(fromRequestedHF, fromRecommend, fromSearchText)            
@@ -78,5 +89,29 @@ final class HobbyViewModel: ViewModelType {
             .disposed(by: disposeBag)
         
         return output
+    }
+    
+    private func makeTagFromSearchbar(text: String) -> [String] {
+        let value = searchTextRelay.value
+        let newArr = value + text.components(separatedBy: " ").filter { $0.count != 0 }
+        if newArr.count > 8 {
+            coordinator?.toasting(message: "취미는 8개까지 등록이 가능합니다.")
+            return value
+        }
+        else {
+            return newArr
+        }
+    }
+    
+    private func makeTagFromButton(section: Int, title: String) {
+        var value = searchTextRelay.value
+        if section == 0 {
+            value.append(title)
+            searchTextRelay.accept(value)
+        } else {
+            let idx = value.firstIndex(of: title) ?? 0            
+            value.remove(at: idx)
+            searchTextRelay.accept(value)
+        }
     }
 }

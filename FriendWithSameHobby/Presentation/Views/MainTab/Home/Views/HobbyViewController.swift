@@ -14,6 +14,9 @@ import RxGesture
 import RxDataSources
 
 final class HobbyViewController: UIViewController {
+    deinit {
+        print("hobby vc deinit")
+    }
     
     private let hobbyCollectionView = UICollectionView(frame: .zero, collectionViewLayout: HobbyCollectionViewFlowLayout()).then {
         $0.register(HobbyCollectionViewCell.self, forCellWithReuseIdentifier: HobbyCollectionViewCell.identifier)
@@ -24,6 +27,7 @@ final class HobbyViewController: UIViewController {
     private let findButton = BaseButton(title: "새싹 찾기", status: .fill, type: .h48)
         
     private var viewModel: HobbyViewModel?
+    private let itemRelay = PublishRelay<(Int, String)>()
     private var disposeBag = DisposeBag()
     
     init(viewModel: HobbyViewModel) {
@@ -61,20 +65,26 @@ final class HobbyViewController: UIViewController {
     }
     
     private func binding() {
-        
         let input = HobbyViewModel.Input(
-            viewWillAppear: self.rx.methodInvoked(#selector(viewWillAppear(_:))).map { _ in () }.asDriver(onErrorJustReturn: ()),
-            searchBarText: searchBar.rx.searchButtonClicked.withLatestFrom(searchBar.rx.text.orEmpty).asDriver(onErrorJustReturn: "")
+            viewWillAppear:
+                self.rx.methodInvoked(#selector(viewWillAppear(_:))).map { _ in () }
+                .asDriver(onErrorJustReturn: ()),
+            searchBarText: searchBar.rx.searchButtonClicked.withLatestFrom(searchBar.rx.text.orEmpty).asDriver(onErrorJustReturn: ""),
+            itemSelected: itemRelay
         )
+        
         let output = viewModel?.transform(input, disposeBag: disposeBag)
         
-        // Collection View Config
-        let dataSource = RxCollectionViewSectionedAnimatedDataSource<SectionOfHobbyCellModel> {
+        // MARK: - Collection View Config
+        let dataSource = RxCollectionViewSectionedAnimatedDataSource<SectionOfHobbyCellModel> { [weak self]
             datasource, cv, indexPath, item in
             guard let cell = cv.dequeueReusableCell(
                 withReuseIdentifier: HobbyCollectionViewCell.identifier,
                 for: indexPath) as? HobbyCollectionViewCell else { return UICollectionViewCell() }
             cell.configure(with: item)
+            cell.tagButton.rx.tap.asDriver().drive { _ in
+                self?.itemRelay.accept((indexPath.section, item.cellTitle))
+            }.disposed(by: cell.disposeBag)
             return cell
         }
         
@@ -88,6 +98,13 @@ final class HobbyViewController: UIViewController {
             .drive { [weak self] in
                 let safeAreaBottom = self?.view.safeAreaInsets.bottom ?? 0
                 self?.keyboardHandling(of: .show(height: $0, safeAreaBottom: safeAreaBottom))
+            }.disposed(by: disposeBag)
+        
+        searchBar.rx.searchButtonClicked
+            .asDriver()
+            .drive { [weak self] _ in
+                self?.searchBar.resignFirstResponder()
+                self?.keyboardHandling(of: .hide)
             }.disposed(by: disposeBag)
         
         view.rx

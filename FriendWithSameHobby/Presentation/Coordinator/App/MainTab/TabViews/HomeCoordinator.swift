@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Toast
 
 final class HomeCoordinator: CoordinatorType {
     weak var parentCoordinator: CoordinatorType?
@@ -37,5 +38,9 @@ final class HomeCoordinator: CoordinatorType {
         let hobbyVC = HobbyViewController(viewModel: viewModel)
         hobbyVC.hidesBottomBarWhenPushed = true
         navigationController.pushViewController(hobbyVC, animated: true)
+    }
+    
+    func toasting(message: String) {
+        navigationController.view.makeToast(message, position: .top)
     }
 }

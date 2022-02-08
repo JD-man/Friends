@@ -8,7 +8,7 @@
 import Foundation
 import RxDataSources
 
-struct HobbyCell: IdentifiableType, Equatable {
+struct HobbyCellModel: IdentifiableType, Equatable {
     var identity: String
     var cellTitle: String
     var status: HobbyCellStatus
@@ -16,7 +16,7 @@ struct HobbyCell: IdentifiableType, Equatable {
 
 struct SectionOfHobbyCellModel {
     var headerTitle: String
-    var items: [HobbyCell]
+    var items: [HobbyCellModel]
 }
 
 extension SectionOfHobbyCellModel: AnimatableSectionModelType {
@@ -24,7 +24,7 @@ extension SectionOfHobbyCellModel: AnimatableSectionModelType {
         return headerTitle
     }
     
-    init(original: SectionOfHobbyCellModel, items: [HobbyCell]) {
+    init(original: SectionOfHobbyCellModel, items: [HobbyCellModel]) {
         self = original
         self.items = items
     }

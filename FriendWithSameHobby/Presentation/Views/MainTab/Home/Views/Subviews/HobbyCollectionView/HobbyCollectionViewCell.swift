@@ -8,6 +8,7 @@
 import UIKit
 import Then
 import SnapKit
+import RxSwift
 
 enum HobbyCellStatus: Equatable {
     case recommend
@@ -27,8 +28,13 @@ enum HobbyCellStatus: Equatable {
 }
 
 final class HobbyCollectionViewCell: UICollectionViewCell {
+    deinit {
+        print("hobby cell deinit")
+    }
     
-    private let tagButton = BaseButton(title: "태그", status: .fill, type: .h32)
+    var disposeBag = DisposeBag()
+    
+    let tagButton = BaseButton(title: "태그", status: .fill, type: .h32)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -40,14 +46,21 @@ final class HobbyCollectionViewCell: UICollectionViewCell {
     }
     
     private func viewConfig() {        
-        contentView.addSubview(tagButton)
+        addSubview(tagButton)
         tagButton.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
     }
     
-    func configure(with model: HobbyCell) {
+    func configure(with model: HobbyCellModel) {
         tagButton.setTitle(model.cellTitle, for: .normal)
         tagButton.status = model.status.buttonStatus
+        tagButton.frame.size.width = tagButton.titleLabel?.frame.size.width ?? 0 + 30
+        tagButton.frame.size.height = tagButton.titleLabel?.frame.size.height ?? 0
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        disposeBag = DisposeBag()
     }
 }
