@@ -11,7 +11,7 @@ import RxRelay
 import RxCocoa
 
 final class NickNameViewModel: ViewModelType {
-    init(useCase: EmptyUseCase?, coordinator: AuthCoordinator?) {
+    init(useCase: EmptyUseCase, coordinator: AuthCoordinator?) {
         self.useCase = useCase
         self.coordinator = coordinator
     }
@@ -30,7 +30,7 @@ final class NickNameViewModel: ViewModelType {
         let nextButtonStatus = BehaviorRelay<BaseButtonStatus>(value: .disable)
     }
     
-    var useCase: EmptyUseCase?
+    var useCase: EmptyUseCase
     weak var coordinator: AuthCoordinator?
     
     func transform(_ input: Input, disposeBag: DisposeBag) -> Output {

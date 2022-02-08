@@ -26,13 +26,13 @@ final class HomeViewModel: ViewModelType {
         let userCoord = PublishRelay<[FromQueueDBModel]>()
     }
     
-    var useCase: HomeUseCase?
+    var useCase: HomeUseCase
     weak var coordinator: HomeCoordinator?
     private var disposeBag = DisposeBag()
     
     private var gender: UserGender = .unselected
     
-    init(useCase: HomeUseCase?, coordinator: HomeCoordinator?) {
+    init(useCase: HomeUseCase, coordinator: HomeCoordinator?) {
         self.useCase = useCase
         self.coordinator = coordinator
     }
@@ -47,7 +47,7 @@ final class HomeViewModel: ViewModelType {
             .debounce(.milliseconds(800), scheduler: MainScheduler.instance)
             .bind { [weak self] in
                 self?.gender = $0.0
-                self?.useCase?.excuteFriendsCoord(lat: $0.1, long: $0.2)
+                self?.useCase.excuteFriendsCoord(lat: $0.1, long: $0.2)
             }.disposed(by: disposeBag)
         
         input.matchingButtonTap
@@ -56,7 +56,7 @@ final class HomeViewModel: ViewModelType {
             }.disposed(by: disposeBag)
         
         // UseCase to Output
-        useCase?.fromQueueSuccess
+        useCase.fromQueueSuccess
             .map { [weak self] in
                 if self?.gender == UserGender.unselected { return $0.fromQueueDB }
                 else { return $0.fromQueueDB.filter { $0.gender == self?.gender ?? .unselected } }

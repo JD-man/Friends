@@ -11,7 +11,7 @@ import RxRelay
 import RxCocoa
 
 final class VerifyViewModel: ViewModelType {
-    init(useCase: VerifyUseCase?, coordinator: AuthCoordinator?) {
+    init(useCase: VerifyUseCase, coordinator: AuthCoordinator) {
         self.useCase = useCase
         self.coordinator = coordinator
     }
@@ -36,7 +36,7 @@ final class VerifyViewModel: ViewModelType {
         let timerTextRelay = PublishRelay<String>()
     }
     
-    var useCase: VerifyUseCase?
+    var useCase: VerifyUseCase
     weak var coordinator: AuthCoordinator?
     private var disposeBag = DisposeBag()
     
@@ -60,7 +60,7 @@ final class VerifyViewModel: ViewModelType {
                 } else {
                     BaseActivityIndicator.shared.show()
                     self?.timer?.dispose()
-                    self?.useCase?.excuteAuthNumber(code: code)
+                    self?.useCase.excuteAuthNumber(code: code)
                 }
             }.disposed(by: disposeBag)
         
@@ -69,7 +69,7 @@ final class VerifyViewModel: ViewModelType {
             .drive { [weak self] _ in
                 BaseActivityIndicator.shared.show()
                 self?.timer?.dispose()
-                self?.useCase?.requestRegisterCode()
+                self?.useCase.requestRegisterCode()
             }.disposed(by: disposeBag)
         
         // Input to Output
@@ -79,14 +79,14 @@ final class VerifyViewModel: ViewModelType {
             .disposed(by: disposeBag)
         
         // UseCase to Coordinator
-        useCase?.authSuccessRelay
+        useCase.authSuccessRelay
             .asDriver(onErrorJustReturn: false)
             .drive { [weak self] in
                 BaseActivityIndicator.shared.hide()
                 if $0 { self?.coordinator?.finish(to: .mainTab, completion: nil) }
             }.disposed(by: disposeBag)
         
-        useCase?.authErrorRelay
+        useCase.authErrorRelay
             .asDriver(onErrorJustReturn: .unknownError)
             .drive { [weak self] error in                
                 BaseActivityIndicator.shared.hide()
@@ -99,7 +99,7 @@ final class VerifyViewModel: ViewModelType {
                 }                
             }.disposed(by: disposeBag)
         
-        useCase?.retrySuccessRelay
+        useCase.retrySuccessRelay
             .asDriver(onErrorJustReturn: false)
             .drive { [weak self] _ in
                 self?.remain = 60

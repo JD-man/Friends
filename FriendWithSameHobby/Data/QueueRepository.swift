@@ -13,6 +13,7 @@ final class QueueRepository: QueueRepositoryInterface {
     let provider = MoyaProvider<QueueTarget>()
     
     func requestOnqueue(model: OnqueueBodyModel, completion: @escaping (OnqueueResult) -> Void) {
+        print("onqueue request")
         let parameters = OnqueueBodyDTO(model: model).toParamteres()
         provider.request(.searchFriends(parameters: parameters)) { result in
             switch result {

@@ -11,7 +11,7 @@ import RxCocoa
 import RxRelay
 
 final class PhoneAuthViewModel: ViewModelType {
-    init(useCase: PhoneAuthUseCase?, coordinator: AuthCoordinator?) {
+    init(useCase: PhoneAuthUseCase, coordinator: AuthCoordinator) {
         self.useCase = useCase
         self.coordinator = coordinator
     }
@@ -32,7 +32,7 @@ final class PhoneAuthViewModel: ViewModelType {
         let buttonStatusRelay = PublishRelay<BaseButtonStatus>()
     }
     
-    var useCase: PhoneAuthUseCase?    
+    var useCase: PhoneAuthUseCase
     weak var coordinator: AuthCoordinator?
     private var disposeBag = DisposeBag()
     
@@ -51,7 +51,7 @@ final class PhoneAuthViewModel: ViewModelType {
                 case .fill:
                     BaseActivityIndicator.shared.show()
                     self?.coordinator?.toasting(message: "전화 번호 인증 시작")
-                    self?.useCase?.execute(phoneNumber: phoneNumber)
+                    self?.useCase.execute(phoneNumber: phoneNumber)
                 default:
                     break
                 }                
@@ -70,14 +70,14 @@ final class PhoneAuthViewModel: ViewModelType {
             .disposed(by: disposeBag)
         
         // UseCase to Coordinator
-        useCase?.authSuccessRelay
+        useCase.authSuccessRelay
             .asDriver(onErrorJustReturn: "")
             .drive { [weak self] in
                 BaseActivityIndicator.shared.hide()
                 if $0 != "" { self?.coordinator?.pushVerifyVC(phoneId: $0) }
             }.disposed(by: disposeBag)
         
-        useCase?.authErrorRelay
+        useCase.authErrorRelay
             .asDriver(onErrorJustReturn: .unknownError)
             .drive { [weak self] in
                 BaseActivityIndicator.shared.hide()

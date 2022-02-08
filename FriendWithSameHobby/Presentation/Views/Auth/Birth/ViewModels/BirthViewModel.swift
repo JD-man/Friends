@@ -11,7 +11,7 @@ import RxCocoa
 import RxRelay
 
 final class BirthViewModel: ViewModelType {
-    init(useCase: EmptyUseCase?, coordinator: AuthCoordinator?) {
+    init(useCase: EmptyUseCase, coordinator: AuthCoordinator) {
         self.useCase = useCase
         self.coordinator = coordinator
     }
@@ -34,7 +34,7 @@ final class BirthViewModel: ViewModelType {
         let buttonStatus = BehaviorRelay<BaseButtonStatus>(value: .disable)        
     }
     
-    var useCase: EmptyUseCase? = nil
+    var useCase: EmptyUseCase
     weak var coordinator: AuthCoordinator?
     
     func transform(_ input: Input, disposeBag: DisposeBag) -> Output {

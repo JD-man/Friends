@@ -12,7 +12,7 @@ import RxCocoa
 import RxGesture
 
 final class OnboardingViewModel: ViewModelType {
-    init(useCase: OnboardingUseCase?, coordinator: AuthCoordinator?) {
+    init(useCase: OnboardingUseCase, coordinator: AuthCoordinator) {
         self.useCase = useCase
         self.coordinator = coordinator
     }
@@ -33,7 +33,7 @@ final class OnboardingViewModel: ViewModelType {
         let onboardingTextRelay = BehaviorRelay<NSMutableAttributedString>(value: NSMutableAttributedString())
     }
     
-    var useCase: OnboardingUseCase?
+    var useCase: OnboardingUseCase
     weak var coordinator: AuthCoordinator?
     
     func transform(_ input: Input, disposeBag: DisposeBag) -> Output {
@@ -51,7 +51,7 @@ final class OnboardingViewModel: ViewModelType {
                 default:
                     break
                 }                
-                self?.useCase?.execute(offset: offset)
+                self?.useCase.execute(offset: offset)
             }).disposed(by: disposeBag)
         
         input.didTapStartButton
@@ -60,15 +60,15 @@ final class OnboardingViewModel: ViewModelType {
             }.disposed(by: disposeBag)
         
         // UseCase To Output
-        useCase?.assetImageRelay
+        useCase.assetImageRelay
             .bind(to: output.imageRelay)            
             .disposed(by: disposeBag)
         
-        useCase?.idxRelay
+        useCase.idxRelay
             .bind(to: output.pageControlRelay)
             .disposed(by: disposeBag)
         
-        useCase?.highlightedTextRelay
+        useCase.highlightedTextRelay
             .bind(to: output.onboardingTextRelay)
             .disposed(by: disposeBag)
         return output

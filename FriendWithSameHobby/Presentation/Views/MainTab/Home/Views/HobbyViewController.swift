@@ -11,9 +11,13 @@ import Then
 import SnapKit
 import RxKeyboard
 import RxGesture
+import RxDataSources
 
 final class HobbyViewController: UIViewController {
     
+    private let hobbyCollectionView = UICollectionView(frame: .zero, collectionViewLayout: HobbyCollectionViewFlowLayout()).then {
+        $0.register(HobbyCollectionViewCell.self, forCellWithReuseIdentifier: HobbyCollectionViewCell.identifier)
+    }
     private let searchBar = UISearchBar().then {
         $0.placeholder = "띄어쓰기로 복수 입력이 가능해요"
     }
@@ -39,12 +43,18 @@ final class HobbyViewController: UIViewController {
     
     private func viewConfig() {
         view.backgroundColor = .systemBackground
-        view.addSubview(findButton)
+        [hobbyCollectionView, findButton]
+            .forEach { view.addSubview($0) }
         findButton.snp.makeConstraints { make in
             make.height.equalTo(findButton.frame.height)
             make.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide).inset(16)
         }
         
+        hobbyCollectionView.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(32)
+            make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(16)
+            make.bottom.equalTo(findButton.snp.top).offset(-32)
+        }
         // search bar config
         navigationItem.titleView = searchBar
         navigationController?.navigationBar.topItem?.title = ""
@@ -56,17 +66,20 @@ final class HobbyViewController: UIViewController {
         )
         let output = viewModel?.transform(input, disposeBag: disposeBag)
         
-        output?.aroundTag
-            .asDriver(onErrorJustReturn: [])
-            .drive {
-                print("around tag", $0)
-            }.disposed(by: disposeBag)
+        // Collection View Config
+        let dataSource = RxCollectionViewSectionedAnimatedDataSource<SectionOfHobbyCell> {
+            datasource, cv, indexPath, item in
+            guard let cell = cv.dequeueReusableCell(
+                withReuseIdentifier: HobbyCollectionViewCell.identifier,
+                for: indexPath) as? HobbyCollectionViewCell else { return UICollectionViewCell() }
+            cell.configure(with: item.cellTitle)
+            return cell
+        }
         
-        output?.fromRecommend
+        output?.aroundHobby
             .asDriver(onErrorJustReturn: [])
-            .drive {
-                print("from recommed", $0)
-            }.disposed(by: disposeBag)
+            .drive(hobbyCollectionView.rx.items(dataSource: dataSource))
+            .disposed(by: disposeBag)
         
         // MARK: - Keyboard handling
         RxKeyboard.instance.willShowVisibleHeight

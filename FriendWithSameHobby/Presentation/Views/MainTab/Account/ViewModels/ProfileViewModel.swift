@@ -30,11 +30,11 @@ final class ProfileViewModel: ViewModelType {
         let ageRange = PublishRelay<String>()
     }
     
-    var useCase: ProfileUseCase?
+    var useCase: ProfileUseCase
     weak var coordinator: AccountCoordinator?
     private var disposeBag = DisposeBag()
     
-    init(useCase: ProfileUseCase?, coordinator: AccountCoordinator?) {
+    init(useCase: ProfileUseCase, coordinator: AccountCoordinator) {
         self.useCase = useCase
         self.coordinator = coordinator
     }
@@ -45,20 +45,20 @@ final class ProfileViewModel: ViewModelType {
         // input to usecase
         input.withdrawTap
             .drive { [weak self] _ in
-                let alert = BaseAlertView(message: .withdraw) { self?.useCase?.executeWithdraw() }
+                let alert = BaseAlertView(message: .withdraw) { self?.useCase.executeWithdraw() }
                 alert.show()
             }.disposed(by: disposeBag)
         
         input.viewWillAppear
             .drive { [weak self] _ in
                 print("viewwillappear")
-                self?.useCase?.executeFetchUserInfo()
+                self?.useCase.executeFetchUserInfo()
             }.disposed(by: disposeBag)
         
         input.updateButtonTap
             .drive { [weak self] in
                 BaseActivityIndicator.shared.show()
-                self?.useCase?.excuteUpdateUserInfo(gender: $0.0,
+                self?.useCase.excuteUpdateUserInfo(gender: $0.0,
                                                     hobby: $0.1,
                                                     searchable: $0.2,
                                                     ageMin: $0.3 + 18,
@@ -66,26 +66,26 @@ final class ProfileViewModel: ViewModelType {
             }.disposed(by: disposeBag)
         
         // usecase to coordinator
-        useCase?.withdrawSuccess
+        useCase.withdrawSuccess
             .asDriver(onErrorJustReturn: false)
             .drive { [weak self] _ in
                 guard let mainTabCoordinator = self?.coordinator?.parentCoordinator as? MainTabCoordinator else { return }
                 mainTabCoordinator.finish(to: .auth, completion: nil)
             }.disposed(by: disposeBag)
         
-        useCase?.withdrawFail
+        useCase.withdrawFail
             .asDriver(onErrorJustReturn: .unknownError)
             .drive { [weak self] in
                 self?.coordinator?.toasting(message: $0.description)
             }.disposed(by: disposeBag)
         
-        useCase?.getUserInfoFail
+        useCase.getUserInfoFail
             .asDriver(onErrorJustReturn: .unknownError)
             .drive { [weak self] in
                 self?.coordinator?.toasting(message: $0.description)
             }.disposed(by: disposeBag)
         
-        useCase?.updateSuccess
+        useCase.updateSuccess
             .asDriver(onErrorJustReturn: false)
             .drive { [weak self] _ in
                 BaseActivityIndicator.shared.hide()
@@ -94,39 +94,39 @@ final class ProfileViewModel: ViewModelType {
                 })
             }.disposed(by: disposeBag)
         
-        useCase?.updateFail
+        useCase.updateFail
             .asDriver(onErrorJustReturn: .unknownError)
             .drive { [weak self] in
                 self?.coordinator?.toasting(message: $0.description)
             }.disposed(by: disposeBag)
         
         // Usecase to Output
-        useCase?.userInfoData
+        useCase.userInfoData
             .map { $0.gender }
             .bind(to: output.gender)
             .disposed(by: disposeBag)
         
-        useCase?.userInfoData
+        useCase.userInfoData
             .map { $0.hobby }
             .bind(to: output.hobby)
             .disposed(by: disposeBag)
         
-        useCase?.userInfoData
+        useCase.userInfoData
             .map { $0.searchable }
             .bind(to: output.searchable)
             .disposed(by: disposeBag)
         
-        useCase?.userInfoData
+        useCase.userInfoData
             .map { $0.minAge - 18 }
             .bind(to: output.minAgeIndex)
             .disposed(by: disposeBag)
         
-        useCase?.userInfoData
+        useCase.userInfoData
             .map { $0.maxAge - 18 }
             .bind(to: output.maxAgeIndex)
             .disposed(by: disposeBag)
         
-        useCase?.userInfoData
+        useCase.userInfoData
             .map { "\($0.minAge)-\($0.maxAge)" }
             .bind(to: output.ageRange)
             .disposed(by: disposeBag)

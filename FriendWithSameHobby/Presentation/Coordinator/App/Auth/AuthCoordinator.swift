@@ -72,19 +72,19 @@ final class AuthCoordinator: CoordinatorType {
     }
     
     func pushNicknameVC() {        
-        let viewModel = NickNameViewModel(useCase: nil, coordinator: self)
+        let viewModel = NickNameViewModel(useCase: EmptyUseCase(), coordinator: self)
         let nicknameVC = NicknameViewController(viewModel: viewModel)
         navigationController.setViewControllers([nicknameVC], animated: true)
     }
     
     func pushBirthVC() {
-        let viewModel = BirthViewModel(useCase: nil, coordinator: self)
+        let viewModel = BirthViewModel(useCase: EmptyUseCase(), coordinator: self)
         let birthVC = BirthViewController(viewModel: viewModel)
         navigationController.pushViewController(birthVC, animated: true)
     }
     
     func pushEmailVC() {
-        let viewModel = EmailViewModel(useCase: nil, coordinator: self)
+        let viewModel = EmailViewModel(useCase: EmptyUseCase(), coordinator: self)
         let emailVC = EmailViewController(viewModel: viewModel)
         navigationController.pushViewController(emailVC, animated: true)
     }
