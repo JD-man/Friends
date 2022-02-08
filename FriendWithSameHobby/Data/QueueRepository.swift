@@ -23,6 +23,7 @@ final class QueueRepository: QueueRepositoryInterface {
                     print("decoded fail")
                     return
                 }
+                print(decoded)
                 completion(.success(decoded.toDomain()))                
             case .failure(let error):
                 let statusCode = error.response?.statusCode ?? -1

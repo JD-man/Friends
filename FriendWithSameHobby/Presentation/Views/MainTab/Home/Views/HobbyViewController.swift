@@ -18,8 +18,8 @@ final class HobbyViewController: UIViewController {
     private let hobbyCollectionView = UICollectionView(frame: .zero, collectionViewLayout: HobbyCollectionViewFlowLayout()).then {
         $0.register(HobbyCollectionViewCell.self, forCellWithReuseIdentifier: HobbyCollectionViewCell.identifier)
     }
-    private let searchBar = UISearchBar().then {
-        $0.placeholder = "띄어쓰기로 복수 입력이 가능해요"
+    private let searchBar = UISearchBar().then {        
+        $0.searchTextField.attributedPlaceholder = NSAttributedString(string: "띄어쓰기로 복수 입력이 가능해요", attributes: [.font : AssetsFonts.NotoSansKR.regular.font(size: 14)])
     }
     private let findButton = BaseButton(title: "새싹 찾기", status: .fill, type: .h48)
         
@@ -72,7 +72,7 @@ final class HobbyViewController: UIViewController {
             guard let cell = cv.dequeueReusableCell(
                 withReuseIdentifier: HobbyCollectionViewCell.identifier,
                 for: indexPath) as? HobbyCollectionViewCell else { return UICollectionViewCell() }
-            cell.configure(with: item.cellTitle)
+            cell.configure(with: item)
             return cell
         }
         

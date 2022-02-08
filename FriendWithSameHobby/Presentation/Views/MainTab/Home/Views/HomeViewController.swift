@@ -67,7 +67,7 @@ final class HomeViewController: UIViewController {
         super.viewDidLoad()
         viewConfig()
         locationManagerConfig()
-        binding()
+        binding()        
     }
     
     private func viewConfig() {

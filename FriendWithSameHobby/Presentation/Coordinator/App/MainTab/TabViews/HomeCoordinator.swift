@@ -35,6 +35,7 @@ final class HomeCoordinator: CoordinatorType {
         let useCase = HomeUseCase(firebaseRepo: firebaseRepo, queueRepo: queueRepo)
         let viewModel = HobbyViewModel(useCase: useCase, coordinator: self, lat: lat, long: long)
         let hobbyVC = HobbyViewController(viewModel: viewModel)
+        hobbyVC.hidesBottomBarWhenPushed = true
         navigationController.pushViewController(hobbyVC, animated: true)
     }
 }

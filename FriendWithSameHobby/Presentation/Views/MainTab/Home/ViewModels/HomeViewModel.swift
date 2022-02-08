@@ -43,8 +43,8 @@ final class HomeViewModel: ViewModelType {
         // Input to UseCase
         
         input.inputRelay
-            .skip(1)
-            .debounce(.milliseconds(800), scheduler: MainScheduler.instance)
+            .skip(1)            
+            .throttle(.milliseconds(800), latest: true, scheduler: MainScheduler.instance)
             .bind { [weak self] in
                 self?.gender = $0.0
                 self?.useCase.excuteFriendsCoord(lat: $0.1, long: $0.2)
@@ -57,6 +57,7 @@ final class HomeViewModel: ViewModelType {
         
         // UseCase to Output
         useCase.fromQueueSuccess
+            .debug()
             .map { [weak self] in
                 if self?.gender == UserGender.unselected { return $0.fromQueueDB }
                 else { return $0.fromQueueDB.filter { $0.gender == self?.gender ?? .unselected } }

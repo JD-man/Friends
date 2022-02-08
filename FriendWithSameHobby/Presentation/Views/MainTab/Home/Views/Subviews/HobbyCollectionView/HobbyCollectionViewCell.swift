@@ -9,11 +9,26 @@ import UIKit
 import Then
 import SnapKit
 
+enum HobbyCellStatus: Equatable {
+    case recommend
+    case around
+    case added
+    
+    var buttonStatus: BaseButtonStatus {
+        switch self {
+        case .recommend:
+            return .outline(color: AssetsColors.error.color)
+        case .around:
+            return .disable
+        case .added:
+            return .outline(color: AssetsColors.green.color)
+        }
+    }
+}
+
 final class HobbyCollectionViewCell: UICollectionViewCell {
     
-    private let tagButton = BaseButton(title: "태그", status: .outline, type: .h32).then {
-        $0.addCorner(rad: 8, borderColor: AssetsColors.green.color)
-    }
+    private let tagButton = BaseButton(title: "태그", status: .fill, type: .h32)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -31,7 +46,8 @@ final class HobbyCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    func configure(with model: String) {
-        tagButton.setTitle(model, for: .normal)
+    func configure(with model: HobbyCell) {
+        tagButton.setTitle(model.cellTitle, for: .normal)
+        tagButton.status = model.status.buttonStatus
     }
 }

@@ -39,8 +39,8 @@ extension FromQueueDB {
                                 reputation: reputation,
                                 hf: hf,
                                 reviews: reviews,
-                                gender: gender == 0 ? .female : .male,
-                                type: gender == 0 ? .female : .male,
+                                gender: UserGender(rawValue: gender) ?? .unselected,
+                                type: UserGender(rawValue: type) ?? .unselected,
                                 sesac: SeSACFace(rawValue: sesac) ?? .basic,
                                 background: background)
     }

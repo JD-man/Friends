@@ -38,16 +38,18 @@ final class BaseButton: UIButton {
     }
 }
 
-enum BaseButtonStatus {    
+enum BaseButtonStatus: Equatable {    
     case fill
     case cancel
-    case outline
+    case outline(color: UIColor)
     case disable
     case inactive
     
     var backgroundColor: UIColor {
         switch self {
-        case .inactive, .outline:
+        case .inactive:
+            return AssetsColors.white.color
+        case .outline:
             return AssetsColors.white.color
         case .fill:
             return AssetsColors.green.color
@@ -64,8 +66,8 @@ enum BaseButtonStatus {
             return AssetsColors.gray4.color
         case .fill:
             return AssetsColors.green.color
-        case .outline:
-            return AssetsColors.green.color
+        case .outline(let color):
+            return color
         case .cancel:
             return AssetsColors.gray2.color
         case .disable:
@@ -79,8 +81,8 @@ enum BaseButtonStatus {
             return AssetsColors.black.color
         case .fill:
             return AssetsColors.white.color
-        case .outline:
-            return AssetsColors.green.color
+        case .outline(let color):
+            return color
         case .disable:
             return AssetsColors.gray3.color
         }

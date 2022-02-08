@@ -16,11 +16,8 @@ final class HobbyViewModel: ViewModelType {
         let viewWillAppear: Driver<Void>        
     }
     struct Output {
-//        let aroundTag = PublishRelay<[String]>()
-//        let fromRecommend = PublishRelay<[String]>()
         // collection view section
-        
-        let aroundHobby = PublishRelay<[SectionOfHobbyCell]>()
+        let aroundHobby = PublishRelay<[SectionOfHobbyCell]>()        
     }
     
     private var disposeBag = DisposeBag()
@@ -48,15 +45,20 @@ final class HobbyViewModel: ViewModelType {
         
         // usecase to output
         let requestedHF = useCase.fromQueueSuccess
-            .map { Set($0.fromQueueDBRequested.flatMap { $0.hf }) }
+            .map {
+                Set($0.fromQueueDBRequested.flatMap { $0.hf })
+                    .map { HobbyCell(identity: $0, cellTitle: $0, status: .around) }
+            }
         
         let fromRecommend = useCase.fromQueueSuccess
-            .map{ Set($0.fromRecommend) }
+            .map {
+                Set($0.fromRecommend)
+                    .map { HobbyCell(identity: $0, cellTitle: $0, status: .recommend) }
+            }
         
         Observable.merge(requestedHF, fromRecommend)
             .map {
-                let items = $0.map { HobbyCell(identity: $0, cellTitle: $0) }
-                return [SectionOfHobbyCell.init(headerTitle: "주변취미", items: items)]
+                return [SectionOfHobbyCell.init(headerTitle: "주변취미", items: $0)]
             }.bind(to: output.aroundHobby)
             .disposed(by: disposeBag)
         

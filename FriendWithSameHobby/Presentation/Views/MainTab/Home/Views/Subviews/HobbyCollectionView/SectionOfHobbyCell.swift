@@ -11,6 +11,7 @@ import RxDataSources
 struct HobbyCell: IdentifiableType, Equatable {
     var identity: String
     var cellTitle: String
+    var status: HobbyCellStatus
 }
 
 struct SectionOfHobbyCell {
