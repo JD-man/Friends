@@ -43,7 +43,7 @@ final class HomeViewModel: ViewModelType {
         // Input to UseCase
         
         input.inputRelay
-            .skip(1)            
+            .skip(1)
             .throttle(.milliseconds(800), latest: true, scheduler: MainScheduler.instance)
             .bind { [weak self] in
                 self?.gender = $0.0
@@ -56,8 +56,7 @@ final class HomeViewModel: ViewModelType {
             }.disposed(by: disposeBag)
         
         // UseCase to Output
-        useCase.fromQueueSuccess
-            .debug()
+        useCase.fromQueueSuccess            
             .map { [weak self] in
                 if self?.gender == UserGender.unselected { return $0.fromQueueDB }
                 else { return $0.fromQueueDB.filter { $0.gender == self?.gender ?? .unselected } }

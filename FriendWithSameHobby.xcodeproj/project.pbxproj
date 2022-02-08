@@ -46,7 +46,7 @@
 		894F5C3627A81D4D00E583B9 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894F5C3527A81D4D00E583B9 /* ProfileViewModel.swift */; };
 		8950C88027B23C340025A8D7 /* HobbyCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8950C87F27B23C340025A8D7 /* HobbyCollectionViewFlowLayout.swift */; };
 		8950C88227B23E370025A8D7 /* HobbyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8950C88127B23E370025A8D7 /* HobbyCollectionViewCell.swift */; };
-		8950C88527B24ED10025A8D7 /* SectionOfHobbyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8950C88427B24ED10025A8D7 /* SectionOfHobbyCell.swift */; };
+		8950C88527B24ED10025A8D7 /* SectionOfHobbyCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8950C88427B24ED10025A8D7 /* SectionOfHobbyCellModel.swift */; };
 		8950C88827B24F240025A8D7 /* RxDataSources in Frameworks */ = {isa = PBXBuildFile; productRef = 8950C88727B24F240025A8D7 /* RxDataSources */; };
 		895E1D7D27A518F00054742F /* FirebaseAuthRepositoryInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895E1D7C27A518F00054742F /* FirebaseAuthRepositoryInterface.swift */; };
 		895E1D7F27A51EB50054742F /* EmptyUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895E1D7E27A51EB50054742F /* EmptyUseCase.swift */; };
@@ -194,7 +194,7 @@
 		894F5C3527A81D4D00E583B9 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		8950C87F27B23C340025A8D7 /* HobbyCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HobbyCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		8950C88127B23E370025A8D7 /* HobbyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HobbyCollectionViewCell.swift; sourceTree = "<group>"; };
-		8950C88427B24ED10025A8D7 /* SectionOfHobbyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionOfHobbyCell.swift; sourceTree = "<group>"; };
+		8950C88427B24ED10025A8D7 /* SectionOfHobbyCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionOfHobbyCellModel.swift; sourceTree = "<group>"; };
 		895E1D7C27A518F00054742F /* FirebaseAuthRepositoryInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthRepositoryInterface.swift; sourceTree = "<group>"; };
 		895E1D7E27A51EB50054742F /* EmptyUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyUseCase.swift; sourceTree = "<group>"; };
 		895E1D8027A52B1B0054742F /* UpdateFCMtokenDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateFCMtokenDTO.swift; sourceTree = "<group>"; };
@@ -500,7 +500,7 @@
 			children = (
 				8950C87F27B23C340025A8D7 /* HobbyCollectionViewFlowLayout.swift */,
 				8950C88127B23E370025A8D7 /* HobbyCollectionViewCell.swift */,
-				8950C88427B24ED10025A8D7 /* SectionOfHobbyCell.swift */,
+				8950C88427B24ED10025A8D7 /* SectionOfHobbyCellModel.swift */,
 			);
 			path = HobbyCollectionView;
 			sourceTree = "<group>";
@@ -1415,7 +1415,7 @@
 				894184E027A15396007F35AC /* ProfileViewController.swift in Sources */,
 				89A81988279ADF7800F257CA /* BaseButton.swift in Sources */,
 				89C147E827A00F5000F0E616 /* FriendsViewController.swift in Sources */,
-				8950C88527B24ED10025A8D7 /* SectionOfHobbyCell.swift in Sources */,
+				8950C88527B24ED10025A8D7 /* SectionOfHobbyCellModel.swift in Sources */,
 				89A81985279A831A00F257CA /* OnboardingRepositoryInterface.swift in Sources */,
 				895E1D8527A5B0A70054742F /* AccountTableViewCell.swift in Sources */,
 				89EC76CF27ACF29700CDA0A4 /* HomeMatchingButton.swift in Sources */,

@@ -14,17 +14,17 @@ struct HobbyCell: IdentifiableType, Equatable {
     var status: HobbyCellStatus
 }
 
-struct SectionOfHobbyCell {
+struct SectionOfHobbyCellModel {
     var headerTitle: String
     var items: [HobbyCell]
 }
 
-extension SectionOfHobbyCell: AnimatableSectionModelType {
+extension SectionOfHobbyCellModel: AnimatableSectionModelType {
     var identity: String {
         return headerTitle
     }
     
-    init(original: SectionOfHobbyCell, items: [HobbyCell]) {
+    init(original: SectionOfHobbyCellModel, items: [HobbyCell]) {
         self = original
         self.items = items
     }

@@ -61,13 +61,15 @@ final class HobbyViewController: UIViewController {
     }
     
     private func binding() {
+        
         let input = HobbyViewModel.Input(
-            viewWillAppear: self.rx.methodInvoked(#selector(viewWillAppear(_:))).map { _ in () }.asDriver(onErrorJustReturn: ())
+            viewWillAppear: self.rx.methodInvoked(#selector(viewWillAppear(_:))).map { _ in () }.asDriver(onErrorJustReturn: ()),
+            searchBarText: searchBar.rx.searchButtonClicked.withLatestFrom(searchBar.rx.text.orEmpty).asDriver(onErrorJustReturn: "")
         )
         let output = viewModel?.transform(input, disposeBag: disposeBag)
         
         // Collection View Config
-        let dataSource = RxCollectionViewSectionedAnimatedDataSource<SectionOfHobbyCell> {
+        let dataSource = RxCollectionViewSectionedAnimatedDataSource<SectionOfHobbyCellModel> {
             datasource, cv, indexPath, item in
             guard let cell = cv.dequeueReusableCell(
                 withReuseIdentifier: HobbyCollectionViewCell.identifier,

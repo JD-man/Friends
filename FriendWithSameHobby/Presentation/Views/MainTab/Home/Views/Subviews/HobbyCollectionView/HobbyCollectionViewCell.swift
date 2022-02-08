@@ -39,7 +39,7 @@ final class HobbyCollectionViewCell: UICollectionViewCell {
         super.init(coder: coder)
     }
     
-    private func viewConfig() {
+    private func viewConfig() {        
         contentView.addSubview(tagButton)
         tagButton.snp.makeConstraints { make in
             make.edges.equalToSuperview()

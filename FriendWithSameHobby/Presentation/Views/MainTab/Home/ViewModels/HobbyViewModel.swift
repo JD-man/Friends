@@ -13,11 +13,13 @@ import RxRelay
 final class HobbyViewModel: ViewModelType {
     struct Input {
         // view will appear
-        let viewWillAppear: Driver<Void>        
+        let viewWillAppear: Driver<Void>
+        // search bar text
+        let searchBarText: Driver<String>
     }
     struct Output {
         // collection view section
-        let aroundHobby = PublishRelay<[SectionOfHobbyCell]>()        
+        let aroundHobby = PublishRelay<[SectionOfHobbyCellModel]>()        
     }
     
     private var disposeBag = DisposeBag()
@@ -26,6 +28,7 @@ final class HobbyViewModel: ViewModelType {
     
     private var lat: Double
     private var long: Double
+    private var searchTextRelay = BehaviorRelay<[String]>(value: [])
     
     init(useCase: HomeUseCase, coordinator: HomeCoordinator, lat: Double, long: Double) {
         self.useCase = useCase
@@ -43,23 +46,35 @@ final class HobbyViewModel: ViewModelType {
                 self?.useCase.excuteFriendsCoord(lat: self?.lat ?? 0.0, long: self?.long ?? 0.0)
             }.disposed(by: disposeBag)
         
+        // input to search text relay
+        input.searchBarText
+            .map { $0.components(separatedBy: " ") }
+            .drive(searchTextRelay)
+            .disposed(by: disposeBag)
+        
         // usecase to output
-        let requestedHF = useCase.fromQueueSuccess
+        let fromRequestedHF = useCase.fromQueueSuccess
             .map {
                 Set($0.fromQueueDBRequested.flatMap { $0.hf })
-                    .map { HobbyCell(identity: $0, cellTitle: $0, status: .around) }
+                    .map { HobbyCell(identity: $0, cellTitle: $0.addSideSpace(), status: .around) }
             }
         
         let fromRecommend = useCase.fromQueueSuccess
             .map {
                 Set($0.fromRecommend)
-                    .map { HobbyCell(identity: $0, cellTitle: $0, status: .recommend) }
+                    .map { HobbyCell(identity: $0, cellTitle: $0.addSideSpace(), status: .recommend) }
             }
         
-        Observable.merge(requestedHF, fromRecommend)
+        let fromSearchText = searchTextRelay
             .map {
-                return [SectionOfHobbyCell.init(headerTitle: "주변취미", items: $0)]
-            }.bind(to: output.aroundHobby)
+                Set($0).map { HobbyCell(identity: $0, cellTitle: $0.addSideSpace(), status: .added) }
+            }
+        
+        Observable.combineLatest(fromRequestedHF, fromRecommend, fromSearchText)            
+            .map {
+                return [SectionOfHobbyCellModel.init(headerTitle: "지금 주변에는", items: $0 + $1),
+                        SectionOfHobbyCellModel.init(headerTitle: "내가 하고 싶은", items: $2)] }
+            .bind(to: output.aroundHobby)
             .disposed(by: disposeBag)
         
         return output

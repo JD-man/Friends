@@ -34,8 +34,7 @@ final class HomeViewController: UIViewController {
     private var viewModel: HomeViewModel?
     private var disposeBag = DisposeBag()
     private var currentCoord: NMGLatLng = NMGLatLng() {
-        didSet {
-            print("didSet")
+        didSet {            
             let gender = genderStackView.gender
             let lat = currentCoord.lat
             let lng = currentCoord.lng
@@ -121,7 +120,6 @@ final class HomeViewController: UIViewController {
         output?.userCoord
             .asDriver(onErrorJustReturn: [])
             .drive { [weak self] in
-                print($0)
                 let markers = $0.map {
                     NMFMarker(position: NMGLatLng(lat: $0.lat, lng: $0.long),
                               iconImage: NMFOverlayImage(image: $0.sesac.imageAsset.image)) }
