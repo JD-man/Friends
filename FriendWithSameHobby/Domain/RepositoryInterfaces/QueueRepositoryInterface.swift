@@ -17,4 +17,8 @@ protocol QueueRepositoryInterface {
         model: PostQueueBodyModel,
         completion: @escaping (Result<Bool, PostQueueError>) -> Void
     )
+    
+    func cancelQueue(
+        completion: @escaping (Result<Bool, CancelQueueError>) -> Void
+    )
 }

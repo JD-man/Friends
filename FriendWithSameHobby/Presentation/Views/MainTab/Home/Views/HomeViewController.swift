@@ -70,6 +70,11 @@ final class HomeViewController: UIViewController {
         binding()        
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.isHidden = true
+    }
+    
     private func viewConfig() {
         view.backgroundColor = .systemGreen
         [mapView, genderStackView, locationButton, matchingButton, userMarker]

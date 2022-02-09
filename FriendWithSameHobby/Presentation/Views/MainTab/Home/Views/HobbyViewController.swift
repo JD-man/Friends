@@ -46,6 +46,11 @@ final class HobbyViewController: UIViewController {
         binding()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.isHidden = false
+    }
+    
     private func viewConfig() {
         view.backgroundColor = .systemBackground
         [hobbyCollectionView, findButton]
@@ -72,7 +77,7 @@ final class HobbyViewController: UIViewController {
                 .asDriver(onErrorJustReturn: ()),
             searchBarText: searchBar.rx.searchButtonClicked.withLatestFrom(searchBar.rx.text.orEmpty).asDriver(onErrorJustReturn: ""),
             itemSelected: itemRelay,
-            findButtonTap: findButton.rx.tap.asDriver()
+            findButtonTap: findButton.rx.tap.asDriver() // 태그가 없으면 501에러 날라옴
         )
         
         let output = viewModel?.transform(input, disposeBag: disposeBag)

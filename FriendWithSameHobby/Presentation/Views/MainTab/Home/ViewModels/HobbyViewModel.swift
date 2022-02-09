@@ -118,8 +118,8 @@ final class HobbyViewModel: ViewModelType {
         newArr.forEach {
             if value.contains($0) == false, value.count < 8 {
                 value.append($0)
-            } else if newArr.count >= 8 {
-                coordinator?.toasting(message: "취미는 8개까지 등록이 가능합니다.")
+            } else if value.count >= 8 {
+                coordinator?.toasting(message: "취미를 더 이상 추가할 수 없습니다")
             }
         }
         return value

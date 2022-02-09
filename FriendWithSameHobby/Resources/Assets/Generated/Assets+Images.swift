@@ -29,6 +29,7 @@ internal enum AssetsImages {
   internal static let socialLifeCuate = ImageAsset(name: "Social life-cuate")
   internal static let arrow = ImageAsset(name: "arrow")
   internal static let cancelMatch = ImageAsset(name: "cancel_match")
+  internal static let clarityRefreshLine = ImageAsset(name: "clarity_refresh-line")
   internal static let closeBig = ImageAsset(name: "close_big")
   internal static let faq = ImageAsset(name: "faq")
   internal static let femaleButton = ImageAsset(name: "femaleButton")

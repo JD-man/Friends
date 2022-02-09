@@ -59,6 +59,8 @@
 		896795CA27B3DD4900BF942B /* PostQueueBodyDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896795C927B3DD4900BF942B /* PostQueueBodyDTO.swift */; };
 		896795CC27B3DD5700BF942B /* PostQueueBodyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896795CB27B3DD5700BF942B /* PostQueueBodyModel.swift */; };
 		896795CE27B3ED3200BF942B /* UserSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896795CD27B3ED3200BF942B /* UserSearchViewController.swift */; };
+		896795D027B42EFB00BF942B /* UserSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896795CF27B42EFB00BF942B /* UserSearchViewModel.swift */; };
+		896795D227B42F6F00BF942B /* UserSearchUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896795D127B42F6F00BF942B /* UserSearchUseCase.swift */; };
 		898B79442799431000844284 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898B79432799431000844284 /* OnboardingViewController.swift */; };
 		898B79462799447600844284 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 898B79452799447600844284 /* Images.xcassets */; };
 		898B79482799456F00844284 /* Assets+Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898B79472799456F00844284 /* Assets+Images.swift */; };
@@ -210,6 +212,8 @@
 		896795C927B3DD4900BF942B /* PostQueueBodyDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostQueueBodyDTO.swift; sourceTree = "<group>"; };
 		896795CB27B3DD5700BF942B /* PostQueueBodyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostQueueBodyModel.swift; sourceTree = "<group>"; };
 		896795CD27B3ED3200BF942B /* UserSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSearchViewController.swift; sourceTree = "<group>"; };
+		896795CF27B42EFB00BF942B /* UserSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSearchViewModel.swift; sourceTree = "<group>"; };
+		896795D127B42F6F00BF942B /* UserSearchUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSearchUseCase.swift; sourceTree = "<group>"; };
 		898B79432799431000844284 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		898B79452799447600844284 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		898B79472799456F00844284 /* Assets+Images.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Assets+Images.swift"; sourceTree = "<group>"; };
@@ -499,6 +503,7 @@
 				894F5C3327A81C2100E583B9 /* ProfileUseCase.swift */,
 				89EC76D227AD09F100CDA0A4 /* HomeUseCase.swift */,
 				890A905F27B0FDE5002A4DF6 /* HobbyUseCase.swift */,
+				896795D127B42F6F00BF942B /* UserSearchUseCase.swift */,
 			);
 			path = MainTab;
 			sourceTree = "<group>";
@@ -851,6 +856,7 @@
 			children = (
 				89EC76D027AD07C500CDA0A4 /* HomeViewModel.swift */,
 				890A905D27B0FD61002A4DF6 /* HobbyViewModel.swift */,
+				896795CF27B42EFB00BF942B /* UserSearchViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -1474,9 +1480,11 @@
 				898B794F279949D600844284 /* UseCaseType.swift in Sources */,
 				89235B3727A688130069EFB5 /* SeSACReviewView.swift in Sources */,
 				89E0559C279D18D200E86445 /* UserRepository.swift in Sources */,
+				896795D227B42F6F00BF942B /* UserSearchUseCase.swift in Sources */,
 				89FDC55027AFEF2F0088B32A /* OnqueueResponseDTO.swift in Sources */,
 				89A81990279AF9E500F257CA /* PhoneAuthUseCase.swift in Sources */,
 				895E1D7F27A51EB50054742F /* EmptyUseCase.swift in Sources */,
+				896795D027B42EFB00BF942B /* UserSearchViewModel.swift in Sources */,
 				89235B3527A67A260069EFB5 /* SeSACTitleView.swift in Sources */,
 				89C147D327A00E6400F0E616 /* FriendsCoordinator.swift in Sources */,
 				895E1D8727A5B5420054742F /* Cell+Ext.swift in Sources */,

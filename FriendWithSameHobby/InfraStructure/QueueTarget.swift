@@ -11,6 +11,7 @@ import Moya
 enum QueueTarget {
     case searchFriends(parameters: Parameters)
     case postQueue(Parameters: Parameters)
+    case cancelQueue
 }
 
 extension QueueTarget: TargetType {
@@ -22,7 +23,7 @@ extension QueueTarget: TargetType {
         switch self {
         case .searchFriends:
             return "/queue/onqueue"
-        case .postQueue:
+        case .postQueue, .cancelQueue:
             return "/queue"
         }
     }
@@ -31,6 +32,8 @@ extension QueueTarget: TargetType {
         switch self {
         case .searchFriends, .postQueue:
             return .post
+        case .cancelQueue:
+            return .delete
         }
     }
     
@@ -42,6 +45,9 @@ extension QueueTarget: TargetType {
         case .postQueue(let parameters):
             return .requestParameters(parameters: parameters,
                                       encoding: URLEncoding(arrayEncoding: .noBrackets))
+        case .cancelQueue:
+            return .requestParameters(parameters: [:],
+                                      encoding: URLEncoding.default)
         }
     }
     

@@ -11,6 +11,7 @@ import Moya
 final class QueueRepository: QueueRepositoryInterface {
     typealias OnqueueResult = Result<OnqueueResponseModel, OnqueueError>
     typealias PostQueueResult = Result<Bool, PostQueueError>
+    typealias CancelQueueResult = Result<Bool, CancelQueueError>
     let provider = MoyaProvider<QueueTarget>()
     
     func requestOnqueue(model: OnqueueBodyModel, completion: @escaping (OnqueueResult) -> Void) {
@@ -41,6 +42,18 @@ final class QueueRepository: QueueRepositoryInterface {
                 print(error)
                 let statusCode = error.response?.statusCode ?? -1
                 completion(.failure(PostQueueError(rawValue: statusCode) ?? .unknownError))
+            }
+        }
+    }
+    
+    func cancelQueue(completion: @escaping (CancelQueueResult) -> Void) {
+        provider.request(.cancelQueue) { result in
+            switch result {
+            case .success(_):
+                completion(.success(true))
+            case .failure(let error):
+                let statusCode = error.response?.statusCode ?? -1
+                completion(.failure(CancelQueueError(rawValue: statusCode) ?? .unknownError))
             }
         }
     }
