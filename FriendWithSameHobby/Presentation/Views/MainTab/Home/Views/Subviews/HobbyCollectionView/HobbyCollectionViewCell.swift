@@ -35,6 +35,11 @@ final class HobbyCollectionViewCell: UICollectionViewCell {
     var disposeBag = DisposeBag()
     
     let tagButton = BaseButton(title: "태그", status: .fill, type: .h32)
+    let emptyLabel = PaddedLabel().then {
+        $0.backgroundColor = .clear
+        $0.textColor = .clear
+        $0.isUserInteractionEnabled = false
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -45,19 +50,23 @@ final class HobbyCollectionViewCell: UICollectionViewCell {
         super.init(coder: coder)
     }
     
-    private func viewConfig() {        
-        addSubview(tagButton)
+    private func viewConfig() {
+        [emptyLabel, tagButton]
+            .forEach { addSubview($0) }
+        
+        emptyLabel.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
         tagButton.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-    
     }
     
     func configure(with model: HobbyCellModel) {
         tagButton.setTitle(model.cellTitle, for: .normal)
         tagButton.status = model.status.buttonStatus
-        tagButton.frame.size.width = tagButton.titleLabel?.frame.size.width ?? 0 + 30
-        tagButton.frame.size.height = tagButton.titleLabel?.frame.size.height ?? 0
+        emptyLabel.text = model.cellTitle
     }
     
     override func prepareForReuse() {

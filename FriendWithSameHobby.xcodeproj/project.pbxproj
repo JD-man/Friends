@@ -61,6 +61,7 @@
 		896795CE27B3ED3200BF942B /* UserSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896795CD27B3ED3200BF942B /* UserSearchViewController.swift */; };
 		896795D027B42EFB00BF942B /* UserSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896795CF27B42EFB00BF942B /* UserSearchViewModel.swift */; };
 		896795D227B42F6F00BF942B /* UserSearchUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896795D127B42F6F00BF942B /* UserSearchUseCase.swift */; };
+		896795D427B44AF600BF942B /* PaddedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896795D327B44AF600BF942B /* PaddedLabel.swift */; };
 		898B79442799431000844284 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898B79432799431000844284 /* OnboardingViewController.swift */; };
 		898B79462799447600844284 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 898B79452799447600844284 /* Images.xcassets */; };
 		898B79482799456F00844284 /* Assets+Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898B79472799456F00844284 /* Assets+Images.swift */; };
@@ -214,6 +215,7 @@
 		896795CD27B3ED3200BF942B /* UserSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSearchViewController.swift; sourceTree = "<group>"; };
 		896795CF27B42EFB00BF942B /* UserSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSearchViewModel.swift; sourceTree = "<group>"; };
 		896795D127B42F6F00BF942B /* UserSearchUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSearchUseCase.swift; sourceTree = "<group>"; };
+		896795D327B44AF600BF942B /* PaddedLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddedLabel.swift; sourceTree = "<group>"; };
 		898B79432799431000844284 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		898B79452799447600844284 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		898B79472799456F00844284 /* Assets+Images.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Assets+Images.swift"; sourceTree = "<group>"; };
@@ -684,6 +686,7 @@
 				89D721C1279B8F8300B02A1E /* BaseTextField.swift */,
 				890C52B327A3E32F009E54E9 /* BaseActivityIndicator.swift */,
 				89D7242F27AE4C2F00929C68 /* BaseAlertView.swift */,
+				896795D327B44AF600BF942B /* PaddedLabel.swift */,
 			);
 			path = BaseComponent;
 			sourceTree = "<group>";
@@ -1420,6 +1423,7 @@
 				89EC76D627AD0A8500CDA0A4 /* HobbyViewController.swift in Sources */,
 				894F5C2C27A7EB2400E583B9 /* ProfileAllowSearchingView.swift in Sources */,
 				89AB665E27985F4200DFEE95 /* UIFont+Ext.swift in Sources */,
+				896795D427B44AF600BF942B /* PaddedLabel.swift in Sources */,
 				89AB665927985B9600DFEE95 /* Assets+Fonts.swift in Sources */,
 				898B79482799456F00844284 /* Assets+Images.swift in Sources */,
 				8950C88027B23C340025A8D7 /* HobbyCollectionViewFlowLayout.swift in Sources */,
