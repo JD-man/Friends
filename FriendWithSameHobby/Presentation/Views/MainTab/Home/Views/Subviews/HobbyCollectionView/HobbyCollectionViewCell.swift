@@ -20,7 +20,7 @@ enum HobbyCellStatus: Equatable {
         case .recommend:
             return .outline(color: AssetsColors.error.color)
         case .around:
-            return .disable
+            return .outline(color: AssetsColors.black.color)
         case .added:
             return .outline(color: AssetsColors.green.color)
         }
@@ -50,6 +50,7 @@ final class HobbyCollectionViewCell: UICollectionViewCell {
         tagButton.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
+    
     }
     
     func configure(with model: HobbyCellModel) {

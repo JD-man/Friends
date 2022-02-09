@@ -87,8 +87,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     private func navigationConfig() {
-        UINavigationBar.appearance().backIndicatorImage = AssetsImages.arrow.image
-        UINavigationBar.appearance().backIndicatorTransitionMaskImage = AssetsImages.arrow.image        
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithDefaultBackground()
+        appearance.setBackIndicatorImage(AssetsImages.arrow.image, transitionMaskImage: AssetsImages.arrow.image)
+        UINavigationBar.appearance().standardAppearance = appearance
+        UINavigationBar.appearance().scrollEdgeAppearance = appearance
         UINavigationBar.appearance().tintColor = AssetsColors.black.color        
     }
 }

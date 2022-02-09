@@ -20,6 +20,7 @@ final class HobbyViewController: UIViewController {
     
     private let hobbyCollectionView = UICollectionView(frame: .zero, collectionViewLayout: HobbyCollectionViewFlowLayout()).then {
         $0.register(HobbyCollectionViewCell.self, forCellWithReuseIdentifier: HobbyCollectionViewCell.identifier)
+        $0.register(HobbyCollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: HobbyCollectionReusableView.identifier)
     }
     private let searchBar = UISearchBar().then {        
         $0.searchTextField.attributedPlaceholder = NSAttributedString(string: "띄어쓰기로 복수 입력이 가능해요", attributes: [.font : AssetsFonts.NotoSansKR.regular.font(size: 14)])
@@ -70,13 +71,14 @@ final class HobbyViewController: UIViewController {
                 self.rx.methodInvoked(#selector(viewWillAppear(_:))).map { _ in () }
                 .asDriver(onErrorJustReturn: ()),
             searchBarText: searchBar.rx.searchButtonClicked.withLatestFrom(searchBar.rx.text.orEmpty).asDriver(onErrorJustReturn: ""),
-            itemSelected: itemRelay
+            itemSelected: itemRelay,
+            findButtonTap: findButton.rx.tap.asDriver()
         )
         
         let output = viewModel?.transform(input, disposeBag: disposeBag)
         
         // MARK: - Collection View Config
-        let dataSource = RxCollectionViewSectionedAnimatedDataSource<SectionOfHobbyCellModel> { [weak self]
+        let cvDataSource = RxCollectionViewSectionedAnimatedDataSource<SectionOfHobbyCellModel> { [weak self]
             datasource, cv, indexPath, item in
             guard let cell = cv.dequeueReusableCell(
                 withReuseIdentifier: HobbyCollectionViewCell.identifier,
@@ -88,9 +90,20 @@ final class HobbyViewController: UIViewController {
             return cell
         }
         
+        cvDataSource.configureSupplementaryView = { dataSource, cv, kind, indexPath in
+            guard let section = cv.dequeueReusableSupplementaryView(
+                ofKind: kind,
+                withReuseIdentifier: HobbyCollectionReusableView.identifier,
+                for: indexPath) as? HobbyCollectionReusableView else {
+                return UICollectionReusableView()
+            }            
+            section.titleLabel.text = dataSource[indexPath.section].headerTitle
+            return section
+        }
+        
         output?.aroundHobby
             .asDriver(onErrorJustReturn: [])
-            .drive(hobbyCollectionView.rx.items(dataSource: dataSource))
+            .drive(hobbyCollectionView.rx.items(dataSource: cvDataSource))
             .disposed(by: disposeBag)
         
         // MARK: - Keyboard handling

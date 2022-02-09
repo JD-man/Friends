@@ -8,7 +8,7 @@
 import Foundation
 import RxRelay
 
-final class HomeUseCase: UseCaseType {
+class HomeUseCase: UseCaseType {
     var firebaseRepo: FirebaseAuthRepositoryInterface?
     var queueRepo: QueueRepositoryInterface?
     
@@ -42,7 +42,7 @@ final class HomeUseCase: UseCaseType {
         })
     }
     
-    private func tokenErrorHandling(completion: @escaping () -> Void) {
+    func tokenErrorHandling(completion: @escaping () -> Void) {
         firebaseRepo?.refreshingIDtoken(completion: { result in
             switch result {
             case .success(let idToken):

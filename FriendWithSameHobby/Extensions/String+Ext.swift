@@ -24,4 +24,8 @@ extension String {
     func removeHyphen() -> String {
         return self.replacingOccurrences(of: "-", with: "")
     }
+    
+//    func addSideSpace() -> String {
+//        return "    \(self)    "
+//    }
 }

@@ -53,13 +53,18 @@ final class AccountViewController: UIViewController {
         binding()
     }
     
-    private func viewConfig() {
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         title = "내정보"
+    }
+    
+    private func viewConfig() {
         view.backgroundColor = .systemBackground
         view.addSubview(accountTableView)
         accountTableView.snp.makeConstraints { make in
             make.edges.equalTo(view.safeAreaLayoutGuide)
         }
+        accountTableView.sectionHeaderTopPadding = 1
         accountCellRelay.accept(cellModels)
     }
     

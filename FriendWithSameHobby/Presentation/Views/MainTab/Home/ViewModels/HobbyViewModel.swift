@@ -19,6 +19,8 @@ final class HobbyViewModel: ViewModelType {
         let searchBarText: Driver<String>
         // item selected
         let itemSelected: PublishRelay<(Int,String)>
+        // find button
+        let findButtonTap: Driver<Void>
     }
     struct Output {
         // collection view section
@@ -26,14 +28,14 @@ final class HobbyViewModel: ViewModelType {
     }
     
     private var disposeBag = DisposeBag()
-    var useCase: HomeUseCase
+    var useCase: HobbyUseCase
     weak var coordinator: HomeCoordinator?
     
     private var lat: Double
     private var long: Double
     private var searchTextRelay = BehaviorRelay<[String]>(value: [])
     
-    init(useCase: HomeUseCase, coordinator: HomeCoordinator, lat: Double, long: Double) {
+    init(useCase: HobbyUseCase, coordinator: HomeCoordinator, lat: Double, long: Double) {
         self.useCase = useCase
         self.coordinator = coordinator
         self.lat = lat
@@ -47,6 +49,26 @@ final class HobbyViewModel: ViewModelType {
         input.viewWillAppear
             .drive { [weak self] _ in
                 self?.useCase.excuteFriendsCoord(lat: self?.lat ?? 0.0, long: self?.long ?? 0.0)
+            }.disposed(by: disposeBag)
+        
+        input.findButtonTap
+            .drive { [weak self] _ in
+                self?.useCase.excutePostQueue(lat: self?.lat ?? 0.0,
+                                              long: self?.long ?? 0.0,
+                                              hf: self?.searchTextRelay.value ?? [])
+            }.disposed(by: disposeBag)
+        
+        // usecase to cooodinator
+        useCase.postQueueSuccess
+            .asDriver(onErrorJustReturn: false)
+            .drive { [weak self] in
+                if $0 { self?.coordinator?.pushUserSearchVC() }
+            }.disposed(by: disposeBag)
+        
+        useCase.postQueueError
+            .asDriver(onErrorJustReturn: .unknownError)
+            .drive { [weak self] in
+                self?.coordinator?.toasting(message: $0.description)
             }.disposed(by: disposeBag)
         
         // input to search text relay
@@ -77,11 +99,10 @@ final class HobbyViewModel: ViewModelType {
         
         let fromSearchText = searchTextRelay
             .map {
-                Set($0)
-                    .map { HobbyCellModel(identity: "search\($0)", cellTitle: $0, status: .added) }
+                $0.map { HobbyCellModel(identity: "search\($0)", cellTitle: $0, status: .added) }
             }
         
-        Observable.combineLatest(fromRequestedHF, fromRecommend, fromSearchText)            
+        Observable.combineLatest(fromRecommend, fromRequestedHF, fromSearchText)
             .map {
                 return [SectionOfHobbyCellModel.init(headerTitle: "지금 주변에는", items: $0 + $1),
                         SectionOfHobbyCellModel.init(headerTitle: "내가 하고 싶은", items: $2)] }
@@ -92,23 +113,24 @@ final class HobbyViewModel: ViewModelType {
     }
     
     private func makeTagFromSearchbar(text: String) -> [String] {
-        let value = searchTextRelay.value
-        let newArr = value + text.components(separatedBy: " ").filter { $0.count != 0 }
-        if newArr.count > 8 {
-            coordinator?.toasting(message: "취미는 8개까지 등록이 가능합니다.")
-            return value
+        var value = searchTextRelay.value
+        let newArr = text.components(separatedBy: " ").filter { $0.count != 0 }
+        newArr.forEach {
+            if value.contains($0) == false, value.count < 8 {
+                value.append($0)
+            } else if newArr.count >= 8 {
+                coordinator?.toasting(message: "취미는 8개까지 등록이 가능합니다.")
+            }
         }
-        else {
-            return newArr
-        }
+        return value
     }
     
     private func makeTagFromButton(section: Int, title: String) {
         var value = searchTextRelay.value
-        if section == 0 {
+        if section == 0, value.contains(title) == false {
             value.append(title)
             searchTextRelay.accept(value)
-        } else {
+        } else if section == 1 {
             let idx = value.firstIndex(of: title) ?? 0            
             value.remove(at: idx)
             searchTextRelay.accept(value)

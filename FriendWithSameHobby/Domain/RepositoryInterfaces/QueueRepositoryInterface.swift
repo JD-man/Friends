@@ -8,6 +8,13 @@
 import Foundation
 
 protocol QueueRepositoryInterface {
-    func requestOnqueue(model: OnqueueBodyModel,
-                        completion: @escaping (Result<OnqueueResponseModel, OnqueueError>) -> Void)
+    func requestOnqueue(
+        model: OnqueueBodyModel,
+        completion: @escaping (Result<OnqueueResponseModel, OnqueueError>) -> Void
+    )
+    
+    func postQueue(
+        model: PostQueueBodyModel,
+        completion: @escaping (Result<Bool, PostQueueError>) -> Void
+    )
 }

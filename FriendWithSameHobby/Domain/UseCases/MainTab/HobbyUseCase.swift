@@ -6,20 +6,29 @@
 //
 
 import Foundation
+import RxRelay
 
-final class HobbyUseCase: UseCaseType {
-    private var firebaseRepo: FirebaseAuthRepositoryInterface?
-    private var queueRepo: QueueRepositoryInterface?
+final class HobbyUseCase: HomeUseCase {
     
-    init(
-        firebaseRepo: FirebaseAuthRepositoryInterface,
-        queueRepo: QueueRepositoryInterface
-    ) {
-        self.firebaseRepo = firebaseRepo
-        self.queueRepo = queueRepo
-    }
+    let postQueueSuccess = PublishRelay<Bool>()
+    let postQueueError = PublishRelay<PostQueueError>()
     
-    func executeRequestedHobby() {
-        
+    func excutePostQueue(type: Int = 2 , lat: Double, long: Double, hf: [String]) {
+        let model = PostQueueBodyModel(lat: lat, long: long, hf: hf)
+        queueRepo?.postQueue(model: model, completion: { [weak self] result in
+            switch result {
+            case .success(let isPosted):
+                self?.postQueueSuccess.accept(isPosted)
+            case .failure(let error):
+                switch error {
+                case .tokenError:
+                    self?.tokenErrorHandling {
+                        self?.excutePostQueue(lat: lat, long: long, hf: hf)
+                    }
+                default:
+                    self?.postQueueError.accept(error)
+                }
+            }
+        })
     }
 }

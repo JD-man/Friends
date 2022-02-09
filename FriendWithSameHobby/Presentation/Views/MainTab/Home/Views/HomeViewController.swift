@@ -64,6 +64,7 @@ final class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(UserInfoManager.idToken)
         viewConfig()
         locationManagerConfig()
         binding()        

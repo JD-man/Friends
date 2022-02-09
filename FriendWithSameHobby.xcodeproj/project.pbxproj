@@ -56,6 +56,9 @@
 		895E1D8727A5B5420054742F /* Cell+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895E1D8627A5B5420054742F /* Cell+Ext.swift */; };
 		89636BF227A996D100DD8B91 /* UserMyPageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89636BF127A996D100DD8B91 /* UserMyPageModel.swift */; };
 		89636BF427A9A97600DD8B91 /* UserMyPageDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89636BF327A9A97600DD8B91 /* UserMyPageDTO.swift */; };
+		896795CA27B3DD4900BF942B /* PostQueueBodyDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896795C927B3DD4900BF942B /* PostQueueBodyDTO.swift */; };
+		896795CC27B3DD5700BF942B /* PostQueueBodyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896795CB27B3DD5700BF942B /* PostQueueBodyModel.swift */; };
+		896795CE27B3ED3200BF942B /* UserSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896795CD27B3ED3200BF942B /* UserSearchViewController.swift */; };
 		898B79442799431000844284 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898B79432799431000844284 /* OnboardingViewController.swift */; };
 		898B79462799447600844284 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 898B79452799447600844284 /* Images.xcassets */; };
 		898B79482799456F00844284 /* Assets+Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898B79472799456F00844284 /* Assets+Images.swift */; };
@@ -66,6 +69,7 @@
 		898B79542799502900844284 /* CoordinatorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898B79532799502900844284 /* CoordinatorType.swift */; };
 		898B79572799505000844284 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898B79562799505000844284 /* AppCoordinator.swift */; };
 		898B795A2799604700844284 /* AuthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898B79592799604700844284 /* AuthCoordinator.swift */; };
+		899B713327B2F732001E5C02 /* HobbyCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899B713227B2F732001E5C02 /* HobbyCollectionReusableView.swift */; };
 		89A81983279A81D400F257CA /* OnboardingRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A81982279A81D400F257CA /* OnboardingRepository.swift */; };
 		89A81985279A831A00F257CA /* OnboardingRepositoryInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A81984279A831A00F257CA /* OnboardingRepositoryInterface.swift */; };
 		89A81988279ADF7800F257CA /* BaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A81987279ADF7800F257CA /* BaseButton.swift */; };
@@ -203,6 +207,9 @@
 		895E1D8627A5B5420054742F /* Cell+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Cell+Ext.swift"; sourceTree = "<group>"; };
 		89636BF127A996D100DD8B91 /* UserMyPageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMyPageModel.swift; sourceTree = "<group>"; };
 		89636BF327A9A97600DD8B91 /* UserMyPageDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMyPageDTO.swift; sourceTree = "<group>"; };
+		896795C927B3DD4900BF942B /* PostQueueBodyDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostQueueBodyDTO.swift; sourceTree = "<group>"; };
+		896795CB27B3DD5700BF942B /* PostQueueBodyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostQueueBodyModel.swift; sourceTree = "<group>"; };
+		896795CD27B3ED3200BF942B /* UserSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSearchViewController.swift; sourceTree = "<group>"; };
 		898B79432799431000844284 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		898B79452799447600844284 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		898B79472799456F00844284 /* Assets+Images.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Assets+Images.swift"; sourceTree = "<group>"; };
@@ -213,6 +220,7 @@
 		898B79532799502900844284 /* CoordinatorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorType.swift; sourceTree = "<group>"; };
 		898B79562799505000844284 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		898B79592799604700844284 /* AuthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinator.swift; sourceTree = "<group>"; };
+		899B713227B2F732001E5C02 /* HobbyCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HobbyCollectionReusableView.swift; sourceTree = "<group>"; };
 		89A81982279A81D400F257CA /* OnboardingRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingRepository.swift; sourceTree = "<group>"; };
 		89A81984279A831A00F257CA /* OnboardingRepositoryInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingRepositoryInterface.swift; sourceTree = "<group>"; };
 		89A81987279ADF7800F257CA /* BaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseButton.swift; sourceTree = "<group>"; };
@@ -501,6 +509,7 @@
 				8950C87F27B23C340025A8D7 /* HobbyCollectionViewFlowLayout.swift */,
 				8950C88127B23E370025A8D7 /* HobbyCollectionViewCell.swift */,
 				8950C88427B24ED10025A8D7 /* SectionOfHobbyCellModel.swift */,
+				899B713227B2F732001E5C02 /* HobbyCollectionReusableView.swift */,
 			);
 			path = HobbyCollectionView;
 			sourceTree = "<group>";
@@ -832,6 +841,7 @@
 				89EC76D427AD0A6A00CDA0A4 /* Subviews */,
 				89C147E327A00F1300F0E616 /* HomeViewController.swift */,
 				89EC76D527AD0A8500CDA0A4 /* HobbyViewController.swift */,
+				896795CD27B3ED3200BF942B /* UserSearchViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1061,6 +1071,7 @@
 			children = (
 				89FDC54D27AFEE570088B32A /* OnqueueBodyDTO.swift */,
 				89FDC54F27AFEF2F0088B32A /* OnqueueResponseDTO.swift */,
+				896795C927B3DD4900BF942B /* PostQueueBodyDTO.swift */,
 			);
 			path = Queue;
 			sourceTree = "<group>";
@@ -1081,6 +1092,7 @@
 			children = (
 				89FDC55327AFEFB80088B32A /* OnqueueBodyModel.swift */,
 				89FDC55527AFF0EA0088B32A /* OnqueueResponseModel.swift */,
+				896795CB27B3DD5700BF942B /* PostQueueBodyModel.swift */,
 			);
 			path = Queue;
 			sourceTree = "<group>";
@@ -1456,6 +1468,7 @@
 				89C147E627A00F3500F0E616 /* ShopViewController.swift in Sources */,
 				89FDC55A27B000650088B32A /* QueueError.swift in Sources */,
 				89C147CF27A00E4B00F0E616 /* HomeCoordinator.swift in Sources */,
+				899B713327B2F732001E5C02 /* HobbyCollectionReusableView.swift in Sources */,
 				895E1D7D27A518F00054742F /* FirebaseAuthRepositoryInterface.swift in Sources */,
 				89BF2C9527A6DA4200D693F6 /* ProfileTableViewCell.swift in Sources */,
 				898B794F279949D600844284 /* UseCaseType.swift in Sources */,
@@ -1474,11 +1487,13 @@
 				898B79442799431000844284 /* OnboardingViewController.swift in Sources */,
 				89ECC564279E759600C4C477 /* NickNameViewModel.swift in Sources */,
 				890C52B427A3E32F009E54E9 /* BaseActivityIndicator.swift in Sources */,
+				896795CE27B3ED3200BF942B /* UserSearchViewController.swift in Sources */,
 				89D721C4279B906F00B02A1E /* UITextField+Ext.swift in Sources */,
 				894F5C3627A81D4D00E583B9 /* ProfileViewModel.swift in Sources */,
 				89D7243027AE4C2F00929C68 /* BaseAlertView.swift in Sources */,
 				89EC76DA27AD203C00CDA0A4 /* QueueTarget.swift in Sources */,
 				894F5C2827A7BF7B00E583B9 /* ProfileGenderView.swift in Sources */,
+				896795CA27B3DD4900BF942B /* PostQueueBodyDTO.swift in Sources */,
 				89AB6650279846A900DFEE95 /* Assets+Colors.swift in Sources */,
 				898B794D279945F100844284 /* ViewModelType.swift in Sources */,
 				890CCA222796986600D6185E /* PhoneAuthViewController.swift in Sources */,
@@ -1493,6 +1508,7 @@
 				89636BF227A996D100DD8B91 /* UserMyPageModel.swift in Sources */,
 				894F5C3427A81C2100E583B9 /* ProfileUseCase.swift in Sources */,
 				89A8198D279AF95C00F257CA /* PhoneAuthViewModel.swift in Sources */,
+				896795CC27B3DD5700BF942B /* PostQueueBodyModel.swift in Sources */,
 				89EC76D127AD07C500CDA0A4 /* HomeViewModel.swift in Sources */,
 				895E1D8327A52B8D0054742F /* UpdateFCMtokenModel.swift in Sources */,
 				89EC76D827AD200000CDA0A4 /* QueueRepository.swift in Sources */,

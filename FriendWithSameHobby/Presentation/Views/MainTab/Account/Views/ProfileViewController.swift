@@ -54,12 +54,19 @@ final class ProfileViewController: UIViewController {
         binding()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        title = "정보 관리"
+    }
+    
     private func viewConfig() {
         view.backgroundColor = .systemBackground
         view.addSubview(profileTableView)
         profileTableView.snp.makeConstraints { make in
             make.edges.equalTo(view.safeAreaLayoutGuide).inset(16)
         }
+        
+        profileTableView.sectionHeaderTopPadding = 1
         
         // Nav config
         navigationController?.navigationBar.topItem?.title = ""
@@ -90,7 +97,7 @@ final class ProfileViewController: UIViewController {
     private func binding() {
         let input = ProfileViewModel.Input(
             viewWillAppear: self.rx.methodInvoked(#selector(viewWillAppear(_:))).map { _ in return () }.asDriver(onErrorJustReturn: ()),
-            withdrawTap: footerView.withdrawButton.rx.tap.asDriver(),
+            withdrawTap: footerView.withdrawButton.rx.tap.asDriver(),            
             updateButtonTap: updateBarButton.rx.tap.map { [weak self] in
                 self?.makeUpdateData() ?? (.unselected, "", false, 0, 1) }
                 .asDriver(onErrorJustReturn: (.unselected, "", false, 0, 1))
@@ -134,7 +141,6 @@ final class ProfileViewController: UIViewController {
         let searchable = footerView.allowSearchingView.allowSwitch.isOn
         let minAgeIndex = footerView.ageView.ageSlider.lowerValueStepIndex
         let maxAgeIndex = footerView.ageView.ageSlider.upperValueStepIndex
-        
         return (gender, hobby, searchable, minAgeIndex, maxAgeIndex)
     }
 }

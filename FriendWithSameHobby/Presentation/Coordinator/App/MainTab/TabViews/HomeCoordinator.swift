@@ -26,18 +26,24 @@ final class HomeCoordinator: CoordinatorType {
         let queueRepo = QueueRepository()
         let useCase = HomeUseCase(firebaseRepo: firebaseRepo, queueRepo: queueRepo)
         let viewModel = HomeViewModel(useCase: useCase, coordinator: self)
-        let homeVC = HomeViewController(viewModel: viewModel)
+        let homeVC = HomeViewController(viewModel: viewModel)        
         navigationController.pushViewController(homeVC, animated: true)
     }
     
     func pushHobbyVC(lat: Double, long: Double) {
         let firebaseRepo = FirebaseAuthRepository(phoneID: nil)
         let queueRepo = QueueRepository()
-        let useCase = HomeUseCase(firebaseRepo: firebaseRepo, queueRepo: queueRepo)
+        let useCase = HobbyUseCase(firebaseRepo: firebaseRepo, queueRepo: queueRepo)
         let viewModel = HobbyViewModel(useCase: useCase, coordinator: self, lat: lat, long: long)
         let hobbyVC = HobbyViewController(viewModel: viewModel)
         hobbyVC.hidesBottomBarWhenPushed = true
         navigationController.pushViewController(hobbyVC, animated: true)
+    }
+    
+    func pushUserSearchVC() {
+        let userSearchVC = UserSearchViewController()
+        userSearchVC.hidesBottomBarWhenPushed = true
+        navigationController.pushViewController(userSearchVC, animated: true)
     }
     
     func toasting(message: String) {

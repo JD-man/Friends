@@ -35,7 +35,7 @@ final class AccountCoordinator: CoordinatorType {
         let useCase = ProfileUseCase(phoneAuthRepo: phoneAuthRepo, userRepo: userRepo)
         let viewModel = ProfileViewModel(useCase: useCase, coordinator: self)
         let profileVC = ProfileViewController(profileViewModel: viewModel)
-        navigationController.navigationItem.hidesBackButton = true
+        profileVC.hidesBottomBarWhenPushed = true        
         navigationController.pushViewController(profileVC, animated: true)
     }
     
