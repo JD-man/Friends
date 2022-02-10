@@ -8,7 +8,7 @@ import UIKit
 import SnapKit
 
 final class SeSACReviewView: UIView {
-    let titleLabel = UILabel().then {
+    private let titleLabel = UILabel().then {
         $0.text = "새싹 리뷰"
         $0.font = AssetsFonts.NotoSansKR.regular.font(size: 12)
     }

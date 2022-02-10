@@ -21,13 +21,16 @@ final class HomeCoordinator: CoordinatorType {
     }
     
     func start() {
-        // Start with accountVC
+        pushHomeVC()        
+    }
+    
+    func pushHomeVC() {
         let firebaseRepo = FirebaseAuthRepository(phoneID: nil)
         let queueRepo = QueueRepository()
         let useCase = HomeUseCase(firebaseRepo: firebaseRepo, queueRepo: queueRepo)
         let viewModel = HomeViewModel(useCase: useCase, coordinator: self)
         let homeVC = HomeViewController(viewModel: viewModel)
-        navigationController.pushViewController(homeVC, animated: true)        
+        navigationController.pushViewController(homeVC, animated: true)
     }
     
     func pushHobbyVC(lat: Double, long: Double) {
@@ -40,12 +43,12 @@ final class HomeCoordinator: CoordinatorType {
         navigationController.pushViewController(hobbyVC, animated: true)
     }
     
-    func pushUserSearchVC() {
+    func pushMatchingVC(lat: Double, long: Double) {
         let firebaseRepo = FirebaseAuthRepository(phoneID: nil)
         let queueRepo = QueueRepository()
-        let useCase = UserSearchUseCase(firebaseRepo: firebaseRepo, queueRepo: queueRepo)
-        let viewModel = UserSearchViewModel(useCase: useCase, coordinator: self)
-        let userSearchVC = UserSearchViewController(viewModel: viewModel)
+        let useCase = MatchingUseCase(firebaseRepo: firebaseRepo, queueRepo: queueRepo)
+        let viewModel = MatchingViewModel(useCase: useCase, coordinator: self, lat: lat, long: long)
+        let userSearchVC = MatchingViewController(viewModel: viewModel)
         userSearchVC.hidesBottomBarWhenPushed = true
         navigationController.pushViewController(userSearchVC, animated: true)
     }

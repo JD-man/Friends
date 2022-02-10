@@ -8,7 +8,7 @@
 import Foundation
 import RxRelay
 
-final class UserSearchUseCase: HomeUseCase {
+final class MatchingUseCase: HomeUseCase {
     
     let cancelSuccess = PublishRelay<Bool>()
     let cancelFail = PublishRelay<CancelQueueError>()

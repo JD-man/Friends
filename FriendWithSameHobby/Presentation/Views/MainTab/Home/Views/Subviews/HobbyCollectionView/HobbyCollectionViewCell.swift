@@ -38,6 +38,7 @@ final class HobbyCollectionViewCell: UICollectionViewCell {
     let emptyLabel = PaddedLabel().then {
         $0.backgroundColor = .clear
         $0.textColor = .clear
+        $0.numberOfLines = 1
         $0.isUserInteractionEnabled = false
     }
     
@@ -63,7 +64,7 @@ final class HobbyCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    func configure(with model: HobbyCellModel) {
+    func configure(with model: HobbyItemViewModel) {
         tagButton.setTitle(model.cellTitle, for: .normal)
         tagButton.status = model.status.buttonStatus
         emptyLabel.text = model.cellTitle

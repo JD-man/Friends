@@ -42,6 +42,6 @@ extension FromQueueDB {
                                 gender: UserGender(rawValue: gender) ?? .unselected,
                                 type: UserGender(rawValue: type) ?? .unselected,
                                 sesac: SeSACFace(rawValue: sesac) ?? .basic,
-                                background: background)
+                                background: SeSACBackground(rawValue: background) ?? .basic)
     }
 }

@@ -24,7 +24,7 @@ final class HobbyViewModel: ViewModelType {
     }
     struct Output {
         // collection view section
-        let aroundHobby = PublishRelay<[SectionOfHobbyCellModel]>()        
+        let aroundHobby = PublishRelay<[SectionOfHobbyItemViewModel]>()        
     }
     
     private var disposeBag = DisposeBag()
@@ -62,7 +62,8 @@ final class HobbyViewModel: ViewModelType {
         useCase.postQueueSuccess
             .asDriver(onErrorJustReturn: false)
             .drive { [weak self] in
-                if $0 { self?.coordinator?.pushUserSearchVC() }
+                if $0 { self?.coordinator?.pushMatchingVC(lat: self?.lat ?? 0.0,
+                                                          long: self?.long ?? 0.0) }
             }.disposed(by: disposeBag)
         
         useCase.postQueueError
@@ -87,25 +88,26 @@ final class HobbyViewModel: ViewModelType {
         // usecase to output
         let fromRequestedHF = useCase.fromQueueSuccess
             .map {
-                Set($0.fromQueueDBRequested.flatMap { $0.hf })
-                    .map { HobbyCellModel(identity: "hf\($0)", cellTitle: $0, status: .around) }
+                Set($0.fromQueueDBRequested.flatMap { $0.hf } + $0.fromQueueDB.flatMap { $0.hf })
+                    .map { HobbyItemViewModel(identity: "hf\($0)", cellTitle: $0, status: .around) }
             }
         
         let fromRecommend = useCase.fromQueueSuccess
             .map {
                 Set($0.fromRecommend)
-                    .map { HobbyCellModel(identity: "recommend\($0)", cellTitle: $0, status: .recommend) }
+                    .map { HobbyItemViewModel(identity: "recommend\($0)", cellTitle: $0, status: .recommend) }
             }
         
         let fromSearchText = searchTextRelay
             .map {
-                $0.map { HobbyCellModel(identity: "search\($0)", cellTitle: $0, status: .added) }
+                $0
+                .map { HobbyItemViewModel(identity: "search\($0)", cellTitle: $0, status: .added) }
             }
         
         Observable.combineLatest(fromRecommend, fromRequestedHF, fromSearchText)
             .map {
-                return [SectionOfHobbyCellModel.init(headerTitle: "지금 주변에는", items: $0 + $1),
-                        SectionOfHobbyCellModel.init(headerTitle: "내가 하고 싶은", items: $2)] }
+                return [SectionOfHobbyItemViewModel.init(headerTitle: "지금 주변에는", items: $0 + $1),
+                        SectionOfHobbyItemViewModel.init(headerTitle: "내가 하고 싶은", items: $2)] }
             .bind(to: output.aroundHobby)
             .disposed(by: disposeBag)
         
@@ -117,7 +119,11 @@ final class HobbyViewModel: ViewModelType {
         let newArr = text.components(separatedBy: " ").filter { $0.count != 0 }
         newArr.forEach {
             if value.contains($0) == false, value.count < 8 {
-                value.append($0)
+                if $0.count <= 8 {
+                    value.append($0)
+                } else {
+                    coordinator?.toasting(message: "8자 이상인 취미는 추가되지 않습니다.")
+                }
             } else if value.count >= 8 {
                 coordinator?.toasting(message: "취미를 더 이상 추가할 수 없습니다")
             }

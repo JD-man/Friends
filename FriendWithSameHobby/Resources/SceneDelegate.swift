@@ -94,4 +94,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         UINavigationBar.appearance().scrollEdgeAppearance = appearance
         UINavigationBar.appearance().tintColor = AssetsColors.black.color        
     }
+    
+    private func tableViewConfig() {
+        if #available(iOS 15.0, *) { UITableView.appearance().sectionHeaderTopPadding = 1 }
+    }
 }

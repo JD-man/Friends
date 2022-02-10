@@ -34,6 +34,7 @@ final class AccountViewController: UIViewController {
     
     private var accountTableView = UITableView().then {
         $0.rowHeight = 74
+        if #available(iOS 15.0, *) { $0.sectionHeaderTopPadding = 1 }
         $0.register(AccountTableHeaderView.self, forHeaderFooterViewReuseIdentifier: AccountTableHeaderView.identifier)
         $0.register(AccountTableViewCell.self, forCellReuseIdentifier: AccountTableViewCell.identifier)
     }
@@ -64,7 +65,6 @@ final class AccountViewController: UIViewController {
         accountTableView.snp.makeConstraints { make in
             make.edges.equalTo(view.safeAreaLayoutGuide)
         }
-        accountTableView.sectionHeaderTopPadding = 1
         accountCellRelay.accept(cellModels)
     }
     

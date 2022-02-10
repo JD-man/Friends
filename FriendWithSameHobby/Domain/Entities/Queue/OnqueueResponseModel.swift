@@ -20,7 +20,7 @@ struct FromQueueDBModel {
     let gender: UserGender
     let type: UserGender
     let sesac: SeSACFace
-    let background: Int
+    let background: SeSACBackground
 }
 
 enum SeSACFace: Int {
@@ -42,6 +42,38 @@ enum SeSACFace: Int {
             return AssetsImages.sesacFace4
         case .gold:
             return AssetsImages.sesacFace5
+        }
+    }
+}
+
+enum SeSACBackground: Int {
+    case basic = 0
+    case cityView
+    case nightTrail
+    case dayTrail
+    case stage
+    case livingRoom
+    case hometrainingRoom
+    case musicRoom
+    
+    var imageAsset: ImageAsset {
+        switch self {
+        case .basic:
+            return AssetsImages.sesacBackground1
+        case .cityView:
+            return AssetsImages.sesacBackground2
+        case .nightTrail:
+            return AssetsImages.sesacBackground3
+        case .dayTrail:
+            return AssetsImages.sesacBackground4
+        case .stage:
+            return AssetsImages.sesacBackground5
+        case .livingRoom:
+            return AssetsImages.sesacBackground6
+        case .hometrainingRoom:
+            return AssetsImages.sesacBackground7
+        case .musicRoom:
+            return AssetsImages.sesacBackground8
         }
     }
 }

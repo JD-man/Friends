@@ -14,16 +14,16 @@ final class SeSACTitleView: UIView {
         $0.font = AssetsFonts.NotoSansKR.regular.font(size: 12)
     }
     
-    let mannerButton = BaseButton(title: "좋은 매너", status: .inactive, type: .h32)
-    let punctualButton = BaseButton(title: "정화한 시간 약속", status: .inactive, type: .h32)
-    let quickResponseButton = BaseButton(title: "빠른 응답", status: .inactive, type: .h32)
-    let kindButton = BaseButton(title: "친절한 성격", status: .inactive, type: .h32)
-    let proficientButton = BaseButton(title: "능숙한 취미 실력", status: .inactive, type: .h32)
-    let gootTimeButton = BaseButton(title: "유익한 시간", status: .inactive, type: .h32)
+    private let mannerButton = BaseButton(title: "좋은 매너", status: .inactive, type: .h32)
+    private let punctualButton = BaseButton(title: "정화한 시간 약속", status: .inactive, type: .h32)
+    private let quickResponseButton = BaseButton(title: "빠른 응답", status: .inactive, type: .h32)
+    private let kindButton = BaseButton(title: "친절한 성격", status: .inactive, type: .h32)
+    private let proficientButton = BaseButton(title: "능숙한 취미 실력", status: .inactive, type: .h32)
+    private let goodTimeButton = BaseButton(title: "유익한 시간", status: .inactive, type: .h32)
     
-    let firstHStackView = UIStackView()
-    let secondHStackView = UIStackView()
-    let thirdHStackView = UIStackView()
+    private let firstHStackView = UIStackView()
+    private let secondHStackView = UIStackView()
+    private let thirdHStackView = UIStackView()
     
     let verticalStackView = UIStackView()
     
@@ -66,7 +66,7 @@ final class SeSACTitleView: UIView {
         secondHStackView.addArrangedSubview(kindButton)
         
         thirdHStackView.addArrangedSubview(proficientButton)
-        thirdHStackView.addArrangedSubview(gootTimeButton)
+        thirdHStackView.addArrangedSubview(goodTimeButton)
         
         verticalStackView.spacing = 8
         verticalStackView.axis = .vertical
@@ -74,5 +74,13 @@ final class SeSACTitleView: UIView {
         verticalStackView.addArrangedSubview(firstHStackView)
         verticalStackView.addArrangedSubview(secondHStackView)
         verticalStackView.addArrangedSubview(thirdHStackView)
+    }
+    
+    func buttonConfig(with data: [BaseButtonStatus]) {
+        let buttons = [mannerButton, punctualButton, quickResponseButton,
+                       kindButton, proficientButton, goodTimeButton]
+        
+        zip(buttons, data)
+            .forEach { $0.0.status = $0.1 }
     }
 }

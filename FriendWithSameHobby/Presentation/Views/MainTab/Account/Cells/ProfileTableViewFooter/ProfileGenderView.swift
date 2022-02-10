@@ -25,14 +25,14 @@ final class ProfileGenderView: UIView {
         didSet {
             switch gender {
             case .unselected:
-                maleButton.backgroundColor = .systemBackground
-                femaleButton.backgroundColor = .systemBackground
+                maleButton.status = .inactive
+                femaleButton.status = .inactive
             case .female:
-                maleButton.backgroundColor = .systemBackground
-                femaleButton.backgroundColor = AssetsColors.green.color
+                maleButton.status = .inactive
+                femaleButton.status = .fill
             case .male:
-                femaleButton.backgroundColor = .systemBackground
-                maleButton.backgroundColor = AssetsColors.green.color
+                maleButton.status = .fill
+                femaleButton.status = .inactive
             }
         }
     }

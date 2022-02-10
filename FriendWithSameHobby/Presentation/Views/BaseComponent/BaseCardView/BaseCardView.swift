@@ -82,4 +82,8 @@ final class BaseCardView: UIView {
             make.bottom.equalTo(self).offset(constant).priority(.low)
         })        
     }
+    
+    func buttonConfig(with data: [BaseButtonStatus]) {
+        sesacTitleView.buttonConfig(with: data)
+    }
 }

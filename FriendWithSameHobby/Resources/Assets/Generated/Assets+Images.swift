@@ -20,6 +20,7 @@ internal typealias AssetImageTypeAlias = ImageAsset.Image
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
 internal enum AssetsImages {
   internal static let accountIcon = ImageAsset(name: "AccountIcon")
+  internal static let emptyList = ImageAsset(name: "EmptyList")
   internal static let friendsIcon = ImageAsset(name: "FriendsIcon")
   internal static let homeIcon = ImageAsset(name: "HomeIcon")
   internal static let matchAntenna = ImageAsset(name: "MatchAntenna")
@@ -50,6 +51,14 @@ internal enum AssetsImages {
   internal static let profileImg = ImageAsset(name: "profile_img")
   internal static let qna = ImageAsset(name: "qna")
   internal static let search = ImageAsset(name: "search")
+  internal static let sesacBackground1 = ImageAsset(name: "sesac_background_1")
+  internal static let sesacBackground2 = ImageAsset(name: "sesac_background_2")
+  internal static let sesacBackground3 = ImageAsset(name: "sesac_background_3")
+  internal static let sesacBackground4 = ImageAsset(name: "sesac_background_4")
+  internal static let sesacBackground5 = ImageAsset(name: "sesac_background_5")
+  internal static let sesacBackground6 = ImageAsset(name: "sesac_background_6")
+  internal static let sesacBackground7 = ImageAsset(name: "sesac_background_7")
+  internal static let sesacBackground8 = ImageAsset(name: "sesac_background_8")
   internal static let sesacBg01 = ImageAsset(name: "sesac_bg_01")
   internal static let sesacFace1 = ImageAsset(name: "sesac_face_1")
   internal static let sesacFace2 = ImageAsset(name: "sesac_face_2")

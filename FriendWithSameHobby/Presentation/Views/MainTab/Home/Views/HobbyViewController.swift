@@ -83,7 +83,7 @@ final class HobbyViewController: UIViewController {
         let output = viewModel?.transform(input, disposeBag: disposeBag)
         
         // MARK: - Collection View Config
-        let cvDataSource = RxCollectionViewSectionedAnimatedDataSource<SectionOfHobbyCellModel> { [weak self]
+        let cvDataSource = RxCollectionViewSectionedAnimatedDataSource<SectionOfHobbyItemViewModel> { [weak self]
             datasource, cv, indexPath, item in
             guard let cell = cv.dequeueReusableCell(
                 withReuseIdentifier: HobbyCollectionViewCell.identifier,
