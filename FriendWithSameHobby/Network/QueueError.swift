@@ -89,5 +89,37 @@ enum CancelQueueError: Int, CustomError {
             return "서버 에러"
         }
     }
-    
 }
+
+enum RequestMatchingError: Int, CustomError {
+    case unknownError = -1
+    case requestedFromUser = 201
+    case stopMatchingUser = 202
+    case tokenError = 401
+    case unregistered = 406
+    case serverError = 500
+    case clientError = 501
+    
+    var description: String {
+        switch self {
+        case .unknownError:
+            return "오류가 발생했습니다."
+        case .requestedFromUser:
+            return "상대가 이미 나에게 취미 함께하기 요청한 상태입니다."
+        case .stopMatchingUser:
+            return "상대가 취미 함께할 친구 찾기 중단한 상태입니다."
+        case .tokenError:
+            return "토큰 에러"
+        case .unregistered:
+            return "미가입 회원"
+        case .serverError:
+            return "서버 에러"
+        case .clientError:
+            return "클라이언트 에러"
+        }
+    }
+}
+
+
+
+

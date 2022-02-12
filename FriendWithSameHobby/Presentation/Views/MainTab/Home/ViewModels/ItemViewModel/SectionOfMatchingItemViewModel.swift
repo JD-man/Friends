@@ -16,6 +16,7 @@ struct MatchingItemViewModel: IdentifiableType, Equatable {
     var reputation: [BaseButtonStatus] // BaseButtonStatus?
     var hf: [String]
     var review: [String]
+    var matchingButtonStatus: MatchingButtonStatus
     var expanding: Bool
 }
 
@@ -29,6 +30,7 @@ extension MatchingItemViewModel {
             reputation: [.fill, .fill, .inactive, .fill, .inactive, .fill],
             hf: ["취미1", "취미2"],
             review: ["리뷰1", "리뷰2"],
+            matchingButtonStatus: .request,
             expanding: false
         )
     }

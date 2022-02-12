@@ -13,7 +13,10 @@ final class MatchingUseCase: MapUseCase {
     let cancelSuccess = PublishRelay<Bool>()
     let cancelFail = PublishRelay<CancelQueueError>()
     
-    func cancelQueue() {
+    let requestMatchingSuccess = PublishRelay<Bool>()
+    let requestMatchingFail = PublishRelay<RequestMatchingError>()
+    
+    func executeCancelQueue() {
         queueRepo?.cancelQueue(completion: { [weak self] result in
             switch result {
             case .success(let isCanceled):
@@ -23,12 +26,35 @@ final class MatchingUseCase: MapUseCase {
                 switch error {
                 case .tokenError:
                     self?.tokenErrorHandling {
-                        self?.cancelQueue()
+                        self?.executeCancelQueue()
                     }
                 default:
                     self?.cancelFail.accept(error)
                 }
             }
         })
+    }
+    
+    func executeRequestMatching(uid: String) {
+        let model = RequestMatchingModel(uid: uid)
+        queueRepo?.requestMatch(model: model, completion: { [weak self] result in
+            switch result {
+            case .success(let isRequested):
+                self?.requestMatchingSuccess.accept(isRequested)
+            case .failure(let error):
+                switch error {
+                case .tokenError:
+                    self?.tokenErrorHandling {
+                        self?.executeRequestMatching(uid: uid)
+                    }
+                default:
+                    self?.requestMatchingFail.accept(error)
+                }
+            }
+        })
+    }
+    
+    func executeAllowMatching(uid: String) {
+        
     }
 }

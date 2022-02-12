@@ -12,20 +12,14 @@ import RxRelay
 
 final class MatchingViewModel: ViewModelType {
     struct Input {
-        // viewWillAppear
         let viewWillAppear: Driver<Void>
-        // back button tap
         let backButtonTap: Driver<Void>
-        // stop matching button tap
         let stopMatchingButtonTap: Driver<Void>
-        // change hobby button tap
         let changeHobbyButtonTap: Driver<Void>
-        // refresh button tap
-        
-        // around button tap
         let aroundButtonTap: Driver<Void>
-        // requested button tap
         let requestedButtonTap: Driver<Void>
+        let matchingButtonTap: PublishRelay<Int>
+        let toggleButtonTap: PublishRelay<Int>
     }
     
     struct Output {
@@ -64,12 +58,12 @@ final class MatchingViewModel: ViewModelType {
         // Input to UseCase
         input.stopMatchingButtonTap
             .drive { [weak self] _ in
-                self?.useCase.cancelQueue()
+                self?.useCase.executeCancelQueue()
             }.disposed(by: disposeBag)
         
         input.changeHobbyButtonTap
             .drive { [weak self] _ in
-                self?.useCase.cancelQueue()
+                self?.useCase.executeCancelQueue()
             }.disposed(by: disposeBag)
         
         input.aroundButtonTap
@@ -87,6 +81,35 @@ final class MatchingViewModel: ViewModelType {
         input.viewWillAppear
             .drive { [weak self] _ in
                 self?.useCase.excuteFriendsCoord(lat: self?.lat ?? 0.0, long: self?.long ?? 0.0)
+            }.disposed(by: disposeBag)
+        
+        input.toggleButtonTap
+            .bind {
+                var queue = output.aroundQueue.value[0]
+                let item = queue.items[$0]
+                let currExpanding = !(item.expanding)
+                queue.items[$0].expanding = currExpanding
+                output.aroundQueue.accept([queue])
+            }.disposed(by: disposeBag)
+        
+        input.matchingButtonTap
+            .asDriver(onErrorJustReturn: 0)
+            .drive { [weak self] idx in
+                let uid = output.aroundQueue.value[0].items[idx].identity
+                if output.selectedTap.value {
+                    print("request matching")
+                    let alert = BaseAlertView(message: .matchingRequest, confirm: {
+                        self?.useCase.executeRequestMatching(uid: uid)
+                    })
+                    alert.show()
+                } else {
+                    print("request allow")
+                    let alert = BaseAlertView(message: .matchingAllow, confirm: {
+                        print(output.aroundQueue.value[0].items[idx].identity)
+                    })
+                    alert.show()
+                }
+                //alert.show()
             }.disposed(by: disposeBag)
         
         // Input to Coordinator
@@ -107,6 +130,7 @@ final class MatchingViewModel: ViewModelType {
                                           reputation: $0.reputation.map { $0 == 0 ? .inactive : .fill },
                                           hf: $0.hf,
                                           review: $0.reviews,
+                                          matchingButtonStatus: output.selectedTap.value ? .request : .allow,
                                           expanding: false) })]
             }
         
@@ -115,7 +139,7 @@ final class MatchingViewModel: ViewModelType {
             .disposed(by: disposeBag)
         
         queueSuccess
-            .map { $0.count > 0 }
+            .map { $0[0].items.count > 0 }
             .bind(to: output.isQueueExist)
             .disposed(by: disposeBag)
         
@@ -129,6 +153,18 @@ final class MatchingViewModel: ViewModelType {
             }.disposed(by: disposeBag)
         
         useCase.cancelFail
+            .asDriver(onErrorJustReturn: .unknownError)
+            .drive { [weak self] in
+                self?.coordinator?.toasting(message: $0.description)
+            }.disposed(by: disposeBag)
+        
+        useCase.requestMatchingSuccess
+            .asDriver(onErrorJustReturn: false)
+            .drive { [weak self] _ in
+                self?.coordinator?.toasting(message: "취미 함께 하기 요청을 보냈습니다.")
+            }.disposed(by: disposeBag)
+        
+        useCase.requestMatchingFail
             .asDriver(onErrorJustReturn: .unknownError)
             .drive { [weak self] in
                 self?.coordinator?.toasting(message: $0.description)

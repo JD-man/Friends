@@ -13,11 +13,17 @@ import RxCocoa
 
 enum BaseAlertMessage {
     case withdraw
+    case matchingRequest
+    case matchingAllow
     
     var title: String {
         switch self {
         case .withdraw:
             return "정말 탈퇴하시겠습니까?"
+        case .matchingRequest:
+            return "취미 같이 하기를 요청할게요!"
+        case .matchingAllow:
+            return "취미 같이 하기를 수락할까요?"
         }
     }
     
@@ -25,6 +31,10 @@ enum BaseAlertMessage {
         switch self {
         case .withdraw:
             return "탈퇴하시면 새싹 프렌즈를 이용할 수 업어요ㅋ"
+        case .matchingRequest:
+            return "요청이 수락되면 30분 후에 리뷰를 남길 수 있어요"
+        case .matchingAllow:
+            return "요청을 수락하면 채팅창에서 대화를 나눌 수 있어요"
         }
     }
 }
@@ -32,7 +42,7 @@ enum BaseAlertMessage {
 final class BaseAlertView: UIView {
     
     deinit {
-        print("Alert View Dismiss")
+        print("Alert View deinit")
     }
     
     private let container = UIView().then {
@@ -117,8 +127,9 @@ final class BaseAlertView: UIView {
         
         confirmButton.rx.tap
             .asDriver()
-            .drive { _ in
+            .drive { [weak self] _ in
                 confirm()
+                self?.dismiss()
             }.disposed(by: disposeBag)
     }
     

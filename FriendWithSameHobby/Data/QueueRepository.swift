@@ -12,6 +12,8 @@ final class QueueRepository: QueueRepositoryInterface {
     typealias OnqueueResult = Result<OnqueueResponseModel, OnqueueError>
     typealias PostQueueResult = Result<Bool, PostQueueError>
     typealias CancelQueueResult = Result<Bool, CancelQueueError>
+    typealias RequestMatchingResult = Result<Bool, RequestMatchingError>
+    
     let provider = MoyaProvider<QueueTarget>()
     
     func requestOnqueue(model: OnqueueBodyModel, completion: @escaping (OnqueueResult) -> Void) {
@@ -33,8 +35,7 @@ final class QueueRepository: QueueRepositoryInterface {
     
     func postQueue(model: PostQueueBodyModel, completion: @escaping (PostQueueResult) -> Void) {
         let parameters = PostQueueBodyDTO(model: model).toParameters()
-        print(parameters)
-        provider.request(.postQueue(Parameters: parameters)) { result in
+        provider.request(.postQueue(parameters: parameters)) { result in
             switch result {
             case .success(_):
                 completion(.success(true))
@@ -54,6 +55,19 @@ final class QueueRepository: QueueRepositoryInterface {
             case .failure(let error):
                 let statusCode = error.response?.statusCode ?? -1
                 completion(.failure(CancelQueueError(rawValue: statusCode) ?? .unknownError))
+            }
+        }
+    }
+    
+    func requestMatch(model: RequestMatchingModel, completion: @escaping (RequestMatchingResult) -> Void) {
+        let parameters = RequestMatchingDTO(model: model).toParameters()
+        provider.request(.requestMatching(parameters: parameters)) { result in
+            switch result {
+            case .success(_):
+                completion(.success(true))
+            case .failure(let error):
+                let statusCode = error.response?.statusCode ?? -1
+                completion(.failure(RequestMatchingError(rawValue: statusCode) ?? .unknownError))
             }
         }
     }

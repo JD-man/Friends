@@ -10,6 +10,29 @@ import Then
 import SnapKit
 import RxSwift
 
+enum MatchingButtonStatus {
+    case request
+    case allow
+    
+    var backgroundColor: UIColor {
+        switch self {
+        case .allow:
+            return AssetsColors.success.color
+        case .request:
+            return AssetsColors.error.color
+        }
+    }
+    
+    var title: String {
+        switch self {
+        case .allow:
+            return "수락하기"
+        case .request:
+            return "요청하기"
+        }
+    }
+}
+
 class QueueTableViewCell: UITableViewCell {
     
     var disposeBag = DisposeBag()
@@ -26,11 +49,13 @@ class QueueTableViewCell: UITableViewCell {
         $0.image = AssetsImages.sesacFace2.image
     }
     
-    let baseCardView = BaseCardView()
-    
-    private let popupButton = UIButton().then {
-        $0.setTitle("요청 하기", for: .normal)
+    let matchingButton = UIButton().then {        
+        $0.addCorner(rad: 8, borderColor: nil)
+        $0.titleLabel?.font = AssetsFonts.NotoSansKR.medium.font(size: 14)
+        $0.setTitleColor(AssetsColors.white.color, for: .normal)
     }
+    
+    let baseCardView = BaseCardView()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -43,7 +68,7 @@ class QueueTableViewCell: UITableViewCell {
     
     private func viewConfig() {
         selectionStyle = .none
-        [backgroundImageView, sesacImageView, baseCardView]
+        [backgroundImageView, sesacImageView, baseCardView, matchingButton]
             .forEach { contentView.addSubview($0) } // contentView에 안하면 backgroundView랑 레이아웃 에러나옴.
         
         backgroundImageView.snp.makeConstraints { make in
@@ -60,9 +85,15 @@ class QueueTableViewCell: UITableViewCell {
         }
         
         baseCardView.snp.makeConstraints { make in
+            make.bottom.equalTo(contentView).offset(-16)
             make.top.equalTo(backgroundImageView.snp.bottom)
             make.leading.trailing.equalTo(backgroundImageView)
-            make.bottom.equalTo(contentView).offset(-16)
+        }
+        
+        matchingButton.snp.makeConstraints { make in
+            make.width.equalTo(80)
+            make.height.equalTo(40)
+            make.top.trailing.equalTo(backgroundImageView).inset(12)
         }
     }
     
@@ -76,13 +107,19 @@ class QueueTableViewCell: UITableViewCell {
     }
     
     func configure(with data: MatchingItemViewModel) {
+        baseCardView.nicknameLabel.text = data.nick
+        baseCardView.buttonConfig(with: data.reputation)
+        sesacImageView.image = data.sesac.imageAsset.image
         baseCardView.expanding(isExpanding: data.expanding)
         backgroundImageView.image = data.background.imageAsset.image
-        sesacImageView.image = data.sesac.imageAsset.image
-        baseCardView.nicknameLabel.text = data.nick
-        baseCardView.sesacReviewView.reviewLabel.text = data.review.first
         
-        // title button config
-        baseCardView.buttonConfig(with: data.reputation)
+        matchingButton.setTitle(data.matchingButtonStatus.title, for: .normal)
+        matchingButton.backgroundColor = data.matchingButtonStatus.backgroundColor
+        
+        if let firstReview = data.review.first {
+            baseCardView.sesacReviewView.reviewLabelConfig(status: .exist(text: firstReview))
+        } else {
+            baseCardView.sesacReviewView.reviewLabelConfig(status: .empty)
+        }
     }
 }

@@ -21,6 +21,7 @@ final class BaseCardView: UIView {
     }
     
     let sesacTitleView = SeSACTitleView()
+    
     let sesacReviewView = SeSACReviewView()
     
     var titleViewHeight = 0

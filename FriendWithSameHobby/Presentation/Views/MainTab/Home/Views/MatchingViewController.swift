@@ -28,6 +28,7 @@ class MatchingViewController: UIViewController {
     }
     private let queueTableView = UITableView().then {
         $0.separatorStyle = .none
+        $0.showsVerticalScrollIndicator = false
         $0.backgroundView = EmptyUserListView(of: .around)
         $0.register(QueueTableViewCell.self, forCellReuseIdentifier: QueueTableViewCell.identifier)
     }
@@ -37,6 +38,10 @@ class MatchingViewController: UIViewController {
     private let aroundButton = TopTabButton(title: "주변 새싹", status: .selected)
     private let requestedButton = TopTabButton(title: "받은 요청", status: .unselected)
     private let changeHobbyButton = BaseButton(title: "취미 변경하기", status: .fill, type: .h48)
+    
+    private let toggleButtonTap = PublishRelay<Int>()
+    private let matchingButtonTap = PublishRelay<Int>()
+    
     
     init(viewModel: MatchingViewModel) {
         self.viewModel = viewModel
@@ -103,16 +108,31 @@ class MatchingViewController: UIViewController {
             backButtonTap: backButton.rx.tap.asDriver(),
             stopMatchingButtonTap: stopMatchingButton.rx.tap.asDriver(),
             changeHobbyButtonTap: changeHobbyButton.rx.tap.asDriver(),
-            
             aroundButtonTap: aroundButton.tabButton.rx.tap.asDriver(),
-            requestedButtonTap: requestedButton.tabButton.rx.tap.asDriver()
+            requestedButtonTap: requestedButton.tabButton.rx.tap.asDriver(),
+            matchingButtonTap: matchingButtonTap,
+            toggleButtonTap: toggleButtonTap
         )
         
         let output = viewModel.transform(input, disposeBag: disposeBag)
         
-        let dataSource = RxTableViewSectionedAnimatedDataSource<SectionOfMatchingItemViewModel> { dataSource, tableView, indexPath, item in
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: QueueTableViewCell.identifier, for: indexPath) as? QueueTableViewCell else { return UITableViewCell() }
+        let dataSource = RxTableViewSectionedAnimatedDataSource<SectionOfMatchingItemViewModel> { [weak self] dataSource, tableView, indexPath, item in
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: QueueTableViewCell.identifier, for: indexPath) as? QueueTableViewCell,
+                  let self = self else { return UITableViewCell() }
             cell.configure(with: item)
+            
+            // matching Button Tap
+            cell.matchingButton.rx.tap.map { indexPath.item }
+                .asSignal(onErrorJustReturn: 0)
+                .emit(to: self.matchingButtonTap)
+                .disposed(by: cell.disposeBag)
+            
+            // toggle Button tap
+            cell.baseCardView.moreButton.rx.tap.map { indexPath.item }
+                .asSignal(onErrorJustReturn: 0)
+                .emit(to: self.toggleButtonTap)
+                .disposed(by: cell.disposeBag)
+                
             return cell
         }
         
@@ -122,11 +142,16 @@ class MatchingViewController: UIViewController {
             .disposed(by: disposeBag)
         
         output.isQueueExist
-            .asDriver(onErrorJustReturn: true)
-            .drive { [weak self] in
-                self?.changeHobbyButton.isHidden = $0
-                self?.refreshButton.isHidden = $0
-            }.disposed(by: disposeBag)
+            .bind(to: changeHobbyButton.rx.isHidden)
+            .disposed(by: disposeBag)
+        
+        output.isQueueExist
+            .bind(to: refreshButton.rx.isHidden)
+            .disposed(by: disposeBag)
+        
+        output.isQueueExist
+            .bind(to: queueTableView.backgroundView!.rx.isHidden)
+            .disposed(by: disposeBag)
         
         output.selectedTap
             .map { $0 ? TopTabButtonStatus.selected : TopTabButtonStatus.unselected }

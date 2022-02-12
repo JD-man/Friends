@@ -10,8 +10,9 @@ import Moya
 
 enum QueueTarget {
     case searchFriends(parameters: Parameters)
-    case postQueue(Parameters: Parameters)
+    case postQueue(parameters: Parameters)
     case cancelQueue
+    case requestMatching(parameters: Parameters)
 }
 
 extension QueueTarget: TargetType {
@@ -25,12 +26,15 @@ extension QueueTarget: TargetType {
             return "/queue/onqueue"
         case .postQueue, .cancelQueue:
             return "/queue"
+        case .requestMatching:
+            return "/queue/hobbyrequest"
         }
+    
     }
     
     var method: Moya.Method {
         switch self {
-        case .searchFriends, .postQueue:
+        case .searchFriends, .postQueue, .requestMatching:
             return .post
         case .cancelQueue:
             return .delete
@@ -47,6 +51,9 @@ extension QueueTarget: TargetType {
                                       encoding: URLEncoding(arrayEncoding: .noBrackets))
         case .cancelQueue:
             return .requestParameters(parameters: [:],
+                                      encoding: URLEncoding.default)
+        case .requestMatching(let parameters):
+            return .requestParameters(parameters: parameters,
                                       encoding: URLEncoding.default)
         }
     }

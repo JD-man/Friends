@@ -21,4 +21,8 @@ protocol QueueRepositoryInterface {
     func cancelQueue(
         completion: @escaping (Result<Bool, CancelQueueError>) -> Void
     )
+    
+    func requestMatch(
+        model: RequestMatchingModel,
+        completion: @escaping (Result<Bool, RequestMatchingError>) -> Void)
 }
