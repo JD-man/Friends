@@ -74,7 +74,7 @@ final class MatchingViewModel: ViewModelType {
         // Input to Coordinator
         input.backButtonTap
             .drive { [weak self] _ in
-                self?.coordinator?.navigationController.popToRootViewController(animated: true)
+                self?.coordinator?.show(view: .mapView, by: .backToFirst)
             }.disposed(by: disposeBag)
         
         // UseCase to Output
@@ -96,7 +96,9 @@ final class MatchingViewModel: ViewModelType {
         useCase.cancelSuccess
             .asDriver(onErrorJustReturn: false)
             .drive { [weak self] _ in
-                self?.coordinator?.navigationController.popViewController(animated: true)
+                self?.coordinator?.show(
+                    view: .hobbyView(lat: self?.lat ?? 0.0, long: self?.long ?? 0.0),
+                    by: .backToFirst)
             }.disposed(by: disposeBag)
         
         useCase.cancelFail

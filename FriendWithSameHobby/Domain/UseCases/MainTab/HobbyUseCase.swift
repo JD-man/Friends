@@ -8,7 +8,7 @@
 import Foundation
 import RxRelay
 
-final class HobbyUseCase: HomeUseCase {
+final class HobbyUseCase: MapUseCase {
     
     let postQueueSuccess = PublishRelay<Bool>()
     let postQueueError = PublishRelay<PostQueueError>()
@@ -18,6 +18,7 @@ final class HobbyUseCase: HomeUseCase {
         queueRepo?.postQueue(model: model, completion: { [weak self] result in
             switch result {
             case .success(let isPosted):
+                UserMatchingStatus.matchingStatus = MatchingStatus.waiting.rawValue
                 self?.postQueueSuccess.accept(isPosted)
             case .failure(let error):
                 switch error {

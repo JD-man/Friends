@@ -11,13 +11,13 @@ import RxSwift
 import CoreLocation
 import RxRelay
 
-final class HomeViewController: UIViewController {
+final class MapViewController: UIViewController {
     typealias OnqueueInput = (UserGender, Double, Double)
     
     private let mapView = NMFMapView()
     private let locationManager = CLLocationManager()
     
-    private let genderStackView = HomeGenderView().then {
+    private let genderStackView = MapGenderView().then {
         $0.addshadow(rad: 3, opacity: 0.3)
     }
     private let locationButton = UIButton().then {
@@ -30,8 +30,8 @@ final class HomeViewController: UIViewController {
         $0.frame.size.width = 48
         $0.image = AssetsImages.mapMarker.image
     }
-    private let matchingButton = HomeMatchingButton(status: .normal)
-    private var viewModel: HomeViewModel?
+    private let matchingButton = MapMatchingButton(status: .normal)
+    private var viewModel: MapViewModel
     private var disposeBag = DisposeBag()
     private var currentCoord: NMGLatLng = NMGLatLng() {
         didSet {            
@@ -53,13 +53,13 @@ final class HomeViewController: UIViewController {
     }    
     private let inputRelay = PublishRelay<OnqueueInput>()
     
-    init(viewModel: HomeViewModel) {
-        super.init(nibName: nil, bundle: nil)
+    init(viewModel: MapViewModel) {
         self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder: NSCoder) {
-        super.init(coder: coder)
+        fatalError("init(coder:) has not been implemented")
     }
     
     override func viewDidLoad() {
@@ -72,6 +72,7 @@ final class HomeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        matchingButton.setMatchingStatus()
         navigationController?.navigationBar.isHidden = true
     }
     
@@ -115,15 +116,16 @@ final class HomeViewController: UIViewController {
     }
     
     private func binding() {
-        let input = HomeViewModel.Input(
+        let input = MapViewModel.Input(
             matchingButtonTap: matchingButton.rx.tap.map({ [weak self] in
                 let coord = self?.mapView.cameraPosition.target ?? NMGLatLng()
-                return (coord.lat, coord.lng) }).asDriver(onErrorJustReturn: (0.0, 0.0)),
+                let matchingStatus = self?.matchingButton.matchingStatus ?? .normal
+                return (matchingStatus, coord.lat, coord.lng) }).asDriver(onErrorJustReturn: (.normal, 0.0, 0.0)),
             inputRelay: inputRelay
         )
-        let output = viewModel?.transform(input, disposeBag: disposeBag)
+        let output = viewModel.transform(input, disposeBag: disposeBag)
         
-        output?.userCoord
+        output.userCoord
             .asDriver(onErrorJustReturn: [])
             .drive { [weak self] in
                 let markers = $0.map {
@@ -160,7 +162,7 @@ final class HomeViewController: UIViewController {
     }
 }
 
-extension HomeViewController: CLLocationManagerDelegate {
+extension MapViewController: CLLocationManagerDelegate {
     func checkUserLocationServiceAuthorization() {
         let authStatus: CLAuthorizationStatus
         authStatus = locationManager.authorizationStatus
@@ -224,7 +226,7 @@ extension HomeViewController: CLLocationManagerDelegate {
     }
 }
 
-extension HomeViewController: NMFMapViewCameraDelegate {
+extension MapViewController: NMFMapViewCameraDelegate {
     func mapViewCameraIdle(_ mapView: NMFMapView) {
         projectionCoord()
     }

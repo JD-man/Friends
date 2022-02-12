@@ -21,6 +21,9 @@ enum UserDefaultsKeyType: String {
     case onboardingPassed
     case loggedIn
     case registered
+    
+    // Matching Status
+    case matchingStatus
 }
 
 @propertyWrapper
@@ -51,4 +54,8 @@ struct UserProgressManager {
     @UserDefaultsValue(.onboardingPassed) static var onboardingPassed: Bool?
     @UserDefaultsValue(.loggedIn) static var loggedIn: Bool?
     @UserDefaultsValue(.registered) static var registered: Bool?
+}
+
+struct UserMatchingStatus {
+    @UserDefaultsValue(.matchingStatus) static var matchingStatus: String?
 }

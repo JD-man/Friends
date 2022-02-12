@@ -67,7 +67,7 @@ final class EmptyUserListView: UIView {
         
         titleLabel.snp.makeConstraints { make in
             make.center.equalToSuperview()
-            make.leading.trailing.equalToSuperview().inset(16)
+            make.leading.trailing.equalToSuperview().inset(16).priority(.low)
         }
         
         subtitleLabel.snp.makeConstraints { make in

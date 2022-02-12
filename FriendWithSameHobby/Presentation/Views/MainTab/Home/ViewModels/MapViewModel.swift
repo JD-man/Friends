@@ -10,12 +10,12 @@ import RxSwift
 import RxCocoa
 import RxRelay
 
-final class HomeViewModel: ViewModelType {
+final class MapViewModel: ViewModelType {
     typealias OnqueueInput = (UserGender, Double, Double)
     
     struct Input {
         // matching button tap to push hobby VC
-        let matchingButtonTap: Driver<(Double, Double)>
+        let matchingButtonTap: Driver<(MatchingStatus, Double, Double)>
         
         // coord input relay
         let inputRelay: PublishRelay<OnqueueInput>        
@@ -26,13 +26,13 @@ final class HomeViewModel: ViewModelType {
         let userCoord = PublishRelay<[FromQueueDBModel]>()
     }
     
-    var useCase: HomeUseCase
+    var useCase: MapUseCase
     weak var coordinator: HomeCoordinator?
     private var disposeBag = DisposeBag()
     
     private var gender: UserGender = .unselected
     
-    init(useCase: HomeUseCase, coordinator: HomeCoordinator?) {
+    init(useCase: MapUseCase, coordinator: HomeCoordinator?) {
         self.useCase = useCase
         self.coordinator = coordinator
     }
@@ -52,7 +52,14 @@ final class HomeViewModel: ViewModelType {
         
         input.matchingButtonTap
             .drive { [weak self] in
-                self?.coordinator?.pushHobbyVC(lat: $0.0, long: $0.1)
+                switch $0.0 {
+                case .normal:
+                    self?.coordinator?.show(view: .hobbyView(lat: $0.1, long: $0.2), by: .push)
+                case .waiting:
+                    self?.coordinator?.show(view: .matchingView(lat: $0.1, long: $0.2), by: .push)
+                case .matched:
+                    print("matched")
+                }
             }.disposed(by: disposeBag)
         
         // UseCase to Output

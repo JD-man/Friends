@@ -6,7 +6,7 @@
 //
 import UIKit
 
-enum MatchingStatus {
+enum MatchingStatus: String {
     case normal
     case waiting
     case matched
@@ -23,9 +23,10 @@ enum MatchingStatus {
     }
 }
 
-final class HomeMatchingButton: UIButton {
+final class MapMatchingButton: UIButton {
     var matchingStatus: MatchingStatus = .normal {
         didSet {
+            setImage(matchingStatus.matchingImage, for: .normal)
         }
     }
     
@@ -46,5 +47,10 @@ final class HomeMatchingButton: UIButton {
         addshadow(rad: 3, opacity: 0.3)
         backgroundColor = AssetsColors.black.color
         setImage(status.matchingImage, for: .normal)
+    }
+    
+    func setMatchingStatus() {
+        let rawValue = UserMatchingStatus.matchingStatus ?? ""
+        matchingStatus = MatchingStatus(rawValue: rawValue) ?? .normal
     }
 }

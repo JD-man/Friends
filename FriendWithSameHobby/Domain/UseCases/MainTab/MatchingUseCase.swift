@@ -8,7 +8,7 @@
 import Foundation
 import RxRelay
 
-final class MatchingUseCase: HomeUseCase {
+final class MatchingUseCase: MapUseCase {
     
     let cancelSuccess = PublishRelay<Bool>()
     let cancelFail = PublishRelay<CancelQueueError>()
@@ -17,6 +17,7 @@ final class MatchingUseCase: HomeUseCase {
         queueRepo?.cancelQueue(completion: { [weak self] result in
             switch result {
             case .success(let isCanceled):
+                UserMatchingStatus.matchingStatus = MatchingStatus.normal.rawValue
                 self?.cancelSuccess.accept(isCanceled)
             case .failure(let error):
                 switch error {

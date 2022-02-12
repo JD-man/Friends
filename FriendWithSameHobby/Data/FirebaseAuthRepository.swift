@@ -77,8 +77,7 @@ final class FirebaseAuthRepository: FirebaseAuthRepositoryInterface {
             }
             guard let idToken = idToken else {
                 return
-            }
-            print(idToken)
+            }            
             completion(.success(idToken))
         })
     }

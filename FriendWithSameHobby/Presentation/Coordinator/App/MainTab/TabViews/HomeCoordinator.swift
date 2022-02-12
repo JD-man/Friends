@@ -8,6 +8,17 @@
 import UIKit
 import Toast
 
+enum HomeCoordinatorViews {
+    case mapView
+    case hobbyView(lat: Double, long: Double)
+    case matchingView(lat: Double, long: Double)
+}
+
+enum HomeCoordinatorShowStyle {
+    case push
+    case backToFirst
+}
+
 final class HomeCoordinator: CoordinatorType {
     weak var parentCoordinator: CoordinatorType?
     
@@ -21,39 +32,60 @@ final class HomeCoordinator: CoordinatorType {
     }
     
     func start() {
-        pushHomeVC()        
+        show(view: .mapView, by: .push)
     }
     
-    func pushHomeVC() {
+    private func mapVC() -> MapViewController {
         let firebaseRepo = FirebaseAuthRepository(phoneID: nil)
         let queueRepo = QueueRepository()
-        let useCase = HomeUseCase(firebaseRepo: firebaseRepo, queueRepo: queueRepo)
-        let viewModel = HomeViewModel(useCase: useCase, coordinator: self)
-        let homeVC = HomeViewController(viewModel: viewModel)
-        navigationController.pushViewController(homeVC, animated: true)
+        let useCase = MapUseCase(firebaseRepo: firebaseRepo, queueRepo: queueRepo)
+        let viewModel = MapViewModel(useCase: useCase, coordinator: self)
+        let mapVC = MapViewController(viewModel: viewModel)
+        mapVC.hidesBottomBarWhenPushed = false
+        return mapVC
     }
     
-    func pushHobbyVC(lat: Double, long: Double) {
+    private func hobbyVC(lat: Double, long: Double) -> HobbyViewController {
         let firebaseRepo = FirebaseAuthRepository(phoneID: nil)
         let queueRepo = QueueRepository()
         let useCase = HobbyUseCase(firebaseRepo: firebaseRepo, queueRepo: queueRepo)
         let viewModel = HobbyViewModel(useCase: useCase, coordinator: self, lat: lat, long: long)
         let hobbyVC = HobbyViewController(viewModel: viewModel)
         hobbyVC.hidesBottomBarWhenPushed = true
-        navigationController.pushViewController(hobbyVC, animated: true)
+        return hobbyVC
     }
     
-    func pushMatchingVC(lat: Double, long: Double) {
+    private func matchingVC(lat: Double, long: Double) -> MatchingViewController {
         let firebaseRepo = FirebaseAuthRepository(phoneID: nil)
         let queueRepo = QueueRepository()
         let useCase = MatchingUseCase(firebaseRepo: firebaseRepo, queueRepo: queueRepo)
         let viewModel = MatchingViewModel(useCase: useCase, coordinator: self, lat: lat, long: long)
-        let userSearchVC = MatchingViewController(viewModel: viewModel)
-        userSearchVC.hidesBottomBarWhenPushed = true
-        navigationController.pushViewController(userSearchVC, animated: true)
+        let matchingVC = MatchingViewController(viewModel: viewModel)
+        matchingVC.hidesBottomBarWhenPushed = true
+        return matchingVC
     }
     
     func toasting(message: String) {
         navigationController.view.makeToast(message, position: .top)
+    }
+    
+    func show(view: HomeCoordinatorViews, by: HomeCoordinatorShowStyle) {
+        switch view {
+        case .mapView:
+            showBy(view: mapVC(), style: by)
+        case .hobbyView(let lat, let long):
+            showBy(view: hobbyVC(lat: lat, long: long), style: by)
+        case .matchingView(let lat, let long):
+            showBy(view: matchingVC(lat: lat, long: long), style: by)
+        }
+    }
+    
+    private func showBy(view: UIViewController, style: HomeCoordinatorShowStyle) {
+        switch style {
+        case .push:
+            navigationController.pushViewController(view, animated: true)
+        case .backToFirst:
+            navigationController.setViewControllers([view], animated: true)
+        }
     }
 }

@@ -56,11 +56,12 @@ class MatchingViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         title = "새싹 찾기"
+        navigationController?.navigationBar.isHidden = false
     }
     
     private func viewConfig() {
         view.backgroundColor = .systemBackground
-        [aroundButton, requestedButton, changeHobbyButton, refreshButton, queueTableView]
+        [aroundButton, requestedButton, queueTableView, changeHobbyButton, refreshButton]
             .forEach { view.addSubview($0) }
         
         refreshButton.snp.makeConstraints { make in

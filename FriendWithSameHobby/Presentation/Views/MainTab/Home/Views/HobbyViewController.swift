@@ -18,6 +18,9 @@ final class HobbyViewController: UIViewController {
         print("hobby vc deinit")
     }
     
+    private let backButton = UIBarButtonItem().then {
+        $0.image = AssetsImages.arrow.image
+    }
     private let hobbyCollectionView = UICollectionView(frame: .zero, collectionViewLayout: HobbyCollectionViewFlowLayout()).then {
         $0.register(HobbyCollectionViewCell.self, forCellWithReuseIdentifier: HobbyCollectionViewCell.identifier)
         $0.register(HobbyCollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: HobbyCollectionReusableView.identifier)
@@ -26,18 +29,18 @@ final class HobbyViewController: UIViewController {
         $0.searchTextField.attributedPlaceholder = NSAttributedString(string: "띄어쓰기로 복수 입력이 가능해요", attributes: [.font : AssetsFonts.NotoSansKR.regular.font(size: 14)])
     }
     private let findButton = BaseButton(title: "새싹 찾기", status: .fill, type: .h48)
-        
-    private var viewModel: HobbyViewModel?
+    private var viewModel: HobbyViewModel
     private let itemRelay = PublishRelay<(Int, String)>()
     private var disposeBag = DisposeBag()
     
     init(viewModel: HobbyViewModel) {
-        super.init(nibName: nil, bundle: nil)
         self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+        
     }
     
     required init?(coder: NSCoder) {
-        super.init(coder: coder)
+        fatalError("init(coder:) has not been implemented")
     }
     
     override func viewDidLoad() {
@@ -68,6 +71,10 @@ final class HobbyViewController: UIViewController {
         // search bar config
         navigationItem.titleView = searchBar
         navigationController?.navigationBar.topItem?.title = ""
+        
+        // back button config
+        navigationItem.hidesBackButton = true
+        navigationItem.leftBarButtonItem = backButton
     }
     
     private func binding() {
@@ -77,10 +84,11 @@ final class HobbyViewController: UIViewController {
                 .asDriver(onErrorJustReturn: ()),
             searchBarText: searchBar.rx.searchButtonClicked.withLatestFrom(searchBar.rx.text.orEmpty).asDriver(onErrorJustReturn: ""),
             itemSelected: itemRelay,
-            findButtonTap: findButton.rx.tap.asDriver() // 태그가 없으면 501에러 날라옴
+            findButtonTap: findButton.rx.tap.asDriver(), // 태그가 없으면 501에러 날라옴
+            backButtonTap : backButton.rx.tap.asDriver()
         )
         
-        let output = viewModel?.transform(input, disposeBag: disposeBag)
+        let output = viewModel.transform(input, disposeBag: disposeBag)
         
         // MARK: - Collection View Config
         let cvDataSource = RxCollectionViewSectionedAnimatedDataSource<SectionOfHobbyItemViewModel> { [weak self]
@@ -106,7 +114,7 @@ final class HobbyViewController: UIViewController {
             return section
         }
         
-        output?.aroundHobby
+        output.aroundHobby
             .asDriver(onErrorJustReturn: [])
             .drive(hobbyCollectionView.rx.items(dataSource: cvDataSource))
             .disposed(by: disposeBag)

@@ -11,7 +11,7 @@ import SnapKit
 import RxSwift
 import RxCocoa
 
-final class HomeGenderView: UIView {
+final class MapGenderView: UIView {
     let allGenderButton = UIButton().then {
         $0.clipsToBounds = true
         $0.setTitle("전체", for: .normal)

@@ -8,7 +8,7 @@
 import Foundation
 import RxRelay
 
-class HomeUseCase: UseCaseType {
+class MapUseCase: UseCaseType {
     var firebaseRepo: FirebaseAuthRepositoryInterface?
     var queueRepo: QueueRepositoryInterface?
     

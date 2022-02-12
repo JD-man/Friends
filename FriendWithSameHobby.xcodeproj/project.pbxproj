@@ -101,7 +101,7 @@
 		89C147D127A00E5700F0E616 /* ShopCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C147D027A00E5700F0E616 /* ShopCoordinator.swift */; };
 		89C147D327A00E6400F0E616 /* FriendsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C147D227A00E6400F0E616 /* FriendsCoordinator.swift */; };
 		89C147D527A00E7200F0E616 /* AccountCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C147D427A00E7200F0E616 /* AccountCoordinator.swift */; };
-		89C147E427A00F1300F0E616 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C147E327A00F1300F0E616 /* HomeViewController.swift */; };
+		89C147E427A00F1300F0E616 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C147E327A00F1300F0E616 /* MapViewController.swift */; };
 		89C147E627A00F3500F0E616 /* ShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C147E527A00F3500F0E616 /* ShopViewController.swift */; };
 		89C147E827A00F5000F0E616 /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C147E727A00F5000F0E616 /* FriendsViewController.swift */; };
 		89C147EA27A00F7700F0E616 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C147E927A00F7700F0E616 /* AccountViewController.swift */; };
@@ -122,10 +122,10 @@
 		89E055AF279D9B4400E86445 /* UserInfoDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E055AE279D9B4400E86445 /* UserInfoDTO.swift */; };
 		89E055B1279D9D7800E86445 /* APIErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E055B0279D9D7800E86445 /* APIErrors.swift */; };
 		89E055B5279DA6C200E86445 /* NicknameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E055B4279DA6C200E86445 /* NicknameViewController.swift */; };
-		89EC76CB27ACCFB600CDA0A4 /* HomeGenderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EC76CA27ACCFB600CDA0A4 /* HomeGenderView.swift */; };
-		89EC76CF27ACF29700CDA0A4 /* HomeMatchingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EC76CE27ACF29700CDA0A4 /* HomeMatchingButton.swift */; };
-		89EC76D127AD07C500CDA0A4 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EC76D027AD07C500CDA0A4 /* HomeViewModel.swift */; };
-		89EC76D327AD09F100CDA0A4 /* HomeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EC76D227AD09F100CDA0A4 /* HomeUseCase.swift */; };
+		89EC76CB27ACCFB600CDA0A4 /* MapGenderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EC76CA27ACCFB600CDA0A4 /* MapGenderView.swift */; };
+		89EC76CF27ACF29700CDA0A4 /* MapMatchingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EC76CE27ACF29700CDA0A4 /* MapMatchingButton.swift */; };
+		89EC76D127AD07C500CDA0A4 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EC76D027AD07C500CDA0A4 /* MapViewModel.swift */; };
+		89EC76D327AD09F100CDA0A4 /* MapUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EC76D227AD09F100CDA0A4 /* MapUseCase.swift */; };
 		89EC76D627AD0A8500CDA0A4 /* HobbyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EC76D527AD0A8500CDA0A4 /* HobbyViewController.swift */; };
 		89EC76D827AD200000CDA0A4 /* QueueRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EC76D727AD200000CDA0A4 /* QueueRepository.swift */; };
 		89EC76DA27AD203C00CDA0A4 /* QueueTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EC76D927AD203C00CDA0A4 /* QueueTarget.swift */; };
@@ -259,7 +259,7 @@
 		89C147D027A00E5700F0E616 /* ShopCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopCoordinator.swift; sourceTree = "<group>"; };
 		89C147D227A00E6400F0E616 /* FriendsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsCoordinator.swift; sourceTree = "<group>"; };
 		89C147D427A00E7200F0E616 /* AccountCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCoordinator.swift; sourceTree = "<group>"; };
-		89C147E327A00F1300F0E616 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		89C147E327A00F1300F0E616 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		89C147E527A00F3500F0E616 /* ShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopViewController.swift; sourceTree = "<group>"; };
 		89C147E727A00F5000F0E616 /* FriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
 		89C147E927A00F7700F0E616 /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
@@ -278,10 +278,10 @@
 		89E055AE279D9B4400E86445 /* UserInfoDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoDTO.swift; sourceTree = "<group>"; };
 		89E055B0279D9D7800E86445 /* APIErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIErrors.swift; sourceTree = "<group>"; };
 		89E055B4279DA6C200E86445 /* NicknameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameViewController.swift; sourceTree = "<group>"; };
-		89EC76CA27ACCFB600CDA0A4 /* HomeGenderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeGenderView.swift; sourceTree = "<group>"; };
-		89EC76CE27ACF29700CDA0A4 /* HomeMatchingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeMatchingButton.swift; sourceTree = "<group>"; };
-		89EC76D027AD07C500CDA0A4 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
-		89EC76D227AD09F100CDA0A4 /* HomeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeUseCase.swift; sourceTree = "<group>"; };
+		89EC76CA27ACCFB600CDA0A4 /* MapGenderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapGenderView.swift; sourceTree = "<group>"; };
+		89EC76CE27ACF29700CDA0A4 /* MapMatchingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapMatchingButton.swift; sourceTree = "<group>"; };
+		89EC76D027AD07C500CDA0A4 /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
+		89EC76D227AD09F100CDA0A4 /* MapUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapUseCase.swift; sourceTree = "<group>"; };
 		89EC76D527AD0A8500CDA0A4 /* HobbyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HobbyViewController.swift; sourceTree = "<group>"; };
 		89EC76D727AD200000CDA0A4 /* QueueRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueRepository.swift; sourceTree = "<group>"; };
 		89EC76D927AD203C00CDA0A4 /* QueueTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueTarget.swift; sourceTree = "<group>"; };
@@ -511,7 +511,7 @@
 			isa = PBXGroup;
 			children = (
 				894F5C3327A81C2100E583B9 /* ProfileUseCase.swift */,
-				89EC76D227AD09F100CDA0A4 /* HomeUseCase.swift */,
+				89EC76D227AD09F100CDA0A4 /* MapUseCase.swift */,
 				890A905F27B0FDE5002A4DF6 /* HobbyUseCase.swift */,
 				896795D127B42F6F00BF942B /* MatchingUseCase.swift */,
 			);
@@ -871,7 +871,7 @@
 			isa = PBXGroup;
 			children = (
 				89EC76D427AD0A6A00CDA0A4 /* Subviews */,
-				89C147E327A00F1300F0E616 /* HomeViewController.swift */,
+				89C147E327A00F1300F0E616 /* MapViewController.swift */,
 				89EC76D527AD0A8500CDA0A4 /* HobbyViewController.swift */,
 				896795CD27B3ED3200BF942B /* MatchingViewController.swift */,
 			);
@@ -882,7 +882,7 @@
 			isa = PBXGroup;
 			children = (
 				8986D7E027B58A7500EED6DC /* ItemViewModel */,
-				89EC76D027AD07C500CDA0A4 /* HomeViewModel.swift */,
+				89EC76D027AD07C500CDA0A4 /* MapViewModel.swift */,
 				890A905D27B0FD61002A4DF6 /* HobbyViewModel.swift */,
 				896795CF27B42EFB00BF942B /* MatchingViewModel.swift */,
 			);
@@ -1036,8 +1036,8 @@
 			children = (
 				8986D7DB27B5613300EED6DC /* QueueTableView */,
 				8950C88327B24EA20025A8D7 /* HobbyCollectionView */,
-				89EC76CA27ACCFB600CDA0A4 /* HomeGenderView.swift */,
-				89EC76CE27ACF29700CDA0A4 /* HomeMatchingButton.swift */,
+				89EC76CA27ACCFB600CDA0A4 /* MapGenderView.swift */,
+				89EC76CE27ACF29700CDA0A4 /* MapMatchingButton.swift */,
 				896795D827B4501900BF942B /* EmptyUserListView.swift */,
 				896795DA27B458F900BF942B /* TopTabButton.swift */,
 			);
@@ -1459,7 +1459,7 @@
 				89D721CA279C5A0E00B02A1E /* VerifyViewController.swift in Sources */,
 				89D721CE279C5BFE00B02A1E /* VerifyUseCase.swift in Sources */,
 				89C0F3F827A28F6D0038DACA /* UserRegisterDTO.swift in Sources */,
-				89EC76CB27ACCFB600CDA0A4 /* HomeGenderView.swift in Sources */,
+				89EC76CB27ACCFB600CDA0A4 /* MapGenderView.swift in Sources */,
 				890CC9EE2796959C00D6185E /* AppDelegate.swift in Sources */,
 				89E055A5279D296400E86445 /* UserDefaultManagers.swift in Sources */,
 				8950C88227B23E370025A8D7 /* HobbyCollectionViewCell.swift in Sources */,
@@ -1470,8 +1470,8 @@
 				8950C88527B24ED10025A8D7 /* SectionOfHobbyItemViewModel.swift in Sources */,
 				89A81985279A831A00F257CA /* OnboardingRepositoryInterface.swift in Sources */,
 				895E1D8527A5B0A70054742F /* AccountTableViewCell.swift in Sources */,
-				89EC76CF27ACF29700CDA0A4 /* HomeMatchingButton.swift in Sources */,
-				89C147E427A00F1300F0E616 /* HomeViewController.swift in Sources */,
+				89EC76CF27ACF29700CDA0A4 /* MapMatchingButton.swift in Sources */,
+				89C147E427A00F1300F0E616 /* MapViewController.swift in Sources */,
 				89C0F3F427A28C3C0038DACA /* UserInfoModel.swift in Sources */,
 				898B794A279945BC00844284 /* OnboardingViewModel.swift in Sources */,
 				890CC9F02796959C00D6185E /* SceneDelegate.swift in Sources */,
@@ -1548,12 +1548,12 @@
 				89C147CC27A00DDF00F0E616 /* MainTabCoordinator.swift in Sources */,
 				896795D927B4501900BF942B /* EmptyUserListView.swift in Sources */,
 				89ECC566279E987B00C4C477 /* BirthViewController.swift in Sources */,
-				89EC76D327AD09F100CDA0A4 /* HomeUseCase.swift in Sources */,
+				89EC76D327AD09F100CDA0A4 /* MapUseCase.swift in Sources */,
 				89636BF227A996D100DD8B91 /* UserMyPageModel.swift in Sources */,
 				894F5C3427A81C2100E583B9 /* ProfileUseCase.swift in Sources */,
 				89A8198D279AF95C00F257CA /* PhoneAuthViewModel.swift in Sources */,
 				896795CC27B3DD5700BF942B /* PostQueueBodyModel.swift in Sources */,
-				89EC76D127AD07C500CDA0A4 /* HomeViewModel.swift in Sources */,
+				89EC76D127AD07C500CDA0A4 /* MapViewModel.swift in Sources */,
 				895E1D8327A52B8D0054742F /* UpdateFCMtokenModel.swift in Sources */,
 				89EC76D827AD200000CDA0A4 /* QueueRepository.swift in Sources */,
 				890A906027B0FDE5002A4DF6 /* HobbyUseCase.swift in Sources */,

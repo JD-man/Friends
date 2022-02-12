@@ -21,6 +21,8 @@ final class HobbyViewModel: ViewModelType {
         let itemSelected: PublishRelay<(Int,String)>
         // find button
         let findButtonTap: Driver<Void>
+        // back button
+        let backButtonTap: Driver<Void>
     }
     struct Output {
         // collection view section
@@ -62,8 +64,10 @@ final class HobbyViewModel: ViewModelType {
         useCase.postQueueSuccess
             .asDriver(onErrorJustReturn: false)
             .drive { [weak self] in
-                if $0 { self?.coordinator?.pushMatchingVC(lat: self?.lat ?? 0.0,
-                                                          long: self?.long ?? 0.0) }
+                if $0 {
+                    self?.coordinator?.show(view: .matchingView(lat: self?.lat ?? 0.0,
+                                                                long: self?.long ?? 0.0), by: .push)
+                }
             }.disposed(by: disposeBag)
         
         useCase.postQueueError
@@ -83,6 +87,11 @@ final class HobbyViewModel: ViewModelType {
             .asDriver(onErrorJustReturn: (0, ""))
             .drive { [weak self] in
                 self?.makeTagFromButton(section: $0.0, title: $0.1)
+            }.disposed(by: disposeBag)
+        
+        input.backButtonTap
+            .drive { [weak self] _ in
+                self?.coordinator?.show(view: .mapView, by: .backToFirst)
             }.disposed(by: disposeBag)
         
         // usecase to output

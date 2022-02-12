@@ -80,7 +80,7 @@ class QueueTableViewCell: UITableViewCell {
         backgroundImageView.image = data.background.imageAsset.image
         sesacImageView.image = data.sesac.imageAsset.image
         baseCardView.nicknameLabel.text = data.nick
-        baseCardView.sesacReviewView.reviewLabel.text = data.review[0]
+        baseCardView.sesacReviewView.reviewLabel.text = data.review.first
         
         // title button config
         baseCardView.buttonConfig(with: data.reputation)
