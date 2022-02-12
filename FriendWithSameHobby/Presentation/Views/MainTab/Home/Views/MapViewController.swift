@@ -77,7 +77,7 @@ final class MapViewController: UIViewController {
     }
     
     private func viewConfig() {
-        view.backgroundColor = .systemGreen
+        view.backgroundColor = .white
         [mapView, genderStackView, locationButton, matchingButton, userMarker]
             .forEach { view.addSubview($0) }
         

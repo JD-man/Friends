@@ -79,9 +79,7 @@ final class HobbyViewController: UIViewController {
     
     private func binding() {
         let input = HobbyViewModel.Input(
-            viewWillAppear:
-                self.rx.methodInvoked(#selector(viewWillAppear(_:))).map { _ in () }
-                .asDriver(onErrorJustReturn: ()),
+            viewWillAppear: self.rx.viewWillAppear.asDriver(onErrorJustReturn: ()),
             searchBarText: searchBar.rx.searchButtonClicked.withLatestFrom(searchBar.rx.text.orEmpty).asDriver(onErrorJustReturn: ""),
             itemSelected: itemRelay,
             findButtonTap: findButton.rx.tap.asDriver(), // 태그가 없으면 501에러 날라옴

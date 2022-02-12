@@ -99,9 +99,11 @@ class MatchingViewController: UIViewController {
     
     private func binding() {
         let input = MatchingViewModel.Input(
+            viewWillAppear: self.rx.viewWillAppear.asDriver(onErrorJustReturn: ()),
             backButtonTap: backButton.rx.tap.asDriver(),
             stopMatchingButtonTap: stopMatchingButton.rx.tap.asDriver(),
             changeHobbyButtonTap: changeHobbyButton.rx.tap.asDriver(),
+            
             aroundButtonTap: aroundButton.tabButton.rx.tap.asDriver(),
             requestedButtonTap: requestedButton.tabButton.rx.tap.asDriver()
         )
@@ -119,5 +121,23 @@ class MatchingViewController: UIViewController {
             .drive(queueTableView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
         
+        output.isQueueExist
+            .asDriver(onErrorJustReturn: true)
+            .drive { [weak self] in
+                self?.changeHobbyButton.isHidden = $0
+                self?.refreshButton.isHidden = $0
+            }.disposed(by: disposeBag)
+        
+        output.selectedTap
+            .map { $0 ? TopTabButtonStatus.selected : TopTabButtonStatus.unselected }
+            .asDriver(onErrorJustReturn: .selected)
+            .drive(aroundButton.rx.status)
+            .disposed(by: disposeBag)
+        
+        output.selectedTap
+            .map { $0 ? TopTabButtonStatus.unselected : TopTabButtonStatus.selected }
+            .asDriver(onErrorJustReturn: .unselected)
+            .drive(requestedButton.rx.status)
+            .disposed(by: disposeBag)
     }
 }

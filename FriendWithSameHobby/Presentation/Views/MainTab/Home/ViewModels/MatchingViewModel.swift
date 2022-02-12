@@ -12,6 +12,8 @@ import RxRelay
 
 final class MatchingViewModel: ViewModelType {
     struct Input {
+        // viewWillAppear
+        let viewWillAppear: Driver<Void>
         // back button tap
         let backButtonTap: Driver<Void>
         // stop matching button tap
@@ -30,13 +32,17 @@ final class MatchingViewModel: ViewModelType {
         // refresh result
         
         // fromQueueDB result
-        let aroundQueue = PublishRelay<[SectionOfMatchingItemViewModel]>()
+        let aroundQueue = BehaviorRelay<[SectionOfMatchingItemViewModel]>(value: [])
         // fromQueueDBRequested result
-    
+        
+        // user queue exist
+        let isQueueExist = PublishRelay<Bool>()
+        let selectedTap = BehaviorRelay<Bool>(value: true)
     }
     
     private var lat: Double
     private var long: Double
+    
     var useCase: MatchingUseCase
     weak var coordinator: HomeCoordinator?
     
@@ -68,6 +74,18 @@ final class MatchingViewModel: ViewModelType {
         
         input.aroundButtonTap
             .drive { [weak self] _ in
+                output.selectedTap.accept(true)
+                self?.useCase.excuteFriendsCoord(lat: self?.lat ?? 0.0, long: self?.long ?? 0.0)
+            }.disposed(by: disposeBag)
+        
+        input.requestedButtonTap
+            .drive { [weak self] _ in
+                output.selectedTap.accept(false)
+                self?.useCase.excuteFriendsCoord(lat: self?.lat ?? 0.0, long: self?.long ?? 0.0)
+            }.disposed(by: disposeBag)
+        
+        input.viewWillAppear
+            .drive { [weak self] _ in
                 self?.useCase.excuteFriendsCoord(lat: self?.lat ?? 0.0, long: self?.long ?? 0.0)
             }.disposed(by: disposeBag)
         
@@ -78,9 +96,10 @@ final class MatchingViewModel: ViewModelType {
             }.disposed(by: disposeBag)
         
         // UseCase to Output
-        useCase.fromQueueSuccess
+        let queueSuccess: Observable<[SectionOfMatchingItemViewModel]> = useCase.fromQueueSuccess
             .map {
-                [SectionOfMatchingItemViewModel.init(items: $0.fromQueueDB.map {
+                let queue = output.selectedTap.value ? $0.fromQueueDB : $0.fromQueueDBRequested
+                return [SectionOfMatchingItemViewModel.init(items: queue.map {
                     MatchingItemViewModel(identity: $0.uid,
                                           sesac: $0.sesac,
                                           background: $0.background,
@@ -89,7 +108,15 @@ final class MatchingViewModel: ViewModelType {
                                           hf: $0.hf,
                                           review: $0.reviews,
                                           expanding: false) })]
-            }.bind(to: output.aroundQueue)
+            }
+        
+        queueSuccess
+            .bind(to: output.aroundQueue)
+            .disposed(by: disposeBag)
+        
+        queueSuccess
+            .map { $0.count > 0 }
+            .bind(to: output.isQueueExist)
             .disposed(by: disposeBag)
         
         // UseCase to coordinator

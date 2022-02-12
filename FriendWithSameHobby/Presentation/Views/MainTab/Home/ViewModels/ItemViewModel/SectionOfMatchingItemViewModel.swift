@@ -8,7 +8,6 @@
 import Foundation
 import RxDataSources
 
-// cell이 uid를 가지고 있을 필요가 있나??????
 struct MatchingItemViewModel: IdentifiableType, Equatable {
     var identity: String
     var sesac: SeSACFace
