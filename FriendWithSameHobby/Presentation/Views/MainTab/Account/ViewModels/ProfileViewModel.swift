@@ -28,6 +28,7 @@ final class ProfileViewModel: ViewModelType {
         let minAgeIndex = PublishRelay<Int>()
         let maxAgeIndex = PublishRelay<Int>()
         let ageRange = PublishRelay<String>()
+        let profileItem = PublishRelay<[ProfileItemViewModel]>()
     }
     
     var useCase: ProfileUseCase
@@ -101,32 +102,44 @@ final class ProfileViewModel: ViewModelType {
             }.disposed(by: disposeBag)
         
         // Usecase to Output
-        useCase.userInfoData
+        let profileFooter = useCase.userInfoData.map {
+            ProfileFooterViewModel(model: $0)
+        }
+        
+        let profileItem = useCase.userInfoData.map {
+            [ProfileItemViewModel(model: $0)]
+        }
+        
+        profileItem
+            .bind(to: output.profileItem)
+            .disposed(by: disposeBag)
+        
+        profileFooter
             .map { $0.gender }
             .bind(to: output.gender)
             .disposed(by: disposeBag)
         
-        useCase.userInfoData
+        profileFooter
             .map { $0.hobby }
             .bind(to: output.hobby)
             .disposed(by: disposeBag)
         
-        useCase.userInfoData
+        profileFooter
             .map { $0.searchable }
             .bind(to: output.searchable)
             .disposed(by: disposeBag)
         
-        useCase.userInfoData
+        profileFooter
             .map { $0.minAge - 18 }
             .bind(to: output.minAgeIndex)
             .disposed(by: disposeBag)
         
-        useCase.userInfoData
+        profileFooter
             .map { $0.maxAge - 18 }
             .bind(to: output.maxAgeIndex)
             .disposed(by: disposeBag)
         
-        useCase.userInfoData
+        profileFooter
             .map { "\($0.minAge)-\($0.maxAge)" }
             .bind(to: output.ageRange)
             .disposed(by: disposeBag)

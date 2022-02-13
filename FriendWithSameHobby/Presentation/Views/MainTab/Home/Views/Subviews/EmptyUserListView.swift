@@ -45,6 +45,12 @@ final class EmptyUserListView: UIView {
         $0.font = AssetsFonts.NotoSansKR.regular.font(size: 14)
     }
     
+    var listCase: EmptyListCase = .around {
+        didSet {
+            titleConfig(listCase: listCase)
+        }
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         viewConfig()
@@ -56,8 +62,7 @@ final class EmptyUserListView: UIView {
     
     convenience init(of listCase: EmptyListCase) {
         self.init()
-        titleLabel.text = listCase.title
-        subtitleLabel.text = listCase.subtitle
+        titleConfig(listCase: listCase)
     }
     
     private func viewConfig() {
@@ -80,5 +85,10 @@ final class EmptyUserListView: UIView {
             make.centerX.equalTo(titleLabel)
             make.bottom.equalTo(titleLabel.snp.top).offset(-32)
         }                
+    }
+    
+    private func titleConfig(listCase: EmptyListCase) {
+        titleLabel.text = listCase.title
+        subtitleLabel.text = listCase.subtitle
     }
 }

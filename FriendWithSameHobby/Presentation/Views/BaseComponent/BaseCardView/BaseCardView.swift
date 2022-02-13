@@ -98,11 +98,9 @@ final class BaseCardView: UIView {
         reviewViewHeight = Int(sesacReviewView.frame.height)
         titleViewHeight = Int(sesacTitleView.frame.height)
         tagViewHeight = Int(hobbyTagView.frame.height)
-        print(#function)
     }
     
-    func expanding(isExpanding: Bool) {
-        print("expading")
+    func expanding(isExpanding: Bool) {        
         sesacTitleView.isHidden = isExpanding
         sesacReviewView.isHidden = isExpanding
         let constant = isExpanding ? 30 + tagViewHeight + reviewViewHeight + titleViewHeight : -16

@@ -163,5 +163,12 @@ class MatchingViewController: UIViewController {
             .asDriver(onErrorJustReturn: .unselected)
             .drive(requestedButton.rx.status)
             .disposed(by: disposeBag)
+        
+        output.selectedTap
+            .map { $0 ? EmptyListCase.around : EmptyListCase.requested }
+            .asDriver(onErrorJustReturn: .around)
+            .drive((queueTableView.backgroundView as? EmptyUserListView ?? EmptyUserListView()).rx.listCase)
+            .disposed(by: disposeBag)
+            
     }
 }

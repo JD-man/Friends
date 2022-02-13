@@ -15,18 +15,18 @@ struct UserInfoModel {
     let uid, phoneNumber, email, fcMtoken: String
     let nick: String
     let birth: Date
-    let gender: Int
+    let gender: UserGender
     let hobby: String
     let comment: [String]
     let reputation: [Int]
-    let sesac: Int
+    let sesac: SeSACFace
     let sesacCollection: [Int]
-    let background: Int
+    let background: SeSACBackground
     let backgroundCollection: [Int]
     let purchaseToken, transactionID, reviewedBefore: [String]
     let reportedNum: Int
     let reportedUser: [String]
     let dodgepenalty, dodgeNum, ageMin, ageMax: Int
-    let searchable: Int
+    let searchable: Bool
     let createdAt: Date
 }

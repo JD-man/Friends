@@ -13,6 +13,7 @@ final class UserRepository: UserRepositoryInterface {
     private let provider = MoyaProvider<UserTargets>()
     
     func getUserInfo(completion: @escaping(Result<UserInfoModel, UserInfoError>) -> Void) {
+        print("user info API Call")
         provider.request(.getUserInfo) { result in
             switch result {
             case .success(let response):

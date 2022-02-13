@@ -10,6 +10,8 @@ import Then
 import SnapKit
 import RxSwift
 import RxCocoa
+import RxKeyboard
+import RxGesture
 
 final class ProfileViewController: UIViewController {
     typealias UserMyPageData = (UserGender, String, Bool, Int, Int)
@@ -44,13 +46,11 @@ final class ProfileViewController: UIViewController {
     }
     
     private let footerView = ProfileTableViewFooter()
-    private var testRelay = BehaviorRelay<[Bool]>(value: [false])
     private var disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()        
         viewConfig()
-        profileTableViewConfig()
         binding()
     }
     
@@ -73,36 +73,35 @@ final class ProfileViewController: UIViewController {
         navigationItem.rightBarButtonItem = updateBarButton
     }
     
-    private func profileTableViewConfig() {
-        testRelay
-            .asDriver()
-            .drive(profileTableView.rx.items(
-                cellIdentifier: ProfileTableViewCell.identifier,
-                cellType: ProfileTableViewCell.self)) { [weak self] row, item, cell in
-                    cell.expand(item)
-                    cell.baseCardView.moreButton.rx.tap
-                        .asDriver()
-                        .drive { [weak self] _ in
-                            guard let strongSelf = self else { return }
-                            var value = strongSelf.testRelay.value
-                            value[row] = !value[row]
-                            strongSelf.testRelay.accept(value)
-                        }.disposed(by: cell.disposeBag)
-                }.disposed(by: disposeBag)
-        
-        profileTableView.rx.setDelegate(self)
-            .disposed(by: disposeBag)
-    }
-    
     private func binding() {
         let input = ProfileViewModel.Input(
-            viewWillAppear: self.rx.methodInvoked(#selector(viewWillAppear(_:))).map { _ in return () }.asDriver(onErrorJustReturn: ()),
+            viewWillAppear: self.rx.viewWillAppear.asDriver(),
             withdrawTap: footerView.withdrawButton.rx.tap.asDriver(),            
             updateButtonTap: updateBarButton.rx.tap.map { [weak self] in
                 self?.makeUpdateData() ?? (.unselected, "", false, 0, 1) }
                 .asDriver(onErrorJustReturn: (.unselected, "", false, 0, 1))
         )
         let output = viewModel?.transform(input, disposeBag: disposeBag)
+        
+        output?.profileItem
+            .asDriver(onErrorJustReturn: [])
+            .drive(profileTableView.rx.items(
+                cellIdentifier: ProfileTableViewCell.identifier,
+                cellType: ProfileTableViewCell.self)) { row, item, cell in
+                    cell.configure(with: item)
+//                    Expanding method
+//                    cell.baseCardView.moreButton.rx.tap
+//                        .asDriver()
+//                        .drive { [weak self] _ in
+//                            guard let strongSelf = self else { return }
+//                            var value = strongSelf.testRelay.value
+//                            value[row] = !value[row]
+//                            strongSelf.testRelay.accept(value)
+//                        }.disposed(by: cell.disposeBag)
+                }.disposed(by: disposeBag)
+        
+        profileTableView.rx.setDelegate(self)
+            .disposed(by: disposeBag)
         
         output?.gender
             .asDriver(onErrorJustReturn: .unselected)
@@ -133,9 +132,29 @@ final class ProfileViewController: UIViewController {
             .asDriver(onErrorJustReturn: "18-65")
             .drive(footerView.ageView.ageLabel.rx.text)
             .disposed(by: disposeBag)
+        
+        RxKeyboard.instance.visibleHeight
+            .drive { [weak self] in
+                self?.keyboardHandling(height: $0)
+            }.disposed(by: disposeBag)
+        
+        view.rx
+            .tapGesture()
+            .when(.ended)
+            .subscribe(onNext: { [weak self] _ in
+                self?.view.endEditing(true)
+            }).disposed(by: disposeBag)
     }
     
-    func makeUpdateData() -> UserMyPageData {
+    private func keyboardHandling(height: CGFloat) {
+        if height == 0.0 {
+            view.frame.origin.y = 0
+        } else {
+            view.frame.origin.y -= height
+        }
+    }
+    
+    private func makeUpdateData() -> UserMyPageData {
         let gender = footerView.genderView.gender
         let hobby = footerView.hobbyView.hobbyTextField.inputTextField.text ?? ""
         let searchable = footerView.allowSearchingView.allowSwitch.isOn

@@ -49,13 +49,13 @@ extension UserInfoDTO  {
                              fcMtoken: fcMtoken,
                              nick: nick,
                              birth: birth.toDate,
-                             gender: gender,
+                             gender: UserGender(rawValue: gender) ?? .unselected,
                              hobby: hobby,
                              comment: comment,
                              reputation: reputation,
-                             sesac: sesac,
+                             sesac: SeSACFace(rawValue: sesac) ?? .basic,
                              sesacCollection: sesacCollection,
-                             background: background,
+                             background: SeSACBackground(rawValue: background) ?? .basic,
                              backgroundCollection: backgroundCollection,
                              purchaseToken: purchaseToken,
                              transactionID: transactionID,
@@ -66,7 +66,7 @@ extension UserInfoDTO  {
                              dodgeNum: dodgeNum,
                              ageMin: ageMin,
                              ageMax: ageMax,
-                             searchable: searchable,
+                             searchable: searchable == 1 ? true : false,
                              createdAt: createdAt.toDate)
     }
 }

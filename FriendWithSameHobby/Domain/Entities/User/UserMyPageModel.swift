@@ -2,7 +2,7 @@
 //  UserMyPageModel.swift
 //  FriendWithSameHobby
 //
-//  Created by JD_MacMini on 2022/02/02.
+//  Created by JD_MacMini on 2022/02/13.
 //
 
 import Foundation

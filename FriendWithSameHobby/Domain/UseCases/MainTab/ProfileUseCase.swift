@@ -17,7 +17,7 @@ final class ProfileUseCase: UseCaseType {
     let withdrawFail = PublishRelay<UserWithdrawError>()
     
     // fetch user page relay
-    let userInfoData = PublishRelay<UserMyPageModel>()
+    let userInfoData = PublishRelay<UserInfoModel>()
     let getUserInfoFail = PublishRelay<UserInfoError>()
     
     // update user page relay
@@ -55,12 +55,8 @@ final class ProfileUseCase: UseCaseType {
         userRepo?.getUserInfo(completion: { [weak self] result in
             switch result {
             case .success(let model):
-                let footerModel = UserMyPageModel(gender: UserGender(rawValue: model.gender) ?? .unselected,
-                                                  hobby: model.hobby,
-                                                  searchable: model.searchable == 1 ? true : false,
-                                                  minAge: model.ageMin,
-                                                  maxAge: model.ageMax)
-                self?.userInfoData.accept(footerModel)
+                UserInfoManager.nick = model.nick
+                self?.userInfoData.accept(model)
             case .failure(let error):
                 switch error {
                 case .tokenError:

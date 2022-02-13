@@ -64,8 +64,22 @@ class ProfileTableViewCell: UITableViewCell {
         }
     }
     
-    func expand(_ isExpanding: Bool) {
+    private func expand(_ isExpanding: Bool) {
         baseCardView.expanding(isExpanding: isExpanding)
+    }
+    
+    func configure(with data: ProfileItemViewModel) {
+        baseCardView.nicknameLabel.text = data.nick
+        baseCardView.buttonConfig(with: data.reputation)
+        sesacImageView.image = data.sesac.imageAsset.image
+        baseCardView.expanding(isExpanding: data.isExpanding)
+        backgroundImageView.image = data.background.imageAsset.image
+        
+        if let firstReview = data.comment.first {
+            baseCardView.sesacReviewView.reviewLabelConfig(status: .exist(text: firstReview))
+        } else {
+            baseCardView.sesacReviewView.reviewLabelConfig(status: .empty)
+        }
     }
     
     override func prepareForReuse() {
