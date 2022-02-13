@@ -21,7 +21,7 @@ final class HobbyViewController: UIViewController {
     private let backButton = UIBarButtonItem().then {
         $0.image = AssetsImages.arrow.image
     }
-    private let hobbyCollectionView = UICollectionView(frame: .zero, collectionViewLayout: HobbyCollectionViewFlowLayout()).then {
+    private let hobbyCollectionView = UICollectionView(frame: .zero, collectionViewLayout: HobbyCollectionViewFlowLayout(headerHeight: 20)).then {
         $0.register(HobbyCollectionViewCell.self, forCellWithReuseIdentifier: HobbyCollectionViewCell.identifier)
         $0.register(HobbyCollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: HobbyCollectionReusableView.identifier)
     }

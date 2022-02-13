@@ -120,6 +120,34 @@ enum RequestMatchingError: Int, CustomError {
     }
 }
 
-
-
-
+enum AcceptMatchingError: Int, CustomError {
+    case unknownError = -1
+    case otherMatched = 201
+    case otherStopped = 202
+    case userMatched = 203
+    case tokenError = 401
+    case unregistered = 406
+    case serverError = 500
+    case clientError = 501
+    
+    var description: String {
+        switch self {
+        case .unknownError:
+            return "오류가 발생했습니다."
+        case .otherMatched:
+            return "상대가 다른 사람과 매칭된 상태입니다."
+        case .otherStopped:
+            return "상대가 친구 찾기를 중단한 상태입니다."
+        case .userMatched:
+            return "이미 다른 사람과 매칭된 상태입니다,"
+        case .tokenError:
+            return "토큰 에러"
+        case .unregistered:
+            return "미가입 회원"
+        case .serverError:
+            return "서버 에러"
+        case .clientError:
+            return "클라이언트 에러"
+        }
+    }
+}

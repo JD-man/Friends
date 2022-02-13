@@ -55,7 +55,7 @@ class QueueTableViewCell: UITableViewCell {
         $0.setTitleColor(AssetsColors.white.color, for: .normal)
     }
     
-    let baseCardView = BaseCardView()
+    let baseCardView = BaseCardView(type: .matching)
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -115,6 +115,7 @@ class QueueTableViewCell: UITableViewCell {
         
         matchingButton.setTitle(data.matchingButtonStatus.title, for: .normal)
         matchingButton.backgroundColor = data.matchingButtonStatus.backgroundColor
+        baseCardView.hobbyTagView.hobbyTagRelay.accept(data.hf)
         
         if let firstReview = data.review.first {
             baseCardView.sesacReviewView.reviewLabelConfig(status: .exist(text: firstReview))

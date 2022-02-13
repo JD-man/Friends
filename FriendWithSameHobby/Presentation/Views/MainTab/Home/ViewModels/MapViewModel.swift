@@ -58,7 +58,7 @@ final class MapViewModel: ViewModelType {
                 case .waiting:
                     self?.coordinator?.show(view: .matchingView(lat: $0.1, long: $0.2), by: .push)
                 case .matched:
-                    print("matched")
+                    self?.coordinator?.show(view: .chatView, by: .push)
                 }
             }.disposed(by: disposeBag)
         

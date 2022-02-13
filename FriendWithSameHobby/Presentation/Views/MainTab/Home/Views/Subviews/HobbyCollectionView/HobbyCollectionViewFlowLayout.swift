@@ -10,11 +10,15 @@ import UIKit
 class HobbyCollectionViewFlowLayout: UICollectionViewFlowLayout {
     override init() {
         super.init()
+    }
+    
+    convenience init(headerHeight: CGFloat) {
+        self.init()
         scrollDirection = .vertical
         minimumLineSpacing = 10
         minimumInteritemSpacing = 10
-        headerReferenceSize = CGSize(width: collectionView?.frame.width ?? 0, height: 30)
-        sectionInset = UIEdgeInsets(top: 20, left: 0, bottom: 20, right: 0)
+        headerReferenceSize = CGSize(width: collectionView?.frame.width ?? 0, height: headerHeight)
+        sectionInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
         
         // 이거 있으면 가운데가 먼저나옴
         estimatedItemSize = UICollectionViewFlowLayout.automaticSize

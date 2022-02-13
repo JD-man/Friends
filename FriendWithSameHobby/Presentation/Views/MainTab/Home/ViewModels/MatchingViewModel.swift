@@ -19,15 +19,14 @@ final class MatchingViewModel: ViewModelType {
         let aroundButtonTap: Driver<Void>
         let requestedButtonTap: Driver<Void>
         let matchingButtonTap: PublishRelay<Int>
-        let toggleButtonTap: PublishRelay<Int>
+        let refreshingButtonTap: Driver<Void>
+        //let toggleButtonTap: PublishRelay<Int>
     }
     
     struct Output {
         // refresh result
         
-        // fromQueueDB result
-        let aroundQueue = BehaviorRelay<[SectionOfMatchingItemViewModel]>(value: [])
-        // fromQueueDBRequested result
+        let queueItems = BehaviorRelay<[SectionOfMatchingItemViewModel]>(value: [])
         
         // user queue exist
         let isQueueExist = PublishRelay<Bool>()
@@ -83,33 +82,37 @@ final class MatchingViewModel: ViewModelType {
                 self?.useCase.excuteFriendsCoord(lat: self?.lat ?? 0.0, long: self?.long ?? 0.0)
             }.disposed(by: disposeBag)
         
-        input.toggleButtonTap
-            .bind {
-                var queue = output.aroundQueue.value[0]
-                let item = queue.items[$0]
-                let currExpanding = !(item.expanding)
-                queue.items[$0].expanding = currExpanding
-                output.aroundQueue.accept([queue])
+        input.refreshingButtonTap
+            .drive { [weak self] _ in
+                print("refreshing button tap")
+                self?.useCase.excuteFriendsCoord(lat: self?.lat ?? 0.0, long: self?.long ?? 0.0)
             }.disposed(by: disposeBag)
+        
+//        input.toggleButtonTap
+//            .bind {
+//                var queue = output.aroundQueue.value[0]
+//                let item = queue.items[$0]
+//                let currExpanding = !(item.expanding)
+//                queue.items[$0].expanding = currExpanding
+//                output.aroundQueue.accept([queue])
+//            }.disposed(by: disposeBag)
         
         input.matchingButtonTap
             .asDriver(onErrorJustReturn: 0)
             .drive { [weak self] idx in
-                let uid = output.aroundQueue.value[0].items[idx].identity
+                print("matching button tap")
+                let uid = output.queueItems.value[0].items[idx].identity
                 if output.selectedTap.value {
-                    print("request matching")
                     let alert = BaseAlertView(message: .matchingRequest, confirm: {
                         self?.useCase.executeRequestMatching(uid: uid)
                     })
                     alert.show()
                 } else {
-                    print("request allow")
                     let alert = BaseAlertView(message: .matchingAllow, confirm: {
-                        print(output.aroundQueue.value[0].items[idx].identity)
+                        self?.useCase.executeAllowMatching(uid: uid)
                     })
                     alert.show()
                 }
-                //alert.show()
             }.disposed(by: disposeBag)
         
         // Input to Coordinator
@@ -135,7 +138,7 @@ final class MatchingViewModel: ViewModelType {
             }
         
         queueSuccess
-            .bind(to: output.aroundQueue)
+            .bind(to: output.queueItems)
             .disposed(by: disposeBag)
         
         queueSuccess
@@ -165,6 +168,19 @@ final class MatchingViewModel: ViewModelType {
             }.disposed(by: disposeBag)
         
         useCase.requestMatchingFail
+            .asDriver(onErrorJustReturn: .unknownError)
+            .drive { [weak self] in
+                self?.coordinator?.toasting(message: $0.description)
+            }.disposed(by: disposeBag)
+        
+        useCase.acceptMatchingSuccess
+            .asDriver(onErrorJustReturn: false)
+            .drive { [weak self] _ in
+                self?.coordinator?.toasting(message: "취미 함께 하기 요청을 보냈습니다.")
+                self?.coordinator?.show(view: .chatView, by: .push)
+            }.disposed(by: disposeBag)
+        
+        useCase.acceptMatchingFail
             .asDriver(onErrorJustReturn: .unknownError)
             .drive { [weak self] in
                 self?.coordinator?.toasting(message: $0.description)

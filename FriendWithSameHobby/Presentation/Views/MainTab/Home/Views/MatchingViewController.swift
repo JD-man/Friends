@@ -41,8 +41,6 @@ class MatchingViewController: UIViewController {
     
     private let toggleButtonTap = PublishRelay<Int>()
     private let matchingButtonTap = PublishRelay<Int>()
-    
-    
     init(viewModel: MatchingViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -111,7 +109,8 @@ class MatchingViewController: UIViewController {
             aroundButtonTap: aroundButton.tabButton.rx.tap.asDriver(),
             requestedButtonTap: requestedButton.tabButton.rx.tap.asDriver(),
             matchingButtonTap: matchingButtonTap,
-            toggleButtonTap: toggleButtonTap
+            refreshingButtonTap: refreshButton.rx.tap.asDriver()
+            //toggleButtonTap: toggleButtonTap
         )
         
         let output = viewModel.transform(input, disposeBag: disposeBag)
@@ -136,7 +135,7 @@ class MatchingViewController: UIViewController {
             return cell
         }
         
-        output.aroundQueue
+        output.queueItems
             .asDriver(onErrorJustReturn: [])
             .drive(queueTableView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)

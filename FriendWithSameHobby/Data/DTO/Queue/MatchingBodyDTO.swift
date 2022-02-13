@@ -7,15 +7,15 @@
 
 import Foundation
 
-struct RequestMatchingDTO {
+struct MatchingBodyDTO {
     var uid: String
     
-    init(model: RequestMatchingModel) {
+    init(model: MatchingBodyModel) {
         self.uid = model.uid
     }
 }
 
-extension RequestMatchingDTO {
+extension MatchingBodyDTO {
     func toParameters() -> Parameters {
         return [
             "otheruid" : uid

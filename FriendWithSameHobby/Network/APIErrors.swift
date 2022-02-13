@@ -15,8 +15,8 @@ protocol CustomError: Error {
 // MARK: - Get User Info Error
 enum UserInfoError: Int, CustomError {
     case unknownError = -1
-    case unregistered = 201
     case tokenError = 401
+    case unregistered = 406
     case serverError = 500
     case clientError = 501
     case tooManyRequest = 17010
@@ -47,6 +47,7 @@ enum UserRegisterError: Int, CustomError {
     case userExisted = 201
     case invalidNickname = 202
     case tokenError = 401
+    case unregistered = 406
     case serverError = 500
     case clientError = 501
     
@@ -64,6 +65,8 @@ enum UserRegisterError: Int, CustomError {
             return "서버 에러입니다."
         case .clientError:
             return "오류가 발생했습니다."
+        case .unregistered:
+            return "미가입 유저"
         }
     }
 }

@@ -8,6 +8,11 @@
 import UIKit
 import SnapKit
 
+enum BaseCardViewType {
+    case profile
+    case matching
+}
+
 final class BaseCardView: UIView {
     
     let nicknameLabel = UILabel().then {
@@ -21,25 +26,30 @@ final class BaseCardView: UIView {
     }
     
     let sesacTitleView = SeSACTitleView()
-    
+    let hobbyTagView = SeSACHobbyTagView()
     let sesacReviewView = SeSACReviewView()
     
-    var titleViewHeight = 0
-    var reviewViewHeight = 0
+    private var titleViewHeight = 0
+    private var reviewViewHeight = 0
+    private var tagViewHeight = 0
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        viewConfig()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
     
-    private func viewConfig() {
+    convenience init(type: BaseCardViewType) {
+        self.init()
+        viewConfig(type: type)
+    }
+    
+    private func viewConfig(type: BaseCardViewType) {
         addCorner(rad: 5, borderColor: AssetsColors.gray2.color)
         
-        [nicknameLabel, moreButton, sesacTitleView, sesacReviewView]
+        [nicknameLabel, moreButton, sesacTitleView, hobbyTagView, sesacReviewView]
             .forEach { addSubview($0) }
         
         moreButton.snp.makeConstraints { make in
@@ -60,10 +70,26 @@ final class BaseCardView: UIView {
             make.leading.trailing.equalTo(self).inset(16)
         }
         
+        switch type {
+        case .profile:
+            hobbyTagView.snp.makeConstraints { make in
+                make.top.equalTo(sesacTitleView.snp.bottom).offset(24)
+                make.leading.trailing.equalTo(self).inset(16)
+                make.height.equalTo(0)
+            }
+            hobbyTagView.isHidden = true
+            
+        case .matching:
+            hobbyTagView.snp.makeConstraints { make in
+                make.top.equalTo(sesacTitleView.snp.bottom).offset(24)
+                make.leading.trailing.equalTo(self).inset(16)
+            }
+        }
+        
         sesacReviewView.snp.makeConstraints { make in
-            make.top.equalTo(sesacTitleView.snp.bottom).offset(24)
+            make.top.equalTo(hobbyTagView.snp.bottom).offset(16)
             make.leading.trailing.equalTo(self).inset(16)
-            make.bottom.equalTo(self).offset(-16).priority(.low)
+            make.bottom.equalTo(self).offset(-16)
         }
     }
     
@@ -71,6 +97,7 @@ final class BaseCardView: UIView {
         super.layoutSubviews()
         reviewViewHeight = Int(sesacReviewView.frame.height)
         titleViewHeight = Int(sesacTitleView.frame.height)
+        tagViewHeight = Int(hobbyTagView.frame.height)
         print(#function)
     }
     
@@ -78,9 +105,9 @@ final class BaseCardView: UIView {
         print("expading")
         sesacTitleView.isHidden = isExpanding
         sesacReviewView.isHidden = isExpanding
-        let constant = isExpanding ? 30 + reviewViewHeight + titleViewHeight : -16        
+        let constant = isExpanding ? 30 + tagViewHeight + reviewViewHeight + titleViewHeight : -16
         sesacReviewView.snp.updateConstraints({ make in
-            make.bottom.equalTo(self).offset(constant).priority(.low)
+            make.bottom.equalTo(self).offset(constant)
         })        
     }
     

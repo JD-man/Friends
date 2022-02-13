@@ -27,7 +27,7 @@ class ProfileTableViewCell: UITableViewCell {
         $0.image = AssetsImages.sesacFace2.image
     }
     
-    var baseCardView = BaseCardView()
+    var baseCardView = BaseCardView(type: .profile)
     var disposeBag = DisposeBag()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

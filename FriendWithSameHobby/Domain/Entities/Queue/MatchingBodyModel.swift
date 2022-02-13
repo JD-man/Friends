@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct RequestMatchingModel {
+struct MatchingBodyModel {
     var uid: String
 }

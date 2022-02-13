@@ -12,6 +12,7 @@ enum HomeCoordinatorViews {
     case mapView
     case hobbyView(lat: Double, long: Double)
     case matchingView(lat: Double, long: Double)
+    case chatView
 }
 
 enum HomeCoordinatorShowStyle {
@@ -65,6 +66,12 @@ final class HomeCoordinator: CoordinatorType {
         return matchingVC
     }
     
+    private func chatVC() -> ChatViewController {
+        let chatVC = ChatViewController()
+        chatVC.hidesBottomBarWhenPushed = true
+        return chatVC
+    }
+    
     func toasting(message: String) {
         navigationController.view.makeToast(message, position: .top)
     }
@@ -72,15 +79,17 @@ final class HomeCoordinator: CoordinatorType {
     func show(view: HomeCoordinatorViews, by: HomeCoordinatorShowStyle) {
         switch view {
         case .mapView:
-            showBy(view: mapVC(), style: by)
+            showBy(view: mapVC(), by: by)
         case .hobbyView(let lat, let long):
-            showBy(view: hobbyVC(lat: lat, long: long), style: by)
+            showBy(view: hobbyVC(lat: lat, long: long), by: by)
         case .matchingView(let lat, let long):
-            showBy(view: matchingVC(lat: lat, long: long), style: by)
+            showBy(view: matchingVC(lat: lat, long: long), by: by)
+        case .chatView:
+            showBy(view: chatVC(), by: by)
         }
     }
     
-    private func showBy(view: UIViewController, style: HomeCoordinatorShowStyle) {
+    private func showBy(view: UIViewController, by style: HomeCoordinatorShowStyle) {
         switch style {
         case .push:
             navigationController.pushViewController(view, animated: true)

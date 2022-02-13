@@ -23,6 +23,12 @@ protocol QueueRepositoryInterface {
     )
     
     func requestMatch(
-        model: RequestMatchingModel,
-        completion: @escaping (Result<Bool, RequestMatchingError>) -> Void)
+        model: MatchingBodyModel,
+        completion: @escaping (Result<Bool, RequestMatchingError>) -> Void
+    )
+    
+    func acceptMatch(
+        model: MatchingBodyModel,
+        completion: @escaping (Result<Bool, AcceptMatchingError>) -> Void
+    )
 }

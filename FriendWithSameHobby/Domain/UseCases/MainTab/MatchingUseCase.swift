@@ -16,6 +16,9 @@ final class MatchingUseCase: MapUseCase {
     let requestMatchingSuccess = PublishRelay<Bool>()
     let requestMatchingFail = PublishRelay<RequestMatchingError>()
     
+    let acceptMatchingSuccess = PublishRelay<Bool>()
+    let acceptMatchingFail = PublishRelay<AcceptMatchingError>()
+    
     func executeCancelQueue() {
         queueRepo?.cancelQueue(completion: { [weak self] result in
             switch result {
@@ -36,13 +39,15 @@ final class MatchingUseCase: MapUseCase {
     }
     
     func executeRequestMatching(uid: String) {
-        let model = RequestMatchingModel(uid: uid)
+        let model = MatchingBodyModel(uid: uid)
         queueRepo?.requestMatch(model: model, completion: { [weak self] result in
             switch result {
             case .success(let isRequested):
                 self?.requestMatchingSuccess.accept(isRequested)
             case .failure(let error):
                 switch error {
+                case .requestedFromUser:
+                    self?.executeAllowMatching(uid: uid)
                 case .tokenError:
                     self?.tokenErrorHandling {
                         self?.executeRequestMatching(uid: uid)
@@ -55,6 +60,22 @@ final class MatchingUseCase: MapUseCase {
     }
     
     func executeAllowMatching(uid: String) {
-        
+        let model = MatchingBodyModel(uid: uid)
+        queueRepo?.acceptMatch(model: model, completion: { [weak self] result in
+            switch result {
+            case .success(let isAccepted):
+                UserMatchingStatus.matchingStatus = MatchingStatus.matched.rawValue
+                self?.acceptMatchingSuccess.accept(isAccepted)
+            case .failure(let error):
+                switch error {
+                case .tokenError:
+                    self?.tokenErrorHandling {
+                        self?.executeAllowMatching(uid: uid)
+                    }
+                default:
+                    self?.acceptMatchingFail.accept(error)
+                }
+            }
+        })
     }
 }
