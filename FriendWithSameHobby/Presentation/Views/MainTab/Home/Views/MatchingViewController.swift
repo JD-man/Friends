@@ -41,6 +41,8 @@ class MatchingViewController: UIViewController {
     
     private let toggleButtonTap = PublishRelay<Int>()
     private let matchingButtonTap = PublishRelay<Int>()
+    private let commentButtonTap = PublishRelay<Int>()
+    
     init(viewModel: MatchingViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -109,7 +111,8 @@ class MatchingViewController: UIViewController {
             aroundButtonTap: aroundButton.tabButton.rx.tap.asDriver(),
             requestedButtonTap: requestedButton.tabButton.rx.tap.asDriver(),
             matchingButtonTap: matchingButtonTap,
-            refreshingButtonTap: refreshButton.rx.tap.asDriver()
+            refreshingButtonTap: refreshButton.rx.tap.asDriver(),
+            commentButtonTap: commentButtonTap
             //toggleButtonTap: toggleButtonTap
         )
         
@@ -119,19 +122,21 @@ class MatchingViewController: UIViewController {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: QueueTableViewCell.identifier, for: indexPath) as? QueueTableViewCell,
                   let self = self else { return UITableViewCell() }
             cell.configure(with: item)
-            
-            // matching Button Tap
+
             cell.matchingButton.rx.tap.map { indexPath.item }
                 .asSignal(onErrorJustReturn: 0)
                 .emit(to: self.matchingButtonTap)
                 .disposed(by: cell.disposeBag)
-            
-            // toggle Button tap
+
             cell.baseCardView.moreButton.rx.tap.map { indexPath.item }
                 .asSignal(onErrorJustReturn: 0)
                 .emit(to: self.toggleButtonTap)
                 .disposed(by: cell.disposeBag)
-                
+
+            cell.baseCardView.sesacCommentView.moreButton.rx.tap.map { indexPath.item }
+                .asSignal(onErrorJustReturn: 0)
+                .emit(to: self.commentButtonTap)
+                .disposed(by: cell.disposeBag)
             return cell
         }
         
@@ -139,6 +144,16 @@ class MatchingViewController: UIViewController {
             .asDriver(onErrorJustReturn: [])
             .drive(queueTableView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
+        
+//        output.queueItems
+//            .map {
+//                guard let first = $0.first else { return [] }
+//                return first.items
+//            }
+//            .asDriver(onErrorJustReturn: [])
+//            .drive(queueTableView.rx.items(cellIdentifier: QueueTableViewCell.identifier, cellType: QueueTableViewCell.self)) { row, item, cell in
+//                cell.configure(with: item)
+//            }.disposed(by: disposeBag)
         
         output.isQueueExist
             .bind(to: changeHobbyButton.rx.isHidden)

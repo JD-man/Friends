@@ -28,9 +28,18 @@ enum ReviewLabelStatus {
             return AssetsColors.black.color
         }
     }
+    
+    var isMoreButtonHidden: Bool {
+        switch self {
+        case .empty:
+            return true
+        case .exist:
+            return false
+        }
+    }
 }
 
-final class SeSACReviewView: UIView {
+final class SeSACCommentView: UIView {
     private let titleLabel = UILabel().then {
         $0.text = "새싹 리뷰"
         $0.font = AssetsFonts.NotoSansKR.regular.font(size: 12)
@@ -79,5 +88,6 @@ final class SeSACReviewView: UIView {
     func reviewLabelConfig(status: ReviewLabelStatus) {
         reviewLabel.text = status.text
         reviewLabel.textColor = status.textColor
+        moreButton.isHidden = status.isMoreButtonHidden
     }
 }

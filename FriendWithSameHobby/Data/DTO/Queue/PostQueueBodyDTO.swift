@@ -19,7 +19,7 @@ struct PostQueueBodyDTO {
         self.region = Int((model.lat + 90).setRegion + (model.long + 180).setRegion) ?? 0
         self.lat = model.lat
         self.long = model.long
-        self.hf = model.hf
+        self.hf = model.hf.map { $0 == "아무거나" ? "anything" : $0}
     }
 }
 

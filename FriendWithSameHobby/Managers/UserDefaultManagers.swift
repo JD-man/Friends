@@ -16,6 +16,7 @@ enum UserDefaultsKeyType: String {
     case birth
     case email
     case gender
+    case uid
     
     // User Progress
     case onboardingPassed
@@ -48,6 +49,7 @@ struct UserInfoManager {
     @UserDefaultsValue(.birth) static var birth: Date?
     @UserDefaultsValue(.email) static var email: String?
     @UserDefaultsValue(.gender) static var gender: Int?
+    @UserDefaultsValue(.uid) static var uid: String?
 }
 
 struct UserProgressManager {

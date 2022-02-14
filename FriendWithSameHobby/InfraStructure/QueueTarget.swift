@@ -14,6 +14,7 @@ enum QueueTarget {
     case cancelQueue
     case requestMatching(parameters: Parameters)
     case acceptMatching(parameters: Parameters)
+    case checkMatching
 }
 
 extension QueueTarget: TargetType {
@@ -31,14 +32,17 @@ extension QueueTarget: TargetType {
             return "/queue/hobbyrequest"
         case .acceptMatching:
             return "/queue/hobbyaccept"
+        case .checkMatching:
+            return "/queue/myQueueState"
         }
-    
     }
     
     var method: Moya.Method {
         switch self {
         case .searchFriends, .postQueue, .requestMatching, .acceptMatching:
             return .post
+        case .checkMatching:
+            return .get
         case .cancelQueue:
             return .delete
         }
@@ -46,13 +50,15 @@ extension QueueTarget: TargetType {
     
     var task: Task {
         switch self {
-        case .searchFriends(let parameters), .requestMatching(let parameters), .acceptMatching(parameters: let parameters):
+        case .searchFriends(let parameters),
+                .requestMatching(let parameters),
+                .acceptMatching(let parameters):
             return .requestParameters(parameters: parameters,
                                       encoding: URLEncoding.default)
         case .postQueue(let parameters):
             return .requestParameters(parameters: parameters,
                                       encoding: URLEncoding(arrayEncoding: .noBrackets))
-        case .cancelQueue:
+        case .cancelQueue, .checkMatching:
             return .requestParameters(parameters: [:],
                                       encoding: URLEncoding.default)
         }

@@ -35,6 +35,10 @@ enum MatchingButtonStatus {
 
 class QueueTableViewCell: UITableViewCell {
     
+    deinit {
+        print("queue cell deinit")
+    }
+    
     var disposeBag = DisposeBag()
     
     let backgroundImageView = UIImageView().then {
@@ -85,7 +89,7 @@ class QueueTableViewCell: UITableViewCell {
         }
         
         baseCardView.snp.makeConstraints { make in
-            make.bottom.equalTo(contentView).offset(-16)
+            make.bottom.equalTo(contentView).offset(-16).priority(.low)
             make.top.equalTo(backgroundImageView.snp.bottom)
             make.leading.trailing.equalTo(backgroundImageView)
         }
@@ -100,27 +104,32 @@ class QueueTableViewCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         disposeBag = DisposeBag()
+        baseCardView.tagViewHeight = 0
+        baseCardView.titleViewHeight = 0
+        baseCardView.commentViewHeight = 0
     }
     
-    private func expand(_ isExpanding: Bool) {
-        baseCardView.expanding(isExpanding: isExpanding)
-    }
+//    private func expand(_ isExpanding: Bool) {
+//        baseCardView.expanding(isExpanding: isExpanding)
+//    }
     
     func configure(with data: MatchingItemViewModel) {
+        baseCardView.isExpanding = data.expanding
         baseCardView.nicknameLabel.text = data.nick
         baseCardView.buttonConfig(with: data.reputation)
         sesacImageView.image = data.sesac.imageAsset.image
-        baseCardView.expanding(isExpanding: data.expanding)
         backgroundImageView.image = data.background.imageAsset.image
         
         matchingButton.setTitle(data.matchingButtonStatus.title, for: .normal)
         matchingButton.backgroundColor = data.matchingButtonStatus.backgroundColor
         baseCardView.hobbyTagView.hobbyTagRelay.accept(data.hf)
-        
         if let firstReview = data.review.first {
-            baseCardView.sesacReviewView.reviewLabelConfig(status: .exist(text: firstReview))
+            baseCardView.sesacCommentView.reviewLabelConfig(status: .exist(text: firstReview))
         } else {
-            baseCardView.sesacReviewView.reviewLabelConfig(status: .empty)
+            baseCardView.sesacCommentView.reviewLabelConfig(status: .empty)
         }
+        
+        // ;;
+        layoutIfNeeded()
     }
 }

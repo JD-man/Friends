@@ -121,7 +121,9 @@ final class MapViewController: UIViewController {
                 let coord = self?.mapView.cameraPosition.target ?? NMGLatLng()
                 let matchingStatus = self?.matchingButton.matchingStatus ?? .normal
                 return (matchingStatus, coord.lat, coord.lng) }).asDriver(onErrorJustReturn: (.normal, 0.0, 0.0)),
-            inputRelay: inputRelay
+            inputRelay: inputRelay,
+            viewWillAppear: self.rx.viewWillAppear,
+            viewWillDisAppear: self.rx.viewWillDisappear
         )
         let output = viewModel.transform(input, disposeBag: disposeBag)
         

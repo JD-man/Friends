@@ -29,7 +29,7 @@ enum HobbyCellStatus: Equatable {
 
 final class HobbyCollectionViewCell: UICollectionViewCell {
     deinit {
-        print("hobby cell deinit")
+        print("tag cell deinit")
     }
     
     var disposeBag = DisposeBag()

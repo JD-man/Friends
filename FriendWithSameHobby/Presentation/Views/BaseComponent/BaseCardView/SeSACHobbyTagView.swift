@@ -10,6 +10,19 @@ import SnapKit
 import RxSwift
 import RxRelay
 
+class DynamicCollectionView: UICollectionView {
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        if bounds.size != intrinsicContentSize {
+            invalidateIntrinsicContentSize()
+        }
+    }
+
+    override var intrinsicContentSize: CGSize {
+        return self.contentSize
+    }
+}
+
 final class SeSACHobbyTagView: UIView {
     
     private let titleLabel = UILabel().then {
@@ -17,12 +30,12 @@ final class SeSACHobbyTagView: UIView {
         $0.font = AssetsFonts.NotoSansKR.regular.font(size: 12)
     }
     
-    private let tagCollectionView = UICollectionView(frame: .zero, collectionViewLayout: HobbyCollectionViewFlowLayout(headerHeight: 0)).then {
-        $0.automaticallyAdjustsScrollIndicatorInsets = false
+    private let tagCollectionView = DynamicCollectionView(frame: .zero, collectionViewLayout: HobbyCollectionViewFlowLayout(headerHeight: 0)).then {
+        $0.backgroundColor = .clear
         $0.isScrollEnabled = false
         $0.register(HobbyCollectionViewCell.self, forCellWithReuseIdentifier: HobbyCollectionViewCell.identifier)
     }
-    var hobbyTagRelay = BehaviorRelay<[String]>(value: ["테스트태그", "테스트태그", "테스트태그", "테스트태그"])
+    var hobbyTagRelay = BehaviorRelay<[String]>(value: [])
     private var disposeBag = DisposeBag()
     
     override init(frame: CGRect) {
@@ -35,27 +48,18 @@ final class SeSACHobbyTagView: UIView {
         super.init(coder: coder)
     }
     
-    private func viewConfig() {        
+    private func viewConfig() {
         [titleLabel, tagCollectionView]
             .forEach { addSubview($0) }
         
         titleLabel.snp.makeConstraints { make in
             make.top.leading.equalTo(self)
         }
-        
-        tagCollectionView.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom)
-            make.leading.trailing.bottom.equalTo(self)
-            make.height.equalTo(50).priority(.low)
-        }
     }
     
     override func layoutSubviews() {
-        super.layoutSubviews()        
-        tagCollectionView.snp.updateConstraints { make in
-            make.height.equalTo(tagCollectionView.collectionViewLayout.collectionViewContentSize.height)
-                .priority(.low)
-        }
+        super.layoutSubviews()
+        
     }
     
     private func binding() {
@@ -68,5 +72,11 @@ final class SeSACHobbyTagView: UIView {
                     cell.tagButton.status = .inactive
                     cell.tagButton.setTitle(item, for: .normal)
                 }.disposed(by: disposeBag)
+        
+        tagCollectionView.snp.makeConstraints { make in
+            make.top.equalTo(titleLabel.snp.bottom)
+            make.leading.trailing.equalTo(self)
+            make.bottom.equalToSuperview().priority(.low)
+        }
     }
 }

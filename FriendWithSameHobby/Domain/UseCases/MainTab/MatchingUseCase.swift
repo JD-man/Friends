@@ -47,7 +47,7 @@ final class MatchingUseCase: MapUseCase {
             case .failure(let error):
                 switch error {
                 case .requestedFromUser:
-                    self?.executeAllowMatching(uid: uid)
+                    self?.executeAcceptMatching(uid: uid)
                 case .tokenError:
                     self?.tokenErrorHandling {
                         self?.executeRequestMatching(uid: uid)
@@ -59,7 +59,7 @@ final class MatchingUseCase: MapUseCase {
         })
     }
     
-    func executeAllowMatching(uid: String) {
+    func executeAcceptMatching(uid: String) {
         let model = MatchingBodyModel(uid: uid)
         queueRepo?.acceptMatch(model: model, completion: { [weak self] result in
             switch result {
@@ -70,7 +70,7 @@ final class MatchingUseCase: MapUseCase {
                 switch error {
                 case .tokenError:
                     self?.tokenErrorHandling {
-                        self?.executeAllowMatching(uid: uid)
+                        self?.executeAcceptMatching(uid: uid)
                     }
                 default:
                     self?.acceptMatchingFail.accept(error)

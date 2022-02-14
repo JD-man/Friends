@@ -37,7 +37,7 @@ extension FromQueueDB {
                                 lat: lat,
                                 long: long,
                                 reputation: reputation,
-                                hf: hf,
+                                hf: hf.map { $0.lowercased() == "anything" ? "아무거나" : $0 },
                                 reviews: reviews,
                                 gender: UserGender(rawValue: gender) ?? .unselected,
                                 type: UserGender(rawValue: type) ?? .unselected,

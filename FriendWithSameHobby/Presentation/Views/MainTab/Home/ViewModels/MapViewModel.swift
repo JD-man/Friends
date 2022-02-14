@@ -16,9 +16,12 @@ final class MapViewModel: ViewModelType {
     struct Input {
         // matching button tap to push hobby VC
         let matchingButtonTap: Driver<(MatchingStatus, Double, Double)>
-        
         // coord input relay
-        let inputRelay: PublishRelay<OnqueueInput>        
+        let inputRelay: PublishRelay<OnqueueInput>
+        // viewWillAppear
+        let viewWillAppear: ControlEvent<Void>
+        // viewWillDisAppear
+        let viewWillDisAppear: ControlEvent<Void>
     }
     
     struct Output {
@@ -31,6 +34,7 @@ final class MapViewModel: ViewModelType {
     private var disposeBag = DisposeBag()
     
     private var gender: UserGender = .unselected
+    private var timer: Disposable?
     
     init(useCase: MapUseCase, coordinator: HomeCoordinator?) {
         self.useCase = useCase
@@ -62,6 +66,12 @@ final class MapViewModel: ViewModelType {
                 }
             }.disposed(by: disposeBag)
         
+        input.viewWillAppear
+            .asDriver()
+            .drive { [weak self] _ in
+                self?.startTimer()
+            }.disposed(by: disposeBag)
+        
         // UseCase to Output
         useCase.fromQueueSuccess            
             .map { [weak self] in
@@ -71,8 +81,33 @@ final class MapViewModel: ViewModelType {
             .bind(to: output.userCoord)
             .disposed(by: disposeBag)
         
+        useCase.checkMatchingSuccess
+            .asSignal()
+            .emit { /*[weak self] in*/
+                print($0)
+            }.disposed(by: disposeBag)
+        
+        useCase.checkMatchingFail
+            .asSignal()
+            .emit { [weak self] in
+                self?.coordinator?.toasting(message: $0.description)
+            }.disposed(by: disposeBag)
         // UseCase to Coordinator
         
         return output
+    }
+    
+    // MARK: - Check Matching Timer
+    private func startTimer() {
+        if let timer = timer {
+            timer.disposed(by: disposeBag)
+        }
+
+        timer = Observable<Int>.interval(.seconds(5), scheduler: MainScheduler.instance)
+            .subscribe { [weak self] _ in
+                self?.useCase.executeCheckMatchingStatus()
+            }
+        
+        timer?.disposed(by: disposeBag)
     }
 }

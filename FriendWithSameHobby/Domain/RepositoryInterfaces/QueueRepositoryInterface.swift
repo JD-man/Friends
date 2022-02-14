@@ -31,4 +31,9 @@ protocol QueueRepositoryInterface {
         model: MatchingBodyModel,
         completion: @escaping (Result<Bool, AcceptMatchingError>) -> Void
     )
+    
+    func checkMatchingStatus(
+        model: MatchingBodyModel,
+        completion: @escaping (Result<MatchingStateModel, CheckMatchingError>) -> Void
+    )
 }

@@ -27,11 +27,13 @@ final class BaseCardView: UIView {
     
     let sesacTitleView = SeSACTitleView()
     let hobbyTagView = SeSACHobbyTagView()
-    let sesacReviewView = SeSACReviewView()
+    let sesacCommentView = SeSACCommentView()
     
-    private var titleViewHeight = 0
-    private var reviewViewHeight = 0
-    private var tagViewHeight = 0
+    var titleViewHeight = 0
+    var commentViewHeight = 0
+    var tagViewHeight = 0
+    
+    var isExpanding: Bool = false
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -49,7 +51,7 @@ final class BaseCardView: UIView {
     private func viewConfig(type: BaseCardViewType) {
         addCorner(rad: 5, borderColor: AssetsColors.gray2.color)
         
-        [nicknameLabel, moreButton, sesacTitleView, hobbyTagView, sesacReviewView]
+        [nicknameLabel, moreButton, sesacTitleView, hobbyTagView, sesacCommentView]
             .forEach { addSubview($0) }
         
         moreButton.snp.makeConstraints { make in
@@ -70,6 +72,12 @@ final class BaseCardView: UIView {
             make.leading.trailing.equalTo(self).inset(16)
         }
         
+        sesacCommentView.snp.makeConstraints { make in
+            make.top.equalTo(hobbyTagView.snp.bottom)
+            make.leading.trailing.equalTo(self).inset(16)
+            make.bottom.equalTo(self).offset(-16).priority(.low)
+        }
+        
         switch type {
         case .profile:
             hobbyTagView.snp.makeConstraints { make in
@@ -83,28 +91,25 @@ final class BaseCardView: UIView {
             hobbyTagView.snp.makeConstraints { make in
                 make.top.equalTo(sesacTitleView.snp.bottom).offset(24)
                 make.leading.trailing.equalTo(self).inset(16)
+                make.bottom.equalTo(sesacCommentView.snp.top).offset(-24).priority(.low)
             }
-        }
-        
-        sesacReviewView.snp.makeConstraints { make in
-            make.top.equalTo(hobbyTagView.snp.bottom).offset(16)
-            make.leading.trailing.equalTo(self).inset(16)
-            make.bottom.equalTo(self).offset(-16)
         }
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        reviewViewHeight = Int(sesacReviewView.frame.height)
+        commentViewHeight = Int(sesacCommentView.frame.height)
         titleViewHeight = Int(sesacTitleView.frame.height)
         tagViewHeight = Int(hobbyTagView.frame.height)
+        
+        //expanding(isExpanding: isExpanding)
     }
     
-    func expanding(isExpanding: Bool) {        
+    private func expanding(isExpanding: Bool) {
         sesacTitleView.isHidden = isExpanding
-        sesacReviewView.isHidden = isExpanding
-        let constant = isExpanding ? 30 + tagViewHeight + reviewViewHeight + titleViewHeight : -16
-        sesacReviewView.snp.updateConstraints({ make in
+        sesacCommentView.isHidden = isExpanding
+        let constant = isExpanding ? 30 + tagViewHeight + commentViewHeight + titleViewHeight : -16
+        sesacCommentView.snp.updateConstraints({ make in
             make.bottom.equalTo(self).offset(constant)
         })        
     }

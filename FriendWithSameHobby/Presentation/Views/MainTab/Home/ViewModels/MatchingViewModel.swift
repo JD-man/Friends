@@ -20,6 +20,7 @@ final class MatchingViewModel: ViewModelType {
         let requestedButtonTap: Driver<Void>
         let matchingButtonTap: PublishRelay<Int>
         let refreshingButtonTap: Driver<Void>
+        let commentButtonTap: PublishRelay<Int>
         //let toggleButtonTap: PublishRelay<Int>
     }
     
@@ -109,7 +110,7 @@ final class MatchingViewModel: ViewModelType {
                     alert.show()
                 } else {
                     let alert = BaseAlertView(message: .matchingAllow, confirm: {
-                        self?.useCase.executeAllowMatching(uid: uid)
+                        self?.useCase.executeAcceptMatching(uid: uid)
                     })
                     alert.show()
                 }
@@ -119,6 +120,13 @@ final class MatchingViewModel: ViewModelType {
         input.backButtonTap
             .drive { [weak self] _ in
                 self?.coordinator?.show(view: .mapView, by: .backToFirst)
+            }.disposed(by: disposeBag)
+        
+        input.commentButtonTap
+            .asDriver(onErrorJustReturn: 0)
+            .drive { [weak self] in
+                let comment = output.queueItems.value[0].items[$0].review
+                self?.coordinator?.show(view: .commentView(review: comment), by: .push)
             }.disposed(by: disposeBag)
         
         // UseCase to Output

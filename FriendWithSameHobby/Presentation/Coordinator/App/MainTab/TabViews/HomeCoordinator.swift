@@ -13,6 +13,7 @@ enum HomeCoordinatorViews {
     case hobbyView(lat: Double, long: Double)
     case matchingView(lat: Double, long: Double)
     case chatView
+    case commentView(review: [String])
 }
 
 enum HomeCoordinatorShowStyle {
@@ -66,6 +67,12 @@ final class HomeCoordinator: CoordinatorType {
         return matchingVC
     }
     
+    private func commentVC(review: [String]) -> CommentViewController {
+        let commentVC = CommentViewController(review: review)
+        commentVC.hidesBottomBarWhenPushed = true
+        return commentVC
+    }
+    
     private func chatVC() -> ChatViewController {
         let chatVC = ChatViewController()
         chatVC.hidesBottomBarWhenPushed = true
@@ -86,12 +93,14 @@ final class HomeCoordinator: CoordinatorType {
             showBy(view: matchingVC(lat: lat, long: long), by: by)
         case .chatView:
             showBy(view: chatVC(), by: by)
+        case .commentView(let review):
+            showBy(view: commentVC(review: review), by: by)
         }
     }
     
     private func showBy(view: UIViewController, by style: HomeCoordinatorShowStyle) {
         switch style {
-        case .push:
+        case .push:            
             navigationController.pushViewController(view, animated: true)
         case .backToFirst:
             navigationController.setViewControllers([view], animated: true)

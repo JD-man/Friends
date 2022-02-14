@@ -14,6 +14,7 @@ final class QueueRepository: QueueRepositoryInterface {
     typealias CancelQueueResult = Result<Bool, CancelQueueError>
     typealias RequestMatchingResult = Result<Bool, RequestMatchingError>
     typealias AccetpMatchingResult = Result<Bool, AcceptMatchingError>
+    typealias CheckMatchingResult = Result<MatchingStateModel, CheckMatchingError>
     
     let provider = MoyaProvider<QueueTarget>()
     
@@ -82,6 +83,24 @@ final class QueueRepository: QueueRepositoryInterface {
             case .failure(let error):
                 let statusCode = error.response?.statusCode ?? -1
                 completion(.failure(AcceptMatchingError(rawValue: statusCode) ?? .unknownError))
+            }
+        }
+    }
+    
+    func checkMatchingStatus(model: MatchingBodyModel, completion: @escaping (CheckMatchingResult) -> Void) {
+        print("check matching API CAll")
+        provider.request(.checkMatching) { result in
+            switch result {
+            case .success(let response):
+                guard let decoded = try? JSONDecoder().decode(MatchingStateDTO.self,
+                                                              from: response.data) else {
+                    return
+                }
+                completion(.success(decoded.toDomain()))
+            case .failure(let error):
+                let statusCode = error.response?.statusCode ?? -1
+                print(error)
+                completion(.failure(CheckMatchingError(rawValue: statusCode) ?? .unknownError))
             }
         }
     }

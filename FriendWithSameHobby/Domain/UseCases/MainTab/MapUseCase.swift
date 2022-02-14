@@ -15,6 +15,9 @@ class MapUseCase: UseCaseType {
     let fromQueueSuccess = PublishRelay<OnqueueResponseModel>()
     let fromQueueFail = PublishRelay<OnqueueError>()
     
+    let checkMatchingSuccess = PublishRelay<MatchingStateModel>()
+    let checkMatchingFail = PublishRelay<CheckMatchingError>()
+    
     init(
         firebaseRepo: FirebaseAuthRepositoryInterface,
         queueRepo: QueueRepositoryInterface
@@ -37,6 +40,26 @@ class MapUseCase: UseCaseType {
                     }
                 default:
                     self?.fromQueueFail.accept(error)
+                }
+            }
+        })
+    }
+    
+    func executeCheckMatchingStatus() {
+        // 없으면 uid 불러와야함
+        let model = MatchingBodyModel(uid: UserInfoManager.uid ?? "")        
+        queueRepo?.checkMatchingStatus(model: model, completion: { [weak self] result in
+            switch result {
+            case .success(let model):
+                self?.checkMatchingSuccess.accept(model)
+            case .failure(let error):
+                switch error {
+                case .tokenError:
+                    self?.tokenErrorHandling {
+                        self?.executeCheckMatchingStatus()
+                    }
+                default:
+                    self?.checkMatchingFail.accept(error)
                 }
             }
         })
