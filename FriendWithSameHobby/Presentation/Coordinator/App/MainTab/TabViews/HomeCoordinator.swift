@@ -34,7 +34,8 @@ final class HomeCoordinator: CoordinatorType {
     }
     
     func start() {
-        show(view: .mapView, by: .push)
+        //show(view: .mapView, by: .push)
+        show(view: .chatView, by: .push)
     }
     
     private func mapVC() -> MapViewController {
@@ -103,7 +104,10 @@ final class HomeCoordinator: CoordinatorType {
         case .push:            
             navigationController.pushViewController(view, animated: true)
         case .backToFirst:
-            navigationController.setViewControllers([view], animated: true)
+            navigationController.viewControllers.insert(view, at: 0)
+            //navigationController.setViewControllers([view], animated: true)
+            navigationController.popToRootViewController(animated: true)            
+            // 맵 맵 태그 찾기(백버튼 누름)
         }
     }
 }

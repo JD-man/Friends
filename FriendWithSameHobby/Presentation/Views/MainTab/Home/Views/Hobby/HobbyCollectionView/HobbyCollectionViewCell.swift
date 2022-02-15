@@ -35,10 +35,10 @@ final class HobbyCollectionViewCell: UICollectionViewCell {
     var disposeBag = DisposeBag()
     
     let tagButton = BaseButton(title: "태그", status: .fill, type: .h32)
-    let emptyLabel = PaddedLabel().then {
-        $0.backgroundColor = .clear
-        $0.textColor = .clear
+    let emptyLabel = PaddedLabel(top: 5, left: 10, bottom: 5, right: 10).then {
         $0.numberOfLines = 1
+        $0.textColor = .clear
+        $0.backgroundColor = .clear
         $0.isUserInteractionEnabled = false
     }
     

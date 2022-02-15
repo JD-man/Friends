@@ -26,7 +26,6 @@ final class MatchingViewModel: ViewModelType {
     
     struct Output {
         // refresh result
-        
         let queueItems = BehaviorRelay<[SectionOfMatchingItemViewModel]>(value: [])
         
         // user queue exist
@@ -100,8 +99,7 @@ final class MatchingViewModel: ViewModelType {
         
         input.matchingButtonTap
             .asDriver(onErrorJustReturn: 0)
-            .drive { [weak self] idx in
-                print("matching button tap")
+            .drive { [weak self] idx in                
                 let uid = output.queueItems.value[0].items[idx].identity
                 if output.selectedTap.value {
                     let alert = BaseAlertView(message: .matchingRequest, confirm: {

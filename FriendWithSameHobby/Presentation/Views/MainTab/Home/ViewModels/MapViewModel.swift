@@ -14,18 +14,13 @@ final class MapViewModel: ViewModelType {
     typealias OnqueueInput = (UserGender, Double, Double)
     
     struct Input {
-        // matching button tap to push hobby VC
         let matchingButtonTap: Driver<(MatchingStatus, Double, Double)>
-        // coord input relay
         let inputRelay: PublishRelay<OnqueueInput>
-        // viewWillAppear
         let viewWillAppear: ControlEvent<Void>
-        // viewWillDisAppear
         let viewWillDisAppear: ControlEvent<Void>
     }
     
     struct Output {
-        // friends coord
         let userCoord = PublishRelay<[FromQueueDBModel]>()
     }
     
@@ -72,6 +67,13 @@ final class MapViewModel: ViewModelType {
                 self?.startTimer()
             }.disposed(by: disposeBag)
         
+        input.viewWillDisAppear
+            .asDriver()
+            .drive { [weak self] _ in
+                print("view will disappear")
+                self?.timer?.dispose()
+            }.disposed(by: disposeBag)
+        
         // UseCase to Output
         useCase.fromQueueSuccess            
             .map { [weak self] in
@@ -90,7 +92,13 @@ final class MapViewModel: ViewModelType {
         useCase.checkMatchingFail
             .asSignal()
             .emit { [weak self] in
-                self?.coordinator?.toasting(message: $0.description)
+                switch $0 {
+                case .matchingStopped:
+                    self?.timer?.dispose()
+                    self?.coordinator?.toasting(message: $0.description)
+                default:
+                    self?.coordinator?.toasting(message: $0.description)
+                }
             }.disposed(by: disposeBag)
         // UseCase to Coordinator
         
@@ -99,9 +107,7 @@ final class MapViewModel: ViewModelType {
     
     // MARK: - Check Matching Timer
     private func startTimer() {
-        if let timer = timer {
-            timer.disposed(by: disposeBag)
-        }
+        if let timer = timer { timer.dispose() }
 
         timer = Observable<Int>.interval(.seconds(5), scheduler: MainScheduler.instance)
             .subscribe { [weak self] _ in

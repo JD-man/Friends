@@ -123,13 +123,13 @@ class QueueTableViewCell: UITableViewCell {
         matchingButton.setTitle(data.matchingButtonStatus.title, for: .normal)
         matchingButton.backgroundColor = data.matchingButtonStatus.backgroundColor
         baseCardView.hobbyTagView.hobbyTagRelay.accept(data.hf)
+        
         if let firstReview = data.review.first {
             baseCardView.sesacCommentView.reviewLabelConfig(status: .exist(text: firstReview))
         } else {
             baseCardView.sesacCommentView.reviewLabelConfig(status: .empty)
         }
         
-        // ;;
         layoutIfNeeded()
     }
 }

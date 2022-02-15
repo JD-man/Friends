@@ -8,7 +8,17 @@
 import UIKit
 
 final class PaddedLabel: UILabel {
-    var padding = UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 10)
+    var padding: UIEdgeInsets
+    
+    init(top: CGFloat, left: CGFloat, bottom: CGFloat, right: CGFloat) {
+        padding = UIEdgeInsets(top: top, left: left, bottom: bottom, right: right)
+        super.init(frame: .zero)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func drawText(in rect: CGRect) {
         super.drawText(in: rect.inset(by: padding))
     }

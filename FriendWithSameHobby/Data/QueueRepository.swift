@@ -76,11 +76,12 @@ final class QueueRepository: QueueRepositoryInterface {
     
     func acceptMatch(model: MatchingBodyModel, completion: @escaping (AccetpMatchingResult) -> Void) {
         let parameters = MatchingBodyDTO(model: model).toParameters()
-        provider.request(.requestMatching(parameters: parameters)) { result in
+        provider.request(.acceptMatching(parameters: parameters)) { result in
             switch result {
             case .success(_):
                 completion(.success(true))
             case .failure(let error):
+                print(error)
                 let statusCode = error.response?.statusCode ?? -1
                 completion(.failure(AcceptMatchingError(rawValue: statusCode) ?? .unknownError))
             }

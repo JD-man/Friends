@@ -183,7 +183,6 @@ class MatchingViewController: UIViewController {
             .map { $0 ? EmptyListCase.around : EmptyListCase.requested }
             .asDriver(onErrorJustReturn: .around)
             .drive((queueTableView.backgroundView as? EmptyUserListView ?? EmptyUserListView()).rx.listCase)
-            .disposed(by: disposeBag)
-            
+            .disposed(by: disposeBag)            
     }
 }
