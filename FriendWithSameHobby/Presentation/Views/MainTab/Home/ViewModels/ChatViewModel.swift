@@ -51,7 +51,7 @@ final class ChatViewModel: ViewModelType {
         
         // Input to Output
         input.messageText
-            .map { $0.components(separatedBy: "\n").count > 3 }
+            .map { $0.components(separatedBy: "\n").count > 2 }
             .bind(to: output.messageTextViewScrollEnabled)
             .disposed(by: disposeBag)
         

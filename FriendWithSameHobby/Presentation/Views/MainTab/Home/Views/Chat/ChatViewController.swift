@@ -132,7 +132,6 @@ class ChatViewController: UIViewController {
         
         output.messageTextViewScrollEnabled
             .asDriver(onErrorJustReturn: false)
-            .distinctUntilChanged()
             .drive { [weak self] in
                 self?.updateMessageTextViewHeight(isLimited: $0)
                 self?.messageTextView.isScrollEnabled = $0
@@ -155,13 +154,14 @@ class ChatViewController: UIViewController {
     }
     
     private func updateMessageTextViewHeight(isLimited: Bool) {
+        let height = messageTextView.text.count == 0 ? 0 : messageTextView.contentSize.height + 28
         if isLimited {
             messageContainer.snp.updateConstraints { make in
                 make.height.greaterThanOrEqualTo(100)
             }
         } else {
             messageContainer.snp.updateConstraints { make in
-                make.height.greaterThanOrEqualTo(0)
+                make.height.greaterThanOrEqualTo(height)
             }
         }
     }
