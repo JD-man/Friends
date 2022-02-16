@@ -54,6 +54,8 @@ extension ChatRepository {
         
         socket.on(clientEvent: .connect) { data, ack in
             print("Socket is connected", data, ack)
+            let uid = UserInfoManager.uid ?? ""
+            self.socket.emit("changesocketid", uid)
         }
         
         socket.on(clientEvent: .disconnect) { data, ack in
@@ -61,10 +63,13 @@ extension ChatRepository {
         }
         
         socket.on("chat") { data, ack in
-            print("chatchatchat")
+            print("=========================data", data)
+            print("=========================ack", ack)
+            print("=========================chatchatchat")
         }
         
         socket.connect()
+        // 자신의 uid를 같이 보낸다.
         print("socket config")
     }
 }

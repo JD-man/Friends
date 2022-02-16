@@ -53,7 +53,8 @@ class MapUseCase: UseCaseType {
             case .success(let model):
                 UserChatManager.otherUID = model.matchedUid
                 UserChatManager.otherNickname = model.matchedNick
-                UserMatchingStatus.matchingStatus = MatchingStatus.matched.rawValue
+                // matched 하면 이거 해야댐
+                //UserMatchingStatus.matchingStatus = MatchingStatus.matched.rawValue
                 self?.checkMatchingSuccess.accept(model)
             case .failure(let error):
                 switch error {
