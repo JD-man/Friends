@@ -39,10 +39,10 @@ final class ChatViewModel: ViewModelType {
         
         // Input to UseCase
         
-//        input.viewWillAppear
-//            .drive { [weak self] _ in
-//                self?.useCase.executeSocketConnect()
-//            }.disposed(by: disposeBag)
+        input.viewWillAppear
+            .drive { [weak self] _ in
+                self?.useCase.executeSocketConnect()
+            }.disposed(by: disposeBag)
         
         input.sendButtonTap
             .drive { [weak self] in
@@ -65,7 +65,7 @@ final class ChatViewModel: ViewModelType {
         input.moreButtonTap
             .asDriver()
             .drive { [weak self] _ in
-                self?.coordinator?.present(viewContoller: ChatMenuViewController())
+                self?.coordinator?.presentChatMenuVC()
             }.disposed(by: disposeBag)
         
         // usecase to output        
@@ -81,6 +81,15 @@ final class ChatViewModel: ViewModelType {
             .asSignal()
             .emit { [weak self] in
                 self?.coordinator?.toasting(message: $0.description)
+            }.disposed(by: disposeBag)
+        
+        useCase.checkMatchingFail
+            .asSignal()
+            .emit { [weak self] in
+                self?.coordinator?.toasting(message: $0.description)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    self?.coordinator?.show(view: .mapView, by: .backToFirst)
+                }
             }.disposed(by: disposeBag)
         
         return output

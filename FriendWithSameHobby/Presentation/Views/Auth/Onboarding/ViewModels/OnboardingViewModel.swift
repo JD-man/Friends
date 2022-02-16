@@ -56,6 +56,7 @@ final class OnboardingViewModel: ViewModelType {
         
         input.didTapStartButton
             .bind { [weak self] in
+                UserProgressManager.onboardingPassed = true
                 self?.coordinator?.pushPhoneAuthVC()
             }.disposed(by: disposeBag)
         

@@ -34,8 +34,8 @@ final class HomeCoordinator: CoordinatorType {
     }
     
     func start() {
-        //show(view: .mapView, by: .push)
-        show(view: .chatView, by: .push)
+        show(view: .mapView, by: .push)
+        //show(view: .chatView, by: .push)
     }
     
     private func mapVC() -> MapViewController {
@@ -88,11 +88,17 @@ final class HomeCoordinator: CoordinatorType {
         return chatVC
     }
     
-    func present(viewContoller: UIViewController) {
-        guard let topView = navigationController.topViewController else { return }
-        topView.addChild(viewContoller)
-        topView.view.addSubview(viewContoller.view)
-        viewContoller.didMove(toParent: topView)
+    func presentChatMenuVC() {
+        guard let chatVC = navigationController.topViewController as? ChatViewController else { return }
+        let firebaseRepo = FirebaseAuthRepository(phoneID: nil)
+        let userRepo = UserRepository()
+        let queueRepo = QueueRepository()
+        let useCase = ChatMenuUseCase(firebaseRepo: firebaseRepo, userRepo: userRepo, queueRepo: queueRepo)
+        let viewModel = ChatMenuViewModel(useCase: useCase, coordinator: self)
+        let chatMenuVC = ChatMenuViewController(viewModel: viewModel)
+        chatVC.addChild(chatMenuVC)
+        chatVC.view.addSubview(chatMenuVC.view)
+        chatMenuVC.didMove(toParent: chatVC)
     }
     
     func toasting(message: String) {
@@ -121,8 +127,7 @@ final class HomeCoordinator: CoordinatorType {
         case .backToFirst:
             navigationController.viewControllers.insert(view, at: 0)
             //navigationController.setViewControllers([view], animated: true)
-            navigationController.popToRootViewController(animated: true)            
-            // 맵 맵 태그 찾기(백버튼 누름)
+            navigationController.popToRootViewController(animated: true)
         }
     }
 }

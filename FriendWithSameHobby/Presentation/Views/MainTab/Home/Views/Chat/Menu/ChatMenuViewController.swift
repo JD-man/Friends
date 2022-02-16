@@ -31,15 +31,26 @@ class ChatMenuViewController: UIViewController {
     }
 
     private let reportButton = MenuButton(title: "새싹 신고", image: AssetsImages.siren.image)
-    private let cancelButton = MenuButton(title: "약속 취소", image: AssetsImages.cancelMatch.image)
+    private let dodgeButton = MenuButton(title: "약속 취소", image: AssetsImages.cancelMatch.image)
     private let reviewButton = MenuButton(title: "리뷰 등록", image: AssetsImages.write.image)
     
-    private lazy var buttonStackView = UIStackView(arrangedSubviews: [reportButton, cancelButton, reviewButton]).then {
+    private let viewModel: ChatMenuViewModel
+    
+    private lazy var buttonStackView = UIStackView(arrangedSubviews: [reportButton, dodgeButton, reviewButton]).then {
         $0.axis = .horizontal
         $0.distribution = .fillEqually
     }
     
     private var disposeBag = DisposeBag()
+    
+    init(viewModel: ChatMenuViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,16 +74,16 @@ class ChatMenuViewController: UIViewController {
     }
     
     private func binding() {
+        let input = ChatMenuViewModel.Input(
+            dodgeButtonTap: dodgeButton.rx.tap.asDriver()
+        )
+        
+        let output = viewModel
+        
         reportButton.rx.tap
             .asDriver()
             .drive { _ in
                 print("reportButton")
-            }.disposed(by: disposeBag)
-
-        cancelButton.rx.tap
-            .asDriver()
-            .drive { _ in
-                print("cancelButton")
             }.disposed(by: disposeBag)
         
         reviewButton.rx.tap

@@ -207,8 +207,10 @@ final class MatchingViewModel: ViewModelType {
         
         useCase.checkMatchingSuccess
             .asSignal()
-            .emit { /*[weak self] in*/
-                print($0)
+            .emit { [weak self] in
+                if $0.matched {
+                    self?.coordinator?.show(view: .chatView, by: .push)
+                }
             }.disposed(by: disposeBag)
         
         useCase.checkMatchingFail

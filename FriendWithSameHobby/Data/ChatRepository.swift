@@ -11,27 +11,29 @@ import RxRelay
 import Moya
 
 final class ChatRepository: ChatRepositoryInterface {
-    typealias ChatSendResult = Result<ChatResponseModel, ChatSendError>
     
-    private var manager: SocketManager!
-    private lazy var socket: SocketIOClient = manager.defaultSocket
-    
-    let receivedMessage = PublishRelay<ChatResponseModel>()
-    
+    // 매칭중단해서 맵뷰로 넘어갈때 socket이 nil이 됨..
     deinit {
         socket.disconnect()
     }
     
+    typealias ChatSendResult = Result<ChatResponseModel, ChatSendError>
+    
+    private var manager: SocketManager!
+    private var socket: SocketIOClient!
+    
+    let receivedMessage = PublishRelay<ChatResponseModel>()
+    
     private let provider = MoyaProvider<ChatTarget>()
     
-    func sendMessage(model: ChatSendModel, completion: @escaping (ChatSendResult) -> Void) {
+    func sendMessage(model: ChatSendModel, completion: @escaping (ChatSendResult) -> Void) {        
         let parameters = ChatSendDTO(model: model).toParameters()
         provider.request(.send(uid: model.uid, parameters: parameters)) { result in
             switch result {
             case .success(let response):
                 guard let decoded = try? JSONDecoder().decode(ChatResponseDTO.self, from: response.data) else {
                     return
-                }
+                }                
                 completion(.success(decoded.toDomain()))
             case .failure(let error):
                 let statusCode = error.response?.statusCode ?? -1
@@ -43,13 +45,12 @@ final class ChatRepository: ChatRepositoryInterface {
 
 // MARK: - Socket Config
 extension ChatRepository {
-    func socketConfig(idToken: String) {
+    func socketConfig(idToken: String) {        
         let url = URL(string: URLComponents.baseURL)!
         manager = SocketManager(socketURL: url, config: [
-            //.log(true),
-            .compress,
-            .extraHeaders(["auth" : idToken])
-            ])
+            .compress])
+        
+        socket = manager.defaultSocket
         
         socket.on(clientEvent: .connect) { data, ack in
             print("Socket is connected", data, ack)
@@ -59,18 +60,11 @@ extension ChatRepository {
             print("Socket is disconnected", data, ack)
         }
         
-        socket.on("chat") { dataArr, ack in
-            print("received chat", dataArr, ack)
-//            let data = dataArr[0] as! NSDictionary
-//            let chat = data["text"] as! String
-//            let name = data["name"] as! String
-//            let createAt = data["createdAt"] as! String
-            
-            //print("chat check", chat, name, createAt)
-//            let receivedChat = ChatResponseModel(to: <#T##String#>, from: <#T##String#>, chat: <#T##String#>, createdAt: <#T##Date#>)
-//            receivedMessage.accept(receivedChat)
+        socket.on("chat") { data, ack in
+            print("chatchatchat")
         }
         
         socket.connect()
+        print("socket config")
     }
 }

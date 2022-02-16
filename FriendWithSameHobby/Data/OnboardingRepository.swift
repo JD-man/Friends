@@ -27,8 +27,7 @@ final class OnboardingRepository: OnboardingRepositoryInterface {
         OnboardingLabelText(fullText: "SeSAC Friends", rangeText: ""),
     ]
     
-    func getOnboardingImages(idx: Int) -> ImageAsset {
-        UserProgressManager.onboardingPassed = true
+    func getOnboardingImages(idx: Int) -> ImageAsset {        
         return assetsImage[idx]
     }
     

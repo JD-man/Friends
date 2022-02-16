@@ -24,9 +24,6 @@ final class AuthCoordinator: CoordinatorType {
     }
     
     func start() {
-        //pushOnboardingVC()
-        //pushPhoneAuthVC()
-        //pushNicknameVC()
         if UserProgressManager.onboardingPassed == nil {
             pushOnboardingVC()
         }

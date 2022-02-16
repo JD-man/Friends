@@ -36,4 +36,9 @@ protocol QueueRepositoryInterface {
         model: MatchingBodyModel,
         completion: @escaping (Result<MatchingStateModel, CheckMatchingError>) -> Void
     )
+    
+    func dodgeMatching(
+        model: DodgeMatchingModel,
+        completion: @escaping (Result<Bool, DodgeError>) -> Void
+    )
 }

@@ -46,6 +46,9 @@ final class ChatUseCase: UseCaseType {
                         self?.executeSocketConnect()
                     }
                 default:
+                    UserChatManager.otherUID = nil
+                    UserChatManager.otherNickname = nil
+                    UserMatchingStatus.matchingStatus = MatchingStatus.normal.rawValue
                     self?.checkMatchingFail.accept(error)
                 }
             }
@@ -53,7 +56,7 @@ final class ChatUseCase: UseCaseType {
     }
     
     func executeSendMessage(chat: String) {
-        let uid = UserChatManager.otherUID ?? ""
+        let uid = UserChatManager.otherUID ?? ""        
         let model = ChatSendModel(uid: uid, chat: chat)
         chatRepo.sendMessage(model: model) { [weak self] result in
             switch result {

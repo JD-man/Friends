@@ -109,6 +109,7 @@ class ChatViewController: UIViewController {
         // navigation config
         navigationItem.leftBarButtonItem = backButton
         navigationItem.rightBarButtonItem = moreButton
+        navigationController?.navigationBar.isHidden = false
     }
     
     private func binding() {
@@ -154,7 +155,7 @@ class ChatViewController: UIViewController {
     }
     
     private func updateMessageTextViewHeight(isLimited: Bool) {
-        let height = messageTextView.text.count == 0 ? 0 : messageTextView.contentSize.height + 28
+        let height = messageTextView.text.components(separatedBy: "\n").count == 1 ? 0 : messageTextView.contentSize.height + 28        
         if isLimited {
             messageContainer.snp.updateConstraints { make in
                 make.height.greaterThanOrEqualTo(100)

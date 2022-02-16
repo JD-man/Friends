@@ -15,6 +15,7 @@ final class QueueRepository: QueueRepositoryInterface {
     typealias RequestMatchingResult = Result<Bool, RequestMatchingError>
     typealias AccetpMatchingResult = Result<Bool, AcceptMatchingError>
     typealias CheckMatchingResult = Result<MatchingStateModel, CheckMatchingError>
+    typealias DodgeResult = Result<Bool, DodgeError>
     
     let provider = MoyaProvider<QueueTarget>()
     
@@ -89,7 +90,6 @@ final class QueueRepository: QueueRepositoryInterface {
     }
     
     func checkMatchingStatus(model: MatchingBodyModel, completion: @escaping (CheckMatchingResult) -> Void) {
-        print("check matching API CAll")
         provider.request(.checkMatching) { result in
             switch result {
             case .success(let response):
@@ -100,8 +100,20 @@ final class QueueRepository: QueueRepositoryInterface {
                 completion(.success(decoded.toDomain()))
             case .failure(let error):
                 let statusCode = error.response?.statusCode ?? -1
-                print(error)
                 completion(.failure(CheckMatchingError(rawValue: statusCode) ?? .unknownError))
+            }
+        }
+    }
+    
+    func dodgeMatching(model: DodgeMatchingModel, completion: @escaping (DodgeResult) -> Void) {
+        let parameters = DodgeMatchingDTO(model: model).toParameters()
+        provider.request(.dodge(parameters: parameters)) { result in
+            switch result {
+            case .success(_):
+                completion(.success(true))
+            case .failure(let error):
+                let statusCode = error.response?.statusCode ?? -1
+                completion(.failure(DodgeError(rawValue: statusCode) ?? .unknownError))
             }
         }
     }

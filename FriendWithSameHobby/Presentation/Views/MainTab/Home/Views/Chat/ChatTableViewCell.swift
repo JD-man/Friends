@@ -50,19 +50,6 @@ class ChatTableViewCell: UITableViewCell {
     }
     
     private func meTypeConfig() {
-        messageLabel.textAlignment = .left
-        messageLabel.snp.makeConstraints { make in
-            make.leading.top.bottom.equalTo(contentView).inset(16)
-            make.width.lessThanOrEqualTo(contentView.snp.width).multipliedBy(264.0 / 375.0)
-        }
-        timeLabel.snp.makeConstraints { make in
-            make.bottom.equalTo(messageLabel)
-            make.leading.equalTo(messageLabel.snp.trailing).offset(8)
-        }
-        messageLabel.addCorner(rad: 8, borderColor: AssetsColors.gray4.color)
-    }
-    
-    private func youTypeConfig() {
         messageLabel.textAlignment = .right
         messageLabel.backgroundColor = AssetsColors.whiteGreen.color
         messageLabel.snp.makeConstraints { make in
@@ -74,5 +61,18 @@ class ChatTableViewCell: UITableViewCell {
             make.trailing.equalTo(messageLabel.snp.leading).offset(-8)
         }
         messageLabel.addCorner(rad: 8, borderColor: nil)
+    }
+    
+    private func youTypeConfig() {
+        messageLabel.textAlignment = .left
+        messageLabel.snp.makeConstraints { make in
+            make.leading.top.bottom.equalTo(contentView).inset(16)
+            make.width.lessThanOrEqualTo(contentView.snp.width).multipliedBy(264.0 / 375.0)
+        }
+        timeLabel.snp.makeConstraints { make in
+            make.bottom.equalTo(messageLabel)
+            make.leading.equalTo(messageLabel.snp.trailing).offset(8)
+        }
+        messageLabel.addCorner(rad: 8, borderColor: AssetsColors.gray4.color)
     }
 }
