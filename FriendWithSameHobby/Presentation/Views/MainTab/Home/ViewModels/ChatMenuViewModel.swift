@@ -46,6 +46,12 @@ final class ChatMenuViewModel: ViewModelType {
                 self?.coordinator?.show(view: .mapView, by: .backToFirst)
             }.disposed(by: disposeBag)
         
+        useCase.dodgeFail
+            .asSignal()
+            .emit { [weak self] in
+                self?.coordinator?.toasting(message: $0.description)
+            }.disposed(by: disposeBag)
+        
         return output
     }
 }

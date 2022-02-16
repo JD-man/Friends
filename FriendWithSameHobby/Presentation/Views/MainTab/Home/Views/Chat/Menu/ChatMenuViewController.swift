@@ -78,7 +78,7 @@ class ChatMenuViewController: UIViewController {
             dodgeButtonTap: dodgeButton.rx.tap.asDriver()
         )
         
-        let output = viewModel
+        let output = viewModel.transform(input, disposeBag: disposeBag)
         
         reportButton.rx.tap
             .asDriver()

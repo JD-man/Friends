@@ -135,7 +135,6 @@ class ChatViewController: UIViewController {
             .asDriver(onErrorJustReturn: false)
             .drive { [weak self] in
                 self?.updateMessageTextViewHeight(isLimited: $0)
-                self?.messageTextView.isScrollEnabled = $0
             }.disposed(by: disposeBag)
         
         RxKeyboard.instance.willShowVisibleHeight
@@ -150,8 +149,7 @@ class ChatViewController: UIViewController {
             .subscribe(onNext: { [weak self] _ in
                 self?.view.endEditing(true)
                 self?.keyboardHandling(of: .hide)
-            }).disposed(by: disposeBag)
-                        
+            }).disposed(by: disposeBag)                        
     }
     
     private func updateMessageTextViewHeight(isLimited: Bool) {
@@ -165,6 +163,7 @@ class ChatViewController: UIViewController {
                 make.height.greaterThanOrEqualTo(height)
             }
         }
+        messageTextView.isScrollEnabled = isLimited
     }
     
     private func keyboardHandling(of status: KeyboardStatus) {

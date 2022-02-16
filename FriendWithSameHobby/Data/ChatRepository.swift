@@ -52,20 +52,36 @@ extension ChatRepository {
         
         socket = manager.defaultSocket
         
-        socket.on(clientEvent: .connect) { data, ack in
+        socket.on(clientEvent: .connect) { [weak self] data, ack in
             print("Socket is connected", data, ack)
             let uid = UserInfoManager.uid ?? ""
-            self.socket.emit("changesocketid", uid)
+            self?.socket.emit("changesocketid", uid)
         }
         
         socket.on(clientEvent: .disconnect) { data, ack in
             print("Socket is disconnected", data, ack)
         }
         
-        socket.on("chat") { data, ack in
-            print("=========================data", data)
-            print("=========================ack", ack)
-            print("=========================chatchatchat")
+        socket.on("chat") { [weak self] data, ack in
+            guard let data = data[0] as? NSDictionary,
+                  let v = data["__v"] as? Int,
+                  let id = data["__id"] as? String,
+                  let chat = data["chat"] as? String,
+                  let to = data["to"] as? String,
+                  let from = data["from"] as? String,
+                  let createdAt = data["createdAt"] as? String else {
+                      print("chat decode fail")
+                      return
+                  }
+            
+            let dto = ChatResponseDTO(id: id,
+                                      v: v,
+                                      to: to,
+                                      from: from,
+                                      chat: chat,
+                                      createdAt: createdAt)
+            
+            self?.receivedMessage.accept(dto.toDomain())
         }
         
         socket.connect()

@@ -49,9 +49,8 @@ final class MapMatchingButton: UIButton {
         setImage(status.matchingImage, for: .normal)
     }
     
-    func setMatchingStatus() {
+    func setMatchingStatus() {        
         let rawValue = UserMatchingStatus.matchingStatus ?? ""
-        //matchingStatus = MatchingStatus(rawValue: rawValue) ?? .normal
-        matchingStatus = MatchingStatus.matched
+        matchingStatus = MatchingStatus(rawValue: rawValue) ?? .normal
     }
 }
