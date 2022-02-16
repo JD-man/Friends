@@ -170,6 +170,8 @@
 		89FDC55827AFFE4F0088B32A /* QueueRepositoryInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89FDC55727AFFE4F0088B32A /* QueueRepositoryInterface.swift */; };
 		89FDC55A27B000650088B32A /* QueueError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89FDC55927B000650088B32A /* QueueError.swift */; };
 		89FDC55C27B029470088B32A /* Double+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89FDC55B27B029470088B32A /* Double+Ext.swift */; };
+		89FE9AEF27BCCDF100887232 /* ChatMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89FE9AEE27BCCDF100887232 /* ChatMenuViewController.swift */; };
+		89FE9AF127BCD09100887232 /* MenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89FE9AF027BCD09100887232 /* MenuButton.swift */; };
 		DE213FD3A06E7EB05CAFFD91 /* Pods_FriendWithSameHobbyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05D1B1D80A9530A1867C233B /* Pods_FriendWithSameHobbyTests.framework */; };
 		F6CE67BF23AC4958BA06EC39 /* Pods_FriendWithSameHobby.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 712EAAB0941D444D06A42692 /* Pods_FriendWithSameHobby.framework */; };
 /* End PBXBuildFile section */
@@ -349,6 +351,8 @@
 		89FDC55727AFFE4F0088B32A /* QueueRepositoryInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueRepositoryInterface.swift; sourceTree = "<group>"; };
 		89FDC55927B000650088B32A /* QueueError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueError.swift; sourceTree = "<group>"; };
 		89FDC55B27B029470088B32A /* Double+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Ext.swift"; sourceTree = "<group>"; };
+		89FE9AEE27BCCDF100887232 /* ChatMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMenuViewController.swift; sourceTree = "<group>"; };
+		89FE9AF027BCD09100887232 /* MenuButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuButton.swift; sourceTree = "<group>"; };
 		B5425E293586A55EB6246AE5 /* Pods-FriendWithSameHobby-FriendWithSameHobbyUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FriendWithSameHobby-FriendWithSameHobbyUITests.release.xcconfig"; path = "Target Support Files/Pods-FriendWithSameHobby-FriendWithSameHobbyUITests/Pods-FriendWithSameHobby-FriendWithSameHobbyUITests.release.xcconfig"; sourceTree = "<group>"; };
 		C37181128589BCA4DEC4E89E /* Pods-FriendWithSameHobby-FriendWithSameHobbyUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FriendWithSameHobby-FriendWithSameHobbyUITests.debug.xcconfig"; path = "Target Support Files/Pods-FriendWithSameHobby-FriendWithSameHobbyUITests/Pods-FriendWithSameHobby-FriendWithSameHobbyUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		C6795BB25530FBCCE40C531A /* Pods-FriendWithSameHobbyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FriendWithSameHobbyTests.debug.xcconfig"; path = "Target Support Files/Pods-FriendWithSameHobbyTests/Pods-FriendWithSameHobbyTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -583,6 +587,7 @@
 		8920161127BB72430090F9D9 /* Chat */ = {
 			isa = PBXGroup;
 			children = (
+				89FE9AED27BCCDD100887232 /* Menu */,
 				8914A14527B8B5A00048FA87 /* ChatViewController.swift */,
 				89EC76CA27ACCFB600CDA0A4 /* MapGenderView.swift */,
 				89EC76CE27ACF29700CDA0A4 /* MapMatchingButton.swift */,
@@ -1245,6 +1250,15 @@
 			path = Queue;
 			sourceTree = "<group>";
 		};
+		89FE9AED27BCCDD100887232 /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				89FE9AEE27BCCDF100887232 /* ChatMenuViewController.swift */,
+				89FE9AF027BCD09100887232 /* MenuButton.swift */,
+			);
+			path = Menu;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1588,6 +1602,7 @@
 				89A81985279A831A00F257CA /* OnboardingRepositoryInterface.swift in Sources */,
 				895E1D8527A5B0A70054742F /* AccountTableViewCell.swift in Sources */,
 				89EC76CF27ACF29700CDA0A4 /* MapMatchingButton.swift in Sources */,
+				89FE9AF127BCD09100887232 /* MenuButton.swift in Sources */,
 				89C147E427A00F1300F0E616 /* MapViewController.swift in Sources */,
 				89C0F3F427A28C3C0038DACA /* UserInfoModel.swift in Sources */,
 				898B794A279945BC00844284 /* OnboardingViewModel.swift in Sources */,
@@ -1649,6 +1664,7 @@
 				89A81990279AF9E500F257CA /* PhoneAuthUseCase.swift in Sources */,
 				895E1D7F27A51EB50054742F /* EmptyUseCase.swift in Sources */,
 				896795D027B42EFB00BF942B /* MatchingViewModel.swift in Sources */,
+				89FE9AEF27BCCDF100887232 /* ChatMenuViewController.swift in Sources */,
 				89235B3527A67A260069EFB5 /* SeSACTitleView.swift in Sources */,
 				89C147D327A00E6400F0E616 /* FriendsCoordinator.swift in Sources */,
 				895E1D8727A5B5420054742F /* Cell+Ext.swift in Sources */,

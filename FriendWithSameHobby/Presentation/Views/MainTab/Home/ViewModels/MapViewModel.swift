@@ -68,12 +68,8 @@ final class MapViewModel: ViewModelType {
             }
             .bind(to: output.userCoord)
             .disposed(by: disposeBag)
-        
-
         // UseCase to Coordinator
         
         return output
     }
-    
-
 }

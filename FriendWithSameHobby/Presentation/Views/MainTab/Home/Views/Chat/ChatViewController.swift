@@ -51,6 +51,15 @@ class ChatViewController: UIViewController {
         $0.setImage(AssetsImages.sendImpossible.image, for: .normal)
     }
     
+    private let backButton = UIBarButtonItem().then {
+        $0.style = .plain
+        $0.image = AssetsImages.arrow.image
+    }
+    private let moreButton = UIBarButtonItem().then {
+        $0.style = .plain
+        $0.image = AssetsImages.more.image
+    }
+    
 //    let testRelay = BehaviorRelay<[ChatItemViewModel]>(value: [
 //        ChatItemViewModel(userType: .me, message: "나", time: "11:11"),
 //        ChatItemViewModel(userType: .you, message: "너", time: "22:22"),
@@ -96,10 +105,16 @@ class ChatViewController: UIViewController {
         }
         
         chatTableView.rx.setDelegate(self).disposed(by: disposeBag)
+        
+        // navigation config
+        navigationItem.leftBarButtonItem = backButton
+        navigationItem.rightBarButtonItem = moreButton
     }
     
     private func binding() {
         let input = ChatViewModel.Input(
+            backButtonTap: backButton.rx.tap.asDriver(),
+            moreButtonTap: moreButton.rx.tap.asDriver(),
             viewWillAppear: self.rx.viewWillAppear.asDriver(),
             sendButtonTap: sendButton.rx.tap.withLatestFrom(messageTextView.rx.text.orEmpty).asDriver(onErrorJustReturn: ""),
             messageText: messageTextView.rx.text.orEmpty

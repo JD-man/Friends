@@ -10,7 +10,6 @@ import SocketIO
 import RxRelay
 import Moya
 
-
 final class ChatRepository: ChatRepositoryInterface {
     typealias ChatSendResult = Result<ChatResponseModel, ChatSendError>
     
@@ -68,8 +67,6 @@ extension ChatRepository {
 //            let createAt = data["createdAt"] as! String
             
             //print("chat check", chat, name, createAt)
-            
-            
 //            let receivedChat = ChatResponseModel(to: <#T##String#>, from: <#T##String#>, chat: <#T##String#>, createdAt: <#T##Date#>)
 //            receivedMessage.accept(receivedChat)
         }

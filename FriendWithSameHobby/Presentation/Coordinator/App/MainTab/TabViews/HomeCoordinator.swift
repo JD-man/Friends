@@ -88,6 +88,13 @@ final class HomeCoordinator: CoordinatorType {
         return chatVC
     }
     
+    func present(viewContoller: UIViewController) {
+        guard let topView = navigationController.topViewController else { return }
+        topView.addChild(viewContoller)
+        topView.view.addSubview(viewContoller.view)
+        viewContoller.didMove(toParent: topView)
+    }
+    
     func toasting(message: String) {
         navigationController.view.makeToast(message, position: .top)
     }

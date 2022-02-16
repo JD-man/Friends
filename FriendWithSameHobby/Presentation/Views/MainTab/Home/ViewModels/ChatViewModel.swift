@@ -12,6 +12,8 @@ import RxRelay
 
 final class ChatViewModel: ViewModelType {
     struct Input {
+        let backButtonTap: Driver<Void>
+        let moreButtonTap: Driver<Void>
         let viewWillAppear: Driver<Void>
         let sendButtonTap: Driver<String>
         let messageText: ControlProperty<String>
@@ -52,6 +54,19 @@ final class ChatViewModel: ViewModelType {
             .map { $0.components(separatedBy: "\n").count > 3 }
             .bind(to: output.messageTextViewScrollEnabled)
             .disposed(by: disposeBag)
+        
+        // Input to Coordinator
+        input.backButtonTap
+            .asDriver()
+            .drive { [weak self] _ in
+                self?.coordinator?.show(view: .mapView, by: .backToFirst)
+            }.disposed(by: disposeBag)
+        
+        input.moreButtonTap
+            .asDriver()
+            .drive { [weak self] _ in
+                self?.coordinator?.present(viewContoller: ChatMenuViewController())
+            }.disposed(by: disposeBag)
         
         // usecase to output        
         useCase.sendMessageSuccess

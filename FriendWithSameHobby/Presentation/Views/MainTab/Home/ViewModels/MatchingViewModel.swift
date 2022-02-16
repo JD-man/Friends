@@ -43,7 +43,6 @@ final class MatchingViewModel: ViewModelType {
     private var timer: Disposable?
     fileprivate var disposeBag = DisposeBag()
     
-    
     init(
         useCase: MatchingUseCase,
         coordinator: HomeCoordinator,
