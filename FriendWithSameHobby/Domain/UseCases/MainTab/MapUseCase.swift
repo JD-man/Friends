@@ -51,6 +51,8 @@ class MapUseCase: UseCaseType {
         queueRepo?.checkMatchingStatus(model: model, completion: { [weak self] result in
             switch result {
             case .success(let model):
+                UserChatManager.otherUID = model.matchedUid
+                UserChatManager.otherNickname = model.matchedNick                
                 self?.checkMatchingSuccess.accept(model)
             case .failure(let error):
                 switch error {

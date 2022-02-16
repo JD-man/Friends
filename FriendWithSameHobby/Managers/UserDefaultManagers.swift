@@ -25,6 +25,10 @@ enum UserDefaultsKeyType: String {
     
     // Matching Status
     case matchingStatus
+    
+    // User Chat Info
+    case otherUID
+    case otherNickname
 }
 
 @propertyWrapper
@@ -60,4 +64,9 @@ struct UserProgressManager {
 
 struct UserMatchingStatus {
     @UserDefaultsValue(.matchingStatus) static var matchingStatus: String?
+}
+
+struct UserChatManager {
+    @UserDefaultsValue(.otherUID) static var otherUID: String?
+    @UserDefaultsValue(.otherNickname) static var otherNickname: String?
 }

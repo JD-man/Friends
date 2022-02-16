@@ -105,6 +105,7 @@ class MatchingViewController: UIViewController {
     private func binding() {
         let input = MatchingViewModel.Input(
             viewWillAppear: self.rx.viewWillAppear.asDriver(onErrorJustReturn: ()),
+            viewWillDisappear: self.rx.viewWillDisappear.asDriver(onErrorJustReturn: ()),
             backButtonTap: backButton.rx.tap.asDriver(),
             stopMatchingButtonTap: stopMatchingButton.rx.tap.asDriver(),
             changeHobbyButtonTap: changeHobbyButton.rx.tap.asDriver(),

@@ -26,6 +26,8 @@ internal enum AssetsImages {
   internal static let matchAntenna = ImageAsset(name: "MatchAntenna")
   internal static let matchMessage = ImageAsset(name: "MatchMessage")
   internal static let matchSearch = ImageAsset(name: "MatchSearch")
+  internal static let sendImpossible = ImageAsset(name: "SendImpossible")
+  internal static let sendPossible = ImageAsset(name: "SendPossible")
   internal static let shopIcon = ImageAsset(name: "ShopIcon")
   internal static let socialLifeCuate = ImageAsset(name: "Social life-cuate")
   internal static let arrow = ImageAsset(name: "arrow")

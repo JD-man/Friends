@@ -7,7 +7,7 @@
 
 import UIKit
 
-enum KeyboardStatus {
+enum KeyboardStatus: Equatable {
     case show(height: CGFloat, safeAreaBottom: CGFloat)
     case hide
     

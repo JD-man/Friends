@@ -41,4 +41,17 @@ extension Date {
         
         return formatter.string(from: self)
     }
+    
+    var chatDate: String {
+        let formatter = DateFormatter.DateFormatterKR
+        let today = Calendar.current.dateComponents([.year, .month, .day, .weekOfMonth], from: Date())
+        let dataDay = Calendar.current.dateComponents([.year, .month, .day, .weekOfMonth], from: self)
+        formatter.dateFormat = "MM/dd a HH:mm"
+        if today.year == dataDay.year, today.month == dataDay.month {
+            if today.day == dataDay.day {
+                formatter.dateFormat = "a HH:mm"
+            }
+        }
+        return formatter.string(from: self)
+    }
 }
