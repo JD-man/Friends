@@ -45,6 +45,10 @@ extension ChatTarget: TargetType {
         }
     }
     
+    var validationType: ValidationType {
+        return .customCodes([200])
+    }
+    
     var headers: [String: String]? {
         switch self {
         case .connect:

@@ -19,6 +19,8 @@ final class ChatUseCase: UseCaseType {
     
     let checkMatchingFail = PublishRelay<CheckMatchingError>()
     
+    let receiveMessageSuccess = PublishRelay<ChatResponseModel>()
+    
     init(
         firebaseRepo: FirebaseAuthRepositoryInterface,
         queueRepo: QueueRepositoryInterface,
@@ -36,9 +38,12 @@ final class ChatUseCase: UseCaseType {
             case .success(let model):
                 UserChatManager.otherUID = model.matchedUid
                 UserChatManager.otherNickname = model.matchedNick
+                print(model)
                 // socket connect
                 let idtoken = UserInfoManager.idToken ?? ""
-                self?.chatRepo.socketConfig(idToken: idtoken)
+                self?.chatRepo.socketConfig(idToken: idtoken, callback: {
+                    self?.receiveMessageSuccess.accept($0)
+                })
             case .failure(let error):
                 switch error {
                 case .tokenError:
@@ -56,7 +61,8 @@ final class ChatUseCase: UseCaseType {
     }
     
     func executeSendMessage(chat: String) {
-        let uid = UserChatManager.otherUID ?? ""        
+        let uid = UserChatManager.otherUID ?? ""
+        print(uid)
         let model = ChatSendModel(uid: uid, chat: chat)
         chatRepo.sendMessage(model: model) { [weak self] result in
             switch result {

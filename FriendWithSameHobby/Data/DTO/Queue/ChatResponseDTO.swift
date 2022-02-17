@@ -26,6 +26,6 @@ extension ChatResponseDTO {
                                  to: to,
                                  from: from,
                                  chat: chat,
-                                 createdAt: createdAt.toDate)
+                                 createdAt: createdAt.toDate.chatDate)
     }
 }

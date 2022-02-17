@@ -91,7 +91,7 @@
 		899B713327B2F732001E5C02 /* HobbyCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899B713227B2F732001E5C02 /* HobbyCollectionReusableView.swift */; };
 		89A579E227BBD5EF008CAAA3 /* ChatTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A579E127BBD5EF008CAAA3 /* ChatTableHeaderView.swift */; };
 		89A579E427BC0ED7008CAAA3 /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A579E327BC0ED7008CAAA3 /* ChatViewModel.swift */; };
-		89A579E627BC0F17008CAAA3 /* ChatUserCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A579E527BC0F17008CAAA3 /* ChatUserCase.swift */; };
+		89A579E627BC0F17008CAAA3 /* ChatUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A579E527BC0F17008CAAA3 /* ChatUseCase.swift */; };
 		89A579E827BC110F008CAAA3 /* ChatRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A579E727BC110F008CAAA3 /* ChatRepository.swift */; };
 		89A579EA27BC113B008CAAA3 /* ChatRepositoryInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A579E927BC113B008CAAA3 /* ChatRepositoryInterface.swift */; };
 		89A579EC27BC11B0008CAAA3 /* ChatTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A579EB27BC11B0008CAAA3 /* ChatTarget.swift */; };
@@ -279,7 +279,7 @@
 		899B713227B2F732001E5C02 /* HobbyCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HobbyCollectionReusableView.swift; sourceTree = "<group>"; };
 		89A579E127BBD5EF008CAAA3 /* ChatTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableHeaderView.swift; sourceTree = "<group>"; };
 		89A579E327BC0ED7008CAAA3 /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
-		89A579E527BC0F17008CAAA3 /* ChatUserCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatUserCase.swift; sourceTree = "<group>"; };
+		89A579E527BC0F17008CAAA3 /* ChatUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatUseCase.swift; sourceTree = "<group>"; };
 		89A579E727BC110F008CAAA3 /* ChatRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRepository.swift; sourceTree = "<group>"; };
 		89A579E927BC113B008CAAA3 /* ChatRepositoryInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRepositoryInterface.swift; sourceTree = "<group>"; };
 		89A579EB27BC11B0008CAAA3 /* ChatTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTarget.swift; sourceTree = "<group>"; };
@@ -558,6 +558,7 @@
 		8920160D27BB722A0090F9D9 /* Map */ = {
 			isa = PBXGroup;
 			children = (
+				89EC76CE27ACF29700CDA0A4 /* MapMatchingButton.swift */,
 				89C147E327A00F1300F0E616 /* MapViewController.swift */,
 			);
 			path = Map;
@@ -598,7 +599,6 @@
 				89FE9AED27BCCDD100887232 /* Menu */,
 				8914A14527B8B5A00048FA87 /* ChatViewController.swift */,
 				89EC76CA27ACCFB600CDA0A4 /* MapGenderView.swift */,
-				89EC76CE27ACF29700CDA0A4 /* MapMatchingButton.swift */,
 				8920161227BB989A0090F9D9 /* ChatTableViewCell.swift */,
 				89A579E127BBD5EF008CAAA3 /* ChatTableHeaderView.swift */,
 			);
@@ -635,7 +635,7 @@
 				89EC76D227AD09F100CDA0A4 /* MapUseCase.swift */,
 				890A905F27B0FDE5002A4DF6 /* HobbyUseCase.swift */,
 				896795D127B42F6F00BF942B /* MatchingUseCase.swift */,
-				89A579E527BC0F17008CAAA3 /* ChatUserCase.swift */,
+				89A579E527BC0F17008CAAA3 /* ChatUseCase.swift */,
 				89FE9AF727BD32D700887232 /* ChatMenuUseCase.swift */,
 			);
 			path = MainTab;
@@ -1626,7 +1626,7 @@
 				898B79572799505000844284 /* AppCoordinator.swift in Sources */,
 				89FDC55627AFF0EA0088B32A /* OnqueueResponseModel.swift in Sources */,
 				89FDC55827AFFE4F0088B32A /* QueueRepositoryInterface.swift in Sources */,
-				89A579E627BC0F17008CAAA3 /* ChatUserCase.swift in Sources */,
+				89A579E627BC0F17008CAAA3 /* ChatUseCase.swift in Sources */,
 				89D721C6279C14CC00B02A1E /* FirebaseAuthRepository.swift in Sources */,
 				890A906327B19164002A4DF6 /* KeyboardStatus.swift in Sources */,
 				89ECC578279F2AEB00C4C477 /* RegisterViewModel.swift in Sources */,

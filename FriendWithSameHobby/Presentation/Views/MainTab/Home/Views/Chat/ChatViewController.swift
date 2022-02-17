@@ -30,6 +30,7 @@ class ChatViewController: UIViewController {
     private let chatTableView = UITableView(frame: .zero, style: .grouped).then {
         $0.separatorStyle = .none
         $0.backgroundColor = .systemBackground
+        $0.rowHeight = UITableView.automaticDimension
         $0.register(ChatTableViewCell.self, forCellReuseIdentifier: ChatTableViewCell.identifier)
         $0.register(ChatTableHeaderView.self, forHeaderFooterViewReuseIdentifier: ChatTableHeaderView.identifier)
     }
@@ -59,17 +60,6 @@ class ChatViewController: UIViewController {
         $0.style = .plain
         $0.image = AssetsImages.more.image
     }
-    
-//    let testRelay = BehaviorRelay<[ChatItemViewModel]>(value: [
-//        ChatItemViewModel(userType: .me, message: "나", time: "11:11"),
-//        ChatItemViewModel(userType: .you, message: "너", time: "22:22"),
-//        ChatItemViewModel(userType: .you, message: "너", time: "33:33"),
-//        ChatItemViewModel(userType: .you, message: "너", time: "44:44"),
-//        ChatItemViewModel(userType: .me, message: "나", time: "55:55"),
-//        ChatItemViewModel(userType: .you, message: "너", time: "66:66"),
-//        ChatItemViewModel(userType: .me, message: "나", time: "77:77"),
-//        ChatItemViewModel(userType: .you, message: "너", time: "88:88")
-//    ])
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -131,6 +121,12 @@ class ChatViewController: UIViewController {
                     cell.configure(with: item)
                 }.disposed(by: disposeBag)
         
+        output.chatMessages
+            .map { _ in "" }
+            .asDriver(onErrorJustReturn: "")
+            .drive(messageTextView.rx.text)
+            .disposed(by: disposeBag)
+        
         output.messageTextViewScrollEnabled
             .asDriver(onErrorJustReturn: false)
             .drive { [weak self] in
@@ -149,7 +145,16 @@ class ChatViewController: UIViewController {
             .subscribe(onNext: { [weak self] _ in
                 self?.view.endEditing(true)
                 self?.keyboardHandling(of: .hide)
-            }).disposed(by: disposeBag)                        
+            }).disposed(by: disposeBag)
+        
+        // 이거 좀 수정하자..
+        messageTextView.rx.text
+            .orEmpty
+            .asDriver()
+            .drive { [weak self] in
+                let buttonAssets = $0.count > 0 ? AssetsImages.sendPossible : AssetsImages.sendImpossible
+                self?.sendButton.setImage(buttonAssets.image, for: .normal)
+            }.disposed(by: disposeBag)
     }
     
     private func updateMessageTextViewHeight(isLimited: Bool) {

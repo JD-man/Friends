@@ -11,5 +11,5 @@ struct ChatResponseModel {
     let id: String
     let v: Int
     let to, from, chat: String
-    let createdAt: Date
+    let createdAt: String
 }

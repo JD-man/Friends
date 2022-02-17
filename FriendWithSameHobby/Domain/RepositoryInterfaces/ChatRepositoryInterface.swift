@@ -13,5 +13,5 @@ protocol ChatRepositoryInterface {
         completion: @escaping (Result<ChatResponseModel, ChatSendError>) -> Void
     )
     
-    func socketConfig(idToken: String)
+    func socketConfig(idToken: String, callback: @escaping (ChatResponseModel) -> Void)
 }

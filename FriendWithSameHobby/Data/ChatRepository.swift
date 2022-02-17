@@ -22,16 +22,15 @@ final class ChatRepository: ChatRepositoryInterface {
     private var manager: SocketManager!
     private var socket: SocketIOClient!
     
-    let receivedMessage = PublishRelay<ChatResponseModel>()
-    
     private let provider = MoyaProvider<ChatTarget>()
     
     func sendMessage(model: ChatSendModel, completion: @escaping (ChatSendResult) -> Void) {        
         let parameters = ChatSendDTO(model: model).toParameters()
         provider.request(.send(uid: model.uid, parameters: parameters)) { result in
             switch result {
-            case .success(let response):
+            case .success(let response):                
                 guard let decoded = try? JSONDecoder().decode(ChatResponseDTO.self, from: response.data) else {
+                    print("decode fail")
                     return
                 }                
                 completion(.success(decoded.toDomain()))
@@ -45,7 +44,7 @@ final class ChatRepository: ChatRepositoryInterface {
 
 // MARK: - Socket Config
 extension ChatRepository {
-    func socketConfig(idToken: String) {        
+    func socketConfig(idToken: String, callback: @escaping (ChatResponseModel) -> Void) {
         let url = URL(string: URLComponents.baseURL)!
         manager = SocketManager(socketURL: url, config: [
             .compress])
@@ -62,26 +61,13 @@ extension ChatRepository {
             print("Socket is disconnected", data, ack)
         }
         
-        socket.on("chat") { [weak self] data, ack in
-            guard let data = data[0] as? NSDictionary,
-                  let v = data["__v"] as? Int,
-                  let id = data["__id"] as? String,
-                  let chat = data["chat"] as? String,
-                  let to = data["to"] as? String,
-                  let from = data["from"] as? String,
-                  let createdAt = data["createdAt"] as? String else {
-                      print("chat decode fail")
-                      return
-                  }
-            
-            let dto = ChatResponseDTO(id: id,
-                                      v: v,
-                                      to: to,
-                                      from: from,
-                                      chat: chat,
-                                      createdAt: createdAt)
-            
-            self?.receivedMessage.accept(dto.toDomain())
+        socket.on("chat") { data, ack in
+            guard let json = try? JSONSerialization.data(withJSONObject: data[0]),
+                  let decoded = try? JSONDecoder().decode(ChatResponseDTO.self, from: json) else {
+                print("decode fail")
+                return
+            }
+            callback(decoded.toDomain())
         }
         
         socket.connect()

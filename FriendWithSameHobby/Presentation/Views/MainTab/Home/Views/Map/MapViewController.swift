@@ -63,7 +63,8 @@ final class MapViewController: UIViewController {
     }
     
     override func viewDidLoad() {
-        super.viewDidLoad()        
+        super.viewDidLoad()
+        print(UserInfoManager.idToken)
         viewConfig()
         locationManagerConfig()
         binding()        

@@ -69,5 +69,7 @@ class ChatTableHeaderView: UITableViewHeaderFooterView {
             make.top.equalTo(titleLabel.snp.bottom).offset(2)
             make.bottom.equalToSuperview().offset(-16)
         }
+        
+        titleLabel.text = "\(UserChatManager.otherNickname ?? "")님과 매칭되었습니다."
     }
 }
