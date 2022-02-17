@@ -7,15 +7,19 @@
 
 import UIKit
 import SnapKit
+import RxSwift
 
 final class SeSACTitleView: UIView {
+    
+    private var disposeBag = DisposeBag()
+    
     let titleLabel = UILabel().then {
         $0.text = "새싹 타이틀"
         $0.font = AssetsFonts.NotoSansKR.regular.font(size: 12)
     }
     
     private let mannerButton = BaseButton(title: "좋은 매너", status: .inactive, type: .h32)
-    private let punctualButton = BaseButton(title: "정화한 시간 약속", status: .inactive, type: .h32)
+    private let punctualButton = BaseButton(title: "정확한 시간 약속", status: .inactive, type: .h32)
     private let quickResponseButton = BaseButton(title: "빠른 응답", status: .inactive, type: .h32)
     private let kindButton = BaseButton(title: "친절한 성격", status: .inactive, type: .h32)
     private let proficientButton = BaseButton(title: "능숙한 취미 실력", status: .inactive, type: .h32)
@@ -27,10 +31,19 @@ final class SeSACTitleView: UIView {
     
     let verticalStackView = UIStackView()
     
+    var reputation: [BaseButtonStatus] {
+        get {
+            [mannerButton, punctualButton,
+             quickResponseButton, kindButton,
+             proficientButton, goodTimeButton].map { $0.status }
+        }
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configStackViews()
         viewConfig()
+        binding()
     }
     
     required init?(coder: NSCoder) {
@@ -81,6 +94,22 @@ final class SeSACTitleView: UIView {
                        kindButton, proficientButton, goodTimeButton]
         
         zip(buttons, data)
-            .forEach { $0.0.status = $0.1 }
+            .forEach {
+                $0.0.isUserInteractionEnabled = false
+                $0.0.status = $0.1
+            }
+    }
+    
+    private func binding() {
+        let buttons = [mannerButton, punctualButton, quickResponseButton,
+                       kindButton, proficientButton, goodTimeButton]
+        
+        buttons.forEach { button in
+            button.rx.tap
+                .asDriver()
+                .drive { [weak button] _ in
+                    button?.status = .fill
+                }.disposed(by: disposeBag)
+        }
     }
 }

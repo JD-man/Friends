@@ -16,6 +16,7 @@ enum QueueTarget {
     case acceptMatching(parameters: Parameters)
     case checkMatching
     case dodge(parameters: Parameters)
+    case comment(otheruid: String, parameters: Parameters)
 }
 
 extension QueueTarget: TargetType {
@@ -37,12 +38,14 @@ extension QueueTarget: TargetType {
             return "/queue/myQueueState"
         case .dodge:
             return "/queue/dodge"
+        case .comment(let otheruid, _):
+            return "/queue/rate/\(otheruid)"
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .searchFriends, .postQueue, .requestMatching, .acceptMatching, .dodge:
+        case .searchFriends, .postQueue, .requestMatching, .acceptMatching, .dodge, .comment:
             return .post
         case .checkMatching:
             return .get
@@ -59,7 +62,8 @@ extension QueueTarget: TargetType {
                 .dodge(let parameters):
             return .requestParameters(parameters: parameters,
                                       encoding: URLEncoding.default)
-        case .postQueue(let parameters):
+        case .postQueue(let parameters),
+                .comment(_, let parameters):
             return .requestParameters(parameters: parameters,
                                       encoding: URLEncoding(arrayEncoding: .noBrackets))
         case .cancelQueue, .checkMatching:

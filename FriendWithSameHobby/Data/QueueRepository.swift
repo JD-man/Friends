@@ -16,6 +16,7 @@ final class QueueRepository: QueueRepositoryInterface {
     typealias AccetpMatchingResult = Result<Bool, AcceptMatchingError>
     typealias CheckMatchingResult = Result<MatchingStateModel, CheckMatchingError>
     typealias DodgeResult = Result<Bool, DodgeError>
+    typealias CommentResult = Result<Bool, CommentError>
     
     let provider = MoyaProvider<QueueTarget>()
     
@@ -109,12 +110,24 @@ final class QueueRepository: QueueRepositoryInterface {
         let parameters = DodgeMatchingDTO(model: model).toParameters()        
         provider.request(.dodge(parameters: parameters)) { result in
             switch result {
-            case .success(let response):
-                print(response)
+            case .success(_):
                 completion(.success(true))
             case .failure(let error):
                 let statusCode = error.response?.statusCode ?? -1
                 completion(.failure(DodgeError(rawValue: statusCode) ?? .unknownError))
+            }
+        }
+    }
+    
+    func commentUser(model: CommentBodyModel, completion: @escaping (CommentResult) -> Void) {
+        let parameters = CommentBodyDTO(model: model).toParameters()
+        provider.request(.comment(otheruid: model.otheruid, parameters: parameters)) { result in
+            switch result {
+            case .success(_):
+                completion(.success(true))
+            case .failure(let error):
+                let statusCode = error.response?.statusCode ?? -1
+                completion(.failure(CommentError(rawValue: statusCode) ?? .unknownError))
             }
         }
     }

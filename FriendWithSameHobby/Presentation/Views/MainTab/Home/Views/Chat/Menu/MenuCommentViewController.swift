@@ -9,6 +9,9 @@ import UIKit
 import SnapKit
 import Then
 import RxSwift
+import RxCocoa
+import RxKeyboard
+import RxGesture
 
 final class MenuCommentViewController: UIViewController {
     
@@ -46,10 +49,13 @@ final class MenuCommentViewController: UIViewController {
     }
     private let commentTextView = UITextView().then {
         $0.addCorner(rad: 8, borderColor: nil)
-        $0.contentInset = UIEdgeInsets(top: 14, left: 12, bottom: 14, right: 12)
+        $0.textColor = AssetsColors.gray7.color
         $0.backgroundColor = AssetsColors.gray1.color
         $0.font = AssetsFonts.NotoSansKR.regular.font(size: 14)
+        $0.text = "자세한 피드백은 다른 새싹들에게 도움이 됩니다 (500자 이내 작성)"
+        $0.textContainerInset = UIEdgeInsets(top: 14, left: 12, bottom: 14, right: 12)
     }
+    
     private let registerButton = BaseButton(title: "리뷰 등록하기", status: .fill, type: .h48)
     
     init(viewModel: MenuCommentViewModel) {
@@ -75,7 +81,7 @@ final class MenuCommentViewController: UIViewController {
         container.snp.makeConstraints { make in
             make.center.equalToSuperview()
             make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(16.5)
-            make.height.equalTo(container.snp.width).multipliedBy(450.0 / 343.0)
+            make.height.equalTo(container.snp.width).multipliedBy(400.0 / 343.0)
         }
         
         titleLabel.snp.makeConstraints { make in
@@ -111,13 +117,55 @@ final class MenuCommentViewController: UIViewController {
     }
     
     private func binding() {
-        let input = MenuCommentViewModel.Input()
+        let input = MenuCommentViewModel.Input(
+            registerButtonTap: registerButton.rx.tap.map { [weak self] in
+                let reputation = self?.hobbyStackView.reputation ?? []
+                let comment = self?.commentTextView.text ?? ""
+                return (reputation, comment)
+            }.asDriver(onErrorJustReturn: ([], "")),
+            commentText: commentTextView.rx.text.orEmpty.map { [weak self] in
+                self?.commentTextView.textColor == AssetsColors.gray7.color ? "" : $0
+            }.asDriver(onErrorJustReturn: "")
+        )
+        
         let output = viewModel.transform(input, disposeBag: disposeBag)
+        
+        output.registerButtonStatus
+            .asDriver()
+            .drive(registerButton.rx.status)
+            .disposed(by: disposeBag)
         
         closeButton.rx.tap
             .asSignal()
             .emit { [weak self] _ in
                 self?.dismiss(animated: false, completion: nil)
             }.disposed(by: disposeBag)
+        
+        commentTextView.rx.didBeginEditing
+            .asDriver()
+            .drive { [weak self] _ in
+                self?.commentTextView.text = ""
+                self?.commentTextView.textColor = AssetsColors.black.color
+            }.disposed(by: disposeBag)
+        
+        RxKeyboard.instance.willShowVisibleHeight
+            .drive { [weak self] in
+                self?.view.frame.origin.y -= $0 * 0.5
+            }.disposed(by: disposeBag)
+        
+        view.rx.tapGesture()
+            .when(.ended)
+            .subscribe(onNext: { [weak self] _ in
+                self?.view.frame.origin.y = 0
+                self?.commentTextViewConfig()
+                self?.view.endEditing(true)
+            }).disposed(by: disposeBag)
+    }
+    
+    private func commentTextViewConfig() {
+        if commentTextView.text.count == 0 {
+            commentTextView.textColor = AssetsColors.gray7.color
+            commentTextView.text = "자세한 피드백은 다른 새싹들에게 도움이 됩니다 (500자 이내 작성)"
+        }
     }
 }

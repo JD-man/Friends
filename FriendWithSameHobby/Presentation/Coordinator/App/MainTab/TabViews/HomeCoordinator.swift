@@ -89,9 +89,7 @@ final class HomeCoordinator: CoordinatorType {
     }
     
     func presentChatMenuVC() {
-        guard let chatVC = navigationController.topViewController as? ChatViewController else {
-            return
-        }
+        guard let chatVC = navigationController.topViewController as? ChatViewController else { return }
         guard let menuVC = chatVC.children.first as? ChatMenuViewController else {
             let firebaseRepo = FirebaseAuthRepository(phoneID: nil)
             let userRepo = UserRepository()

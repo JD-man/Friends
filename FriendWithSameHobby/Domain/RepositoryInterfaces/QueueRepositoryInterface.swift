@@ -41,4 +41,9 @@ protocol QueueRepositoryInterface {
         model: DodgeMatchingModel,
         completion: @escaping (Result<Bool, DodgeError>) -> Void
     )
+    
+    func commentUser(
+        model: CommentBodyModel,
+        completion: @escaping (Result<Bool, CommentError>) -> Void
+    )
 }
