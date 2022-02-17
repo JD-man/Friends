@@ -89,17 +89,22 @@ final class HomeCoordinator: CoordinatorType {
     }
     
     func presentChatMenuVC() {
-        guard let chatVC = navigationController.topViewController as? ChatViewController,
-              chatVC.children.isEmpty else { return }
-        let firebaseRepo = FirebaseAuthRepository(phoneID: nil)
-        let userRepo = UserRepository()
-        let queueRepo = QueueRepository()
-        let useCase = ChatMenuUseCase(firebaseRepo: firebaseRepo, userRepo: userRepo, queueRepo: queueRepo)
-        let viewModel = ChatMenuViewModel(useCase: useCase, coordinator: self)
-        let chatMenuVC = ChatMenuViewController(viewModel: viewModel)        
-        chatVC.addChild(chatMenuVC)
-        chatVC.view.addSubview(chatMenuVC.view)
-        chatMenuVC.didMove(toParent: chatVC)
+        guard let chatVC = navigationController.topViewController as? ChatViewController else {
+            return
+        }
+        guard let menuVC = chatVC.children.first as? ChatMenuViewController else {
+            let firebaseRepo = FirebaseAuthRepository(phoneID: nil)
+            let userRepo = UserRepository()
+            let queueRepo = QueueRepository()
+            let useCase = ChatMenuUseCase(firebaseRepo: firebaseRepo, userRepo: userRepo, queueRepo: queueRepo)
+            let viewModel = ChatMenuViewModel(useCase: useCase, coordinator: self)
+            let chatMenuVC = ChatMenuViewController(viewModel: viewModel)
+            chatVC.addChild(chatMenuVC)
+            chatVC.view.addSubview(chatMenuVC.view)
+            chatMenuVC.didMove(toParent: chatVC)
+            return
+        }
+        menuVC.initialAnimation(type: .present)
     }
     
     func presentCommentVC() {

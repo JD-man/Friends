@@ -144,7 +144,7 @@ class ChatViewController: UIViewController {
             .subscribe(onNext: { [weak self] _ in
                 self?.view.endEditing(true)
                 self?.keyboardHandling(of: .hide)
-            }).disposed(by: disposeBag)        
+            }).disposed(by: disposeBag)
         
         messageTextView.rx.text
             .orEmpty

@@ -120,7 +120,7 @@ class ChatMenuViewController: UIViewController {
             }).disposed(by: disposeBag)
     }
     
-    private func initialAnimation(type: AnimationType) {
+    func initialAnimation(type: AnimationType) {
         buttonStackView.snp.updateConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(type.constant)
         }
