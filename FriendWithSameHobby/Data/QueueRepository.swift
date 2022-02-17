@@ -106,10 +106,11 @@ final class QueueRepository: QueueRepositoryInterface {
     }
     
     func dodgeMatching(model: DodgeMatchingModel, completion: @escaping (DodgeResult) -> Void) {
-        let parameters = DodgeMatchingDTO(model: model).toParameters()
+        let parameters = DodgeMatchingDTO(model: model).toParameters()        
         provider.request(.dodge(parameters: parameters)) { result in
             switch result {
-            case .success(_):
+            case .success(let response):
+                print(response)
                 completion(.success(true))
             case .failure(let error):
                 let statusCode = error.response?.statusCode ?? -1

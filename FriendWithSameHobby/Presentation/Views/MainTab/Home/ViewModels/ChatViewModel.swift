@@ -52,6 +52,12 @@ final class ChatViewModel: ViewModelType {
                 self?.useCase.executeSendMessage(chat: $0)
             }.disposed(by: disposeBag)
         
+        input.sendButtonTap
+            .map { _ in "" }
+            .asSignal(onErrorJustReturn: "")
+            .emit(to: output.initializeTextView)
+            .disposed(by: disposeBag)
+        
         // Input to Output
         input.messageText
             .map { $0.components(separatedBy: "\n").count > 2 }

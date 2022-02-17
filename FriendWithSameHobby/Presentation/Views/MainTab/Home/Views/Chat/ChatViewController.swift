@@ -121,8 +121,7 @@ class ChatViewController: UIViewController {
                     cell.configure(with: item)
                 }.disposed(by: disposeBag)
         
-        output.chatMessages
-            .map { _ in "" }
+        output.initializeTextView
             .asDriver(onErrorJustReturn: "")
             .drive(messageTextView.rx.text)
             .disposed(by: disposeBag)
@@ -145,15 +144,16 @@ class ChatViewController: UIViewController {
             .subscribe(onNext: { [weak self] _ in
                 self?.view.endEditing(true)
                 self?.keyboardHandling(of: .hide)
-            }).disposed(by: disposeBag)
+            }).disposed(by: disposeBag)        
         
-        // 이거 좀 수정하자..
         messageTextView.rx.text
             .orEmpty
             .asDriver()
             .drive { [weak self] in
-                let buttonAssets = $0.count > 0 ? AssetsImages.sendPossible : AssetsImages.sendImpossible
-                self?.sendButton.setImage(buttonAssets.image, for: .normal)
+                let isButtonActive = $0.count > 0
+                let buttonImage = isButtonActive ? AssetsImages.sendPossible : AssetsImages.sendImpossible
+                self?.sendButton.isUserInteractionEnabled = isButtonActive
+                self?.sendButton.setImage(buttonImage.image, for: .normal)
             }.disposed(by: disposeBag)
     }
     

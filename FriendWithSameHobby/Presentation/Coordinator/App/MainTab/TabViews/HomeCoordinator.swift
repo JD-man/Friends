@@ -89,16 +89,27 @@ final class HomeCoordinator: CoordinatorType {
     }
     
     func presentChatMenuVC() {
-        guard let chatVC = navigationController.topViewController as? ChatViewController else { return }
+        guard let chatVC = navigationController.topViewController as? ChatViewController,
+              chatVC.children.isEmpty else { return }
         let firebaseRepo = FirebaseAuthRepository(phoneID: nil)
         let userRepo = UserRepository()
         let queueRepo = QueueRepository()
         let useCase = ChatMenuUseCase(firebaseRepo: firebaseRepo, userRepo: userRepo, queueRepo: queueRepo)
         let viewModel = ChatMenuViewModel(useCase: useCase, coordinator: self)
-        let chatMenuVC = ChatMenuViewController(viewModel: viewModel)
+        let chatMenuVC = ChatMenuViewController(viewModel: viewModel)        
         chatVC.addChild(chatMenuVC)
         chatVC.view.addSubview(chatMenuVC.view)
         chatMenuVC.didMove(toParent: chatVC)
+    }
+    
+    func presentCommentVC() {
+        let firebaseRepo = FirebaseAuthRepository(phoneID: nil)
+        let queueRepo = QueueRepository()
+        let useCase = MenuCommentUseCase(firebaseRepo: firebaseRepo, queueRepo: queueRepo)
+        let viewModel = MenuCommentViewModel(useCase: useCase, coordinator: self)
+        let commentVC = MenuCommentViewController(viewModel: viewModel)
+        commentVC.modalPresentationStyle = .overCurrentContext
+        navigationController.present(commentVC, animated: false)
     }
     
     func toasting(message: String) {

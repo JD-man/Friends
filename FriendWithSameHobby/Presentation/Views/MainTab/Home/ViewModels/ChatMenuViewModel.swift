@@ -13,10 +13,13 @@ import RxRelay
 final class ChatMenuViewModel: ViewModelType {
     struct Input {
         let dodgeButtonTap: Driver<Void>
+        let commentButtonTap: Driver<Void>
+        let reportButtonTap: Driver<Void>
     }
     
     struct Output {
-        
+        let dismissMenu = PublishRelay<Void>()
+        let hideMenu = PublishRelay<Void>()
     }
     
     var useCase: ChatMenuUseCase
@@ -37,6 +40,25 @@ final class ChatMenuViewModel: ViewModelType {
                     self?.useCase.executeDodge()
                 }
                 alert.show()
+            }.disposed(by: disposeBag)
+        
+        // Input to Output
+        Observable.merge(
+            input.commentButtonTap.map { return () }.asObservable(),
+            input.reportButtonTap.map { return () }.asObservable())
+            .asSignal(onErrorJustReturn: ())
+            .emit(to: output.dismissMenu)
+            .disposed(by: disposeBag)
+        
+        input.dodgeButtonTap
+            .asSignal(onErrorJustReturn: ())
+            .emit(to: output.hideMenu)
+            .disposed(by: disposeBag)
+        
+        // Input to Coordinator
+        input.commentButtonTap
+            .drive { [weak self] _ in
+                self?.coordinator?.presentCommentVC()
             }.disposed(by: disposeBag)
         
         // UseCase to Coordinator

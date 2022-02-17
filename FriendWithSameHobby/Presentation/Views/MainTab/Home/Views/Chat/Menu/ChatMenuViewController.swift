@@ -19,24 +19,34 @@ class ChatMenuViewController: UIViewController {
     enum AnimationType {
         case present
         case dismiss
+        case hide
         
         var constant: CGFloat {
             switch self {
             case .present:
                 return 0
-            case .dismiss:
+            case .dismiss, .hide:
                 return -72
+            }
+        }
+        
+        var alpha: CGFloat {
+            switch self {
+            case .present:
+                return 0.25
+            case .dismiss, .hide:
+                return 0
             }
         }
     }
 
     private let reportButton = MenuButton(title: "새싹 신고", image: AssetsImages.siren.image)
     private let dodgeButton = MenuButton(title: "약속 취소", image: AssetsImages.cancelMatch.image)
-    private let reviewButton = MenuButton(title: "리뷰 등록", image: AssetsImages.write.image)
+    private let commentButton = MenuButton(title: "리뷰 등록", image: AssetsImages.write.image)
     
     private let viewModel: ChatMenuViewModel
     
-    private lazy var buttonStackView = UIStackView(arrangedSubviews: [reportButton, dodgeButton, reviewButton]).then {
+    private lazy var buttonStackView = UIStackView(arrangedSubviews: [reportButton, dodgeButton, commentButton]).then {
         $0.axis = .horizontal
         $0.distribution = .fillEqually
     }
@@ -65,7 +75,10 @@ class ChatMenuViewController: UIViewController {
     
     private func viewConfig() {
         view.backgroundColor = AssetsColors.black.color.withAlphaComponent(0.25)
-        view.addSubview(buttonStackView)
+        [buttonStackView].forEach {
+            view.addSubview($0)
+        }
+        
         buttonStackView.snp.makeConstraints { make in
             make.height.equalTo(72)
             make.leading.trailing.equalTo(view.safeAreaLayoutGuide)
@@ -75,21 +88,29 @@ class ChatMenuViewController: UIViewController {
     
     private func binding() {
         let input = ChatMenuViewModel.Input(
-            dodgeButtonTap: dodgeButton.rx.tap.asDriver()
+            dodgeButtonTap: dodgeButton.rx.tap.asDriver(),
+            commentButtonTap: commentButton.rx.tap.asDriver(),
+            reportButtonTap: reportButton.rx.tap.asDriver()
         )
         
         let output = viewModel.transform(input, disposeBag: disposeBag)
+        
+        output.dismissMenu
+            .asDriver(onErrorJustReturn: ())
+            .drive { [weak self] _ in
+                self?.initialAnimation(type: .dismiss)
+            }.disposed(by: disposeBag)
+        
+        output.hideMenu
+            .asDriver(onErrorJustReturn: ())
+            .drive { [weak self] _ in
+                self?.initialAnimation(type: .hide)
+            }.disposed(by: disposeBag)
         
         reportButton.rx.tap
             .asDriver()
             .drive { _ in
                 print("reportButton")
-            }.disposed(by: disposeBag)
-        
-        reviewButton.rx.tap
-            .asDriver()
-            .drive { _ in
-                print("reviewButton")
             }.disposed(by: disposeBag)
         
         view.rx.tapGesture()
@@ -103,10 +124,10 @@ class ChatMenuViewController: UIViewController {
         buttonStackView.snp.updateConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(type.constant)
         }
+        view.backgroundColor = AssetsColors.black.color.withAlphaComponent(type.alpha)
         let animator = UIViewPropertyAnimator(duration: 0.25, curve: .easeInOut) { [weak self] in
             self?.view.layoutIfNeeded()
         }
-        
         animator.addCompletion { [weak self] _ in
             if type == .dismiss {
                 self?.view.removeFromSuperview()

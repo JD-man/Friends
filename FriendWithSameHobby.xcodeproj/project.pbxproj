@@ -145,6 +145,9 @@
 		89E055AF279D9B4400E86445 /* UserInfoDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E055AE279D9B4400E86445 /* UserInfoDTO.swift */; };
 		89E055B1279D9D7800E86445 /* APIErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E055B0279D9D7800E86445 /* APIErrors.swift */; };
 		89E055B5279DA6C200E86445 /* NicknameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E055B4279DA6C200E86445 /* NicknameViewController.swift */; };
+		89E1D03A27BE3EEE00938FC2 /* MenuCommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E1D03927BE3EEE00938FC2 /* MenuCommentViewController.swift */; };
+		89E1D03C27BE8F7300938FC2 /* MenuCommentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E1D03B27BE8F7300938FC2 /* MenuCommentViewModel.swift */; };
+		89E1D03E27BE90B300938FC2 /* MenuCommentUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E1D03D27BE90B300938FC2 /* MenuCommentUseCase.swift */; };
 		89EC76CB27ACCFB600CDA0A4 /* MapGenderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EC76CA27ACCFB600CDA0A4 /* MapGenderView.swift */; };
 		89EC76CF27ACF29700CDA0A4 /* MapMatchingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EC76CE27ACF29700CDA0A4 /* MapMatchingButton.swift */; };
 		89EC76D127AD07C500CDA0A4 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EC76D027AD07C500CDA0A4 /* MapViewModel.swift */; };
@@ -331,6 +334,9 @@
 		89E055AE279D9B4400E86445 /* UserInfoDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoDTO.swift; sourceTree = "<group>"; };
 		89E055B0279D9D7800E86445 /* APIErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIErrors.swift; sourceTree = "<group>"; };
 		89E055B4279DA6C200E86445 /* NicknameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameViewController.swift; sourceTree = "<group>"; };
+		89E1D03927BE3EEE00938FC2 /* MenuCommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCommentViewController.swift; sourceTree = "<group>"; };
+		89E1D03B27BE8F7300938FC2 /* MenuCommentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCommentViewModel.swift; sourceTree = "<group>"; };
+		89E1D03D27BE90B300938FC2 /* MenuCommentUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCommentUseCase.swift; sourceTree = "<group>"; };
 		89EC76CA27ACCFB600CDA0A4 /* MapGenderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapGenderView.swift; sourceTree = "<group>"; };
 		89EC76CE27ACF29700CDA0A4 /* MapMatchingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapMatchingButton.swift; sourceTree = "<group>"; };
 		89EC76D027AD07C500CDA0A4 /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
@@ -637,6 +643,7 @@
 				896795D127B42F6F00BF942B /* MatchingUseCase.swift */,
 				89A579E527BC0F17008CAAA3 /* ChatUseCase.swift */,
 				89FE9AF727BD32D700887232 /* ChatMenuUseCase.swift */,
+				89E1D03D27BE90B300938FC2 /* MenuCommentUseCase.swift */,
 			);
 			path = MainTab;
 			sourceTree = "<group>";
@@ -1013,6 +1020,7 @@
 				896795CF27B42EFB00BF942B /* MatchingViewModel.swift */,
 				89A579E327BC0ED7008CAAA3 /* ChatViewModel.swift */,
 				89FE9AF527BD327A00887232 /* ChatMenuViewModel.swift */,
+				89E1D03B27BE8F7300938FC2 /* MenuCommentViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -1267,6 +1275,7 @@
 			children = (
 				89FE9AEE27BCCDF100887232 /* ChatMenuViewController.swift */,
 				89FE9AF027BCD09100887232 /* MenuButton.swift */,
+				89E1D03927BE3EEE00938FC2 /* MenuCommentViewController.swift */,
 			);
 			path = Menu;
 			sourceTree = "<group>";
@@ -1587,6 +1596,7 @@
 				89C147C6279FCBCA00F0E616 /* UserRepositoryInterface.swift in Sources */,
 				89370A4C27A9129D00D3A720 /* Rx+Ext.swift in Sources */,
 				89FDC55427AFEFB80088B32A /* OnqueueBodyModel.swift in Sources */,
+				89E1D03A27BE3EEE00938FC2 /* MenuCommentViewController.swift in Sources */,
 				89EC76D627AD0A8500CDA0A4 /* HobbyViewController.swift in Sources */,
 				89825B6E27B80FB500B2A239 /* SeSACHobbyTagView.swift in Sources */,
 				89825B6C27B7C10300B2A239 /* ViewController+RxExt.swift in Sources */,
@@ -1697,7 +1707,9 @@
 				89EC76DA27AD203C00CDA0A4 /* QueueTarget.swift in Sources */,
 				894F5C2827A7BF7B00E583B9 /* ProfileGenderView.swift in Sources */,
 				8914A14B27B924200048FA87 /* UserMyPageModel.swift in Sources */,
+				89E1D03C27BE8F7300938FC2 /* MenuCommentViewModel.swift in Sources */,
 				896795CA27B3DD4900BF942B /* PostQueueBodyDTO.swift in Sources */,
+				89E1D03E27BE90B300938FC2 /* MenuCommentUseCase.swift in Sources */,
 				89A579F727BC2124008CAAA3 /* ChatSendModel.swift in Sources */,
 				8920161327BB989A0090F9D9 /* ChatTableViewCell.swift in Sources */,
 				89A579E427BC0ED7008CAAA3 /* ChatViewModel.swift in Sources */,
