@@ -31,4 +31,9 @@ protocol UserRepositoryInterface {
         model: UserMyPageModel,
         completion: @escaping (Result<Bool, UserMyPageError>) -> Void
     )
+    
+    func reportUser(
+        model: ReportUserModel,
+        completion: @escaping (Result<Bool, ReportUserError>) -> Void
+    )
 }

@@ -81,4 +81,17 @@ final class UserRepository: UserRepositoryInterface {
             }
         }
     }
+    
+    func reportUser(model: ReportUserModel, completion: @escaping (Result<Bool, ReportUserError>) -> Void) {
+        let parameters = ReportUserDTO(model: model).toParameters()
+        provider.request(.reportUser(parameters: parameters)) { result in
+            switch result {
+            case .success(_):
+                completion(.success(true))
+            case .failure(let error):
+                let statusCode = error.response?.statusCode ?? -1
+                completion(.failure(ReportUserError(rawValue: statusCode) ?? .unknownError))
+            }
+        }
+    }
 }

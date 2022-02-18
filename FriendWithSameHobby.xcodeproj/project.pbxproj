@@ -45,6 +45,12 @@
 		89235B3727A688130069EFB5 /* SeSACCommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89235B3627A688130069EFB5 /* SeSACCommentView.swift */; };
 		89370A4C27A9129D00D3A720 /* Rx+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89370A4B27A9129D00D3A720 /* Rx+Ext.swift */; };
 		8940CC8B27BF382200A12234 /* ChatYouTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8940CC8A27BF382200A12234 /* ChatYouTableViewCell.swift */; };
+		8940CC8D27BF528300A12234 /* MenuReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8940CC8C27BF528300A12234 /* MenuReportViewController.swift */; };
+		8940CC8F27BF52BF00A12234 /* SeSACReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8940CC8E27BF52BF00A12234 /* SeSACReportView.swift */; };
+		8940CC9127BF736800A12234 /* MenuReportViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8940CC9027BF736800A12234 /* MenuReportViewModel.swift */; };
+		8940CC9327BF73E000A12234 /* MenuReportUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8940CC9227BF73E000A12234 /* MenuReportUseCase.swift */; };
+		8940CC9527BF790900A12234 /* ReportUserDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8940CC9427BF790900A12234 /* ReportUserDTO.swift */; };
+		8940CC9727BF796200A12234 /* ReportUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8940CC9627BF796200A12234 /* ReportUserModel.swift */; };
 		894184E027A15396007F35AC /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894184DF27A15396007F35AC /* ProfileViewController.swift */; };
 		894F5C2527A7BC6100E583B9 /* ProfileTableViewFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894F5C2427A7BC6100E583B9 /* ProfileTableViewFooter.swift */; };
 		894F5C2827A7BF7B00E583B9 /* ProfileGenderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894F5C2727A7BF7B00E583B9 /* ProfileGenderView.swift */; };
@@ -241,6 +247,12 @@
 		89235B3627A688130069EFB5 /* SeSACCommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeSACCommentView.swift; sourceTree = "<group>"; };
 		89370A4B27A9129D00D3A720 /* Rx+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Rx+Ext.swift"; sourceTree = "<group>"; };
 		8940CC8A27BF382200A12234 /* ChatYouTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatYouTableViewCell.swift; sourceTree = "<group>"; };
+		8940CC8C27BF528300A12234 /* MenuReportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuReportViewController.swift; sourceTree = "<group>"; };
+		8940CC8E27BF52BF00A12234 /* SeSACReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeSACReportView.swift; sourceTree = "<group>"; };
+		8940CC9027BF736800A12234 /* MenuReportViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuReportViewModel.swift; sourceTree = "<group>"; };
+		8940CC9227BF73E000A12234 /* MenuReportUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuReportUseCase.swift; sourceTree = "<group>"; };
+		8940CC9427BF790900A12234 /* ReportUserDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportUserDTO.swift; sourceTree = "<group>"; };
+		8940CC9627BF796200A12234 /* ReportUserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportUserModel.swift; sourceTree = "<group>"; };
 		894184DF27A15396007F35AC /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		894F5C2427A7BC6100E583B9 /* ProfileTableViewFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewFooter.swift; sourceTree = "<group>"; };
 		894F5C2727A7BF7B00E583B9 /* ProfileGenderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileGenderView.swift; sourceTree = "<group>"; };
@@ -625,6 +637,7 @@
 				89235B3427A67A260069EFB5 /* SeSACTitleView.swift */,
 				89235B3627A688130069EFB5 /* SeSACCommentView.swift */,
 				89825B6D27B80FB500B2A239 /* SeSACHobbyTagView.swift */,
+				8940CC8E27BF52BF00A12234 /* SeSACReportView.swift */,
 			);
 			path = BaseCardView;
 			sourceTree = "<group>";
@@ -651,6 +664,7 @@
 				89A579E527BC0F17008CAAA3 /* ChatUseCase.swift */,
 				89FE9AF727BD32D700887232 /* ChatMenuUseCase.swift */,
 				89E1D03D27BE90B300938FC2 /* MenuCommentUseCase.swift */,
+				8940CC9227BF73E000A12234 /* MenuReportUseCase.swift */,
 			);
 			path = MainTab;
 			sourceTree = "<group>";
@@ -1028,6 +1042,7 @@
 				89A579E327BC0ED7008CAAA3 /* ChatViewModel.swift */,
 				89FE9AF527BD327A00887232 /* ChatMenuViewModel.swift */,
 				89E1D03B27BE8F7300938FC2 /* MenuCommentViewModel.swift */,
+				8940CC9027BF736800A12234 /* MenuReportViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -1228,6 +1243,7 @@
 		89FDC54B27AFEE0B0088B32A /* User */ = {
 			isa = PBXGroup;
 			children = (
+				8940CC9427BF790900A12234 /* ReportUserDTO.swift */,
 				89E055AE279D9B4400E86445 /* UserInfoDTO.swift */,
 				89C0F3F727A28F6D0038DACA /* UserRegisterDTO.swift */,
 				895E1D8027A52B1B0054742F /* UpdateFCMtokenDTO.swift */,
@@ -1260,6 +1276,7 @@
 				895E1D8227A52B8D0054742F /* UpdateFCMtokenModel.swift */,
 				8914A14A27B924200048FA87 /* UserMyPageModel.swift */,
 				8914A15327B984020048FA87 /* MatchingStateModel.swift */,
+				8940CC9627BF796200A12234 /* ReportUserModel.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -1285,6 +1302,7 @@
 				89FE9AEE27BCCDF100887232 /* ChatMenuViewController.swift */,
 				89FE9AF027BCD09100887232 /* MenuButton.swift */,
 				89E1D03927BE3EEE00938FC2 /* MenuCommentViewController.swift */,
+				8940CC8C27BF528300A12234 /* MenuReportViewController.swift */,
 			);
 			path = Menu;
 			sourceTree = "<group>";
@@ -1626,6 +1644,7 @@
 				89E055A5279D296400E86445 /* UserDefaultManagers.swift in Sources */,
 				8950C88227B23E370025A8D7 /* HobbyCollectionViewCell.swift in Sources */,
 				894184E027A15396007F35AC /* ProfileViewController.swift in Sources */,
+				8940CC9727BF796200A12234 /* ReportUserModel.swift in Sources */,
 				89A81988279ADF7800F257CA /* BaseButton.swift in Sources */,
 				89C147E827A00F5000F0E616 /* FriendsViewController.swift in Sources */,
 				8986D7DD27B5614F00EED6DC /* QueueTableViewCell.swift in Sources */,
@@ -1635,6 +1654,7 @@
 				895E1D8527A5B0A70054742F /* AccountTableViewCell.swift in Sources */,
 				89EC76CF27ACF29700CDA0A4 /* MapMatchingButton.swift in Sources */,
 				89FE9AF127BCD09100887232 /* MenuButton.swift in Sources */,
+				8940CC9127BF736800A12234 /* MenuReportViewModel.swift in Sources */,
 				89C147E427A00F1300F0E616 /* MapViewController.swift in Sources */,
 				89C0F3F427A28C3C0038DACA /* UserInfoModel.swift in Sources */,
 				898B794A279945BC00844284 /* OnboardingViewModel.swift in Sources */,
@@ -1667,6 +1687,7 @@
 				89ECC57A279F2B0000C4C477 /* RegisterViewController.swift in Sources */,
 				89A579F927BC22ED008CAAA3 /* ChatError.swift in Sources */,
 				89E0559E279D1AF100E86445 /* UserTargets.swift in Sources */,
+				8940CC8D27BF528300A12234 /* MenuReportViewController.swift in Sources */,
 				89EF953827A6482A0070BB38 /* BaseCardView.swift in Sources */,
 				8914A14D27B9340E0048FA87 /* CommentViewController.swift in Sources */,
 				89A81983279A81D400F257CA /* OnboardingRepository.swift in Sources */,
@@ -1681,6 +1702,7 @@
 				89C147E627A00F3500F0E616 /* ShopViewController.swift in Sources */,
 				89FDC55A27B000650088B32A /* QueueError.swift in Sources */,
 				8914A15027B941050048FA87 /* CommentTableViewCell.swift in Sources */,
+				8940CC8F27BF52BF00A12234 /* SeSACReportView.swift in Sources */,
 				89C147CF27A00E4B00F0E616 /* HomeCoordinator.swift in Sources */,
 				899B713327B2F732001E5C02 /* HobbyCollectionReusableView.swift in Sources */,
 				895E1D7D27A518F00054742F /* FirebaseAuthRepositoryInterface.swift in Sources */,
@@ -1708,6 +1730,7 @@
 				8940CC8B27BF382200A12234 /* ChatYouTableViewCell.swift in Sources */,
 				89ECC564279E759600C4C477 /* NickNameViewModel.swift in Sources */,
 				890C52B427A3E32F009E54E9 /* BaseActivityIndicator.swift in Sources */,
+				8940CC9327BF73E000A12234 /* MenuReportUseCase.swift in Sources */,
 				896795CE27B3ED3200BF942B /* MatchingViewController.swift in Sources */,
 				89D721C4279B906F00B02A1E /* UITextField+Ext.swift in Sources */,
 				894F5C3627A81D4D00E583B9 /* ProfileViewModel.swift in Sources */,
@@ -1733,6 +1756,7 @@
 				89C0F3F627A28ECA0038DACA /* UserRegisterModel.swift in Sources */,
 				89FE9AF627BD327A00887232 /* ChatMenuViewModel.swift in Sources */,
 				89ECC572279F013800C4C477 /* EmailViewModel.swift in Sources */,
+				8940CC9527BF790900A12234 /* ReportUserDTO.swift in Sources */,
 				89E055AF279D9B4400E86445 /* UserInfoDTO.swift in Sources */,
 				89A579EA27BC113B008CAAA3 /* ChatRepositoryInterface.swift in Sources */,
 				89D721CC279C5B4A00B02A1E /* VerifyViewModel.swift in Sources */,

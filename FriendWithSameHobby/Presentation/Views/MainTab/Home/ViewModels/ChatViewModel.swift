@@ -21,35 +21,7 @@ final class ChatViewModel: ViewModelType {
     
     struct Output {
         // received message text
-        let chatMessages = BehaviorRelay<[ChatItemViewModel]>(value: [
-            ChatItemViewModel(userType: .me, message: "테스트테스트테스트테스트테스트테스트테스트테스트", time: "11:11"),
-            ChatItemViewModel(userType: .you, message: "테스트테스트테스트테스", time: "11:11"),
-            ChatItemViewModel(userType: .me, message: "테스트테스트테스트테스", time: "11:11"),
-            ChatItemViewModel(userType: .me, message: "테스트테스트테스트", time: "11:11"),
-            ChatItemViewModel(userType: .me, message: "테스트테스트테스트테스트", time: "11:11"),
-            ChatItemViewModel(userType: .you, message: "테스트테스트테스트테스트테스트테스트테스트테스트트테스트테스트테스트테스트트테스트테스트테스트테스트", time: "11:11"),
-            ChatItemViewModel(userType: .me, message: "테스트테스트테스트테스트테스트테스트테스트테스트트테스트트테스트트테스트", time: "11:11"),
-            ChatItemViewModel(userType: .you, message: "테스트테스트테스트테스트테스트테스트테스트테스트", time: "11:11"),
-            ChatItemViewModel(userType: .me, message: "테스트테스트테스트테스트테스트테스트테스트테스트", time: "11:11"),
-            ChatItemViewModel(userType: .me, message: "테스트테스트테스트테스트테", time: "11:11"),
-            ChatItemViewModel(userType: .me, message: "테스트테스트테스트테스", time: "11:11"),
-            ChatItemViewModel(userType: .me, message: "테스트테스트테스트테스트테스", time: "11:11"),
-            ChatItemViewModel(userType: .me, message: "테스트테스트테스트테스트테스트테스트테스트테스트", time: "11:11"),
-            ChatItemViewModel(userType: .you, message: "테스트테스트테스트테스트테스트테스트테스트테스트", time: "11:11"),
-            ChatItemViewModel(userType: .me, message: "테스트테스트테스트테스트테스", time: "11:11"),
-            ChatItemViewModel(userType: .me, message: "테스트테스트테스트테스트", time: "11:11"),
-            ChatItemViewModel(userType: .me, message: "테스트테스트테스트테스트테스", time: "11:11"),
-            ChatItemViewModel(userType: .me, message: "테스트테스트테스트테스트테스트테", time: "11:11"),
-            ChatItemViewModel(userType: .you, message: "테스트테스트테스트테스트테스트테스트테스트테스트", time: "11:11"),
-            ChatItemViewModel(userType: .me, message: "테스트테스트테스트테스트테스트테", time: "11:11"),
-            ChatItemViewModel(userType: .me, message: "테스트테스트테스트테스트테스트테스트테스트테스트", time: "11:11"),
-            ChatItemViewModel(userType: .me, message: "테스트테스트테스트테스트테", time: "11:11"),
-            ChatItemViewModel(userType: .you, message: "테스트테스트테스트테스", time: "11:11"),
-            ChatItemViewModel(userType: .me, message: "테스트테스트테스트테스트테스트테스트테스트테스트", time: "11:11"),
-            ChatItemViewModel(userType: .me, message: "테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트", time: "11:11"),
-            ChatItemViewModel(userType: .me, message: "테스트테스트테스트테스트테스트테스트테스트테스트", time: "11:11"),
-            
-        ])
+        let chatMessages = BehaviorRelay<[ChatItemViewModel]>(value: [])
         // text line limit
         let messageTextViewScrollEnabled = PublishRelay<Bool>()
         // text view initialize when send button tap

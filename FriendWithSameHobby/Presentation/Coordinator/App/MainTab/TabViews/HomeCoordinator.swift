@@ -115,6 +115,16 @@ final class HomeCoordinator: CoordinatorType {
         navigationController.present(commentVC, animated: false)
     }
     
+    func presentReportVC() {
+        let firebaseRepo = FirebaseAuthRepository(phoneID: nil)
+        let userRepo = UserRepository()
+        let useCase = MenuReportUseCase(firebaseRepo: firebaseRepo, userRepo: userRepo)
+        let viewModel = MenuReportViewModel(useCase: useCase, coordinator: self)
+        let reportVC = MenuReportViewController(viewModel: viewModel)
+        reportVC.modalPresentationStyle = .overCurrentContext
+        navigationController.present(reportVC, animated: false)
+    }
+    
     func toasting(message: String) {
         navigationController.view.makeToast(message, position: .top)
     }

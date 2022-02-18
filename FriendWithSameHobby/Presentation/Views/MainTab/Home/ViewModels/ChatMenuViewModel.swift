@@ -61,6 +61,11 @@ final class ChatMenuViewModel: ViewModelType {
                 self?.coordinator?.presentCommentVC()
             }.disposed(by: disposeBag)
         
+        input.reportButtonTap
+            .drive { [weak self] _ in
+                self?.coordinator?.presentReportVC()
+            }.disposed(by: disposeBag)
+        
         // UseCase to Coordinator
         useCase.dodgeSuccess
             .asSignal()
