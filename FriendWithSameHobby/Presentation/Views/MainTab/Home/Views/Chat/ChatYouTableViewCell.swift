@@ -1,22 +1,20 @@
 //
-//  ChatMeTableViewCell.swift
+//  ChatYouTableViewCell.swift
 //  FriendWithSameHobby
 //
-//  Created by JD_MacMini on 2022/02/15.
+//  Created by JD_MacMini on 2022/02/18.
 //
 
 import UIKit
-import SnapKit
-import Then
 
-class ChatTableViewCell: UITableViewCell {
+class ChatYouTableViewCell: UITableViewCell {
     
     private let messageLabel = PaddedLabel(top: 10, left: 16, bottom: 10, right: 16).then {
         $0.numberOfLines = 0
         $0.clipsToBounds = true
-        $0.addCorner(rad: 8, borderColor: nil)
-        $0.textAlignment = .right
-        $0.backgroundColor = AssetsColors.whiteGreen.color
+        $0.textAlignment = .left
+        $0.backgroundColor = .systemBackground
+        $0.addCorner(rad: 8, borderColor: AssetsColors.gray4.color)
         $0.font = AssetsFonts.NotoSansKR.regular.font(size: 14)
     }
     
@@ -40,17 +38,17 @@ class ChatTableViewCell: UITableViewCell {
         [messageLabel, timeLabel].forEach { contentView.addSubview($0) }
         
         messageLabel.snp.makeConstraints { make in
-            make.trailing.top.bottom.equalTo(contentView).inset(16)
+            make.leading.top.bottom.equalTo(contentView).inset(16)
             make.width.lessThanOrEqualTo(contentView.snp.width).multipliedBy(264.0 / 375.0)
         }
         timeLabel.snp.makeConstraints { make in
             make.bottom.equalTo(messageLabel)
-            make.trailing.equalTo(messageLabel.snp.leading).offset(-8)
+            make.leading.equalTo(messageLabel.snp.trailing).offset(8)
         }
     }
     
     func configure(with data: ChatItemViewModel) {
         timeLabel.text = data.time
-        messageLabel.text = data.message        
-    }
+        messageLabel.text = data.message
+    }    
 }

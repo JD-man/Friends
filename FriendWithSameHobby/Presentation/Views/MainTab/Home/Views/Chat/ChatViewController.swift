@@ -32,6 +32,7 @@ class ChatViewController: UIViewController {
         $0.backgroundColor = .systemBackground
         $0.rowHeight = UITableView.automaticDimension
         $0.register(ChatTableViewCell.self, forCellReuseIdentifier: ChatTableViewCell.identifier)
+        $0.register(ChatYouTableViewCell.self, forCellReuseIdentifier: ChatYouTableViewCell.identifier)
         $0.register(ChatTableHeaderView.self, forHeaderFooterViewReuseIdentifier: ChatTableHeaderView.identifier)
     }
     
@@ -65,6 +66,11 @@ class ChatViewController: UIViewController {
         super.viewDidLoad()
         viewConfig()
         binding()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        title = UserChatManager.otherNickname ?? ""
     }
     
     private func viewConfig() {
@@ -115,11 +121,18 @@ class ChatViewController: UIViewController {
         
         output.chatMessages
             .asDriver()
-            .drive(chatTableView.rx.items(
-                cellIdentifier: ChatTableViewCell.identifier,
-                cellType: ChatTableViewCell.self)) { row, item, cell in
+            .drive(chatTableView.rx.items) { tableView, row, item in
+                switch item.userType {
+                case .me:
+                    let cell = tableView.dequeueReusableCell(withIdentifier: ChatTableViewCell.identifier) as! ChatTableViewCell
                     cell.configure(with: item)
-                }.disposed(by: disposeBag)
+                    return cell
+                case .you:
+                    let cell = tableView.dequeueReusableCell(withIdentifier: ChatYouTableViewCell.identifier) as! ChatYouTableViewCell
+                    cell.configure(with: item)
+                    return cell
+                }
+            }.disposed(by: disposeBag)
         
         output.initializeTextView
             .asDriver(onErrorJustReturn: "")

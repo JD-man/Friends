@@ -14,11 +14,13 @@ final class MenuCommentViewModel: ViewModelType {
     struct Input {
         let registerButtonTap: Driver<([BaseButtonStatus], String)>
         let commentText: Driver<String>
+        let closeButtonTap: Signal<Void>
     }
     
     struct Output {
         let registerButtonStatus = BehaviorRelay<BaseButtonStatus>(value: .disable)
         let isTextViewEmpty = PublishRelay<Bool>()
+        let dismiss = PublishRelay<Void>()
     }
     
     var useCase: MenuCommentUseCase
@@ -46,10 +48,15 @@ final class MenuCommentViewModel: ViewModelType {
             .emit(to: output.registerButtonStatus)
             .disposed(by: disposeBag)
         
+        input.closeButtonTap
+            .emit(to: output.dismiss)
+            .disposed(by: disposeBag)
+        
         // usecase to coordinator        
         useCase.commentSuccess
             .asSignal()
             .emit { [weak self] _ in
+                output.dismiss.accept(())
                 self?.coordinator?.show(view: .mapView, by: .backToFirst)
             }.disposed(by: disposeBag)
         

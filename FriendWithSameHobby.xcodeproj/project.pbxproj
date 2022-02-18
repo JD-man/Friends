@@ -44,6 +44,7 @@
 		89235B3527A67A260069EFB5 /* SeSACTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89235B3427A67A260069EFB5 /* SeSACTitleView.swift */; };
 		89235B3727A688130069EFB5 /* SeSACCommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89235B3627A688130069EFB5 /* SeSACCommentView.swift */; };
 		89370A4C27A9129D00D3A720 /* Rx+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89370A4B27A9129D00D3A720 /* Rx+Ext.swift */; };
+		8940CC8B27BF382200A12234 /* ChatYouTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8940CC8A27BF382200A12234 /* ChatYouTableViewCell.swift */; };
 		894184E027A15396007F35AC /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894184DF27A15396007F35AC /* ProfileViewController.swift */; };
 		894F5C2527A7BC6100E583B9 /* ProfileTableViewFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894F5C2427A7BC6100E583B9 /* ProfileTableViewFooter.swift */; };
 		894F5C2827A7BF7B00E583B9 /* ProfileGenderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894F5C2727A7BF7B00E583B9 /* ProfileGenderView.swift */; };
@@ -239,6 +240,7 @@
 		89235B3427A67A260069EFB5 /* SeSACTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeSACTitleView.swift; sourceTree = "<group>"; };
 		89235B3627A688130069EFB5 /* SeSACCommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeSACCommentView.swift; sourceTree = "<group>"; };
 		89370A4B27A9129D00D3A720 /* Rx+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Rx+Ext.swift"; sourceTree = "<group>"; };
+		8940CC8A27BF382200A12234 /* ChatYouTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatYouTableViewCell.swift; sourceTree = "<group>"; };
 		894184DF27A15396007F35AC /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		894F5C2427A7BC6100E583B9 /* ProfileTableViewFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewFooter.swift; sourceTree = "<group>"; };
 		894F5C2727A7BF7B00E583B9 /* ProfileGenderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileGenderView.swift; sourceTree = "<group>"; };
@@ -611,6 +613,7 @@
 				89EC76CA27ACCFB600CDA0A4 /* MapGenderView.swift */,
 				8920161227BB989A0090F9D9 /* ChatTableViewCell.swift */,
 				89A579E127BBD5EF008CAAA3 /* ChatTableHeaderView.swift */,
+				8940CC8A27BF382200A12234 /* ChatYouTableViewCell.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -1702,6 +1705,7 @@
 				89E055A2279D1B9F00E86445 /* URLComponents.swift in Sources */,
 				898B795A2799604700844284 /* AuthCoordinator.swift in Sources */,
 				898B79442799431000844284 /* OnboardingViewController.swift in Sources */,
+				8940CC8B27BF382200A12234 /* ChatYouTableViewCell.swift in Sources */,
 				89ECC564279E759600C4C477 /* NickNameViewModel.swift in Sources */,
 				890C52B427A3E32F009E54E9 /* BaseActivityIndicator.swift in Sources */,
 				896795CE27B3ED3200BF942B /* MatchingViewController.swift in Sources */,

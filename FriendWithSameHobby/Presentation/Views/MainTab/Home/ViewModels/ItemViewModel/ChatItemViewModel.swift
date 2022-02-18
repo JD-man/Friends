@@ -7,6 +7,11 @@
 
 import Foundation
 
+enum ChatUserType {
+    case me
+    case you
+}
+
 struct ChatItemViewModel {
     var userType: ChatUserType
     var message: String

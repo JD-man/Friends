@@ -125,7 +125,8 @@ final class MenuCommentViewController: UIViewController {
             }.asDriver(onErrorJustReturn: ([], "")),
             commentText: commentTextView.rx.text.orEmpty.map { [weak self] in
                 self?.commentTextView.textColor == AssetsColors.gray7.color ? "" : $0
-            }.asDriver(onErrorJustReturn: "")
+            }.asDriver(onErrorJustReturn: ""),
+            closeButtonTap: closeButton.rx.tap.asSignal()
         )
         
         let output = viewModel.transform(input, disposeBag: disposeBag)
@@ -135,7 +136,7 @@ final class MenuCommentViewController: UIViewController {
             .drive(registerButton.rx.status)
             .disposed(by: disposeBag)
         
-        closeButton.rx.tap
+        output.dismiss
             .asSignal()
             .emit { [weak self] _ in
                 self?.dismiss(animated: false, completion: nil)
@@ -165,7 +166,7 @@ final class MenuCommentViewController: UIViewController {
     private func commentTextViewConfig() {
         if commentTextView.text.count == 0 {
             commentTextView.textColor = AssetsColors.gray7.color
-            commentTextView.text = "자세한 피드백은 다른 새싹들에게 도움이 됩니다 (500자 이내 작성)"
+            commentTextView.text = "자세한 피드백은 다른 새싹들에게 도움이 됩니다 (300자 이내 작성)"
         }
     }
 }
