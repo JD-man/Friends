@@ -39,6 +39,12 @@ final class AccountCoordinator: CoordinatorType {
         navigationController.pushViewController(profileVC, animated: true)
     }
     
+    func pushCommentVC(review: [String]) {
+        let commentVC = CommentViewController(review: review)
+        commentVC.hidesBottomBarWhenPushed = true
+        navigationController.pushViewController(commentVC, animated: true)
+    }
+    
     func pop(completion: (() -> Void)? ) {
         navigationController.popViewController(animated: true)
         guard let completion = completion else { return }

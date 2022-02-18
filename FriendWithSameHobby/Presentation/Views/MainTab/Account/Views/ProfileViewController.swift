@@ -47,6 +47,7 @@ final class ProfileViewController: UIViewController {
     
     private let footerView = ProfileTableViewFooter()
     private var disposeBag = DisposeBag()
+    private let commentButtonTap = PublishRelay<Void>()
     
     override func viewDidLoad() {
         super.viewDidLoad()        
@@ -79,7 +80,8 @@ final class ProfileViewController: UIViewController {
             withdrawTap: footerView.withdrawButton.rx.tap.asDriver(),            
             updateButtonTap: updateBarButton.rx.tap.map { [weak self] in
                 self?.makeUpdateData() ?? (.unselected, "", false, 0, 1) }
-                .asDriver(onErrorJustReturn: (.unselected, "", false, 0, 1))
+                .asDriver(onErrorJustReturn: (.unselected, "", false, 0, 1)),
+            commentButtonTap: commentButtonTap.asSignal()
         )
         let output = viewModel?.transform(input, disposeBag: disposeBag)
         
@@ -87,8 +89,14 @@ final class ProfileViewController: UIViewController {
             .asDriver(onErrorJustReturn: [])
             .drive(profileTableView.rx.items(
                 cellIdentifier: ProfileTableViewCell.identifier,
-                cellType: ProfileTableViewCell.self)) { row, item, cell in
+                cellType: ProfileTableViewCell.self)) { [weak self] row, item, cell in
                     cell.configure(with: item)
+                    cell.baseCardView.sesacCommentView.moreButton.rx.tap
+                        .asSignal()
+                        .emit { _ in
+                            self?.commentButtonTap.accept(())
+                        }.disposed(by: cell.disposeBag)
+                        
 //                    Expanding method
 //                    cell.baseCardView.moreButton.rx.tap
 //                        .asDriver()

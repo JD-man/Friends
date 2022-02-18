@@ -19,6 +19,8 @@ final class ProfileViewModel: ViewModelType {
         let withdrawTap: Driver<Void>
         // update button tap
         let updateButtonTap: Driver<UserMyPageData>
+        // comment button tap
+        let commentButtonTap: Signal<Void>
     }
     
     struct Output {
@@ -28,7 +30,7 @@ final class ProfileViewModel: ViewModelType {
         let minAgeIndex = PublishRelay<Int>()
         let maxAgeIndex = PublishRelay<Int>()
         let ageRange = PublishRelay<String>()
-        let profileItem = PublishRelay<[ProfileItemViewModel]>()
+        let profileItem = BehaviorRelay<[ProfileItemViewModel]>(value: [])
     }
     
     var useCase: ProfileUseCase
@@ -64,6 +66,12 @@ final class ProfileViewModel: ViewModelType {
                                                     searchable: $0.2,
                                                     ageMin: $0.3 + 18,
                                                     ageMax: $0.4 + 18)
+            }.disposed(by: disposeBag)
+        
+        // input to coordinator
+        input.commentButtonTap
+            .emit { [weak self] _ in
+                self?.coordinator?.pushCommentVC(review: output.profileItem.value[0].comment)                
             }.disposed(by: disposeBag)
         
         // usecase to coordinator
