@@ -134,6 +134,11 @@ class ChatViewController: UIViewController {
                 }
             }.disposed(by: disposeBag)
         
+        output.chatMessages
+            .map { _ in CGPoint(x: 0, y: CGFloat.greatestFiniteMagnitude) }
+            .bind(to: chatTableView.rx.contentOffset)
+            .disposed(by: disposeBag)
+        
         output.initializeTextView
             .asDriver(onErrorJustReturn: "")
             .drive(messageTextView.rx.text)

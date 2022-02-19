@@ -49,4 +49,10 @@ final class RealmRepository: RealmRepositoryInterface {
             print(error)
         }
     }
+    
+    func loadChat(otheruid: String) -> [ChatResponseModel] {
+        guard let object = realm.object(ofType: RealmChatDTO.self,
+                                        forPrimaryKey: otheruid) else { return [] }
+        return object.toDomain()
+    }
 }

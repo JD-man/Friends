@@ -54,6 +54,14 @@ struct UserInfoManager {
     @UserDefaultsValue(.email) static var email: String?
     @UserDefaultsValue(.gender) static var gender: Int?
     @UserDefaultsValue(.uid) static var uid: String?
+    
+    static func setUserInfo(model: UserInfoModel) {
+        self.uid = model.uid
+        self.nick = model.nick
+        self.birth = model.birth
+        self.email = model.email
+        self.gender = model.gender.rawValue
+    }
 }
 
 struct UserProgressManager {

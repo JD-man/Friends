@@ -55,8 +55,7 @@ final class ProfileUseCase: UseCaseType {
         userRepo?.getUserInfo(completion: { [weak self] result in
             switch result {
             case .success(let model):
-                UserInfoManager.uid = model.uid
-                UserInfoManager.nick = model.nick
+                UserInfoManager.setUserInfo(model: model)
                 self?.userInfoData.accept(model)
             case .failure(let error):
                 switch error {

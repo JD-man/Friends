@@ -41,7 +41,8 @@ final class VerifyUseCase: UseCaseType {
     private func getUserInfo() {
         userRepo?.getUserInfo(completion: { [weak self] result in
             switch result {
-            case .success(_):
+            case .success(let model):
+                UserInfoManager.setUserInfo(model: model)
                 UserProgressManager.registered = true
                 self?.updateFCMtoken()
             case .failure(let error):

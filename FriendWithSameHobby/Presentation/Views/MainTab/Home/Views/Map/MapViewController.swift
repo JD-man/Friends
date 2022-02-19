@@ -72,7 +72,6 @@ final class MapViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        matchingButton.setMatchingStatus()
         navigationController?.navigationBar.isHidden = true
     }
     
@@ -122,8 +121,7 @@ final class MapViewController: UIViewController {
                 let matchingStatus = self?.matchingButton.matchingStatus ?? .normal
                 return (matchingStatus, coord.lat, coord.lng) }).asDriver(onErrorJustReturn: (.normal, 0.0, 0.0)),
             inputRelay: inputRelay,
-            viewWillAppear: self.rx.viewWillAppear,
-            viewWillDisAppear: self.rx.viewWillDisappear
+            viewWillAppear: self.rx.viewWillAppear
         )
         let output = viewModel.transform(input, disposeBag: disposeBag)
         
@@ -134,6 +132,12 @@ final class MapViewController: UIViewController {
                     NMFMarker(position: NMGLatLng(lat: $0.lat, lng: $0.long),
                               iconImage: NMFOverlayImage(image: $0.sesac.imageAsset.image)) }
                 self?.friendsMarkers = markers                
+            }.disposed(by: disposeBag)
+        
+        output.isUserMatched
+            .asDriver(onErrorJustReturn: ())
+            .drive { [weak self] _ in
+                self?.matchingButton.setMatchingStatus()
             }.disposed(by: disposeBag)
         
         // MARK: - Relay Input

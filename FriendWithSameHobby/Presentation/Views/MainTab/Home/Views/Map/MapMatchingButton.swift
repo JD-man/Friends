@@ -43,13 +43,15 @@ final class MapMatchingButton: UIButton {
         frame.size.width = 64
         frame.size.height = 64
         matchingStatus = status
-        addCorner(rad: 32, borderColor: nil)
         addshadow(rad: 3, opacity: 0.3)
+        isUserInteractionEnabled = false
+        addCorner(rad: 32, borderColor: nil)
         backgroundColor = AssetsColors.black.color
-        setImage(status.matchingImage, for: .normal)
+        setImage(status.matchingImage, for: .normal)        
     }
     
-    func setMatchingStatus() {        
+    func setMatchingStatus() {
+        isUserInteractionEnabled = true
         let rawValue = UserMatchingStatus.matchingStatus ?? ""
         matchingStatus = MatchingStatus(rawValue: rawValue) ?? .normal
     }

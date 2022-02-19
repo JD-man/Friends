@@ -17,11 +17,11 @@ final class MapViewModel: ViewModelType {
         let matchingButtonTap: Driver<(MatchingStatus, Double, Double)>
         let inputRelay: PublishRelay<OnqueueInput>
         let viewWillAppear: ControlEvent<Void>
-        let viewWillDisAppear: ControlEvent<Void>
     }
     
     struct Output {
         let userCoord = PublishRelay<[FromQueueDBModel]>()
+        let isUserMatched = PublishRelay<Void>()
     }
     
     var useCase: MapUseCase
@@ -60,6 +60,12 @@ final class MapViewModel: ViewModelType {
                 }
             }.disposed(by: disposeBag)
         
+        input.viewWillAppear
+            .asSignal()
+            .emit { [weak self] _ in
+                self?.useCase.executeCheckMatchingStatus()
+            }.disposed(by: disposeBag)
+        
         // UseCase to Output
         useCase.fromQueueSuccess            
             .map { [weak self] in
@@ -68,7 +74,11 @@ final class MapViewModel: ViewModelType {
             }
             .bind(to: output.userCoord)
             .disposed(by: disposeBag)
-        // UseCase to Coordinator
+        
+        useCase.checkMatchingSuccess
+            .map { _ in () }
+            .bind(to: output.isUserMatched)
+            .disposed(by: disposeBag)
         
         return output
     }

@@ -29,7 +29,7 @@ extension String {
 extension Date {
     var toString: String {
         let formatter = DateFormatter.DateFormatterKR
-        formatter.timeZone = TimeZone(abbreviation: "KST")
+        formatter.timeZone = TimeZone(abbreviation: "UTC")
         
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
         return formatter.string(from: self)

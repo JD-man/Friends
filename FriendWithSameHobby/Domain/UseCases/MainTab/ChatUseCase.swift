@@ -19,7 +19,7 @@ final class ChatUseCase: UseCaseType {
     
     let checkMatchingFail = PublishRelay<CheckMatchingError>()
     
-    let receiveMessageSuccess = PublishRelay<ChatResponseModel>()
+    let receiveMessageSuccess = PublishRelay<[ChatResponseModel]>()
     
     init(
         firebaseRepo: FirebaseAuthRepositoryInterface,
@@ -50,11 +50,10 @@ final class ChatUseCase: UseCaseType {
                 // request chat history, save chat
                 self.executeRequestChatHistory(otheruid: model.matchedUid ?? "", lastChatDate: lastChatDate)
                 
-                
                 // socket connect
                 let idtoken = UserInfoManager.idToken ?? ""
                 self.chatRepo.socketConfig(idToken: idtoken, callback: {
-                    self.receiveMessageSuccess.accept($0)
+                    self.receiveMessageSuccess.accept([$0])
                 })
             case .failure(let error):
                 switch error {
@@ -80,7 +79,9 @@ final class ChatUseCase: UseCaseType {
         chatRepo.requestChatHistory(otheruid: otheruid, lastChatDate: lastChatDate) { [weak self] result in
             switch result {
             case .success(let chatHistory):
-                self?.excuteSaveChatHistory(otheruid: otheruid, chatHistory: chatHistory)
+                self?.realmPepo.saveChatHistory(of: otheruid, with: chatHistory)
+                let chat = self?.realmPepo.loadChat(otheruid: otheruid) ?? []
+                self?.receiveMessageSuccess.accept(chat)
             case .failure(let error):
                 switch error {
                 case .tokenError:
@@ -94,17 +95,13 @@ final class ChatUseCase: UseCaseType {
         }
     }
     
-    private func excuteSaveChatHistory(otheruid: String, chatHistory: [ChatResponseModel]) {
-        realmPepo.saveChatHistory(of: otheruid, with: chatHistory)
-    }
-    
     func executeSendMessage(chat: String) {
-        let uid = UserChatManager.otherUID ?? ""
-        print(uid)
-        let model = ChatSendModel(uid: uid, chat: chat)
+        let otheruid = UserChatManager.otherUID ?? ""        
+        let model = ChatSendModel(uid: otheruid, chat: chat)
         chatRepo.sendMessage(model: model) { [weak self] result in
             switch result {
             case .success(let model):
+                self?.realmPepo.saveChatHistory(of: otheruid, with: [model])
                 self?.sendMessageSuccess.accept(model)
             case .failure(let error):
                 switch error {

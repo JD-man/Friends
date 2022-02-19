@@ -10,4 +10,5 @@ import Foundation
 protocol RealmRepositoryInterface {
     func getLastChatDate(of otheruid: String) -> String?
     func saveChatHistory(of otheruid: String, with chatHistory: [ChatResponseModel])
+    func loadChat(otheruid: String) -> [ChatResponseModel]
 }
