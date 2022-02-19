@@ -49,7 +49,7 @@ final class ChatRepository: ChatRepositoryInterface {
                 guard let decoded = try? JSONDecoder().decode(ChatHistoryResponseDTO.self, from: response.data) else {
                     print("chat history decode fail")
                     return
-                }
+                }                
                 completion(.success(decoded.toDomain()))
             case .failure(let error):
                 let statusCode = error.response?.statusCode ?? -1

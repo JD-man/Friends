@@ -45,12 +45,11 @@ final class ChatUseCase: UseCaseType {
                 UserChatManager.otherNickname = model.matchedNick
                 
                 // lastChatDate
-                let chatHistory = self.executeLoadChat(otheruid: model.matchedUid ?? "")
-                print(chatHistory)
+                let lastChatDate = self.executeLoadChat(otheruid: model.matchedUid ?? "")
+                print("last chat date: ", lastChatDate)
+                // request chat history, save chat
+                self.executeRequestChatHistory(otheruid: model.matchedUid ?? "", lastChatDate: lastChatDate)
                 
-                // request chat history
-                
-                // save chat
                 
                 // socket connect
                 let idtoken = UserInfoManager.idToken ?? ""
@@ -73,13 +72,31 @@ final class ChatUseCase: UseCaseType {
         })
     }
     
-    func executeLoadChat(otheruid: String) -> [ChatResponseModel] {
-        return realmPepo.loadChat(of: otheruid)
+    private func executeLoadChat(otheruid: String) -> String {
+        return realmPepo.getLastChatDate(of: otheruid) ?? "2000-01-01T00:00:00.000Z"
     }
     
-//    func executeRequestChatHistory(otheruid: String) {
-//        chatRepo.requestChatHistory(otheruid: otheruid, lastChatDate: <#T##String#>, completion: <#T##(Result<[ChatResponseModel], RequestChatHistoryError>) -> Void#>)
-//    }
+    private func executeRequestChatHistory(otheruid: String, lastChatDate: String) {
+        chatRepo.requestChatHistory(otheruid: otheruid, lastChatDate: lastChatDate) { [weak self] result in
+            switch result {
+            case .success(let chatHistory):
+                self?.excuteSaveChatHistory(otheruid: otheruid, chatHistory: chatHistory)
+            case .failure(let error):
+                switch error {
+                case .tokenError:
+                    self?.tokenErrorHandling {
+                        self?.executeRequestChatHistory(otheruid: otheruid, lastChatDate: lastChatDate)
+                    }
+                default:
+                    print("load chat history error", error)
+                }
+            }
+        }
+    }
+    
+    private func excuteSaveChatHistory(otheruid: String, chatHistory: [ChatResponseModel]) {
+        realmPepo.saveChatHistory(of: otheruid, with: chatHistory)
+    }
     
     func executeSendMessage(chat: String) {
         let uid = UserChatManager.otherUID ?? ""

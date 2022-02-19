@@ -17,7 +17,7 @@ struct ProfileItemViewModel {
     
     init(model: UserInfoModel) {
         self.nick = model.nick
-        self.reputation = model.reputation[0 ..< 6].map { $0 == 1 ? .fill : .inactive }
+        self.reputation = model.reputation[0 ..< 6].map { $0 >= 1 ? .fill : .inactive }
         self.comment = model.comment
         self.sesac = model.sesac
         self.background = model.background

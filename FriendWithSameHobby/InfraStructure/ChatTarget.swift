@@ -38,8 +38,8 @@ extension ChatTarget: TargetType {
     
     var task: Task {
         switch self {
-        case .chatHistory(_, _):
-            return .requestParameters(parameters: [:], encoding: URLEncoding.default)
+        case .chatHistory(_, let lastChatDate):
+            return .requestParameters(parameters: ["lastchatDate": lastChatDate], encoding: URLEncoding.queryString)
         case .send(_, let parameters):
             return .requestParameters(parameters: parameters, encoding: URLEncoding.default)
         }

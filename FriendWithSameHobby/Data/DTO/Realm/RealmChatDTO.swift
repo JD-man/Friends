@@ -12,6 +12,15 @@ final class RealmChatDTO: Object {
     // primaryKey = 상대방 uid
     @Persisted(primaryKey: true) var _id: String
     @Persisted var payload: List<RealmChatPayLoadDTO>
+    
+    convenience init(otheruid: String, chatHistory: [ChatResponseModel]) {
+        self.init()
+        self._id = otheruid
+        
+        let list = List<RealmChatPayLoadDTO>()
+        chatHistory.forEach { list.append(RealmChatPayLoadDTO(model: $0)) }
+        self.payload = list
+    }
 }
 
 final class RealmChatPayLoadDTO: EmbeddedObject {
@@ -21,6 +30,16 @@ final class RealmChatPayLoadDTO: EmbeddedObject {
     @Persisted var from: String
     @Persisted var chat: String
     @Persisted var createdAt: String
+    
+    convenience init(model: ChatResponseModel) {
+        self.init()
+        self.id = model.id
+        self.v = model.v
+        self.to = model.to
+        self.from = model.from
+        self.chat = model.chat
+        self.createdAt = model.createdAt.toString
+    }
 }
 
 extension RealmChatDTO {
