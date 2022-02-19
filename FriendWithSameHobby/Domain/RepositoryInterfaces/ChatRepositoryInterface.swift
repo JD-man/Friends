@@ -13,5 +13,11 @@ protocol ChatRepositoryInterface {
         completion: @escaping (Result<ChatResponseModel, ChatSendError>) -> Void
     )
     
+    func requestChatHistory(
+        otheruid: String,
+        lastChatDate: String,
+        completion: @escaping (Result<[ChatResponseModel], RequestChatHistoryError>) -> Void
+    )
+    
     func socketConfig(idToken: String, callback: @escaping (ChatResponseModel) -> Void)
 }

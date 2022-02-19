@@ -107,12 +107,6 @@ class ChatMenuViewController: UIViewController {
                 self?.initialAnimation(type: .hide)
             }.disposed(by: disposeBag)
         
-        reportButton.rx.tap
-            .asDriver()
-            .drive { _ in
-                print("reportButton")
-            }.disposed(by: disposeBag)
-        
         view.rx.tapGesture()
             .when(.ended)
             .subscribe(onNext: { [weak self] _ in

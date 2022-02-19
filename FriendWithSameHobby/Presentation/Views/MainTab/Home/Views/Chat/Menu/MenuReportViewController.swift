@@ -65,7 +65,7 @@ class MenuReportViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         viewConfig()
-        //binding()
+        binding()
     }
     
     private func viewConfig() {
@@ -137,6 +137,7 @@ class MenuReportViewController: UIViewController {
         output.dismiss
             .asSignal()
             .emit { [weak self] _ in
+                print("dismiss")
                 self?.dismiss(animated: false, completion: nil)
             }.disposed(by: disposeBag)
 

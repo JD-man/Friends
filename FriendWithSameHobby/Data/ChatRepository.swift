@@ -18,6 +18,7 @@ final class ChatRepository: ChatRepositoryInterface {
     }
     
     typealias ChatSendResult = Result<ChatResponseModel, ChatSendError>
+    typealias RequestChatHistoryResult = Result<[ChatResponseModel], RequestChatHistoryError>
     
     private var manager: SocketManager!
     private var socket: SocketIOClient!
@@ -37,6 +38,22 @@ final class ChatRepository: ChatRepositoryInterface {
             case .failure(let error):
                 let statusCode = error.response?.statusCode ?? -1
                 completion(.failure(ChatSendError(rawValue: statusCode) ?? .unknownError))
+            }
+        }
+    }
+    
+    func requestChatHistory(otheruid: String, lastChatDate: String, completion: @escaping (RequestChatHistoryResult) -> Void ) {
+        provider.request(.chatHistory(uid: otheruid, lastChatDate: lastChatDate)) { result in
+            switch result {
+            case .success(let response):
+                guard let decoded = try? JSONDecoder().decode(ChatHistoryResponseDTO.self, from: response.data) else {
+                    print("chat history decode fail")
+                    return
+                }
+                completion(.success(decoded.toDomain()))
+            case .failure(let error):
+                let statusCode = error.response?.statusCode ?? -1
+                completion(.failure(RequestChatHistoryError(rawValue: statusCode) ?? .unknownError))
             }
         }
     }

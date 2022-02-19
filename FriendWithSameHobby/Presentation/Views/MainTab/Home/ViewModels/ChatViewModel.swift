@@ -79,7 +79,7 @@ final class ChatViewModel: ViewModelType {
         
         // usecase to output        
         useCase.sendMessageSuccess
-            .map { ChatItemViewModel(userType: .me, message: $0.chat, time: $0.createdAt) }
+            .map { ChatItemViewModel(userType: .me, message: $0.chat, time: $0.createdAt.chatDate) }
             .bind {
                 var chatValue = output.chatMessages.value
                 chatValue.append($0)
@@ -87,7 +87,7 @@ final class ChatViewModel: ViewModelType {
             }.disposed(by: disposeBag)
         
         useCase.receiveMessageSuccess
-            .map { ChatItemViewModel(userType: .you, message: $0.chat, time: $0.createdAt) }
+            .map { ChatItemViewModel(userType: .you, message: $0.chat, time: $0.createdAt.chatDate) }
             .bind {
                 var chatValue = output.chatMessages.value
                 chatValue.append($0)

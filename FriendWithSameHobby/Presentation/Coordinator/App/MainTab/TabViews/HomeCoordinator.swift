@@ -78,10 +78,12 @@ final class HomeCoordinator: CoordinatorType {
         let chatRepo = ChatRepository()
         let queueRepo = QueueRepository()
         let firebaseRepo = FirebaseAuthRepository(phoneID: nil)
+        let realmRepo = RealmRepository()
         let useCase = ChatUseCase(
             firebaseRepo: firebaseRepo,
             queueRepo: queueRepo,
-            chatRepo: chatRepo)
+            chatRepo: chatRepo,
+            realmRepo: realmRepo)
         let viewModel = ChatViewModel(useCase: useCase, coordinator: self)
         let chatVC = ChatViewController(viewModel: viewModel)
         chatVC.hidesBottomBarWhenPushed = true

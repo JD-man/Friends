@@ -54,6 +54,17 @@ final class MenuReportViewModel: ViewModelType {
         
         // usecase to coordinator
         useCase.reportSuccess
+            .asSignal()
+            .emit { [weak self] _ in
+                output.dismiss.accept(())
+                self?.coordinator?.show(view: .mapView, by: .backToFirst)
+            }.disposed(by: disposeBag)
+        
+        useCase.reportFailure
+            .asSignal()
+            .emit { [weak self] in
+                self?.coordinator?.toasting(message: $0.description)
+            }.disposed(by: disposeBag)
         
         return output
     }
