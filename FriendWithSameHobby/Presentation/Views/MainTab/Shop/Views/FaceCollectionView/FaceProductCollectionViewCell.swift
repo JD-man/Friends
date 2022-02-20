@@ -13,7 +13,7 @@ class FaceProductCollectionViewCell: UICollectionViewCell {
     
     private let faceImageView = UIImageView().then {
         $0.contentMode = .scaleAspectFit
-        $0.addCorner(rad: 8, borderColor: AssetsColors.gray1.color)
+        $0.addCorner(rad: 8, borderColor: AssetsColors.gray3.color)
     }
     private let productNameLabel = UILabel().then {
         $0.font = AssetsFonts.NotoSansKR.medium.font(size: 14)
