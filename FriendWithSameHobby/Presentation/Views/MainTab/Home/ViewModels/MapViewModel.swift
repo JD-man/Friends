@@ -21,7 +21,7 @@ final class MapViewModel: ViewModelType {
     
     struct Output {
         let userCoord = PublishRelay<[FromQueueDBModel]>()
-        let isUserMatched = PublishRelay<Void>()
+        //let isUserMatched = PublishRelay<Void>()
     }
     
     var useCase: MapUseCase
@@ -60,11 +60,11 @@ final class MapViewModel: ViewModelType {
                 }
             }.disposed(by: disposeBag)
         
-        input.viewWillAppear
-            .asSignal()
-            .emit { [weak self] _ in
-                self?.useCase.executeCheckMatchingStatus()
-            }.disposed(by: disposeBag)
+//        input.viewWillAppear
+//            .asSignal()
+//            .emit { [weak self] _ in
+//                self?.useCase.executeCheckMatchingStatus()
+//            }.disposed(by: disposeBag)
         
         // UseCase to Output
         useCase.fromQueueSuccess            
@@ -75,11 +75,11 @@ final class MapViewModel: ViewModelType {
             .bind(to: output.userCoord)
             .disposed(by: disposeBag)
         
-        Observable.merge(
-            useCase.checkMatchingSuccess.map { _ in () },
-            useCase.checkMatchingFail.map { _ in () }
-            ).bind(to: output.isUserMatched)
-            .disposed(by: disposeBag)
+//        Observable.merge(
+//            useCase.checkMatchingSuccess.map { _ in () },
+//            useCase.checkMatchingFail.map { _ in () }
+//            ).bind(to: output.isUserMatched)
+//            .disposed(by: disposeBag)
         
         return output
     }

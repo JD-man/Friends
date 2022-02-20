@@ -57,6 +57,30 @@ final class ShopViewController: UIViewController {
                                         description: "테스트 설명 테스트 설명 테스트 설명 테스트 설명 테스트 설명 테스트 설명 "),
         ])
     
+    private let faceProductRelay = BehaviorRelay<[FaceShopItemViewModel]>(
+        value: [
+            FaceShopItemViewModel(faceImage: SeSACFace.basic,
+                                  productName: "테스트 배경이름",
+                                  isPurchased: true,
+                                  description: "테스트 설명 테스트 설명 테스트 설명 테스트 설명 테스트 설명 테스트 설명 "),
+            FaceShopItemViewModel(faceImage: SeSACFace.basic,
+                                  productName: "테스트 배경이름",
+                                  isPurchased: true,
+                                  description: "테스트 설명 테스트 설명 테스트 설명 테스트 설명 테스트 설명 테스트 설명 "),
+            FaceShopItemViewModel(faceImage: SeSACFace.basic,
+                                  productName: "테스트 배경이름",
+                                  isPurchased: true,
+                                  description: "테스트 설명 테스트 설명 테스트 설명 테스트 설명 테스트 설명 테스트 설명 "),
+            FaceShopItemViewModel(faceImage: SeSACFace.basic,
+                                  productName: "테스트 배경이름",
+                                  isPurchased: true,
+                                  description: "테스트 설명 테스트 설명 테스트 설명 테스트 설명 테스트 설명 테스트 설명 "),
+            FaceShopItemViewModel(faceImage: SeSACFace.basic,
+                                  productName: "테스트 배경이름",
+                                  isPurchased: true,
+                                  description: "테스트 설명 테스트 설명 테스트 설명 테스트 설명 테스트 설명 테스트 설명 "),
+        ])
+    
     private let backgroundProductTableView = UITableView().then {
         $0.isHidden = true
         $0.separatorStyle = .none
@@ -65,7 +89,10 @@ final class ShopViewController: UIViewController {
                     forCellReuseIdentifier: BackgroundShopTableViewCell.identifier)        
     }
     
-    private let faceProductCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
+    private let faceProductCollectionView = UICollectionView(frame: .zero, collectionViewLayout: FaceProductCollectionViewFlowLayout()).then {
+        $0.register(FaceProductCollectionViewCell.self,
+                    forCellWithReuseIdentifier: FaceProductCollectionViewCell.identifier)
+    }
     
     weak var coordinator: ShopCoordinator?
     
@@ -88,7 +115,8 @@ final class ShopViewController: UIViewController {
         title = "새싹샵"
         view.backgroundColor = .systemBackground
         [backgroundImageView, faceImageView, saveButton,
-         faceTapButton, backgroundTapButton, backgroundProductTableView].forEach { view.addSubview($0) }
+         faceTapButton, backgroundTapButton,
+         faceProductCollectionView, backgroundProductTableView].forEach { view.addSubview($0) }
         
         backgroundImageView.snp.makeConstraints { make in
             make.top.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(16)
@@ -119,6 +147,11 @@ final class ShopViewController: UIViewController {
             make.trailing.equalTo(view.safeAreaLayoutGuide)
         }
         
+        faceProductCollectionView.snp.makeConstraints { make in
+            make.top.equalTo(faceTapButton.snp.bottom).offset(4)
+            make.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
+        }
+        
         backgroundProductTableView.snp.makeConstraints { make in
             make.top.equalTo(faceTapButton.snp.bottom).offset(4)
             make.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
@@ -133,6 +166,11 @@ final class ShopViewController: UIViewController {
         )
         
         let output = viewModel.transform(input, disposeBag: disposeBag)
+        
+        output.shopHidden
+            .map { $0 == false }
+            .bind(to: faceProductCollectionView.rx.isHidden)
+            .disposed(by: disposeBag)
 
         output.shopHidden
             .map { $0 == true }
@@ -140,18 +178,14 @@ final class ShopViewController: UIViewController {
             .disposed(by: disposeBag)
         
         output.shopHidden
-            .map { $0 == false ? TopTabButtonStatus.selected : TopTabButtonStatus.unselected }
-            .bind(to: backgroundTapButton.rx.status)
-            .disposed(by: disposeBag)
-        
-        output.shopHidden
             .map { $0 == true ? TopTabButtonStatus.selected : TopTabButtonStatus.unselected }
             .bind(to: faceTapButton.rx.status)
             .disposed(by: disposeBag)
         
-//        output.shopHidden
-//            .map { $0 == false }
-//            .bind(to)
+        output.shopHidden
+            .map { $0 == false ? TopTabButtonStatus.selected : TopTabButtonStatus.unselected }
+            .bind(to: backgroundTapButton.rx.status)
+            .disposed(by: disposeBag)
         
         // MARK: - TableView Binding
         backgroundProductTestRelay
@@ -161,6 +195,14 @@ final class ShopViewController: UIViewController {
                 cellType: BackgroundShopTableViewCell.self)) { row, item, cell in
                     cell.configure(with: item)
                 }.disposed(by: disposeBag)
-            
+        
+        // MARK: - Collection View Binding
+        faceProductRelay
+            .asDriver(onErrorJustReturn: [])
+            .drive(faceProductCollectionView.rx.items(
+                cellIdentifier: FaceProductCollectionViewCell.identifier,
+                cellType: FaceProductCollectionViewCell.self)) { row, item, cell in
+                    cell.configure(with: item)
+                }.disposed(by: disposeBag)            
     }
 }

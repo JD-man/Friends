@@ -46,11 +46,10 @@ class MapUseCase: UseCaseType {
     }
     
     func executeCheckMatchingStatus() {
-        // 없으면 uid 불러와야함
         let model = MatchingBodyModel(uid: UserInfoManager.uid ?? "")        
         queueRepo?.checkMatchingStatus(model: model, completion: { [weak self] result in
             switch result {
-            case .success(let model):
+            case .success(let model):                
                 UserChatManager.otherUID = model.matchedUid
                 UserChatManager.otherNickname = model.matchedNick
                 if model.matched {

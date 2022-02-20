@@ -53,6 +53,7 @@ final class ChatUseCase: UseCaseType {
                 // socket connect
                 let idtoken = UserInfoManager.idToken ?? ""
                 self.chatRepo.socketConfig(idToken: idtoken, callback: {
+                    self.realmPepo.saveChatHistory(of: model.matchedUid ?? "" , with: [$0])
                     self.receiveMessageSuccess.accept([$0])
                 })
             case .failure(let error):

@@ -90,6 +90,7 @@
 		89724A9727C23D9900D06258 /* ShopUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89724A9627C23D9900D06258 /* ShopUseCase.swift */; };
 		89724A9927C2535A00D06258 /* FaceProductCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89724A9827C2535A00D06258 /* FaceProductCollectionViewFlowLayout.swift */; };
 		89724A9B27C2536D00D06258 /* FaceProductCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89724A9A27C2536D00D06258 /* FaceProductCollectionViewCell.swift */; };
+		89724A9D27C28A3200D06258 /* FaceShopItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89724A9C27C28A3200D06258 /* FaceShopItemViewModel.swift */; };
 		89825B6C27B7C10300B2A239 /* ViewController+RxExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89825B6B27B7C10300B2A239 /* ViewController+RxExt.swift */; };
 		89825B6E27B80FB500B2A239 /* SeSACHobbyTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89825B6D27B80FB500B2A239 /* SeSACHobbyTagView.swift */; };
 		89825B7027B8227400B2A239 /* MatchingBodyDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89825B6F27B8227400B2A239 /* MatchingBodyDTO.swift */; };
@@ -299,6 +300,7 @@
 		89724A9627C23D9900D06258 /* ShopUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopUseCase.swift; sourceTree = "<group>"; };
 		89724A9827C2535A00D06258 /* FaceProductCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceProductCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		89724A9A27C2536D00D06258 /* FaceProductCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceProductCollectionViewCell.swift; sourceTree = "<group>"; };
+		89724A9C27C28A3200D06258 /* FaceShopItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceShopItemViewModel.swift; sourceTree = "<group>"; };
 		89825B6B27B7C10300B2A239 /* ViewController+RxExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+RxExt.swift"; sourceTree = "<group>"; };
 		89825B6D27B80FB500B2A239 /* SeSACHobbyTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeSACHobbyTagView.swift; sourceTree = "<group>"; };
 		89825B6F27B8227400B2A239 /* MatchingBodyDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchingBodyDTO.swift; sourceTree = "<group>"; };
@@ -1121,6 +1123,7 @@
 			children = (
 				89724A9227C2361100D06258 /* BackgroundShopItemViewModel.swift */,
 				89724A9427C23CCD00D06258 /* ShopViewModel.swift */,
+				89724A9C27C28A3200D06258 /* FaceShopItemViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -1727,6 +1730,7 @@
 				89A81985279A831A00F257CA /* OnboardingRepositoryInterface.swift in Sources */,
 				895E1D8527A5B0A70054742F /* AccountTableViewCell.swift in Sources */,
 				89EC76CF27ACF29700CDA0A4 /* MapMatchingButton.swift in Sources */,
+				89724A9D27C28A3200D06258 /* FaceShopItemViewModel.swift in Sources */,
 				894E089427C0D6EA00E611E1 /* RealmChatDTO.swift in Sources */,
 				89FE9AF127BCD09100887232 /* MenuButton.swift in Sources */,
 				8940CC9127BF736800A12234 /* MenuReportViewModel.swift in Sources */,

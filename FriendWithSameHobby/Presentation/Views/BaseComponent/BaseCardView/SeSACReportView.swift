@@ -83,7 +83,8 @@ final class SeSACReportView: UIView {
             button.rx.tap
                 .asDriver()
                 .drive { [weak button] _ in
-                    button?.status = .fill
+                    guard let button = button else { return }
+                    button.status = button.status == .fill ? .inactive : .fill
                 }.disposed(by: disposeBag)
         }
     }
