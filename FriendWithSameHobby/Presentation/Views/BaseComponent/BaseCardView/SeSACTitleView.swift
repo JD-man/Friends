@@ -108,7 +108,8 @@ final class SeSACTitleView: UIView {
             button.rx.tap
                 .asDriver()
                 .drive { [weak button] _ in
-                    button?.status = .fill
+                    guard let button = button else { return }
+                    button.status = button.status == .fill ? .disable : .fill
                 }.disposed(by: disposeBag)
         }
     }
