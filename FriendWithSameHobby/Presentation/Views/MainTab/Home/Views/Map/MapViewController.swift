@@ -72,7 +72,7 @@ final class MapViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        matchingButton.setMatchingStatus()
+        //matchingButton.setMatchingStatus()
         navigationController?.navigationBar.isHidden = true
     }
     
@@ -135,12 +135,12 @@ final class MapViewController: UIViewController {
                 self?.friendsMarkers = markers                
             }.disposed(by: disposeBag)
         
-//        output.isUserMatched
-//            .asDriver(onErrorJustReturn: ())
-//            .drive { [weak self] _ in
-//                print("view will appear")
-//                self?.matchingButton.setMatchingStatus()
-//            }.disposed(by: disposeBag)
+        output.isUserMatched
+            .asDriver(onErrorJustReturn: ())
+            .drive { [weak self] _ in
+                print("==================== view will appear end")
+                self?.matchingButton.setMatchingStatus()
+            }.disposed(by: disposeBag)
         
         // MARK: - Relay Input
         Observable.merge(

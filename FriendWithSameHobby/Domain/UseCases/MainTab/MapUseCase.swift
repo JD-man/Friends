@@ -54,8 +54,8 @@ class MapUseCase: UseCaseType {
                 UserChatManager.otherNickname = model.matchedNick
                 if model.matched {
                     UserMatchingStatus.matchingStatus = MatchingStatus.matched.rawValue
-                    self?.checkMatchingSuccess.accept(model)
-                }                
+                }
+                self?.checkMatchingSuccess.accept(model)
             case .failure(let error):
                 switch error {
                 case .tokenError:
