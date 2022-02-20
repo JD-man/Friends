@@ -20,8 +20,13 @@ final class ShopCoordinator: CoordinatorType {
     }
     
     func start() {
-        // Start with accountVC
-        let shopVC = ShopViewController(coordinator: self)
+        pushShopVC()
+    }
+    
+    func pushShopVC() {
+        let useCase = ShopUseCase()
+        let viewModel = ShopViewModel(useCase: useCase, coordinator: self)
+        let shopVC = ShopViewController(viewModel: viewModel)
         navigationController.pushViewController(shopVC, animated: true)
     }
 }

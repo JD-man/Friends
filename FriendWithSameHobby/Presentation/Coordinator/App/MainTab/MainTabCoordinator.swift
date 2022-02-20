@@ -36,19 +36,19 @@ final class MainTabCoordinator: CoordinatorType {
         let shopCoordinator = ShopCoordinator(nav: shopNav)
         coordinatorConfig(coordinator: shopCoordinator)
         
-        // 3. Friends Coordinator
-        let friendsNav = tabbarNav(title: "새싹친구", image: AssetsImages.friendsIcon.image)
-        let friendsCoordinator = FriendsCoordinator(nav: friendsNav)
-        coordinatorConfig(coordinator: friendsCoordinator)
+//        // 3. 새싹친구 탭 삭제
+//        let friendsNav = tabbarNav(title: "새싹친구", image: AssetsImages.friendsIcon.image)
+//        let friendsCoordinator = FriendsCoordinator(nav: friendsNav)
+//        coordinatorConfig(coordinator: friendsCoordinator)
         
-        // 4. Account Coordinator
+        // 3. Account Coordinator
         let accountNav = tabbarNav(title: "내정보", image: AssetsImages.accountIcon.image)
         let accountCoordinator = AccountCoordinator(nav: accountNav)
         coordinatorConfig(coordinator: accountCoordinator)
         
         navigationController.navigationBar.isHidden = true
         
-        tabbarController.viewControllers = [homeNav, shopNav, friendsNav, accountNav]        
+        tabbarController.viewControllers = [homeNav, shopNav, accountNav]        
         navigationController.pushViewController(tabbarController, animated: true)        
     }
     

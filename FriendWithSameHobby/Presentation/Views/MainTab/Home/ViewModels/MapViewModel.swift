@@ -75,9 +75,10 @@ final class MapViewModel: ViewModelType {
             .bind(to: output.userCoord)
             .disposed(by: disposeBag)
         
-        useCase.checkMatchingSuccess
-            .map { _ in () }
-            .bind(to: output.isUserMatched)
+        Observable.merge(
+            useCase.checkMatchingSuccess.map { _ in () },
+            useCase.checkMatchingFail.map { _ in () }
+            ).bind(to: output.isUserMatched)
             .disposed(by: disposeBag)
         
         return output
