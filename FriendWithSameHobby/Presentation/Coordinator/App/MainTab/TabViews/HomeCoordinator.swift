@@ -14,6 +14,7 @@ enum HomeCoordinatorViews {
     case matchingView(lat: Double, long: Double)
     case chatView
     case commentView(review: [String])
+    case profileView
 }
 
 enum HomeCoordinatorShowStyle {
@@ -90,6 +91,16 @@ final class HomeCoordinator: CoordinatorType {
         return chatVC
     }
     
+    func profileVC() -> ProfileViewController {
+        let userRepo = UserRepository()
+        let phoneAuthRepo = FirebaseAuthRepository(phoneID: nil)
+        let useCase = ProfileUseCase(phoneAuthRepo: phoneAuthRepo, userRepo: userRepo)
+        let viewModel = ProfileViewModel(useCase: useCase, coordinator: nil)
+        let profileVC = ProfileViewController(profileViewModel: viewModel)
+        profileVC.hidesBottomBarWhenPushed = true
+        return profileVC
+    }
+    
     func presentChatMenuVC() {
         guard let chatVC = navigationController.topViewController as? ChatViewController else { return }
         guard let menuVC = chatVC.children.first as? ChatMenuViewController else {
@@ -143,6 +154,8 @@ final class HomeCoordinator: CoordinatorType {
             showBy(view: chatVC(), by: by)
         case .commentView(let review):
             showBy(view: commentVC(review: review), by: by)
+        case .profileView:
+            showBy(view: profileVC(), by: by)
         }
     }
     

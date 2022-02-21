@@ -137,8 +137,7 @@ final class MapViewController: UIViewController {
         
         output.isUserMatched
             .asDriver(onErrorJustReturn: ())
-            .drive { [weak self] _ in
-                print("==================== view will appear end")
+            .drive { [weak self] _ in                
                 self?.matchingButton.setMatchingStatus()
             }.disposed(by: disposeBag)
         

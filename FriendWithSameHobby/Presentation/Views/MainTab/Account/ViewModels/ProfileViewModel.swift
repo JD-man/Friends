@@ -37,7 +37,7 @@ final class ProfileViewModel: ViewModelType {
     weak var coordinator: AccountCoordinator?
     private var disposeBag = DisposeBag()
     
-    init(useCase: ProfileUseCase, coordinator: AccountCoordinator) {
+    init(useCase: ProfileUseCase, coordinator: AccountCoordinator?) {
         self.useCase = useCase
         self.coordinator = coordinator
     }

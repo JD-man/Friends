@@ -44,7 +44,7 @@ final class RealmChatPayLoadDTO: EmbeddedObject {
 
 extension RealmChatDTO {
     func toDomain() -> [ChatResponseModel] {
-        return Array(payload).map { $0.toDomain() }.sorted { $0.createdAt < $1.createdAt }
+        return Array(payload).map { $0.toDomain() }/*.sorted { $0.createdAt < $1.createdAt }*/
     }
 }
 

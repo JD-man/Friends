@@ -50,20 +50,23 @@ final class MapViewModel: ViewModelType {
         
         input.matchingButtonTap
             .drive { [weak self] in
-                switch $0.0 {
-                case .normal:
-                    self?.coordinator?.show(view: .hobbyView(lat: $0.1, long: $0.2), by: .push)
-                case .waiting:
-                    self?.coordinator?.show(view: .matchingView(lat: $0.1, long: $0.2), by: .push)
-                case .matched:
-                    self?.coordinator?.show(view: .chatView, by: .push)
+                if UserInfoManager.gender == -1 {
+                    self?.coordinator?.show(view: .profileView, by: .push)
+                } else {
+                    switch $0.0 {
+                    case .normal:
+                        self?.coordinator?.show(view: .hobbyView(lat: $0.1, long: $0.2), by: .push)
+                    case .waiting:
+                        self?.coordinator?.show(view: .matchingView(lat: $0.1, long: $0.2), by: .push)
+                    case .matched:
+                        self?.coordinator?.show(view: .chatView, by: .push)
+                    }
                 }
             }.disposed(by: disposeBag)
         
         input.viewWillAppear
             .asSignal()
-            .emit { [weak self] _ in
-                print("==================== view will appear start")
+            .emit { [weak self] _ in                
                 self?.useCase.executeCheckMatchingStatus()
             }.disposed(by: disposeBag)
         
