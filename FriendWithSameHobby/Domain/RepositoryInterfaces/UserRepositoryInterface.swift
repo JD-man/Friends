@@ -36,4 +36,13 @@ protocol UserRepositoryInterface {
         model: ReportUserModel,
         completion: @escaping (Result<Bool, ReportUserError>) -> Void
     )
+    
+    func shopInfo(
+        completion: @escaping (Result<UserShopInfoModel, UserShopError>) -> Void
+    )
+    
+    func saveImageProfile(
+        model: UpdateImageModel,
+        completion: @escaping (Result<Bool, UpdateImageError>) -> Void
+    )
 }

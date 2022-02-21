@@ -51,6 +51,13 @@
 		8940CC9527BF790900A12234 /* ReportUserDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8940CC9427BF790900A12234 /* ReportUserDTO.swift */; };
 		8940CC9727BF796200A12234 /* ReportUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8940CC9627BF796200A12234 /* ReportUserModel.swift */; };
 		894184E027A15396007F35AC /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894184DF27A15396007F35AC /* ProfileViewController.swift */; };
+		894B6AF727C3653E009D76E5 /* UserShopInfoDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894B6AF627C3653E009D76E5 /* UserShopInfoDTO.swift */; };
+		894B6AF927C3658A009D76E5 /* UserShopInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894B6AF827C3658A009D76E5 /* UserShopInfoModel.swift */; };
+		894B6AFB27C37A6E009D76E5 /* Int+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894B6AFA27C37A6E009D76E5 /* Int+Ext.swift */; };
+		894B6AFD27C3A5A2009D76E5 /* UpdateImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894B6AFC27C3A5A2009D76E5 /* UpdateImageModel.swift */; };
+		894B6AFF27C3A684009D76E5 /* UpdateImageDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894B6AFE27C3A684009D76E5 /* UpdateImageDTO.swift */; };
+		894B6B0127C3B230009D76E5 /* ShopRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894B6B0027C3B230009D76E5 /* ShopRepository.swift */; };
+		894B6B0427C3B261009D76E5 /* ShopRepositoryInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894B6B0327C3B261009D76E5 /* ShopRepositoryInterface.swift */; };
 		894E088F27C0D5F100E611E1 /* RealmRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894E088E27C0D5F100E611E1 /* RealmRepository.swift */; };
 		894E089127C0D61500E611E1 /* RealmRepositoryInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894E089027C0D61500E611E1 /* RealmRepositoryInterface.swift */; };
 		894E089427C0D6EA00E611E1 /* RealmChatDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894E089327C0D6EA00E611E1 /* RealmChatDTO.swift */; };
@@ -265,6 +272,13 @@
 		8940CC9427BF790900A12234 /* ReportUserDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportUserDTO.swift; sourceTree = "<group>"; };
 		8940CC9627BF796200A12234 /* ReportUserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportUserModel.swift; sourceTree = "<group>"; };
 		894184DF27A15396007F35AC /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		894B6AF627C3653E009D76E5 /* UserShopInfoDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserShopInfoDTO.swift; sourceTree = "<group>"; };
+		894B6AF827C3658A009D76E5 /* UserShopInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserShopInfoModel.swift; sourceTree = "<group>"; };
+		894B6AFA27C37A6E009D76E5 /* Int+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Ext.swift"; sourceTree = "<group>"; };
+		894B6AFC27C3A5A2009D76E5 /* UpdateImageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateImageModel.swift; sourceTree = "<group>"; };
+		894B6AFE27C3A684009D76E5 /* UpdateImageDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateImageDTO.swift; sourceTree = "<group>"; };
+		894B6B0027C3B230009D76E5 /* ShopRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopRepository.swift; sourceTree = "<group>"; };
+		894B6B0327C3B261009D76E5 /* ShopRepositoryInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopRepositoryInterface.swift; sourceTree = "<group>"; };
 		894E088E27C0D5F100E611E1 /* RealmRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmRepository.swift; sourceTree = "<group>"; };
 		894E089027C0D61500E611E1 /* RealmRepositoryInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmRepositoryInterface.swift; sourceTree = "<group>"; };
 		894E089327C0D6EA00E611E1 /* RealmChatDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmChatDTO.swift; sourceTree = "<group>"; };
@@ -572,6 +586,7 @@
 				89EC76D727AD200000CDA0A4 /* QueueRepository.swift */,
 				89A579E727BC110F008CAAA3 /* ChatRepository.swift */,
 				894E088E27C0D5F100E611E1 /* RealmRepository.swift */,
+				894B6B0027C3B230009D76E5 /* ShopRepository.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -665,6 +680,13 @@
 				8940CC8E27BF52BF00A12234 /* SeSACReportView.swift */,
 			);
 			path = BaseCardView;
+			sourceTree = "<group>";
+		};
+		894B6B0227C3B236009D76E5 /* Shop */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Shop;
 			sourceTree = "<group>";
 		};
 		894E088D27C0D5D900E611E1 /* Realm */ = {
@@ -923,6 +945,7 @@
 				89FDC55727AFFE4F0088B32A /* QueueRepositoryInterface.swift */,
 				89A579E927BC113B008CAAA3 /* ChatRepositoryInterface.swift */,
 				894E089027C0D61500E611E1 /* RealmRepositoryInterface.swift */,
+				894B6B0327C3B261009D76E5 /* ShopRepositoryInterface.swift */,
 			);
 			path = RepositoryInterfaces;
 			sourceTree = "<group>";
@@ -1001,6 +1024,7 @@
 				89ECC56B279EF43100C4C477 /* Date+Ext.swift */,
 				895E1D8627A5B5420054742F /* Cell+Ext.swift */,
 				89FDC55B27B029470088B32A /* Double+Ext.swift */,
+				894B6AFA27C37A6E009D76E5 /* Int+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1209,6 +1233,7 @@
 		89E05599279D108100E86445 /* DTO */ = {
 			isa = PBXGroup;
 			children = (
+				894B6B0227C3B236009D76E5 /* Shop */,
 				894E088D27C0D5D900E611E1 /* Realm */,
 				894E089227C0D69400E611E1 /* Chat */,
 				89FDC54C27AFEE110088B32A /* Queue */,
@@ -1326,6 +1351,8 @@
 				89C0F3F727A28F6D0038DACA /* UserRegisterDTO.swift */,
 				895E1D8027A52B1B0054742F /* UpdateFCMtokenDTO.swift */,
 				89636BF327A9A97600DD8B91 /* UserMyPageDTO.swift */,
+				894B6AF627C3653E009D76E5 /* UserShopInfoDTO.swift */,
+				894B6AFE27C3A684009D76E5 /* UpdateImageDTO.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -1353,6 +1380,8 @@
 				8914A14A27B924200048FA87 /* UserMyPageModel.swift */,
 				8914A15327B984020048FA87 /* MatchingStateModel.swift */,
 				8940CC9627BF796200A12234 /* ReportUserModel.swift */,
+				894B6AF827C3658A009D76E5 /* UserShopInfoModel.swift */,
+				894B6AFC27C3A5A2009D76E5 /* UpdateImageModel.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -1700,6 +1729,7 @@
 				89C147C6279FCBCA00F0E616 /* UserRepositoryInterface.swift in Sources */,
 				89FDC55427AFEFB80088B32A /* OnqueueBodyModel.swift in Sources */,
 				89E1D03A27BE3EEE00938FC2 /* MenuCommentViewController.swift in Sources */,
+				894B6AFB27C37A6E009D76E5 /* Int+Ext.swift in Sources */,
 				89EC76D627AD0A8500CDA0A4 /* HobbyViewController.swift in Sources */,
 				89825B6E27B80FB500B2A239 /* SeSACHobbyTagView.swift in Sources */,
 				89825B6C27B7C10300B2A239 /* ViewController+RxExt.swift in Sources */,
@@ -1709,6 +1739,7 @@
 				896795D427B44AF600BF942B /* PaddedLabel.swift in Sources */,
 				89AB665927985B9600DFEE95 /* Assets+Fonts.swift in Sources */,
 				898B79482799456F00844284 /* Assets+Images.swift in Sources */,
+				894B6AF927C3658A009D76E5 /* UserShopInfoModel.swift in Sources */,
 				8950C88027B23C340025A8D7 /* HobbyCollectionViewFlowLayout.swift in Sources */,
 				896795DB27B458F900BF942B /* TopTabButton.swift in Sources */,
 				89D721CA279C5A0E00B02A1E /* VerifyViewController.swift in Sources */,
@@ -1720,6 +1751,7 @@
 				89E055A5279D296400E86445 /* UserDefaultManagers.swift in Sources */,
 				8950C88227B23E370025A8D7 /* HobbyCollectionViewCell.swift in Sources */,
 				894184E027A15396007F35AC /* ProfileViewController.swift in Sources */,
+				894B6B0127C3B230009D76E5 /* ShopRepository.swift in Sources */,
 				8940CC9727BF796200A12234 /* ReportUserModel.swift in Sources */,
 				89A81988279ADF7800F257CA /* BaseButton.swift in Sources */,
 				89C147E827A00F5000F0E616 /* FriendsViewController.swift in Sources */,
@@ -1761,10 +1793,12 @@
 				89ECC57C279F330300C4C477 /* RegisterUseCase.swift in Sources */,
 				89E055B5279DA6C200E86445 /* NicknameViewController.swift in Sources */,
 				89A81992279B023900F257CA /* String+Ext.swift in Sources */,
+				894B6AF727C3653E009D76E5 /* UserShopInfoDTO.swift in Sources */,
 				895E1D8127A52B1B0054742F /* UpdateFCMtokenDTO.swift in Sources */,
 				89ECC56C279EF43100C4C477 /* Date+Ext.swift in Sources */,
 				898B79542799502900844284 /* CoordinatorType.swift in Sources */,
 				89D721C2279B8F8300B02A1E /* BaseTextField.swift in Sources */,
+				894B6AFD27C3A5A2009D76E5 /* UpdateImageModel.swift in Sources */,
 				89A579EC27BC11B0008CAAA3 /* ChatTarget.swift in Sources */,
 				89ECC57A279F2B0000C4C477 /* RegisterViewController.swift in Sources */,
 				89A579F927BC22ED008CAAA3 /* ChatError.swift in Sources */,
@@ -1841,6 +1875,7 @@
 				89FE9AF627BD327A00887232 /* ChatMenuViewModel.swift in Sources */,
 				89724A9B27C2536D00D06258 /* FaceProductCollectionViewCell.swift in Sources */,
 				89ECC572279F013800C4C477 /* EmailViewModel.swift in Sources */,
+				894B6B0427C3B261009D76E5 /* ShopRepositoryInterface.swift in Sources */,
 				8940CC9527BF790900A12234 /* ReportUserDTO.swift in Sources */,
 				89E055AF279D9B4400E86445 /* UserInfoDTO.swift in Sources */,
 				89724A9727C23D9900D06258 /* ShopUseCase.swift in Sources */,
@@ -1849,6 +1884,7 @@
 				89C147CC27A00DDF00F0E616 /* MainTabCoordinator.swift in Sources */,
 				896795D927B4501900BF942B /* EmptyUserListView.swift in Sources */,
 				894E089127C0D61500E611E1 /* RealmRepositoryInterface.swift in Sources */,
+				894B6AFF27C3A684009D76E5 /* UpdateImageDTO.swift in Sources */,
 				89ECC566279E987B00C4C477 /* BirthViewController.swift in Sources */,
 				89EC76D327AD09F100CDA0A4 /* MapUseCase.swift in Sources */,
 				894F5C3427A81C2100E583B9 /* ProfileUseCase.swift in Sources */,

@@ -24,9 +24,15 @@ final class ShopCoordinator: CoordinatorType {
     }
     
     func pushShopVC() {
-        let useCase = ShopUseCase()
+        let userRepo = UserRepository()
+        let firebaseRepo = FirebaseAuthRepository(phoneID: nil)
+        let useCase = ShopUseCase(userRepo: userRepo, firebaseRepo: firebaseRepo)
         let viewModel = ShopViewModel(useCase: useCase, coordinator: self)
         let shopVC = ShopViewController(viewModel: viewModel)
         navigationController.pushViewController(shopVC, animated: true)
+    }
+    
+    func toasting(message: String) {
+        navigationController.view.makeToast(message, position: .top)
     }
 }

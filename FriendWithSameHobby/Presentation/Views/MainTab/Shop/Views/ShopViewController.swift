@@ -33,54 +33,6 @@ final class ShopViewController: UIViewController {
     private let faceTapButton = TopTabButton(title: "새싹", status: .selected)
     private let backgroundTapButton = TopTabButton(title: "배경", status: .unselected)
     
-    private let backgroundProductTestRelay = BehaviorRelay<[BackgroundShopItemViewModel]>(
-        value: [
-            BackgroundShopItemViewModel(backgroundImage: SeSACBackground.basic,
-                                        productName: "테스트 배경이름",
-                                        isPurchased: true,
-                                        description: "테스트 설명 테스트 설명 테스트 설명 테스트 설명 테스트 설명 테스트 설명 "),
-            BackgroundShopItemViewModel(backgroundImage: SeSACBackground.basic,
-                                        productName: "테스트 배경이름",
-                                        isPurchased: true,
-                                        description: "테스트 설명 테스트 설명 테스트 설명 테스트 설명 테스트 설명 테스트 설명 "),
-            BackgroundShopItemViewModel(backgroundImage: SeSACBackground.basic,
-                                        productName: "테스트 배경이름",
-                                        isPurchased: true,
-                                        description: "테스트 설명 테스트 설명 테스트 설명 테스트 설명 테스트 설명 테스트 설명 "),
-            BackgroundShopItemViewModel(backgroundImage: SeSACBackground.basic,
-                                        productName: "테스트 배경이름",
-                                        isPurchased: true,
-                                        description: "테스트 설명 테스트 설명 테스트 설명 테스트 설명 테스트 설명 테스트 설명 "),
-            BackgroundShopItemViewModel(backgroundImage: SeSACBackground.basic,
-                                        productName: "테스트 배경이름",
-                                        isPurchased: true,
-                                        description: "테스트 설명 테스트 설명 테스트 설명 테스트 설명 테스트 설명 테스트 설명 "),
-        ])
-    
-    private let faceProductRelay = BehaviorRelay<[FaceShopItemViewModel]>(
-        value: [
-            FaceShopItemViewModel(faceImage: SeSACFace.basic,
-                                  productName: "테스트 배경이름",
-                                  isPurchased: true,
-                                  description: "테스트 설명 테스트 설명 테스트 설명 테스트 설명 테스트 설명 테스트 설명 "),
-            FaceShopItemViewModel(faceImage: SeSACFace.basic,
-                                  productName: "테스트 배경이름",
-                                  isPurchased: true,
-                                  description: "테스트 설명 테스트 설명 테스트 설명 테스트 설명 테스트 설명 테스트 설명 "),
-            FaceShopItemViewModel(faceImage: SeSACFace.basic,
-                                  productName: "테스트 배경이름",
-                                  isPurchased: true,
-                                  description: "테스트 설명 테스트 설명 테스트 설명 테스트 설명 테스트 설명 테스트 설명 "),
-            FaceShopItemViewModel(faceImage: SeSACFace.basic,
-                                  productName: "테스트 배경이름",
-                                  isPurchased: true,
-                                  description: "테스트 설명 테스트 설명 테스트 설명 테스트 설명 테스트 설명 테스트 설명 "),
-            FaceShopItemViewModel(faceImage: SeSACFace.basic,
-                                  productName: "테스트 배경이름",
-                                  isPurchased: true,
-                                  description: "테스트 설명 테스트 설명 테스트 설명 테스트 설명 테스트 설명 테스트 설명 "),
-        ])
-    
     private let backgroundProductTableView = UITableView().then {
         $0.isHidden = true
         $0.separatorStyle = .none
@@ -161,8 +113,12 @@ final class ShopViewController: UIViewController {
     private func binding() {
         // MARK: - Input Ouput
         let input = ShopViewModel.Input(
+            viewWillAppear: self.rx.viewWillAppear.asSignal(),
             faceShopButtonTap: faceTapButton.tabButton.rx.tap.asSignal(),
-            bgShopButtonTap: backgroundTapButton.tabButton.rx.tap.asSignal()
+            bgShopButtonTap: backgroundTapButton.tabButton.rx.tap.asSignal(),            
+            faceSelected: faceProductCollectionView.rx.modelSelected(FaceShopItemViewModel.self),
+            bgSelected: backgroundProductTableView.rx.modelSelected(BackgroundShopItemViewModel.self),
+            saveButtonTap: saveButton.rx.tap.asSignal()
         )
         
         let output = viewModel.transform(input, disposeBag: disposeBag)
@@ -187,22 +143,34 @@ final class ShopViewController: UIViewController {
             .bind(to: backgroundTapButton.rx.status)
             .disposed(by: disposeBag)
         
+        output.currentFace
+            .map { $0.imageAsset.image }
+            .asDriver(onErrorJustReturn: .none)
+            .drive(faceImageView.rx.image)
+            .disposed(by: disposeBag)
+        
+        output.currentBackground
+            .map { $0.imageAsset.image }
+            .asDriver(onErrorJustReturn: .none)
+            .drive(backgroundImageView.rx.image)
+            .disposed(by: disposeBag)
+        
+        // MARK: - Collection View Binding
+        output.faceProduct
+            .asDriver(onErrorJustReturn: [])
+            .drive(faceProductCollectionView.rx.items(
+                cellIdentifier: FaceProductCollectionViewCell.identifier,
+                cellType: FaceProductCollectionViewCell.self)) { row, item, cell in
+                    cell.configure(with: item)
+                }.disposed(by: disposeBag)
+        
         // MARK: - TableView Binding
-        backgroundProductTestRelay
+        output.backgroundProduct
             .asDriver(onErrorJustReturn: [])
             .drive(backgroundProductTableView.rx.items(
                 cellIdentifier: BackgroundShopTableViewCell.identifier,
                 cellType: BackgroundShopTableViewCell.self)) { row, item, cell in
                     cell.configure(with: item)
                 }.disposed(by: disposeBag)
-        
-        // MARK: - Collection View Binding
-        faceProductRelay
-            .asDriver(onErrorJustReturn: [])
-            .drive(faceProductCollectionView.rx.items(
-                cellIdentifier: FaceProductCollectionViewCell.identifier,
-                cellType: FaceProductCollectionViewCell.self)) { row, item, cell in
-                    cell.configure(with: item)
-                }.disposed(by: disposeBag)            
     }
 }

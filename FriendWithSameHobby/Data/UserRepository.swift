@@ -94,4 +94,33 @@ final class UserRepository: UserRepositoryInterface {
             }
         }
     }
+    
+    func shopInfo(completion: @escaping (Result<UserShopInfoModel, UserShopError>) -> Void) {
+        provider.request(.getShopInfo) { result in            
+            switch result {
+            case .success(let response):
+                guard let decoded = try? JSONDecoder().decode(UserShopInfoDTO.self, from: response.data) else {
+                    print("get shop info decode fail")
+                    return
+                }
+                completion(.success(decoded.toDomain()))
+            case .failure(let error):
+                let statusCode = error.response?.statusCode ?? -1
+                completion(.failure(UserShopError(rawValue: statusCode) ?? .unknownError))
+            }
+        }
+    }
+    
+    func saveImageProfile(model: UpdateImageModel, completion: @escaping (Result<Bool, UpdateImageError>) -> Void) {
+        let parameters = UpdateImageDTO(model: model).toParameters()
+        provider.request(.updateImage(parameters: parameters)) { result in
+            switch result {
+            case .success(_):
+                completion(.success(true))
+            case .failure(let error):
+                let statusCode = error.response?.statusCode ?? -1
+                completion(.failure(UpdateImageError(rawValue: statusCode) ?? .unknownError))
+            }
+        }
+    }
 }

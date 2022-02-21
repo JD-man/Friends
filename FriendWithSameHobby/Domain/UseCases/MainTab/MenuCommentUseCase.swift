@@ -34,8 +34,28 @@ final class MenuCommentUseCase: UseCaseType {
                 UserMatchingStatus.matchingStatus = MatchingStatus.normal.rawValue
                 self?.commentSuccess.accept(isCommented)
             case .failure(let error):
-                self?.commentFail.accept(error)
+                switch error {
+                case .tokenError:
+                    self?.tokenErrorHandling {
+                        self?.executeComment(reputation: reputation, comment: comment)
+                    }
+                default:
+                    self?.commentFail.accept(error)
+                }
             }
         }
+    }
+    
+    private func tokenErrorHandling(completion: @escaping () -> Void) {
+        firebaseRepo.refreshingIDtoken(completion: { result in
+            switch result {
+            case .success(let idToken):
+                UserInfoManager.idToken = idToken
+                completion()
+            case .failure(let error):
+                print(error)
+                break
+            }
+        })
     }
 }

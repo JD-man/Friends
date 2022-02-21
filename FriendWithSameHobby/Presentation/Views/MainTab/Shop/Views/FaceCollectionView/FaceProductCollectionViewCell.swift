@@ -67,7 +67,8 @@ class FaceProductCollectionViewCell: UICollectionViewCell {
     func configure(with data: FaceShopItemViewModel) {
         faceImageView.image = data.faceImage.imageAsset.image
         productNameLabel.text = data.productName
-        //purchaseButton
         productDescriptionLabel.text = data.description
+        purchaseButton.status = data.isPurchased ? .disable : .fill
+        purchaseButton.setTitle(data.isPurchased ? "보유" : data.price, for: .normal)
     }
 }

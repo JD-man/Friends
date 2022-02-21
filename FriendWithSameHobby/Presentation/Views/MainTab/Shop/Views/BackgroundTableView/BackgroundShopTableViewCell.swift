@@ -37,6 +37,7 @@ class BackgroundShopTableViewCell: UITableViewCell {
     }
     
     private func viewConfig() {
+        selectionStyle = .none
         [backgroundImageView, productNameLabel,
          productDescriptionLabel, purchaseButton]
             .forEach { contentView.addSubview($0) }
@@ -70,5 +71,7 @@ class BackgroundShopTableViewCell: UITableViewCell {
         backgroundImageView.image = data.backgroundImage.imageAsset.image
         productNameLabel.text = data.productName
         productDescriptionLabel.text = data.description
+        purchaseButton.status = data.isPurchased ? .disable : .fill
+        purchaseButton.setTitle(data.isPurchased ? "보유" : data.price, for: .normal)
     }
 }

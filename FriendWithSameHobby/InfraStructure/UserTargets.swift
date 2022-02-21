@@ -17,6 +17,8 @@ enum UserTargets {
     case withdraw
     case updateUserPage(parameters: Parameters)
     case reportUser(parameters: Parameters)
+    case getShopInfo
+    case updateImage(parameters: Parameters)
 }
 
 extension UserTargets: TargetType {
@@ -36,14 +38,18 @@ extension UserTargets: TargetType {
             return "/user/update/mypage"
         case .reportUser:
             return "/user/report"
+        case .getShopInfo:
+            return "/user/shop/myinfo"
+        case .updateImage:
+            return "/user/update/shop"
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .getUserInfo:
+        case .getUserInfo, .getShopInfo:
             return .get
-        case .postUser, .withdraw, .updateUserPage, .reportUser:
+        case .postUser, .withdraw, .updateUserPage, .reportUser, .updateImage:
             return .post
         case .updateFCMtoken:
             return .put
@@ -52,11 +58,12 @@ extension UserTargets: TargetType {
     
     var task: Task {
         switch self {
-        case .getUserInfo, .withdraw:
+        case .getUserInfo, .withdraw, .getShopInfo:
             return .requestParameters(parameters: [:], encoding: URLEncoding.default)
         case .postUser(let parameters),
                 .updateFCMtoken(let parameters),
-                .updateUserPage(let parameters):
+                .updateUserPage(let parameters),
+                .updateImage(let parameters):
             return .requestParameters(parameters: parameters,
                                       encoding: URLEncoding.default)
         case.reportUser(parameters: let parameters):

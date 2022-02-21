@@ -31,8 +31,28 @@ final class MenuReportUseCase: UseCaseType {
             case .success(let isReported):
                 self?.reportSuccess.accept(isReported)
             case .failure(let error):
-                self?.reportFailure.accept(error)
+                switch error {
+                case .tokenError:
+                    self?.tokenErrorHandling {
+                        self?.executeReportUser(reported: reported, comment: comment)
+                    }
+                default:
+                    self?.reportFailure.accept(error)
+                }
             }
         }
+    }
+    
+    private func tokenErrorHandling(completion: @escaping () -> Void) {
+        firebaseRepo.refreshingIDtoken(completion: { result in
+            switch result {
+            case .success(let idToken):
+                UserInfoManager.idToken = idToken
+                completion()
+            case .failure(let error):
+                print(error)
+                break
+            }
+        })
     }
 }
