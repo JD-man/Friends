@@ -123,4 +123,17 @@ final class UserRepository: UserRepositoryInterface {
             }
         }
     }
+    
+    func completePurchase(model: CompletePurchaseModel, completion: @escaping (Result<Bool, CompletePurchaseError>) -> Void) {
+        let parameters = CompletePurchaseDTO(model: model).toParameters()
+        provider.request(.completePurchase(parameters: parameters)) { result in
+            switch result {
+            case .success(_):
+                completion(.success(true))
+            case .failure(let error):
+                let statusCode = error.response?.statusCode ?? -1
+                completion(.failure(CompletePurchaseError(rawValue: statusCode) ?? .unknownError))
+            }
+        }
+    }
 }

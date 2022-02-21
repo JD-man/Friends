@@ -8,6 +8,7 @@
 import UIKit
 import SnapKit
 import Then
+import RxSwift
 
 class FaceProductCollectionViewCell: UICollectionViewCell {
     
@@ -15,16 +16,21 @@ class FaceProductCollectionViewCell: UICollectionViewCell {
         $0.contentMode = .scaleAspectFit
         $0.addCorner(rad: 8, borderColor: AssetsColors.gray3.color)
     }
-    private let productNameLabel = UILabel().then {
-        $0.font = AssetsFonts.NotoSansKR.medium.font(size: 14)
-    }
+
     private let productDescriptionLabel = UILabel().then {
         $0.numberOfLines = 0
         $0.font = AssetsFonts.NotoSansKR.regular.font(size: 14)
     }
-    private let purchaseButton = BaseButton(title: "가격", status: .disable, type: .h32).then {
+    
+    let purchaseButton = BaseButton(title: "가격", status: .disable, type: .h32).then {
         $0.titleLabel?.font = AssetsFonts.NotoSansKR.medium.font(size: 12)
     }
+    
+    let productNameLabel = UILabel().then {
+        $0.font = AssetsFonts.NotoSansKR.medium.font(size: 14)
+    }
+    
+    var disposeBag = DisposeBag()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -33,6 +39,11 @@ class FaceProductCollectionViewCell: UICollectionViewCell {
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        disposeBag = DisposeBag()
     }
     
     private func viewConfig() {
@@ -69,6 +80,7 @@ class FaceProductCollectionViewCell: UICollectionViewCell {
         productNameLabel.text = data.productName
         productDescriptionLabel.text = data.description
         purchaseButton.status = data.isPurchased ? .disable : .fill
+        purchaseButton.isUserInteractionEnabled = !data.isPurchased
         purchaseButton.setTitle(data.isPurchased ? "보유" : data.price, for: .normal)
     }
 }

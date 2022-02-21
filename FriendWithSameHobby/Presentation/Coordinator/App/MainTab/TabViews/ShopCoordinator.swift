@@ -26,7 +26,8 @@ final class ShopCoordinator: CoordinatorType {
     func pushShopVC() {
         let userRepo = UserRepository()
         let firebaseRepo = FirebaseAuthRepository(phoneID: nil)
-        let useCase = ShopUseCase(userRepo: userRepo, firebaseRepo: firebaseRepo)
+        let shopRepo = ShopRepository()
+        let useCase = ShopUseCase(userRepo: userRepo, firebaseRepo: firebaseRepo, shopRepo: shopRepo)
         let viewModel = ShopViewModel(useCase: useCase, coordinator: self)
         let shopVC = ShopViewController(viewModel: viewModel)
         navigationController.pushViewController(shopVC, animated: true)

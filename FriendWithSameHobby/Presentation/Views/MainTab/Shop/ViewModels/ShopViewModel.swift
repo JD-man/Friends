@@ -21,6 +21,8 @@ final class ShopViewModel: ViewModelType {
         let faceSelected: ControlEvent<FaceShopItemViewModel>
         let bgSelected: ControlEvent<BackgroundShopItemViewModel>
         let saveButtonTap: Signal<Void>
+        let purchaseFaceButtonTap: PublishRelay<Int>
+        let purchaseBGButtonTap: PublishRelay<Int>
     }
     
     struct Output {
@@ -77,6 +79,18 @@ final class ShopViewModel: ViewModelType {
                                                       bg: output.currentBackground.value)
             }.disposed(by: disposeBag)
         
+        input.purchaseFaceButtonTap
+            .asSignal()
+            .emit { [weak self] in
+                self?.useCase.executeBuyProduct(productName: output.faceProduct.value[$0].faceImage.productName)
+            }.disposed(by: disposeBag)
+        
+        input.purchaseBGButtonTap
+            .asSignal()
+            .emit { [weak self] in
+                self?.useCase.executeBuyProduct(productName: output.backgroundProduct.value[$0].backgroundImage.productName)
+            }.disposed(by: disposeBag)
+        
         // Usecase to output
         useCase.shopInfoSuccess
             .map { FaceShopItemViewModel.products(sesacCollection: $0.sesacCollection) }
@@ -105,6 +119,18 @@ final class ShopViewModel: ViewModelType {
             }.disposed(by: disposeBag)
         
         useCase.updateImageFail
+            .asSignal()
+            .emit { [weak self] in
+                self?.coordinator?.toasting(message: $0.description)
+            }.disposed(by: disposeBag)
+        
+        useCase.inAppPurchaseFail
+            .asSignal()
+            .emit { [weak self] in
+                self?.coordinator?.toasting(message: $0.description)
+            }.disposed(by: disposeBag)
+        
+        useCase.completePurchaseFail
             .asSignal()
             .emit { [weak self] in
                 self?.coordinator?.toasting(message: $0.description)

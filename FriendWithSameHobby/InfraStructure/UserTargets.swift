@@ -19,6 +19,7 @@ enum UserTargets {
     case reportUser(parameters: Parameters)
     case getShopInfo
     case updateImage(parameters: Parameters)
+    case completePurchase(parameters: Parameters)
 }
 
 extension UserTargets: TargetType {
@@ -42,6 +43,8 @@ extension UserTargets: TargetType {
             return "/user/shop/myinfo"
         case .updateImage:
             return "/user/update/shop"
+        case .completePurchase:
+            return "/user/shop/ios"
         }
     }
     
@@ -49,7 +52,7 @@ extension UserTargets: TargetType {
         switch self {
         case .getUserInfo, .getShopInfo:
             return .get
-        case .postUser, .withdraw, .updateUserPage, .reportUser, .updateImage:
+        case .postUser, .withdraw, .updateUserPage, .reportUser, .updateImage, .completePurchase:
             return .post
         case .updateFCMtoken:
             return .put
@@ -63,7 +66,8 @@ extension UserTargets: TargetType {
         case .postUser(let parameters),
                 .updateFCMtoken(let parameters),
                 .updateUserPage(let parameters),
-                .updateImage(let parameters):
+                .updateImage(let parameters),
+                .completePurchase(let parameters):
             return .requestParameters(parameters: parameters,
                                       encoding: URLEncoding.default)
         case.reportUser(parameters: let parameters):

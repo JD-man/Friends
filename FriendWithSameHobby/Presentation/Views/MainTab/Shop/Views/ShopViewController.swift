@@ -48,6 +48,9 @@ final class ShopViewController: UIViewController {
     
     weak var coordinator: ShopCoordinator?
     
+    private let purchaseFaceButtonTap = PublishRelay<Int>()
+    private let purchaseBGButtonTap = PublishRelay<Int>()
+    
     init(viewModel: ShopViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -118,7 +121,9 @@ final class ShopViewController: UIViewController {
             bgShopButtonTap: backgroundTapButton.tabButton.rx.tap.asSignal(),            
             faceSelected: faceProductCollectionView.rx.modelSelected(FaceShopItemViewModel.self),
             bgSelected: backgroundProductTableView.rx.modelSelected(BackgroundShopItemViewModel.self),
-            saveButtonTap: saveButton.rx.tap.asSignal()
+            saveButtonTap: saveButton.rx.tap.asSignal(),
+            purchaseFaceButtonTap: purchaseFaceButtonTap,
+            purchaseBGButtonTap: purchaseBGButtonTap
         )
         
         let output = viewModel.transform(input, disposeBag: disposeBag)
@@ -160,8 +165,12 @@ final class ShopViewController: UIViewController {
             .asDriver(onErrorJustReturn: [])
             .drive(faceProductCollectionView.rx.items(
                 cellIdentifier: FaceProductCollectionViewCell.identifier,
-                cellType: FaceProductCollectionViewCell.self)) { row, item, cell in
+                cellType: FaceProductCollectionViewCell.self)) { [weak self] row, item, cell in
                     cell.configure(with: item)
+                    cell.purchaseButton.rx.tap.asSignal()
+                        .emit { _ in
+                            self?.purchaseFaceButtonTap.accept(row)
+                        }.disposed(by: cell.disposeBag)
                 }.disposed(by: disposeBag)
         
         // MARK: - TableView Binding
@@ -169,8 +178,12 @@ final class ShopViewController: UIViewController {
             .asDriver(onErrorJustReturn: [])
             .drive(backgroundProductTableView.rx.items(
                 cellIdentifier: BackgroundShopTableViewCell.identifier,
-                cellType: BackgroundShopTableViewCell.self)) { row, item, cell in
+                cellType: BackgroundShopTableViewCell.self)) { [weak self] row, item, cell in
                     cell.configure(with: item)
+                    cell.purchaseButton.rx.tap.asSignal()
+                        .emit { _ in
+                            self?.purchaseBGButtonTap.accept(row)
+                        }.disposed(by: cell.disposeBag)
                 }.disposed(by: disposeBag)
     }
 }

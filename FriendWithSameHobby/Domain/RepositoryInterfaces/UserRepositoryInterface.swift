@@ -45,4 +45,9 @@ protocol UserRepositoryInterface {
         model: UpdateImageModel,
         completion: @escaping (Result<Bool, UpdateImageError>) -> Void
     )
+    
+    func completePurchase(
+        model: CompletePurchaseModel,
+        completion: @escaping (Result<Bool, CompletePurchaseError>) -> Void
+    )
 }

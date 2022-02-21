@@ -8,5 +8,8 @@
 import Foundation
 
 protocol ShopRepositoryInterface {
-    
+    func buyProduct(
+        localizedTitle: String,
+        completion: @escaping (Result<(String, String), ShopError>) -> Void
+    )
 }

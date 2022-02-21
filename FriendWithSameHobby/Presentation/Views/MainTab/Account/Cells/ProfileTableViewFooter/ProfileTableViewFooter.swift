@@ -34,8 +34,7 @@ class ProfileTableViewFooter: UITableViewHeaderFooterView {
         super.init(coder: coder)
     }
     
-    private func viewConfig() {
-        backgroundColor = .systemBackground
+    private func viewConfig() {        
         [genderView, hobbyView, allowSearchingView, ageView, withdrawButton]
             .forEach { addSubview($0) }
         

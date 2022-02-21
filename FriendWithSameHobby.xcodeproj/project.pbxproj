@@ -58,6 +58,10 @@
 		894B6AFF27C3A684009D76E5 /* UpdateImageDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894B6AFE27C3A684009D76E5 /* UpdateImageDTO.swift */; };
 		894B6B0127C3B230009D76E5 /* ShopRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894B6B0027C3B230009D76E5 /* ShopRepository.swift */; };
 		894B6B0427C3B261009D76E5 /* ShopRepositoryInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894B6B0327C3B261009D76E5 /* ShopRepositoryInterface.swift */; };
+		894B6B0627C3E034009D76E5 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 894B6B0527C3E034009D76E5 /* StoreKit.framework */; };
+		894B6B0827C3F759009D76E5 /* ShopError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894B6B0727C3F759009D76E5 /* ShopError.swift */; };
+		894B6B0A27C40B8A009D76E5 /* CompletePurchaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894B6B0927C40B8A009D76E5 /* CompletePurchaseModel.swift */; };
+		894B6B0C27C40BB9009D76E5 /* CompletePurchaseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894B6B0B27C40BB9009D76E5 /* CompletePurchaseDTO.swift */; };
 		894E088F27C0D5F100E611E1 /* RealmRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894E088E27C0D5F100E611E1 /* RealmRepository.swift */; };
 		894E089127C0D61500E611E1 /* RealmRepositoryInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894E089027C0D61500E611E1 /* RealmRepositoryInterface.swift */; };
 		894E089427C0D6EA00E611E1 /* RealmChatDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894E089327C0D6EA00E611E1 /* RealmChatDTO.swift */; };
@@ -279,6 +283,10 @@
 		894B6AFE27C3A684009D76E5 /* UpdateImageDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateImageDTO.swift; sourceTree = "<group>"; };
 		894B6B0027C3B230009D76E5 /* ShopRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopRepository.swift; sourceTree = "<group>"; };
 		894B6B0327C3B261009D76E5 /* ShopRepositoryInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopRepositoryInterface.swift; sourceTree = "<group>"; };
+		894B6B0527C3E034009D76E5 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		894B6B0727C3F759009D76E5 /* ShopError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopError.swift; sourceTree = "<group>"; };
+		894B6B0927C40B8A009D76E5 /* CompletePurchaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletePurchaseModel.swift; sourceTree = "<group>"; };
+		894B6B0B27C40BB9009D76E5 /* CompletePurchaseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletePurchaseDTO.swift; sourceTree = "<group>"; };
 		894E088E27C0D5F100E611E1 /* RealmRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmRepository.swift; sourceTree = "<group>"; };
 		894E089027C0D61500E611E1 /* RealmRepositoryInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmRepositoryInterface.swift; sourceTree = "<group>"; };
 		894E089327C0D6EA00E611E1 /* RealmChatDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmChatDTO.swift; sourceTree = "<group>"; };
@@ -435,6 +443,7 @@
 				89E055AA279D7BCC00E86445 /* FirebaseMessaging in Frameworks */,
 				890CCA762797214000D6185E /* Toast in Frameworks */,
 				890CCA702797210100D6185E /* RxMoya in Frameworks */,
+				894B6B0627C3E034009D76E5 /* StoreKit.framework in Frameworks */,
 				8950C88827B24F240025A8D7 /* RxDataSources in Frameworks */,
 				890CCA5B279712FC00D6185E /* RxCocoa in Frameworks */,
 				890CCA732797211F00D6185E /* Then in Frameworks */,
@@ -488,6 +497,7 @@
 		5163E25669C67524AC320DA4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				894B6B0527C3E034009D76E5 /* StoreKit.framework */,
 				712EAAB0941D444D06A42692 /* Pods_FriendWithSameHobby.framework */,
 				4197D51F6DEFCF6F658B42FC /* Pods_FriendWithSameHobby_FriendWithSameHobbyUITests.framework */,
 				05D1B1D80A9530A1867C233B /* Pods_FriendWithSameHobbyTests.framework */,
@@ -1275,6 +1285,7 @@
 				89E055B0279D9D7800E86445 /* APIErrors.swift */,
 				89FDC55927B000650088B32A /* QueueError.swift */,
 				89A579F827BC22ED008CAAA3 /* ChatError.swift */,
+				894B6B0727C3F759009D76E5 /* ShopError.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -1353,6 +1364,7 @@
 				89636BF327A9A97600DD8B91 /* UserMyPageDTO.swift */,
 				894B6AF627C3653E009D76E5 /* UserShopInfoDTO.swift */,
 				894B6AFE27C3A684009D76E5 /* UpdateImageDTO.swift */,
+				894B6B0B27C40BB9009D76E5 /* CompletePurchaseDTO.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -1382,6 +1394,7 @@
 				8940CC9627BF796200A12234 /* ReportUserModel.swift */,
 				894B6AF827C3658A009D76E5 /* UserShopInfoModel.swift */,
 				894B6AFC27C3A5A2009D76E5 /* UpdateImageModel.swift */,
+				894B6B0927C40B8A009D76E5 /* CompletePurchaseModel.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -1791,6 +1804,7 @@
 				89C147EA27A00F7700F0E616 /* AccountViewController.swift in Sources */,
 				89FDC55C27B029470088B32A /* Double+Ext.swift in Sources */,
 				89ECC57C279F330300C4C477 /* RegisterUseCase.swift in Sources */,
+				894B6B0C27C40BB9009D76E5 /* CompletePurchaseDTO.swift in Sources */,
 				89E055B5279DA6C200E86445 /* NicknameViewController.swift in Sources */,
 				89A81992279B023900F257CA /* String+Ext.swift in Sources */,
 				894B6AF727C3653E009D76E5 /* UserShopInfoDTO.swift in Sources */,
@@ -1841,6 +1855,7 @@
 				895E1D8727A5B5420054742F /* Cell+Ext.swift in Sources */,
 				894F5C2A27A7E95A00E583B9 /* ProfileHobbyView.swift in Sources */,
 				894F5C2527A7BC6100E583B9 /* ProfileTableViewFooter.swift in Sources */,
+				894B6B0A27C40B8A009D76E5 /* CompletePurchaseModel.swift in Sources */,
 				89E055A2279D1B9F00E86445 /* URLComponents.swift in Sources */,
 				898B795A2799604700844284 /* AuthCoordinator.swift in Sources */,
 				898B79442799431000844284 /* OnboardingViewController.swift in Sources */,
@@ -1879,6 +1894,7 @@
 				8940CC9527BF790900A12234 /* ReportUserDTO.swift in Sources */,
 				89E055AF279D9B4400E86445 /* UserInfoDTO.swift in Sources */,
 				89724A9727C23D9900D06258 /* ShopUseCase.swift in Sources */,
+				894B6B0827C3F759009D76E5 /* ShopError.swift in Sources */,
 				89A579EA27BC113B008CAAA3 /* ChatRepositoryInterface.swift in Sources */,
 				89D721CC279C5B4A00B02A1E /* VerifyViewModel.swift in Sources */,
 				89C147CC27A00DDF00F0E616 /* MainTabCoordinator.swift in Sources */,

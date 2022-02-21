@@ -11,6 +11,7 @@ import RxRelay
 final class ShopUseCase: UseCaseType {
     private let userRepo: UserRepositoryInterface
     private let firebaseRepo: FirebaseAuthRepositoryInterface
+    private let shopRepo: ShopRepositoryInterface
     
     let shopInfoSuccess = PublishRelay<UserShopInfoModel>()
     let shopInfoFail = PublishRelay<UserShopError>()
@@ -18,12 +19,17 @@ final class ShopUseCase: UseCaseType {
     let updateImageSuccess = PublishRelay<Bool>()
     let updateImageFail = PublishRelay<UpdateImageError>()
     
+    let inAppPurchaseFail = PublishRelay<ShopError>()
+    let completePurchaseFail = PublishRelay<CompletePurchaseError>()
+    
     init(
         userRepo: UserRepositoryInterface,
-        firebaseRepo: FirebaseAuthRepositoryInterface
+        firebaseRepo: FirebaseAuthRepositoryInterface,
+        shopRepo: ShopRepositoryInterface
     ) {
         self.userRepo = userRepo
         self.firebaseRepo = firebaseRepo
+        self.shopRepo = shopRepo
     }
     
     func executeGetShopInfo() {
@@ -59,6 +65,36 @@ final class ShopUseCase: UseCaseType {
                 default:
                     self?.updateImageFail.accept(error)
                 }
+            }
+        }
+    }
+    
+    func executeBuyProduct(productName: String) {
+        shopRepo.buyProduct(localizedTitle: productName) { [weak self] result in
+            switch result {
+            case .success(let purchaseResult):
+                self?.executePostPurchaseResult(receipt: purchaseResult.0, product: purchaseResult.1)
+            case .failure(let error):
+                self?.inAppPurchaseFail.accept(error)
+            }
+        }
+    }
+    
+    private func executePostPurchaseResult(receipt: String, product: String) {
+        let model = CompletePurchaseModel(receipt: receipt, product: product)
+        userRepo.completePurchase(model: model) { [weak self] result in
+            switch result {
+            case .success(_):
+                self?.executeGetShopInfo()
+            case .failure(let error):
+                switch error {
+                case .tokenError:
+                    self?.tokenErrorHandling {
+                        self?.executePostPurchaseResult(receipt: receipt, product: product)
+                    }
+                default:
+                    self?.completePurchaseFail.accept(error)
+                }                
             }
         }
     }
