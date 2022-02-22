@@ -82,7 +82,8 @@ final class ShopViewModel: ViewModelType {
         input.purchaseFaceButtonTap
             .asSignal()
             .emit { [weak self] in
-                self?.useCase.executeBuyProduct(productName: output.faceProduct.value[$0].faceImage.productName)
+                self?.useCase.executeBuyProduct(
+                    productName: output.faceProduct.value[$0].faceImage.productName)
             }.disposed(by: disposeBag)
         
         input.purchaseBGButtonTap

@@ -50,7 +50,7 @@ enum SeSACFace: Int, CaseIterable {
         case .basic:
             return "기본 새싹"
         case .wink:
-            return "든든 새싹"
+            return "튼튼 새싹"
         case .mint:
             return "민트 새싹"
         case .purple:

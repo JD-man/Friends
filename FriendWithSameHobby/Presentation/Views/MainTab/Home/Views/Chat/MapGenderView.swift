@@ -15,21 +15,21 @@ final class MapGenderView: UIView {
     let allGenderButton = UIButton().then {
         $0.clipsToBounds = true
         $0.setTitle("전체", for: .normal)
-        $0.setTitleColor(AssetsColors.black.color, for: .normal)
+        $0.setTitleColor(.label, for: .normal)
         $0.titleLabel?.font = AssetsFonts.NotoSansKR.medium.font(size: 14)
     }
     
     let maleButton = UIButton().then {
         $0.clipsToBounds = true
         $0.setTitle("남자", for: .normal)
-        $0.setTitleColor(AssetsColors.black.color, for: .normal)
+        $0.setTitleColor(.label, for: .normal)
         $0.titleLabel?.font = AssetsFonts.NotoSansKR.medium.font(size: 14)
     }
     
     let femaleButton = UIButton().then {
         $0.clipsToBounds = true
         $0.setTitle("여자", for: .normal)
-        $0.setTitleColor(AssetsColors.black.color, for: .normal)
+        $0.setTitleColor(.label, for: .normal)
         $0.titleLabel?.font = AssetsFonts.NotoSansKR.medium.font(size: 14)
     }
     
@@ -81,7 +81,7 @@ final class MapGenderView: UIView {
                 $0.backgroundColor = AssetsColors.green.color
                 $0.setTitleColor(AssetsColors.white.color, for: .normal)
             } else {
-                $0.backgroundColor = AssetsColors.white.color
+                $0.backgroundColor = .systemBackground
                 $0.setTitleColor(AssetsColors.black.color, for: .normal)
             }
         }

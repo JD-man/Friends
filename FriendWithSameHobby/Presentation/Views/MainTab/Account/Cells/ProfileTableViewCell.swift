@@ -40,6 +40,7 @@ class ProfileTableViewCell: UITableViewCell {
     }
     
     private func viewConfig() {
+        backgroundColor = .clear
         selectionStyle = .none
         [backgroundImageView, sesacImageView, baseCardView]
             .forEach { contentView.addSubview($0) }

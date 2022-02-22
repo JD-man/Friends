@@ -47,10 +47,8 @@ enum BaseButtonStatus: Equatable {
     
     var backgroundColor: UIColor {
         switch self {
-        case .inactive:
-            return AssetsColors.white.color
-        case .outline:
-            return AssetsColors.white.color
+        case .inactive, .outline:
+            return .systemBackground
         case .fill:
             return AssetsColors.green.color
         case .cancel:
@@ -78,9 +76,9 @@ enum BaseButtonStatus: Equatable {
     var titleColor: UIColor {
         switch self {
         case .inactive, .cancel:
-            return AssetsColors.black.color
+            return .label
         case .fill:
-            return AssetsColors.white.color
+            return .systemBackground
         case .outline(let color):
             return color
         case .disable:

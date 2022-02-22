@@ -48,7 +48,7 @@ final class BaseCardView: UIView {
         viewConfig(type: type)
     }
     
-    private func viewConfig(type: BaseCardViewType) {
+    private func viewConfig(type: BaseCardViewType) {        
         addCorner(rad: 5, borderColor: AssetsColors.gray2.color)
         
         [nicknameLabel, moreButton, sesacTitleView, hobbyTagView, sesacCommentView]

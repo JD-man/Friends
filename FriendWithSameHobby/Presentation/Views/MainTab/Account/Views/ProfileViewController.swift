@@ -33,7 +33,6 @@ final class ProfileViewController: UIViewController {
     
     private let profileTableView = UITableView(frame: .zero, style: .grouped).then {
         $0.separatorStyle = .none
-        $0.backgroundColor = .systemBackground
         $0.showsVerticalScrollIndicator = false        
         $0.rowHeight = UITableView.automaticDimension
         $0.register(ProfileTableViewCell.self, forCellReuseIdentifier: ProfileTableViewCell.identifier)
