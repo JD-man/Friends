@@ -16,6 +16,7 @@ enum BaseAlertMessage {
     case matchingRequest
     case matchingAllow
     case dodgeMatching
+    case locationAuth
     
     var title: String {
         switch self {
@@ -27,6 +28,8 @@ enum BaseAlertMessage {
             return "취미 같이 하기를 수락할까요?"
         case .dodgeMatching:
             return "약속을 취소하시겠습니까?"
+        case .locationAuth:
+            return "위치 서비스 사용 불가"
         }
     }
     
@@ -40,6 +43,8 @@ enum BaseAlertMessage {
             return "요청을 수락하면 채팅창에서 대화를 나눌 수 있어요"
         case .dodgeMatching:
             return "약속을 취소하시면 페널티가 부과됩니다"
+        case .locationAuth:
+            return "위치 서비스 사용을 위해서 권한 설정이 필요합니다."
         }
     }
 }

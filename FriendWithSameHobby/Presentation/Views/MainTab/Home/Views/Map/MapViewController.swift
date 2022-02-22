@@ -50,8 +50,10 @@ final class MapViewController: UIViewController {
                 $0.mapView = mapView
             }
         }
-    }    
+    }
+    
     private let inputRelay = PublishRelay<OnqueueInput>()
+    private let locationAuthDenied = PublishRelay<Void>()
     
     init(viewModel: MapViewModel) {
         self.viewModel = viewModel
@@ -72,7 +74,6 @@ final class MapViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        //matchingButton.setMatchingStatus()
         navigationController?.navigationBar.isHidden = true
     }
     
@@ -167,6 +168,18 @@ final class MapViewController: UIViewController {
     private func projectionCoord() {
         currentCoord = mapView.cameraPosition.target
     }
+    
+    private func alertLocationAuth() {
+        let alert = BaseAlertView(message: .locationAuth) {
+            guard let settingURL = URL(string: UIApplication.openSettingsURLString) else {
+                return
+            }
+            if UIApplication.shared.canOpenURL(settingURL) {
+                UIApplication.shared.open(settingURL, options: [:], completionHandler: nil)
+            }
+        }
+        alert.show()
+    }
 }
 
 extension MapViewController: CLLocationManagerDelegate {
@@ -178,7 +191,7 @@ extension MapViewController: CLLocationManagerDelegate {
             checkCurrentLocationAuthorization(authStatus: authStatus)
         }
         else {
-            print("alert: iOS 위치 서비스를 켜주세요")
+            alertLocationAuth()
         }
     }
     
@@ -189,6 +202,9 @@ extension MapViewController: CLLocationManagerDelegate {
             locationManager.startUpdatingLocation()
         case .restricted, .denied:
             print("location manager denied")
+            let defaultCoord = NMGLatLng(lat: 37.517819364682694, lng: 126.88647317074734)
+            cameraMoving(coord: defaultCoord)
+            alertLocationAuth()
         case .authorizedWhenInUse:
             locationManager.startUpdatingLocation()
         @unknown default:

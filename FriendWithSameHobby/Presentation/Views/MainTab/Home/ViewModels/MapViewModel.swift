@@ -16,7 +16,7 @@ final class MapViewModel: ViewModelType {
     struct Input {
         let matchingButtonTap: Driver<(MatchingStatus, Double, Double)>
         let inputRelay: PublishRelay<OnqueueInput>
-        let viewWillAppear: ControlEvent<Void>
+        let viewWillAppear: ControlEvent<Void>        
     }
     
     struct Output {
