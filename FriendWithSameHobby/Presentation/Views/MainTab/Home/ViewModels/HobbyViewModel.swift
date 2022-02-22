@@ -35,7 +35,7 @@ final class HobbyViewModel: ViewModelType {
     
     private var lat: Double
     private var long: Double
-    private var searchTextRelay = BehaviorRelay<[String]>(value: [])
+    private var searchTextRelay = BehaviorRelay<[String]>(value: [""])
     
     init(useCase: HobbyUseCase, coordinator: HomeCoordinator, lat: Double, long: Double) {
         self.useCase = useCase
@@ -110,7 +110,10 @@ final class HobbyViewModel: ViewModelType {
         let fromSearchText = searchTextRelay
             .map {
                 $0
-                .map { HobbyItemViewModel(identity: "search\($0)", cellTitle: $0, status: .added) }
+                .map { HobbyItemViewModel(identity: "search\($0)",
+                                          cellTitle: $0,
+                                          status: $0 == "" ? .empty : .added)
+                }
             }
         
         Observable.combineLatest(fromRecommend, fromRequestedHF, fromSearchText)
@@ -125,6 +128,7 @@ final class HobbyViewModel: ViewModelType {
     
     private func makeTagFromSearchbar(text: String) -> [String] {
         var value = searchTextRelay.value
+        if value == [""] { return [text, ""] }
         let newArr = text.components(separatedBy: " ").filter { $0.count != 0 }
         newArr.forEach {
             if value.contains($0) == false, value.count < 8 {
@@ -137,18 +141,22 @@ final class HobbyViewModel: ViewModelType {
                 coordinator?.toasting(message: "취미를 더 이상 추가할 수 없습니다")
             }
         }
-        return value
+        return value.filter { $0 != "" }
     }
     
     private func makeTagFromButton(section: Int, title: String) {
         var value = searchTextRelay.value
+        if value == [""] {
+            searchTextRelay.accept([title, ""])
+            return
+        }
         if section == 0, value.contains(title) == false {
             value.append(title)
-            searchTextRelay.accept(value)
+            searchTextRelay.accept(value.filter { $0 != "" })
         } else if section == 1 {
             let idx = value.firstIndex(of: title) ?? 0            
             value.remove(at: idx)
-            searchTextRelay.accept(value)
+            searchTextRelay.accept(value.filter { $0 != "" })
         }
     }
 }

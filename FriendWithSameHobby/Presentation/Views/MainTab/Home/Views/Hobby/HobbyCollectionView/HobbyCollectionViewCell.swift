@@ -14,6 +14,7 @@ enum HobbyCellStatus: Equatable {
     case recommend
     case around
     case added
+    case empty
     
     var buttonStatus: BaseButtonStatus {
         switch self {
@@ -23,6 +24,8 @@ enum HobbyCellStatus: Equatable {
             return .outline(color: AssetsColors.black.color)
         case .added:
             return .outline(color: AssetsColors.green.color)
+        case .empty:
+            return .outline(color: .clear)
         }
     }
 }
