@@ -47,8 +47,7 @@ final class ChatViewModel: ViewModelType {
             }.disposed(by: disposeBag)
         
         input.sendButtonTap
-            .drive { [weak self] in
-                print("sedn button tap")
+            .drive { [weak self] in                
                 self?.useCase.executeSendMessage(chat: $0)
             }.disposed(by: disposeBag)
         

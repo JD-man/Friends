@@ -29,7 +29,7 @@ class ChatViewController: UIViewController {
     
     private let chatTableView = UITableView(frame: .zero, style: .grouped).then {
         $0.separatorStyle = .none
-        $0.backgroundColor = .systemBackground
+        $0.backgroundColor = .clear
         $0.rowHeight = UITableView.automaticDimension
         $0.register(ChatTableViewCell.self, forCellReuseIdentifier: ChatTableViewCell.identifier)
         $0.register(ChatYouTableViewCell.self, forCellReuseIdentifier: ChatYouTableViewCell.identifier)
@@ -86,6 +86,7 @@ class ChatViewController: UIViewController {
         messageTextView.snp.makeConstraints { make in
             make.top.bottom.equalToSuperview().inset(14)
             make.leading.equalToSuperview().offset(12)
+            make.trailing.equalToSuperview().offset(-46)
         }
         
         sendButton.snp.makeConstraints { make in
@@ -97,7 +98,7 @@ class ChatViewController: UIViewController {
         chatTableView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(16)
             make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(16)
-            make.bottom.equalTo(messageTextView.snp.top).offset(-16)
+            make.bottom.equalTo(messageContainer.snp.top).offset(-16)
         }
         
         chatTableView.rx.setDelegate(self).disposed(by: disposeBag)
@@ -135,9 +136,14 @@ class ChatViewController: UIViewController {
             }.disposed(by: disposeBag)
         
         output.chatMessages
-            .map { _ in CGPoint(x: 0, y: CGFloat.greatestFiniteMagnitude) }
-            .bind(to: chatTableView.rx.contentOffset)
-            .disposed(by: disposeBag)
+            .map { $0.count }
+            .asDriver(onErrorJustReturn: 0)
+            .drive { [weak self] in
+                guard $0 > 0 else { return }
+                self?.chatTableView.scrollToRow(at: IndexPath(row: $0 - 1, section: 0),
+                                                at: .middle,
+                                                animated: false)
+            }.disposed(by: disposeBag)
         
         output.initializeTextView
             .asDriver(onErrorJustReturn: "")

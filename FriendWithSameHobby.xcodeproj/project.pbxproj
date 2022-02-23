@@ -632,6 +632,7 @@
 		8920160D27BB722A0090F9D9 /* Map */ = {
 			isa = PBXGroup;
 			children = (
+				89EC76CA27ACCFB600CDA0A4 /* MapGenderView.swift */,
 				89EC76CE27ACF29700CDA0A4 /* MapMatchingButton.swift */,
 				89C147E327A00F1300F0E616 /* MapViewController.swift */,
 			);
@@ -672,7 +673,6 @@
 			children = (
 				89FE9AED27BCCDD100887232 /* Menu */,
 				8914A14527B8B5A00048FA87 /* ChatViewController.swift */,
-				89EC76CA27ACCFB600CDA0A4 /* MapGenderView.swift */,
 				8920161227BB989A0090F9D9 /* ChatTableViewCell.swift */,
 				89A579E127BBD5EF008CAAA3 /* ChatTableHeaderView.swift */,
 				8940CC8A27BF382200A12234 /* ChatYouTableViewCell.swift */,
