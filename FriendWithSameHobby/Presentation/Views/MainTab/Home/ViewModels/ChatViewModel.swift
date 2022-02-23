@@ -13,7 +13,7 @@ import RxRelay
 final class ChatViewModel: ViewModelType {
     struct Input {
         let backButtonTap: Driver<Void>
-        let moreButtonTap: Driver<Void>
+        let moreButtonTap: Driver<Void>        
         let viewWillAppear: Driver<Void>
         let sendButtonTap: Driver<String>
         let messageText: ControlProperty<String>

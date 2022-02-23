@@ -15,7 +15,7 @@ final class HobbyUseCase: MapUseCase {
     
     func excutePostQueue(type: Int = 2 , lat: Double, long: Double, hf: [String]) {
         let model = PostQueueBodyModel(lat: lat, long: long, hf: hf)
-        queueRepo?.postQueue(model: model, completion: { [weak self] result in
+        queueRepo.postQueue(model: model, completion: { [weak self] result in
             switch result {
             case .success(let isPosted):
                 UserMatchingStatus.matchingStatus = MatchingStatus.waiting.rawValue

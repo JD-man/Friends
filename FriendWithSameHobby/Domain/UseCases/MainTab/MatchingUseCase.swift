@@ -20,7 +20,7 @@ final class MatchingUseCase: MapUseCase {
     let acceptMatchingFail = PublishRelay<AcceptMatchingError>()
     
     func executeCancelQueue() {
-        queueRepo?.cancelQueue(completion: { [weak self] result in
+        queueRepo.cancelQueue(completion: { [weak self] result in
             switch result {
             case .success(let isCanceled):
                 UserMatchingStatus.matchingStatus = MatchingStatus.normal.rawValue
@@ -40,7 +40,7 @@ final class MatchingUseCase: MapUseCase {
     
     func executeRequestMatching(uid: String) {
         let model = MatchingBodyModel(uid: uid)
-        queueRepo?.requestMatch(model: model, completion: { [weak self] result in
+        queueRepo.requestMatch(model: model, completion: { [weak self] result in
             switch result {
             case .success(let isRequested):
                 self?.requestMatchingSuccess.accept(isRequested)
@@ -61,7 +61,7 @@ final class MatchingUseCase: MapUseCase {
     
     func executeAcceptMatching(uid: String) {
         let model = MatchingBodyModel(uid: uid)
-        queueRepo?.acceptMatch(model: model, completion: { [weak self] result in
+        queueRepo.acceptMatch(model: model, completion: { [weak self] result in
             switch result {
             case .success(let isAccepted):
                 UserMatchingStatus.matchingStatus = MatchingStatus.matched.rawValue

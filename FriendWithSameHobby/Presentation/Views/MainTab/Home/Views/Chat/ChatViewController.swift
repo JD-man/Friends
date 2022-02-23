@@ -112,7 +112,7 @@ class ChatViewController: UIViewController {
     private func binding() {
         let input = ChatViewModel.Input(
             backButtonTap: backButton.rx.tap.asDriver(),
-            moreButtonTap: moreButton.rx.tap.asDriver(),
+            moreButtonTap: moreButton.rx.tap.asDriver(),            
             viewWillAppear: self.rx.viewWillAppear.asDriver(),
             sendButtonTap: sendButton.rx.tap.withLatestFrom(messageTextView.rx.text.orEmpty).asDriver(onErrorJustReturn: ""),
             messageText: messageTextView.rx.text.orEmpty
@@ -141,8 +141,9 @@ class ChatViewController: UIViewController {
             .drive { [weak self] in
                 guard $0 > 0 else { return }
                 self?.chatTableView.scrollToRow(at: IndexPath(row: $0 - 1, section: 0),
-                                                at: .middle,
+                                                at: .top,
                                                 animated: false)
+                self?.chatTableView.contentOffset.y -= 50
             }.disposed(by: disposeBag)
         
         output.initializeTextView

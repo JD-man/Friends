@@ -11,7 +11,7 @@ import RxRelay
 
 final class VerifyUseCase: UseCaseType {
     let userRepo: UserRepositoryInterface?
-    let phoneAuthRepo: FirebaseAuthRepositoryInterface?
+    let firebaseRepo: FirebaseAuthRepositoryInterface?
     
     private var disposeBag = DisposeBag()
     
@@ -21,12 +21,12 @@ final class VerifyUseCase: UseCaseType {
     
     init(userRepo: UserRepositoryInterface, phoneAuthRepo: FirebaseAuthRepositoryInterface) {
         self.userRepo = userRepo
-        self.phoneAuthRepo = phoneAuthRepo
+        self.firebaseRepo = phoneAuthRepo
     }
     
     // MARK: - Verify Register code
     func excuteAuthNumber(code: String) {
-        phoneAuthRepo?.verifyRegisterNumber(verificationCode: code,
+        firebaseRepo?.verifyRegisterNumber(verificationCode: code,
                                             completion: { [weak self] result in
             switch result {
             case .success(let idToken):
@@ -65,7 +65,7 @@ final class VerifyUseCase: UseCaseType {
     
     // MARK: - Request Register Code for Retry
     func requestRegisterCode() {
-        phoneAuthRepo?.retryPhoneNumber(completion: { [weak self] result in
+        firebaseRepo?.retryPhoneNumber(completion: { [weak self] result in
             switch result {
             case .success(_):
                 self?.retrySuccessRelay.accept(true)

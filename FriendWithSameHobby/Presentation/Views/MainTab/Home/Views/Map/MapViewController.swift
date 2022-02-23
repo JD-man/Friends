@@ -10,6 +10,7 @@ import NMapsMap
 import RxSwift
 import CoreLocation
 import RxRelay
+import RxCocoa
 
 final class MapViewController: UIViewController {
     typealias OnqueueInput = (UserGender, Double, Double)
@@ -123,7 +124,7 @@ final class MapViewController: UIViewController {
                 let matchingStatus = self?.matchingButton.matchingStatus ?? .normal
                 return (matchingStatus, coord.lat, coord.lng) }).asDriver(onErrorJustReturn: (.normal, 0.0, 0.0)),
             inputRelay: inputRelay,
-            viewWillAppear: self.rx.viewWillAppear
+            viewWillAppear: self.rx.viewWillAppear.asSignal()            
         )
         let output = viewModel.transform(input, disposeBag: disposeBag)
         

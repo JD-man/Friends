@@ -14,8 +14,9 @@ class ChatTableViewCell: UITableViewCell {
     private let messageLabel = PaddedLabel(top: 10, left: 16, bottom: 10, right: 16).then {
         $0.numberOfLines = 0
         $0.clipsToBounds = true
+        $0.textAlignment = .right        
         $0.addCorner(rad: 8, borderColor: nil)
-        $0.textAlignment = .right
+        $0.textColor = AssetsColors.black.color
         $0.backgroundColor = AssetsColors.whiteGreen.color
         $0.font = AssetsFonts.NotoSansKR.regular.font(size: 14)
     }
@@ -37,6 +38,7 @@ class ChatTableViewCell: UITableViewCell {
     
     private func viewConfig() {
         selectionStyle = .none
+        backgroundColor = .systemBackground
         [messageLabel, timeLabel].forEach { contentView.addSubview($0) }
         
         messageLabel.snp.makeConstraints { make in

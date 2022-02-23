@@ -15,7 +15,7 @@ class ChatYouTableViewCell: UITableViewCell {
         $0.textAlignment = .left
         $0.backgroundColor = .systemBackground
         $0.addCorner(rad: 8, borderColor: AssetsColors.gray4.color)
-        $0.font = AssetsFonts.NotoSansKR.regular.font(size: 14)
+        $0.font = AssetsFonts.NotoSansKR.regular.font(size: 14)        
     }
     
     private let timeLabel = UILabel().then {
@@ -35,6 +35,7 @@ class ChatYouTableViewCell: UITableViewCell {
     
     private func viewConfig() {
         selectionStyle = .none
+        backgroundColor = .systemBackground
         [messageLabel, timeLabel].forEach { contentView.addSubview($0) }
         
         messageLabel.snp.makeConstraints { make in

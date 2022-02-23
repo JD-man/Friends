@@ -16,7 +16,7 @@ final class MapViewModel: ViewModelType {
     struct Input {
         let matchingButtonTap: Driver<(MatchingStatus, Double, Double)>
         let inputRelay: PublishRelay<OnqueueInput>
-        let viewWillAppear: ControlEvent<Void>        
+        let viewWillAppear: Signal<Void>
     }
     
     struct Output {
@@ -33,6 +33,7 @@ final class MapViewModel: ViewModelType {
     init(useCase: MapUseCase, coordinator: HomeCoordinator?) {
         self.useCase = useCase
         self.coordinator = coordinator
+        self.useCase.updateFCMtoken()
     }
     
     func transform(_ input: Input, disposeBag: DisposeBag) -> Output {
@@ -66,7 +67,7 @@ final class MapViewModel: ViewModelType {
         
         input.viewWillAppear
             .asSignal()
-            .emit { [weak self] _ in                
+            .emit { [weak self] _ in
                 self?.useCase.executeCheckMatchingStatus()
             }.disposed(by: disposeBag)
         

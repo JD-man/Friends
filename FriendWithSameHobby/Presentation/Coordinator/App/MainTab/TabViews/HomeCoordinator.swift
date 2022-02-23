@@ -42,7 +42,8 @@ final class HomeCoordinator: CoordinatorType {
     private func mapVC() -> MapViewController {
         let firebaseRepo = FirebaseAuthRepository(phoneID: nil)
         let queueRepo = QueueRepository()
-        let useCase = MapUseCase(firebaseRepo: firebaseRepo, queueRepo: queueRepo)
+        let userRepo = UserRepository()
+        let useCase = MapUseCase(firebaseRepo: firebaseRepo, queueRepo: queueRepo, userRepo: userRepo)
         let viewModel = MapViewModel(useCase: useCase, coordinator: self)
         let mapVC = MapViewController(viewModel: viewModel)
         mapVC.hidesBottomBarWhenPushed = false
@@ -52,7 +53,8 @@ final class HomeCoordinator: CoordinatorType {
     private func hobbyVC(lat: Double, long: Double) -> HobbyViewController {
         let firebaseRepo = FirebaseAuthRepository(phoneID: nil)
         let queueRepo = QueueRepository()
-        let useCase = HobbyUseCase(firebaseRepo: firebaseRepo, queueRepo: queueRepo)
+        let userRepo = UserRepository()
+        let useCase = HobbyUseCase(firebaseRepo: firebaseRepo, queueRepo: queueRepo, userRepo: userRepo)
         let viewModel = HobbyViewModel(useCase: useCase, coordinator: self, lat: lat, long: long)
         let hobbyVC = HobbyViewController(viewModel: viewModel)
         hobbyVC.hidesBottomBarWhenPushed = true
@@ -62,7 +64,8 @@ final class HomeCoordinator: CoordinatorType {
     private func matchingVC(lat: Double, long: Double) -> MatchingViewController {
         let firebaseRepo = FirebaseAuthRepository(phoneID: nil)
         let queueRepo = QueueRepository()
-        let useCase = MatchingUseCase(firebaseRepo: firebaseRepo, queueRepo: queueRepo)
+        let userRepo = UserRepository()
+        let useCase = MatchingUseCase(firebaseRepo: firebaseRepo, queueRepo: queueRepo, userRepo: userRepo)
         let viewModel = MatchingViewModel(useCase: useCase, coordinator: self, lat: lat, long: long)
         let matchingVC = MatchingViewController(viewModel: viewModel)
         matchingVC.hidesBottomBarWhenPushed = true
