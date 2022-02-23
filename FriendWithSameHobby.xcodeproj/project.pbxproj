@@ -2092,6 +2092,8 @@
 				DEVELOPMENT_TEAM = 2EZ5QWFYX2;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FriendWithSameHobby/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "SeSAC Friends";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "유저의 위치를 통해 다른 유저를 찾기 위해 권한이 필요합니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -2124,6 +2126,8 @@
 				DEVELOPMENT_TEAM = 2EZ5QWFYX2;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FriendWithSameHobby/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "SeSAC Friends";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "유저의 위치를 통해 다른 유저를 찾기 위해 권한이 필요합니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
