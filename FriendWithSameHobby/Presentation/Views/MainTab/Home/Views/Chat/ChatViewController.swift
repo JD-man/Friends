@@ -45,6 +45,7 @@ class ChatViewController: UIViewController {
         $0.autocorrectionType = .no
         $0.backgroundColor = .clear
         $0.autocapitalizationType = .none
+        $0.textColor = AssetsColors.black.color
         $0.showsVerticalScrollIndicator = false
         $0.textContainer.lineBreakMode = .byTruncatingTail
         $0.font = AssetsFonts.NotoSansKR.regular.font(size: 14)
@@ -143,7 +144,7 @@ class ChatViewController: UIViewController {
                 self?.chatTableView.scrollToRow(at: IndexPath(row: $0 - 1, section: 0),
                                                 at: .top,
                                                 animated: false)
-                self?.chatTableView.contentOffset.y -= 50
+                self?.chatTableView.contentOffset.y -= 60
             }.disposed(by: disposeBag)
         
         output.initializeTextView
@@ -202,6 +203,7 @@ class ChatViewController: UIViewController {
             make.bottom.equalTo(view.safeAreaLayoutGuide)
                 .inset(16 + additional + status.height - status.safeAreaBottom)
         }
+        chatTableView.contentOffset.y += status.height
     }
 }
 
