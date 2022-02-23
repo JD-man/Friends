@@ -41,6 +41,7 @@
 		8914A15427B984020048FA87 /* MatchingStateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8914A15327B984020048FA87 /* MatchingStateModel.swift */; };
 		8920161327BB989A0090F9D9 /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8920161227BB989A0090F9D9 /* ChatTableViewCell.swift */; };
 		8920161527BBA1D70090F9D9 /* ChatItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8920161427BBA1D70090F9D9 /* ChatItemViewModel.swift */; };
+		89205AFB27C60FA0000064A7 /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89205AFA27C60FA0000064A7 /* UIViewController+Ext.swift */; };
 		89235B3527A67A260069EFB5 /* SeSACTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89235B3427A67A260069EFB5 /* SeSACTitleView.swift */; };
 		89235B3727A688130069EFB5 /* SeSACCommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89235B3627A688130069EFB5 /* SeSACCommentView.swift */; };
 		8940CC8B27BF382200A12234 /* ChatYouTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8940CC8A27BF382200A12234 /* ChatYouTableViewCell.swift */; };
@@ -266,6 +267,7 @@
 		8914A15327B984020048FA87 /* MatchingStateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchingStateModel.swift; sourceTree = "<group>"; };
 		8920161227BB989A0090F9D9 /* ChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
 		8920161427BBA1D70090F9D9 /* ChatItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatItemViewModel.swift; sourceTree = "<group>"; };
+		89205AFA27C60FA0000064A7 /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
 		89235B3427A67A260069EFB5 /* SeSACTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeSACTitleView.swift; sourceTree = "<group>"; };
 		89235B3627A688130069EFB5 /* SeSACCommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeSACCommentView.swift; sourceTree = "<group>"; };
 		8940CC8A27BF382200A12234 /* ChatYouTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatYouTableViewCell.swift; sourceTree = "<group>"; };
@@ -1035,6 +1037,7 @@
 				895E1D8627A5B5420054742F /* Cell+Ext.swift */,
 				89FDC55B27B029470088B32A /* Double+Ext.swift */,
 				894B6AFA27C37A6E009D76E5 /* Int+Ext.swift */,
+				89205AFA27C60FA0000064A7 /* UIViewController+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1795,6 +1798,7 @@
 				89A579E627BC0F17008CAAA3 /* ChatUseCase.swift in Sources */,
 				89D721C6279C14CC00B02A1E /* FirebaseAuthRepository.swift in Sources */,
 				890A906327B19164002A4DF6 /* KeyboardStatus.swift in Sources */,
+				89205AFB27C60FA0000064A7 /* UIViewController+Ext.swift in Sources */,
 				89ECC578279F2AEB00C4C477 /* RegisterViewModel.swift in Sources */,
 				894F5C2E27A7F52400E583B9 /* ProfileAgeView.swift in Sources */,
 				89ECC56A279E99E600C4C477 /* BirthViewModel.swift in Sources */,

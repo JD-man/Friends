@@ -47,7 +47,15 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        completionHandler([.list, .banner, .sound])
+        
+        guard let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate,
+              let topVC = sceneDelegate.window?.rootViewController?.topVC else { return }
+        
+        if topVC is ChatViewController {
+            completionHandler([])
+        } else {
+            completionHandler([.list, .banner, .sound])
+        }
     }
 }
 
