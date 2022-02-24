@@ -15,9 +15,53 @@
 # Architecture
 ## iOS-Clean-Architecture
 
+<div align = "center">        
+    <img src = "./ProjectInformation/architecture.png">
+</div>
+
+- Presentation Layer = View, ViewModel, Coordinator
+- Domain Layer = UseCase, Entities, Repository Interface
+- Data Layer = Repository(Network API, DB..), DTO + Mapping
+
 ## MVVM Input/Output
+```swift
+final class ChatViewModel: ViewModelType {
+    struct Input {
+        let backButtonTap: Driver<Void>
+        let moreButtonTap: Driver<Void>        
+        let viewWillAppear: Driver<Void>
+        let sendButtonTap: Driver<String>
+        let messageText: ControlProperty<String>
+    }
+    
+    struct Output {        
+        let chatMessages = BehaviorRelay<[ChatItemViewModel]>(value: [])        
+        let messageTextViewScrollEnabled = PublishRelay<Bool>()        
+        let initializeTextView = PublishRelay<String>()
+    }
+    
+    func transform(_ input: Input, disposeBag: DisposeBag) -> Output {
+        let output = Output()        
+        input.viewWillAppear
+            .drive { [weak self] _ in
+                self?.useCase.executeSocketConnect()
+            }.disposed(by: disposeBag)
+        
+        input.sendButtonTap
+            .drive { [weak self] in                
+                self?.useCase.executeSendMessage(chat: $0)
+            }.disposed(by: disposeBag)
+
+        // ...
+        return output
+    }
+```
 
 ## Coordinator
+
+<div align = "center">        
+    <img src = "./ProjectInformation/coordinator.png">
+</div>
 
 ---
 
