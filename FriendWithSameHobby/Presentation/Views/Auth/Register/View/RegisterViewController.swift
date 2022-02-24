@@ -35,16 +35,16 @@ final class RegisterViewController: UIViewController {
     
     private let registerButton = BaseButton(title: "다음", status: .fill, type: .h48)
 
-    var viewModel: RegisterViewModel?
+    let viewModel: RegisterViewModel
     private var disposeBag = DisposeBag()
     
     init(viewModel: RegisterViewModel) {
-        super.init(nibName: nil, bundle: nil)
         self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder: NSCoder) {
-        super.init(coder: coder)
+        fatalError("init(coder:) has not been implemented")
     }
     
     override func viewDidLoad() {
@@ -94,30 +94,21 @@ final class RegisterViewController: UIViewController {
     }
     
     private func binding() {
-        let maleTapNumber = maleButton.rx.tap.map { 1 }
-        let femaleTapNumber = femaleButton.rx.tap.map { 0 }
-        
-        let mergedTap = Observable.of(maleTapNumber, femaleTapNumber)
-            .merge().asDriver(onErrorJustReturn: -1)
-        
         let input = RegisterViewModel.Input(
-            mergedTap: mergedTap,
+            maleButtonTap: maleButton.rx.tap,
+            femaleButtonTap: femaleButton.rx.tap,
             registerTap: registerButton.rx.tap.asDriver(onErrorJustReturn: ()))
         
-        let output = viewModel?.transform(input, disposeBag: disposeBag)
+        let output = viewModel.transform(input, disposeBag: disposeBag)
         
-        output?.maleButtonColor
-            .asDriver(onErrorJustReturn: false)
-            .drive { [weak self] in
-                self?.maleButton.backgroundColor = $0 ? AssetsColors.whiteGreen.color : .systemBackground
-            }
+        output.selectedGender
+            .map { $0 == .male ? AssetsColors.whiteGreen.color : AssetsColors.white.color}
+            .bind(to: femaleButton.rx.backgroundColor)
             .disposed(by: disposeBag)
         
-        output?.femaleButtonColor
-            .asDriver(onErrorJustReturn: false)
-            .drive { [weak self] in
-                self?.femaleButton.backgroundColor = $0 ? AssetsColors.whiteGreen.color : .systemBackground
-            }
+        output.selectedGender
+            .map { $0 == .female ? AssetsColors.whiteGreen.color : AssetsColors.white.color }
+            .bind(to: maleButton.rx.backgroundColor)
             .disposed(by: disposeBag)
     }
 }

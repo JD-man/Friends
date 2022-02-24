@@ -16,18 +16,14 @@ final class RegisterViewModel: ViewModelType {
         self.coordinator = coordinator
     }
     
-    struct Input {        
-        // merged gender tap
-        let mergedTap: Driver<Int>
-        // register button tap
+    struct Input {
+        let maleButtonTap: ControlEvent<Void>
+        let femaleButtonTap: ControlEvent<Void>
         let registerTap: Driver<Void>
     }
     
     struct Output {
-        // male button status
-        let maleButtonColor = PublishRelay<Bool>()
-        // female button status
-        let femaleButtonColor = PublishRelay<Bool>()
+        let selectedGender = BehaviorRelay<UserGender>(value: .unselected)
     }
     
     var useCase: RegisterUseCase
@@ -36,25 +32,19 @@ final class RegisterViewModel: ViewModelType {
     func transform(_ input: Input, disposeBag: DisposeBag) -> Output {
         let output = Output()
         
+        // Input to Output
+        
         // Input to UseCase
         input.registerTap
             .drive { [weak self] _ in
                 BaseActivityIndicator.shared.show()
-                self?.useCase.executeRegister()
+                self?.useCase.executeRegister(gender: output.selectedGender.value)
             }.disposed(by: disposeBag)
         
-        input.mergedTap
-            .drive { [weak self] in
-                self?.useCase.updateButtonStatus(gender: $0)
-            }.disposed(by: disposeBag)
-        
-        // Usecase to Output
-        useCase.maleButtonStatus
-            .bind(to: output.maleButtonColor)
-            .disposed(by: disposeBag)
-        
-        useCase.femaleButtonStatus
-            .bind(to: output.femaleButtonColor)
+        Observable.merge(
+            input.maleButtonTap.map { _ in return UserGender.male },
+            input.femaleButtonTap.map { _ in return UserGender.female })
+            .bind(to: output.selectedGender)
             .disposed(by: disposeBag)
                 
         // UseCase to Coordinator
