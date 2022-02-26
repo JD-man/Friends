@@ -16,7 +16,7 @@
 ## iOS-Clean-Architecture
 
 <div align = "center">        
-    <img src = "./ProjectInformation/Images/architecture.png">
+    <img src = "./ProjectInformation/Images/Architecture.png">
 </div>
 
 - Presentation Layer = View, ViewModel, Coordinator
@@ -62,7 +62,7 @@ final class ChatViewModel: ViewModelType {
 ## Coordinator
 
 <div align = "center">        
-    <img src = "./ProjectInformation/Images/coordinator.png">
+    <img src = "./ProjectInformation/Images/Coordinator.png">
 </div>
 
 ---
@@ -70,7 +70,7 @@ final class ChatViewModel: ViewModelType {
 # Framework, Library
 
 - UIKit
-- Autolayout, SnapKit, Code-Based UI
+- Code-Based UI, Autolayout, SnapKit, 
 - RxSwift, RxCocoa, RxRelay
 - RxDatasources, RxKeyboard, RxGesture
 - Firebase Auth, Firebase Cloud Message
@@ -89,19 +89,20 @@ final class ChatViewModel: ViewModelType {
 - TabbarController와 Coordinator
 
 ### Framework, Library
-- SwiftGen 도입
-- SwiftLint 도입
-- Moya 도입
-- Naver Map 도입
+- SwiftGen 설치 및 오류
+- SwiftLint 설치
+- Moya 사용
+- Naver Map 설치 
+- SocketIO 설치 및 이슈
 
 ### App
 - FCM Token 업데이트 시점
-- 회원가입시 유저정보를 응답으로 받을 필요성
 - View에서 ViewModel로 상태값 및 여러 값들 넘기기
 - CLLocation과 Repository
 - 복잡하게 이루어진 기획상의 화면전환
 - UICollectiionView, RxDatasources를 이용한 태그 및 애니메이션 버그
 - TableView의 BackgroundView
+- 회원가입시 유저정보를 응답으로 받을 필요성
 - 매칭상태를 UserDefault로 저장하는 부분에 대한 맹점
 - 채팅뷰의 셀을 1개로 했을때의 문제
 - 채팅뷰의 스크롤링
