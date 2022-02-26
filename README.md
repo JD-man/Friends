@@ -2,6 +2,12 @@
 
 # Overview
 
+<div align = "center">
+<img src = "./ProjectInformation/Images/Map.png" width=30%>
+<img src = "./ProjectInformation/Images/Shop.png" width=30%>
+<img src = "./ProjectInformation/Images/Profile.png" width=30%>
+</div>
+
 - 지도, 위치 기반 취미 공유 친구찾기 앱
 - 전화번호 인증, 회원가입
 - 지도를 통한 주변 유저 탐색
@@ -83,21 +89,21 @@ final class ChatViewModel: ViewModelType {
 # Issues
 
 ### Architecture
-- Repository Interface에 대한 고찰
-- Domain Layer와 Entity에 대한 고찰
+- [Repository Interface에 대한 고찰](https://github.com/JD-man/Friends/issues/1)
+- [Domain Layer와 Entity에 대한 고찰](https://github.com/JD-man/Friends/issues/6)
 - Coordinator 도입 및 의존성 주입
 - TabbarController와 Coordinator
 
 ### Framework, Library
-- SwiftGen 설치 및 오류
-- SwiftLint 설치
+- [SwiftGen 설치 및 오류](https://github.com/JD-man/Friends/issues/2)
+- [SwiftLint 설치](https://github.com/JD-man/Friends/issues/3)
 - Moya 사용
 - Naver Map 설치 
 - SocketIO 설치 및 이슈
 
 ### App
-- FCM Token 업데이트 시점
-- View에서 ViewModel로 상태값 및 여러 값들 넘기기
+- [FCM Token 업데이트 시점](https://github.com/JD-man/Friends/issues/4)
+- [View에서 ViewModel로 한번에 여러 값들 넘기기](https://github.com/JD-man/Friends/issues/5)
 - CLLocation과 Repository
 - 복잡하게 이루어진 기획상의 화면전환
 - UICollectiionView, RxDatasources를 이용한 태그 및 애니메이션 버그
