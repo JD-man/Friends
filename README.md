@@ -3,9 +3,14 @@
 # Overview
 
 <div align = "center">
-<img src = "./ProjectInformation/Images/Map.png" width=30%>
-<img src = "./ProjectInformation/Images/Shop.png" width=30%>
-<img src = "./ProjectInformation/Images/Profile.png" width=30%>
+<img src = "./ProjectInformation/Images/Map.png" width=25%>
+<img src = "./ProjectInformation/Images/Shop.png" width=25%>
+<img src = "./ProjectInformation/Images/Profile.png" width=25%>
+</div>
+<div align = "center">
+<img src = "./ProjectInformation/Images/Hobby.png" width=25%>
+<img src = "./ProjectInformation/Images/Find.png" width=25%>
+<img src = "./ProjectInformation/Images/Chat.png" width=25%>
 </div>
 
 - 지도, 위치 기반 취미 공유 친구찾기 앱
@@ -104,9 +109,9 @@ final class ChatViewModel: ViewModelType {
 ### App
 - [FCM Token 업데이트 시점](https://github.com/JD-man/Friends/issues/4)
 - [View에서 ViewModel로 한번에 여러 값들 넘기기](https://github.com/JD-man/Friends/issues/5)
-- CLLocation과 Repository
-- 복잡하게 이루어진 기획상의 화면전환
-- UICollectiionView, RxDatasources를 이용한 태그 및 애니메이션 버그
+- [CLLocation과 Repository](https://github.com/JD-man/Friends/issues/7)
+- [복잡하게 이루어진 기획상의 화면전환](https://github.com/JD-man/Friends/issues/8)
+- [UICollectiionView, RxDatasources를 이용한 태그 및 애니메이션 버그](https://github.com/JD-man/Friends/issues/9)
 - TableView의 BackgroundView
 - 회원가입시 유저정보를 응답으로 받을 필요성
 - 매칭상태를 UserDefault로 저장하는 부분에 대한 맹점

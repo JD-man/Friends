@@ -10,19 +10,6 @@ import SnapKit
 import RxSwift
 import RxRelay
 
-class DynamicCollectionView: UICollectionView {
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        if bounds.size != intrinsicContentSize {
-            invalidateIntrinsicContentSize()
-        }
-    }
-
-    override var intrinsicContentSize: CGSize {
-        return self.contentSize
-    }
-}
-
 final class SeSACHobbyTagView: UIView {
     
     private let titleLabel = UILabel().then {
