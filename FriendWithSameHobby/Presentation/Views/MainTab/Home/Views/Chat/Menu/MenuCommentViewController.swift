@@ -38,7 +38,7 @@ final class MenuCommentViewController: UIViewController {
     }
     
     private let subtitleLabel = UILabel().then {
-        $0.text = "OOO님과의 취미 활동은 어떠셨나요?"
+        $0.text = "\(UserChatManager.otherNickname ?? "")님과의 취미 활동은 어떠셨나요?"
         $0.textAlignment = .center
         $0.textColor = AssetsColors.green.color
         $0.font = AssetsFonts.NotoSansKR.regular.font(size: 14)
