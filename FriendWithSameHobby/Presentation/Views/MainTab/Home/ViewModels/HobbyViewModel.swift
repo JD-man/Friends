@@ -109,8 +109,7 @@ final class HobbyViewModel: ViewModelType {
         
         let fromSearchText = searchTextRelay
             .map {
-                $0
-                .map { HobbyItemViewModel(identity: "search\($0)",
+                $0.map { HobbyItemViewModel(identity: "search\($0)",
                                           cellTitle: $0,
                                           status: $0 == "" ? .empty : .added)
                 }
@@ -156,7 +155,8 @@ final class HobbyViewModel: ViewModelType {
         } else if section == 1 {
             let idx = value.firstIndex(of: title) ?? 0            
             value.remove(at: idx)
-            searchTextRelay.accept(value.filter { $0 != "" })
+            let newValue = value.filter { $0 != "" }
+            searchTextRelay.accept(newValue.count == 0 ? [""] : newValue)
         }
     }
 }

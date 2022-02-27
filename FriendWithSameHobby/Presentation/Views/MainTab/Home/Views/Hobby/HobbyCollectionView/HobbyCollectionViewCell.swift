@@ -28,6 +28,15 @@ enum HobbyCellStatus: Equatable {
             return .outline(color: .clear)
         }
     }
+    
+    var isUserInteractionEnabled: Bool {
+        switch self {
+        case .empty:
+            return false
+        default:
+            return true
+        }
+    }
 }
 
 final class HobbyCollectionViewCell: UICollectionViewCell {
@@ -70,6 +79,7 @@ final class HobbyCollectionViewCell: UICollectionViewCell {
     func configure(with model: HobbyItemViewModel) {
         tagButton.setTitle(model.cellTitle, for: .normal)
         tagButton.status = model.status.buttonStatus
+        tagButton.isUserInteractionEnabled = model.status.isUserInteractionEnabled
         emptyLabel.text = model.cellTitle
     }
     
