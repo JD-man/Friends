@@ -512,6 +512,10 @@
 		890A906127B19157002A4DF6 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				89825B6A27B7C0EF00B2A239 /* RxExtension */,
+				89A8198B279AF32500F257CA /* Managers */,
+				89AB665C27985F3400DFEE95 /* Extensions */,
+				898B794B279945D200844284 /* Protocols */,
 				890A906227B19164002A4DF6 /* KeyboardStatus.swift */,
 			);
 			path = Utils;
@@ -544,14 +548,10 @@
 		890CC9EC2796959C00D6185E /* FriendWithSameHobby */ = {
 			isa = PBXGroup;
 			children = (
-				89825B6A27B7C0EF00B2A239 /* RxExtension */,
+				890A906127B19157002A4DF6 /* Utils */,
 				89E0559F279D1B5D00E86445 /* InfraStructure */,
-				89E055AB279D942B00E86445 /* Network */,
 				89E055A0279D1B8500E86445 /* APIKey */,
-				89A8198B279AF32500F257CA /* Managers */,
 				890CCA69279717C600D6185E /* FriendWithSameHobby.entitlements */,
-				898B794B279945D200844284 /* Protocols */,
-				89AB665C27985F3400DFEE95 /* Extensions */,
 				890CCA202796984C00D6185E /* Presentation */,
 				890CCA1F2796984300D6185E /* Domain */,
 				890CCA1E2796983D00D6185E /* Data */,
@@ -618,7 +618,6 @@
 		890CCA202796984C00D6185E /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				890A906127B19157002A4DF6 /* Utils */,
 				898B79552799504000844284 /* Coordinator */,
 				898B79332799422D00844284 /* Views */,
 			);
@@ -935,7 +934,7 @@
 		898B794B279945D200844284 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				89C147ED27A022ED00F0E616 /* CoordinatorProtocol */,
+				898B79532799502900844284 /* CoordinatorType.swift */,
 				898B794C279945F100844284 /* ViewModelType.swift */,
 				898B794E279949D600844284 /* UseCaseType.swift */,
 			);
@@ -962,6 +961,17 @@
 				894B6B0327C3B261009D76E5 /* ShopRepositoryInterface.swift */,
 			);
 			path = RepositoryInterfaces;
+			sourceTree = "<group>";
+		};
+		8998480527CD0683004C938E /* Errors */ = {
+			isa = PBXGroup;
+			children = (
+				89E055B0279D9D7800E86445 /* APIErrors.swift */,
+				89FDC55927B000650088B32A /* QueueError.swift */,
+				89A579F827BC22ED008CAAA3 /* ChatError.swift */,
+				894B6B0727C3F759009D76E5 /* ShopError.swift */,
+			);
+			path = Errors;
 			sourceTree = "<group>";
 		};
 		89A81986279ADF3A00F257CA /* BaseComponent */ = {
@@ -1211,14 +1221,6 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		89C147ED27A022ED00F0E616 /* CoordinatorProtocol */ = {
-			isa = PBXGroup;
-			children = (
-				898B79532799502900844284 /* CoordinatorType.swift */,
-			);
-			path = CoordinatorProtocol;
-			sourceTree = "<group>";
-		};
 		89C147F027A06D6500F0E616 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -1270,6 +1272,7 @@
 		89E0559F279D1B5D00E86445 /* InfraStructure */ = {
 			isa = PBXGroup;
 			children = (
+				8998480527CD0683004C938E /* Errors */,
 				89E0559D279D1AF100E86445 /* UserTargets.swift */,
 				89EC76D927AD203C00CDA0A4 /* QueueTarget.swift */,
 				89A579EB27BC11B0008CAAA3 /* ChatTarget.swift */,
@@ -1283,17 +1286,6 @@
 				89E055A1279D1B9F00E86445 /* URLComponents.swift */,
 			);
 			path = APIKey;
-			sourceTree = "<group>";
-		};
-		89E055AB279D942B00E86445 /* Network */ = {
-			isa = PBXGroup;
-			children = (
-				89E055B0279D9D7800E86445 /* APIErrors.swift */,
-				89FDC55927B000650088B32A /* QueueError.swift */,
-				89A579F827BC22ED008CAAA3 /* ChatError.swift */,
-				894B6B0727C3F759009D76E5 /* ShopError.swift */,
-			);
-			path = Network;
 			sourceTree = "<group>";
 		};
 		89E055B2279DA6AA00E86445 /* View */ = {
