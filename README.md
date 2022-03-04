@@ -23,6 +23,18 @@
 
 ---
 
+# Skill
+
+- iOS-Clean-Architecture, MVVM Input/Output, Coordinator
+- Swift, UIKit, Code-Based UI, Autolayout, SnapKit
+- RxSwift, RxCocoa, RxRelay, RxDatasources, RxKeyboard, RxGesture
+- Firebase Auth, Firebase Cloud Message
+- Moya, SocketIO , Realm
+- SwiftGen, SwiftLint
+- Postman, Swagger, Confluence, Slack
+
+---
+
 # Architecture
 ## iOS-Clean-Architecture
 
@@ -75,28 +87,6 @@ final class ChatViewModel: ViewModelType {
 <div align = "center">        
     <img src = "./ProjectInformation/Images/Coordinator.png">
 </div>
-
----
-
-# Framework, Library
-
-- UIKit
-- Code-Based UI, Autolayout, SnapKit, 
-- RxSwift, RxCocoa, RxRelay
-- RxDatasources, RxKeyboard, RxGesture
-- Firebase Auth, Firebase Cloud Message
-- Moya, SocketIO
-- Realm
-- SwiftGen, SwiftLint
-
----
-
-# Tools
-
-- Postman
-- Swagger
-- Confluence
-- Slack
 
 ---
 
