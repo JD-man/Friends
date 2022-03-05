@@ -2,25 +2,28 @@
 
 # Overview
 
-<div align = "center">
-<img src = "./ProjectInformation/Images/Map.png" width=25%>
-<img src = "./ProjectInformation/Images/Shop.png" width=25%>
-<img src = "./ProjectInformation/Images/Profile.png" width=25%>
-</div>
-<div align = "center">
-<img src = "./ProjectInformation/Images/Hobby.png" width=25%>
-<img src = "./ProjectInformation/Images/Find.png" width=25%>
-<img src = "./ProjectInformation/Images/Chat.png" width=25%>
-</div>
-
 - 지도, 위치 기반 취미 공유 친구찾기 앱
 - 전화번호 인증, 회원가입
 - 지도를 통한 주변 유저 탐색
 - 유저 매칭 및 채팅
 - 매칭취소, 유저신고, 리뷰
 - 인앱결제
-- 프로필 수정, 회원탈퇴
-
+- 프로필 수정, 회원탈퇴 
+- <details>
+    <summary>결과 스크린샷</summary>
+    <div markdown="1">  
+    <div align = "center">
+    <img src = "./ProjectInformation/Images/Map.png" width=25%>
+    <img src = "./ProjectInformation/Images/Shop.png" width=25%>
+    <img src = "./ProjectInformation/Images/Profile.png" width=25%>
+    </div>
+    <div align = "center">
+    <img src = "./ProjectInformation/Images/Hobby.png" width=25%>
+    <img src = "./ProjectInformation/Images/Find.png" width=25%>
+    <img src = "./ProjectInformation/Images/Chat.png" width=25%>
+    </div>  
+    </div>
+    </details>
 ---
 
 # Skill
@@ -113,5 +116,4 @@ final class ChatViewModel: ViewModelType {
 - [매칭상태를 UserDefaults로 저장하는 것의 단점??](https://github.com/JD-man/Friends/issues/12)
 - [API 에러처리와 토큰만료](https://github.com/JD-man/Friends/issues/13)
 - [인앱결제 도입기](https://github.com/JD-man/Friends/issues/15)
-
 ---
