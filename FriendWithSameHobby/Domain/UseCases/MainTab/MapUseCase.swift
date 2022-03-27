@@ -36,14 +36,15 @@ class MapUseCase: UseCaseType {
             case .success(let model):
                 self?.fromQueueSuccess.accept(model)
             case .failure(let error):
-                switch error {
-                case .tokenError:
-                    self?.tokenErrorHandling {
-                        self?.excuteFriendsCoord(lat: lat, long: long)
-                    }
-                default:
-                    self?.fromQueueFail.accept(error)
-                }
+                self?.fromQueueFail.accept(error)
+//                switch error {
+//                case .tokenError:
+//                    self?.tokenErrorHandling {
+//                        self?.excuteFriendsCoord(lat: lat, long: long)
+//                    }
+//                default:
+//                    self?.fromQueueFail.accept(error)
+//                }
             }
         })
     }
@@ -60,14 +61,15 @@ class MapUseCase: UseCaseType {
                 }
                 self?.checkMatchingSuccess.accept(model)
             case .failure(let error):
-                switch error {
-                case .tokenError:
-                    self?.tokenErrorHandling {
-                        self?.executeCheckMatchingStatus()
-                    }
-                default:
-                    self?.checkMatchingFail.accept(error)
-                }
+                self?.checkMatchingFail.accept(error)
+//                switch error {
+//                case .tokenError:
+//                    self?.tokenErrorHandling {
+//                        self?.executeCheckMatchingStatus()
+//                    }
+//                default:
+//                    self?.checkMatchingFail.accept(error)
+//                }
             }
         })
     }
@@ -89,16 +91,16 @@ class MapUseCase: UseCaseType {
         }
     }
     
-    func tokenErrorHandling(completion: @escaping () -> Void) {
-        firebaseRepo.refreshingIDtoken(completion: { result in
-            switch result {
-            case .success(let idToken):
-                UserInfoManager.idToken = idToken
-                completion()
-            case .failure(let error):
-                print(error)
-                break
-            }
-        })
-    }
+//    func tokenErrorHandling(completion: @escaping () -> Void) {
+//        firebaseRepo.refreshingIDtoken(completion: { result in
+//            switch result {
+//            case .success(let idToken):
+//                UserInfoManager.idToken = idToken
+//                completion()
+//            case .failure(let error):
+//                print(error)
+//                break
+//            }
+//        })
+//    }
 }

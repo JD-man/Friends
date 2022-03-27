@@ -26,14 +26,7 @@ final class MatchingUseCase: MapUseCase {
                 UserMatchingStatus.matchingStatus = MatchingStatus.normal.rawValue
                 self?.cancelSuccess.accept(isCanceled)
             case .failure(let error):
-                switch error {
-                case .tokenError:
-                    self?.tokenErrorHandling {
-                        self?.executeCancelQueue()
-                    }
-                default:
-                    self?.cancelFail.accept(error)
-                }
+                self?.cancelFail.accept(error)
             }
         })
     }
@@ -48,10 +41,6 @@ final class MatchingUseCase: MapUseCase {
                 switch error {
                 case .requestedFromUser:
                     self?.executeAcceptMatching(uid: uid)
-                case .tokenError:
-                    self?.tokenErrorHandling {
-                        self?.executeRequestMatching(uid: uid)
-                    }
                 default:
                     self?.requestMatchingFail.accept(error)
                 }
@@ -67,14 +56,15 @@ final class MatchingUseCase: MapUseCase {
                 UserMatchingStatus.matchingStatus = MatchingStatus.matched.rawValue
                 self?.acceptMatchingSuccess.accept(isAccepted)
             case .failure(let error):
-                switch error {
-                case .tokenError:
-                    self?.tokenErrorHandling {
-                        self?.executeAcceptMatching(uid: uid)
-                    }
-                default:
-                    self?.acceptMatchingFail.accept(error)
-                }
+                self?.acceptMatchingFail.accept(error)
+//                switch error {
+//                case .tokenError:
+//                    self?.tokenErrorHandling {
+//                        self?.executeAcceptMatching(uid: uid)
+//                    }
+//                default:
+//                    self?.acceptMatchingFail.accept(error)
+//                }
             }
         })
     }

@@ -10,7 +10,9 @@ import Moya
 
 // DTO ---> Domain (toDomain function)
 final class UserRepository: UserRepositoryInterface {
-    private let provider = MoyaProvider<UserTargets>()
+    private let provider = MoyaProvider<UserTargets>(
+        session: Session(interceptor: TokenRequestInterceptor())
+    )
     
     func getUserInfo(completion: @escaping(Result<UserInfoModel, UserInfoError>) -> Void) {
         print("user info API Call")

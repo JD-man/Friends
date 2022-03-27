@@ -177,6 +177,7 @@
 		89E055AF279D9B4400E86445 /* UserInfoDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E055AE279D9B4400E86445 /* UserInfoDTO.swift */; };
 		89E055B1279D9D7800E86445 /* APIErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E055B0279D9D7800E86445 /* APIErrors.swift */; };
 		89E055B5279DA6C200E86445 /* NicknameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E055B4279DA6C200E86445 /* NicknameViewController.swift */; };
+		89E0E0ED27F03CF200B9876E /* TokenRequestInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E0E0EC27F03CF200B9876E /* TokenRequestInterceptor.swift */; };
 		89E1D03A27BE3EEE00938FC2 /* MenuCommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E1D03927BE3EEE00938FC2 /* MenuCommentViewController.swift */; };
 		89E1D03C27BE8F7300938FC2 /* MenuCommentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E1D03B27BE8F7300938FC2 /* MenuCommentViewModel.swift */; };
 		89E1D03E27BE90B300938FC2 /* MenuCommentUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E1D03D27BE90B300938FC2 /* MenuCommentUseCase.swift */; };
@@ -398,6 +399,7 @@
 		89E055AE279D9B4400E86445 /* UserInfoDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoDTO.swift; sourceTree = "<group>"; };
 		89E055B0279D9D7800E86445 /* APIErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIErrors.swift; sourceTree = "<group>"; };
 		89E055B4279DA6C200E86445 /* NicknameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameViewController.swift; sourceTree = "<group>"; };
+		89E0E0EC27F03CF200B9876E /* TokenRequestInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenRequestInterceptor.swift; sourceTree = "<group>"; };
 		89E1D03927BE3EEE00938FC2 /* MenuCommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCommentViewController.swift; sourceTree = "<group>"; };
 		89E1D03B27BE8F7300938FC2 /* MenuCommentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCommentViewModel.swift; sourceTree = "<group>"; };
 		89E1D03D27BE90B300938FC2 /* MenuCommentUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCommentUseCase.swift; sourceTree = "<group>"; };
@@ -1276,6 +1278,7 @@
 				89E0559D279D1AF100E86445 /* UserTargets.swift */,
 				89EC76D927AD203C00CDA0A4 /* QueueTarget.swift */,
 				89A579EB27BC11B0008CAAA3 /* ChatTarget.swift */,
+				89E0E0EC27F03CF200B9876E /* TokenRequestInterceptor.swift */,
 			);
 			path = InfraStructure;
 			sourceTree = "<group>";
@@ -1748,6 +1751,7 @@
 				894F5C2C27A7EB2400E583B9 /* ProfileAllowSearchingView.swift in Sources */,
 				89AB665E27985F4200DFEE95 /* UIFont+Ext.swift in Sources */,
 				896795D427B44AF600BF942B /* PaddedLabel.swift in Sources */,
+				89E0E0ED27F03CF200B9876E /* TokenRequestInterceptor.swift in Sources */,
 				89AB665927985B9600DFEE95 /* Assets+Fonts.swift in Sources */,
 				898B79482799456F00844284 /* Assets+Images.swift in Sources */,
 				894B6AF927C3658A009D76E5 /* UserShopInfoModel.swift in Sources */,

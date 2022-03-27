@@ -21,14 +21,15 @@ final class HobbyUseCase: MapUseCase {
                 UserMatchingStatus.matchingStatus = MatchingStatus.waiting.rawValue
                 self?.postQueueSuccess.accept(isPosted)
             case .failure(let error):
-                switch error {
-                case .tokenError:
-                    self?.tokenErrorHandling {
-                        self?.excutePostQueue(lat: lat, long: long, hf: hf)
-                    }
-                default:
-                    self?.postQueueError.accept(error)
-                }
+                self?.postQueueError.accept(error)
+//                switch error {
+//                case .tokenError:
+//                    self?.tokenErrorHandling {
+//                        self?.excutePostQueue(lat: lat, long: long, hf: hf)
+//                    }
+//                default:
+//                    self?.postQueueError.accept(error)
+//                }
             }
         })
     }

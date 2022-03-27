@@ -18,7 +18,7 @@ final class QueueRepository: QueueRepositoryInterface {
     typealias DodgeResult = Result<Bool, DodgeError>
     typealias CommentResult = Result<Bool, CommentError>
     
-    let provider = MoyaProvider<QueueTarget>()
+    let provider = MoyaProvider<QueueTarget>(session: Session(interceptor: TokenRequestInterceptor()))
     
     func requestOnqueue(model: OnqueueBodyModel, completion: @escaping (OnqueueResult) -> Void) {
         let parameters = OnqueueBodyDTO(model: model).toParamteres()
