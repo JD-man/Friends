@@ -12,11 +12,7 @@ import Alamofire
 final class TokenRequestInterceptor: RequestInterceptor {
     func adapt(_ urlRequest: URLRequest, for session: Session, completion: @escaping (Result<URLRequest, Error>) -> Void) {
         print("Token Interceptor Adapt")
-        var adaptedRequest = urlRequest
-        if UserInfoManager.idToken != URLComponents.expiredToken {
-            adaptedRequest.setValue(UserInfoManager.idToken ?? "", forHTTPHeaderField: "idToken")
-        }
-        completion(.success(adaptedRequest))
+        completion(.success(urlRequest))
     }
     
     func retry(_ request: Request, for session: Session, dueTo error: Error, completion: @escaping (RetryResult) -> Void) {

@@ -66,8 +66,7 @@ final class MapViewController: UIViewController {
     }
     
     override func viewDidLoad() {
-        super.viewDidLoad()
-        UserInfoManager.idToken = URLComponents.expiredToken
+        super.viewDidLoad()        
         print(UserInfoManager.idToken)
         viewConfig()
         binding()
