@@ -23,7 +23,7 @@ final class UserRepository: UserRepositoryInterface {
                     print("decode fail")
                     return
                 }
-                completion(.success(decoded.toDomain()))
+                completion(.success(decoded.toDomain()))                
             case .failure(let error):
                 let statusCode = error.response?.statusCode ?? -1
                 completion(.failure(UserInfoError(rawValue: statusCode) ?? .unknownError))

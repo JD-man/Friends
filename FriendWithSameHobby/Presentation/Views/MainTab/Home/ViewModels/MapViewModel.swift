@@ -39,8 +39,7 @@ final class MapViewModel: ViewModelType {
     func transform(_ input: Input, disposeBag: DisposeBag) -> Output {
         let output = Output()
         
-        // Input to UseCase
-        
+        //Input to UseCase        
         input.inputRelay
             .skip(1)
             .throttle(.milliseconds(800), latest: true, scheduler: MainScheduler.instance)
@@ -48,7 +47,7 @@ final class MapViewModel: ViewModelType {
                 self?.gender = $0.0
                 self?.useCase.excuteFriendsCoord(lat: $0.1, long: $0.2)
             }.disposed(by: disposeBag)
-        
+
         input.matchingButtonTap
             .drive { [weak self] in
                 if UserInfoManager.gender == -1 {
@@ -71,8 +70,8 @@ final class MapViewModel: ViewModelType {
                 self?.useCase.executeCheckMatchingStatus()
             }.disposed(by: disposeBag)
         
-        // UseCase to Output
-        useCase.fromQueueSuccess            
+        //UseCase to Output
+        useCase.fromQueueSuccess
             .map { [weak self] in
                 if self?.gender == UserGender.unselected { return $0.fromQueueDB }
                 else { return $0.fromQueueDB.filter { $0.gender == self?.gender ?? .unselected } }

@@ -11,10 +11,12 @@ import Alamofire
 // 401 에러 대응을 위한 Interceptor
 final class TokenRequestInterceptor: RequestInterceptor {
     func adapt(_ urlRequest: URLRequest, for session: Session, completion: @escaping (Result<URLRequest, Error>) -> Void) {
-        
-        // adapt에서는 따로 해줄게 없음
-        completion(.success(urlRequest))
         print("Token Interceptor Adapt")
+        var adaptedRequest = urlRequest
+        if UserInfoManager.idToken != URLComponents.expiredToken {
+            adaptedRequest.setValue(UserInfoManager.idToken ?? "", forHTTPHeaderField: "idToken")
+        }
+        completion(.success(adaptedRequest))
     }
     
     func retry(_ request: Request, for session: Session, dueTo error: Error, completion: @escaping (RetryResult) -> Void) {
@@ -30,7 +32,7 @@ final class TokenRequestInterceptor: RequestInterceptor {
             switch result {
             case .success(let idToken):
                 // ID token 갱신 후에 1초 뒤 retry
-                UserInfoManager.idToken = idToken
+                UserInfoManager.idToken = idToken                
                 print("Token Interceptor 401 retry")
                 completion(.retryWithDelay(1.0))
             case .failure(let error):

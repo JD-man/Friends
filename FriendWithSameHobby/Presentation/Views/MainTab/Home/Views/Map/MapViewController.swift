@@ -15,7 +15,7 @@ import RxCocoa
 final class MapViewController: UIViewController {
     typealias OnqueueInput = (UserGender, Double, Double)
     
-    private let mapView = NMFMapView()
+    private let nmfMapView = NMFMapView()
     private let locationManager = CLLocationManager()
     
     private let genderStackView = MapGenderView().then {
@@ -43,12 +43,12 @@ final class MapViewController: UIViewController {
         }
     }
     private var friendsMarkers: [NMFMarker] = [] {
-        willSet { friendsMarkers.forEach { $0.mapView = nil } }        
+        willSet { friendsMarkers.forEach { $0.mapView = nil } }
         didSet {
             friendsMarkers.forEach {
                 $0.width = 80
                 $0.height = 80
-                $0.mapView = mapView
+                $0.mapView = nmfMapView
             }
         }
     }
@@ -67,10 +67,11 @@ final class MapViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        UserInfoManager.idToken = URLComponents.expiredToken
         print(UserInfoManager.idToken)
         viewConfig()
+        binding()
         locationManagerConfig()
-        binding()        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -80,10 +81,10 @@ final class MapViewController: UIViewController {
     
     private func viewConfig() {
         view.backgroundColor = .white        
-        [mapView, genderStackView, locationButton, matchingButton, userMarker]
+        [nmfMapView, genderStackView, locationButton, matchingButton, userMarker]
             .forEach { view.addSubview($0) }
         
-        mapView.snp.makeConstraints { make in
+        nmfMapView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
         
@@ -113,14 +114,14 @@ final class MapViewController: UIViewController {
     
     private func locationManagerConfig() {
         locationManager.delegate = self
-        mapView.addCameraDelegate(delegate: self)
+        nmfMapView.addCameraDelegate(delegate: self)
         checkUserLocationServiceAuthorization()
     }
     
     private func binding() {
         let input = MapViewModel.Input(
             matchingButtonTap: matchingButton.rx.tap.map({ [weak self] in
-                let coord = self?.mapView.cameraPosition.target ?? NMGLatLng()
+                let coord = self?.nmfMapView.cameraPosition.target ?? NMGLatLng()
                 let matchingStatus = self?.matchingButton.matchingStatus ?? .normal
                 return (matchingStatus, coord.lat, coord.lng) }).asDriver(onErrorJustReturn: (.normal, 0.0, 0.0)),
             inputRelay: inputRelay,
@@ -162,12 +163,13 @@ final class MapViewController: UIViewController {
     }
     
     private func cameraMoving(coord: NMGLatLng) {
-        let cameraUpdate = NMFCameraUpdate(scrollTo: coord, zoomTo: 15)
-        mapView.moveCamera(cameraUpdate)
+        print("camera moving")
+        let cameraUpdate = NMFCameraUpdate(scrollTo: coord, zoomTo: 15)        
+        nmfMapView.moveCamera(cameraUpdate)
     }
     
     private func projectionCoord() {
-        currentCoord = mapView.cameraPosition.target
+        currentCoord = self.nmfMapView.cameraPosition.target
     }
     
     private func alertLocationAuth() {
@@ -187,7 +189,7 @@ extension MapViewController: CLLocationManagerDelegate {
     func checkUserLocationServiceAuthorization() {
         let authStatus: CLAuthorizationStatus
         authStatus = locationManager.authorizationStatus
-        
+
         if CLLocationManager.locationServicesEnabled() {
             checkCurrentLocationAuthorization(authStatus: authStatus)
         }
@@ -195,10 +197,11 @@ extension MapViewController: CLLocationManagerDelegate {
             alertLocationAuth()
         }
     }
-    
+
     func checkCurrentLocationAuthorization(authStatus: CLAuthorizationStatus) {
         switch authStatus {
         case .notDetermined:
+            print("not determined")
             locationManager.requestWhenInUseAuthorization()
             locationManager.startUpdatingLocation()
         case .restricted, .denied:
@@ -207,13 +210,14 @@ extension MapViewController: CLLocationManagerDelegate {
             cameraMoving(coord: defaultCoord)
             alertLocationAuth()
         case .authorizedWhenInUse:
+            print("authorized when in use")
             locationManager.startUpdatingLocation()
         @unknown default:
             print("DEFAULT")
         }
-        
+
         let accuracyState = locationManager.accuracyAuthorization
-        
+
         switch accuracyState {
         case .fullAccuracy:
             print("FULL")
@@ -223,28 +227,29 @@ extension MapViewController: CLLocationManagerDelegate {
             print("DEFAULT")
         }
     }
-    
+
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let coordinate = locations.last?.coordinate {
             let lat = coordinate.latitude
             let lng = coordinate.longitude
             let nmg = NMGLatLng(lat: lat, lng: lng)
-            cameraMoving(coord: nmg)            
+            print("updated location")
+            cameraMoving(coord: nmg)
             locationManager.stopUpdatingLocation()
         }
         else {
             print("Location CanNot Find")
         }
     }
-    
+
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print(#function)
     }
-    
+
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         checkUserLocationServiceAuthorization()
     }
-    
+
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         checkUserLocationServiceAuthorization()
     }
