@@ -104,6 +104,7 @@ final class ChatViewModel: ViewModelType {
 - [SwiftGen 설치 및 오류](https://github.com/JD-man/Friends/issues/2)
 - [SwiftLint 설치](https://github.com/JD-man/Friends/issues/3)
 - [SocketIO 설치 및 이슈](https://github.com/JD-man/Friends/issues/14)
+- [Moya Interceptor를 이용한 토큰갱신](https://github.com/JD-man/Friends/issues/17)
 
 ### App
 - [FCM Token 업데이트 시점](https://github.com/JD-man/Friends/issues/4)
